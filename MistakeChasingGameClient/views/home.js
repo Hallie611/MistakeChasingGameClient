@@ -85,6 +85,7 @@
 
     // Random questions
     function randomQuestions(tab, level) {
+
         getMinMaxDifficulty(tab, level);
 
         // Create list of beginner find bug questions
@@ -95,11 +96,14 @@
         randomFindBugs = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
         //items[Math.floor(Math.random() * items.length)];
 
-        // Create list of beginner find bug questions
-        filteredFillin = DevExpress.data.query(MistakeChasingGameClient.db.fillingblank)
+        // Create list of beginner fillingblank questions
+
+        filteredFillin = DevExpress.data.query(MistakeChasingGameClient.db.fillingblankdb)
                     .filter(["dif", ">=", minDif()], "and", ["dif", "<=", maxDif()])
                     .sortBy("id").toArray();
         // Random a question from the filtered list
+
+
         randomFillinBlanks = filteredFillin[Math.floor(Math.random() * filteredFillin.length)];
         //items[Math.floor(Math.random() * items.length)];
 

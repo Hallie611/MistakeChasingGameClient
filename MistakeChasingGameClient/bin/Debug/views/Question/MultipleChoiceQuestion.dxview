@@ -1,0 +1,18 @@
+<div data-options="dxView : { name: 'MultipleChoiceQuestion', title: 'MultipleChoiceQuestion' } ">
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <img id="Img1" data-bind="attr: { src: src }" />
+        <h1 data-bind="text: mes"></h1>
+
+        <div data-bind="dxRadioGroup:{dataSource: Multidata,itemSelectAction: select}"></div>
+        
+  <!--      
+       <div class="selectbox" data-bind="dxSelectBox: {
+            placeholder: 'Select state',
+            dataSource: Multidata,
+            itemSelectAction : summit
+        }">
+        </div>-->
+        <div data-bind="dxButton: { text: 'Button1',clickAction: summit }"></div>
+
+    </div>
+</div>

@@ -61,6 +61,21 @@
     <Content Include="images\findbugQ\P9.jpg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\level\chick.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\level\chiken.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\level\level1.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\level\level2.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\level\level3.jpg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\lvBtn.png">
       <SubType>Content</SubType>
     </Content>
@@ -121,6 +136,21 @@
     <Content Include="js\globalize.min.js" />
     <Content Include="js\jquery-1.9.1.min.js" />
     <Content Include="js\knockout-2.2.1.js" />
+    <Content Include="viewmodel\FillBlankVM.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="viewmodel\findBugsVM.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="viewmodel\MultiChoiceVM.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="viewmodel\QuestionDetailVM.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="viewmodel\user-view-model.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="views\home.dxview" />
     <Content Include="views\home.css" />
     <Content Include="views\home.js" />
@@ -132,12 +162,37 @@
     <Content Include="views\questionDetail.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="views\Question\FillBlankQuestion.dxview">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\Question\FillBlankQuestion.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\Question\findBugs.dxview">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\Question\findBugs.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\Question\MultipleChoiceQuestion.dxview">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\Question\MultipleChoiceQuestion.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\User.dxview">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\User.js">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="certificates\" />
     <Folder Include="css\" />
     <Folder Include="data\" />
     <Folder Include="images\findbugQ" />
+    <Folder Include="images\level" />
     <Folder Include="js\" />
     <Folder Include="layouts\" />
     <Folder Include="layouts\Desktop\" />
@@ -145,7 +200,9 @@
     <Folder Include="layouts\Navbar\" />
     <Folder Include="layouts\SlideOut\" />
     <Folder Include="images" />
+    <Folder Include="viewmodel" />
     <Folder Include="views\" />
+    <Folder Include="views\Question" />
   </ItemGroup>
   <ItemGroup>
     <None Include="certificates\android_certificate.p12" />

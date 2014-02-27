@@ -1,8 +1,13 @@
 ﻿MistakeChasingGameClient.questionDetail = function (params) {
+    
 
-    var viewModel = {
-//  Put the binding properties here
-    };
 
-    return viewModel;
+    var viewModel = new MistakeChasingGameClient.QuestionVM(params.id);
+
+
+    return  $.extend(viewModel, {
+        viewShown: function () {
+            viewModel.randomQuestions();
+        }
+    });
 };

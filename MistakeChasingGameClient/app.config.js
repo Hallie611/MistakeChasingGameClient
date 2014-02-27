@@ -17,8 +17,8 @@ window.MistakeChasingGameClient = $.extend(true, window.MistakeChasingGameClient
         "location": "navigation"
       },
       {
-        "title": "questionDetail",
-        "action": "#questionDetail",
+        "title": "User",
+        "action": "#User",
         //"icon": "questiondetail"
       }
     ]
