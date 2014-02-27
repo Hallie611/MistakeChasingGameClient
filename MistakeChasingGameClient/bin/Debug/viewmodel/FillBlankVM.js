@@ -5,9 +5,8 @@
 
 
 
-        //lay cau hoi dua theo id truyn vao data tam
-        var data;
-        MistakeChasingGameClient.db.fillingblankdb.byKey(id).done(function (e) { data=e });
+
+
 
         // khai bao bien
         this.src = ko.observable();
@@ -23,7 +22,7 @@
         var answer2;
         var answer3;
 
-        var result="";
+        var result = "";
 
 
         this.Multidata = ko.observable();
@@ -40,21 +39,21 @@
         };
 
 
-       
+
         // ham dung de load du lieu len questiondetail view by data
         this.fromJS = function (data) {
-            if (!data) {
-                return;
-            }
-            else {
-                this.src(data.src);
-                this.answwer1source(data.listA);
-                this.answwer2source(data.listB);
-                this.answwer3source(data.listC);
-                answer1 = data.A;
-                answer2 = data.B;
-                answer3 = data.c;
-            }
+            //lay cau hoi dua theo id truyn vao data tam
+            var data;
+            MistakeChasingGameClient.db.fillingblankdb.byKey(id).done(function (e) { data = e });
+            
+            this.src(data.src);
+            this.answwer1source(data.listA);
+            this.answwer2source(data.listB);
+            this.answwer3source(data.listC);
+            answer1 = data.A;
+            answer2 = data.B;
+            answer3 = data.c;
+
 
         };
 
@@ -70,6 +69,9 @@
             if (this.choice3() == answer3) {
                 result += "3 correct";
             }
+
+            localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+            MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
             alert(result);
         };
     };

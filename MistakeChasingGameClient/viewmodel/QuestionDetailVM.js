@@ -9,9 +9,14 @@
         var randomFillBlank;
         var randomMultiple;
 
-        var curentIndex;
-        if (!curentIndex)
-            curentIndex = 0;
+        //giu index random array question
+        if (!localStorage.curentIndex)
+        localStorage.curentIndex=0;
+        
+
+        //giu level khi chuyen view
+        if(Number(level)%1==0)
+        localStorage.curentlevel = level;
 
         var playingQuest = new DevExpress.data.ArrayStore({
             //name: "playingQ",
@@ -19,52 +24,54 @@
         });
 
 
-        this.randomQuestions = function () {
-            var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", level]).sortBy("id").select("id").toArray();
-            randomFindBugs = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
+        this.changeView = function () {
 
-            var filteredFillBlank = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", level]).sortBy("id").select("id").toArray();
-            randomFillBlank = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
-
-            var filteredMultiple = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", level]).sortBy("id").select("id").toArray();
-            randomMultiple = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
-
-
-            //MistakeChasingGameClient.app.navigate({
-            //    view: 'findBugs',
-            //    id: randomFindBugs.id
-            //});
-            alert(curentIndex);
-            if (curentIndex == 0) {
+            
+            if (Number(localStorage.curentIndex) == 0) {
+                var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.curentlevel)]).sortBy("id").select("id").toArray();
+                randomFindBugs = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
                 MistakeChasingGameClient.app.navigate({
                     view: 'findBugs',
                     id: randomFindBugs.id
-                }); 
+                });
+
             }
-            else if (curentIndex == 1) {
-                
+            else if (Number(localStorage.curentIndex) == 1) {
+                var filteredFillBlank = MistakeChasingGameClient.db.fillingblankdb.createQuery().filter(["dif", "=", Number(localStorage.curentlevel)]).sortBy("id").select("id").toArray();
+
+                randomFillBlank = filteredFillBlank[Math.floor(Math.random() * filteredFillBlank.length)];
+
+             
                 MistakeChasingGameClient.app.navigate({
                     view: 'FillBlankQuestion',
-                    id: filteredFillBlank.id
+                    id: randomFillBlank.id
                 });
-              
+
             }
-           else  if (curentIndex == 2) {
-                curentIndex++;
+            else if (Number(localStorage.curentIndex) == 2) {
+                var filteredMultiple = MistakeChasingGameClient.db.multiplechoicedb.createQuery().filter(["dif", "=", Number(localStorage.curentlevel)]).sortBy("id").select("id").toArray();
+                randomMultiple = filteredMultiple[Math.floor(Math.random() * filteredMultiple.length)];
                 MistakeChasingGameClient.app.navigate({
                     view: 'MultipleChoiceQuestion',
                     id: randomMultiple.id
                 });
-              
             }
-            curentIndex++;
-                return;
+            else
+                localStorage.curentIndex = 0;
+                
             
         };
 
 
 
+        this.PlayAgain = function () {
+            this.changeView();
+        };
 
+        this.Next = function () {
+            var nextLevel= Number( localStorage.curentlevel)+1;
+            MistakeChasingGameClient.app.navigate({ view: "home", level: nextLevel });
+        };
 
 
 

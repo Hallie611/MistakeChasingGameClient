@@ -1,6 +1,10 @@
 ﻿MistakeChasingGameClient.home = function (params) {
 
+    localStorage.curentlevel = 0;
+    localStorage.curentIndex = 0;
     var viewModel = {
+
+
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -54,7 +58,7 @@
 
     // call random for beginner
     playBeginner = function (level) {
-        randomQuestions("beginner", level);
+        changeView("beginner", level);
     };
 
     // Change view for types
@@ -84,7 +88,7 @@
     };
 
     // Random questions
-    function randomQuestions(tab, level) {
+    function changeView(tab, level) {
 
         getMinMaxDifficulty(tab, level);
 

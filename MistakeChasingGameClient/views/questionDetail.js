@@ -7,7 +7,7 @@
 
     return  $.extend(viewModel, {
         viewShown: function () {
-            viewModel.randomQuestions();
+            viewModel.changeView();
         }
     });
 };

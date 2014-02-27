@@ -30,7 +30,8 @@
             if (countX >= 3) {
                 this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + 0 + " star points!", "Result");
                 this.resultDialog.done(function () {
-                    MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+                    localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+                    MistakeChasingGameClient.app.navigate({ view: "questionDetail"});
                 });
             }
         };

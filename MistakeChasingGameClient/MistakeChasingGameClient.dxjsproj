@@ -31,6 +31,96 @@
     <Content Include="data\db.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\fillinBlankQ\F1.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F10.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F11.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F12.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F13.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F14.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F15.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F16.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F17.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F18.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F19.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F2.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F20.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F21.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F22.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F23.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F24.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F25.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F26.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F27.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F28.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F29.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F3.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F30.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F4.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F5.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F6.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F7.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F8.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\fillinBlankQ\F9.jpg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\findbugQ\P1.jpg">
       <SubType>Content</SubType>
     </Content>
@@ -77,6 +167,141 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\lvBtn.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M1.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M10.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M11.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M12.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M13.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M14.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M15.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M16.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M17.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M18.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M19.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M2.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M20.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M21.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M22.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M23.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M24.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M25.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M26.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M27.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M28.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M29.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M3.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M30.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M4.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M5.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M51.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M52.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M53.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M54.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M55.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M56.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M57.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M58.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M59.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M6.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M60.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M61.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M62.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M63.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M64.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M65.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M7.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M8.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\MultipleChoice\M9.jpg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\redX.png">
@@ -193,6 +418,8 @@
     <Folder Include="data\" />
     <Folder Include="images\findbugQ" />
     <Folder Include="images\level" />
+    <Folder Include="images\MultipleChoice" />
+    <Folder Include="images\fillinBlankQ" />
     <Folder Include="js\" />
     <Folder Include="layouts\" />
     <Folder Include="layouts\Desktop\" />

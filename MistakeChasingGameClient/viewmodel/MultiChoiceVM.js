@@ -16,7 +16,7 @@
 
         var data;
         
-        MistakeChasingGameClient.db.multiplechoice.byKey(id).done(function (e) { data = e });
+        MistakeChasingGameClient.db.multiplechoicedb.byKey(id).done(function (e) { data = e });
         // ham nhan du lieu tu database vao de xu ly
         this.fromJS = function () {
             this.src(data.src);
@@ -38,6 +38,8 @@
             else
                 alert("false");
            
+            localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+            MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
         };
     };
 })();

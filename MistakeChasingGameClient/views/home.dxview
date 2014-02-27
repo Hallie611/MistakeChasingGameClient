@@ -6,17 +6,17 @@
             <img data-bind="attr: { src: beginner.src }" style="width: 100%; height: 100%" />
             <div id="lv1" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#questionDetail/1' }">
             </div>
-            <div id="lv2" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { playBeginner(2)} }">
+            <div id="lv2" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#questionDetail/2' }">
             </div>
-            <div id="lv3" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#findBugs/1'}">
+            <div id="lv3" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#questionDetail/3' }">
             </div>
-            <div id="lv4" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#MultipleChoiceQuestion/1'}">
+            <div id="lv4" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#questionDetail/4' }">
             </div>
-            <div id="lv5" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { playBeginner(5)} }">
+            <div id="lv5" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#questionDetail/5' }">
             </div>
-            <div id="lv6" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { playBeginner(6)} }">
+            <div id="lv6" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#questionDetail/6' }">
             </div>
-            <div id="lv7" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { playBeginner(7)} }">
+            <div id="lv7" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#questionDetail/7' }">
             </div>
             <!-- <input id="lv1" type="image" src="images/lvBtn.png" alt="Submit" width="9%" height="9%"> -->
         </div>

@@ -87,7 +87,7 @@
             data: fillingblank,
             key: 'id'
         }),
-        multiplechoice: new DevExpress.data.ArrayStore({
+        multiplechoicedb: new DevExpress.data.ArrayStore({
             data: multiplechoice,
             key: 'id'
         })
