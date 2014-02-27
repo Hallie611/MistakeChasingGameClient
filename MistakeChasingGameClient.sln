@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{1B19158F-E398-40A6-8E3B-350508E125F1}") = "MistakeChasingGameClient", "MistakeChasingGameClient\MistakeChasingGameClient.dxjsproj", "{79AB79EE-C8D6-4853-BD74-7A9712A816EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79AB79EE-C8D6-4853-BD74-7A9712A816EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79AB79EE-C8D6-4853-BD74-7A9712A816EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79AB79EE-C8D6-4853-BD74-7A9712A816EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79AB79EE-C8D6-4853-BD74-7A9712A816EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

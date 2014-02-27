@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79ab79ee-c8d6-4853-bd74-7a9712a816ec}</ProjectGuid>
+    <AutoAssignPort>True</AutoAssignPort>
+    <RunInSimulator>True</RunInSimulator>
+    <ApplicationPage>index.html</ApplicationPage>
+    <Name>MistakeChasingGameClient</Name>
+    <RootNamespace>MistakeChasingGameClient</RootNamespace>
+    <DebugSitePortNumber>50000</DebugSitePortNumber>
+    <UseWebDev>True</UseWebDev>
+    <DefaultDevice>iPhone</DefaultDevice>
+    <DeviceOrientation>Portrait</DeviceOrientation>
+    <KeyApkPath>certificates\android_certificate.p12</KeyApkPath>
+    <KeyApkAlias>tmpl</KeyApkAlias>
+    <ApkDexFilePackageName>app.id_6ac32cd3ed374bf8beeca8d8c86e5c3b</ApkDexFilePackageName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="css\dx.generic.light.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="data\db.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P1.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P10.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P2.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P3.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P4.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P5.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P6.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P7.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P8.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\findbugQ\P9.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\lvBtn.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\redX.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\roadmap.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\roadmap2.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\roadmap3.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\submit-button.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="index.js" />
+    <Content Include="index.html" />
+    <Content Include="index.css" />
+    <Content Include="css\dx.common.css" />
+    <Content Include="css\dx.android.holo-dark.css" />
+    <Content Include="css\dx.desktop.default.css" />
+    <Content Include="css\dx.ios.default.css" />
+    <Content Include="css\dx.win8.black.css" />
+    <Content Include="css\dx.win8.white.css" />
+    <Content Include="css\dx.win8.black.small.css" />
+    <Content Include="css\dx.tizen.black.css" />
+    <Content Include="css\dx.tizen.white.css" />
+    <Content Include="js\jquery-1.10.2.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery-2.0.3.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\knockout-3.0.0.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="layouts\Navbar\NavbarLayout.css" />
+    <Content Include="layouts\Navbar\NavbarLayout.html" />
+    <Content Include="layouts\Navbar\NavbarLayout.js" />
+    <Content Include="layouts\SlideOut\SlideOutLayout.js" />
+    <Content Include="layouts\SlideOut\SlideOutLayout.css" />
+    <Content Include="layouts\SlideOut\SlideOutLayout.html" />
+    <Content Include="layouts\Empty\EmptyLayout.js" />
+    <Content Include="layouts\Empty\EmptyLayout.css" />
+    <Content Include="layouts\Empty\EmptyLayout.html" />
+    <Content Include="layouts\Desktop\DesktopLayout.css" />
+    <Content Include="layouts\Desktop\DesktopLayout.html" />
+    <Content Include="js\dx.all.js" />
+    <Content Include="js\dx.all.debug.js" />
+    <Content Include="js\dx.phonejs.js" />
+    <Content Include="js\dx.phonejs.debug.js" />
+    <Content Include="js\dx.chartjs.js" />
+    <Content Include="js\dx.chartjs.debug.js" />
+    <Content Include="js\globalize.js" />
+    <Content Include="js\globalize.min.js" />
+    <Content Include="js\jquery-1.9.1.min.js" />
+    <Content Include="js\knockout-2.2.1.js" />
+    <Content Include="views\home.dxview" />
+    <Content Include="views\home.css" />
+    <Content Include="views\home.js" />
+    <Content Include="views\about.html" />
+    <Content Include="app.config.js" />
+    <Content Include="views\questionDetail.dxview">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\questionDetail.js">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="certificates\" />
+    <Folder Include="css\" />
+    <Folder Include="data\" />
+    <Folder Include="images\findbugQ" />
+    <Folder Include="js\" />
+    <Folder Include="layouts\" />
+    <Folder Include="layouts\Desktop\" />
+    <Folder Include="layouts\Empty\" />
+    <Folder Include="layouts\Navbar\" />
+    <Folder Include="layouts\SlideOut\" />
+    <Folder Include="images" />
+    <Folder Include="views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="certificates\android_certificate.p12" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <Target Name="Build">
+    <!--
+    <Message Text="'$(MSBuildToolsPath)'"></Message>
+    -->
+    <Message Text="Build JSProject '$(MSBuildProjectFile)':" Importance="high">
+    </Message>
+    <Message Text="Copying refenecses to output dir..." Importance="high" />
+    <MSBuild Targets="Build" Projects="@(ProjectReference)" Properties="OutputPath=$([System.IO.Path]::GetFullPath('$(OutputPath)'))">
+    </MSBuild>
+    <Message Text="Copying files to output dir..." Importance="high" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(OutputPath)%(RelativeDir)%(Filename)%(Extension)')" />
+    <Message Text="Finished Build JSProject '$(MSBuildProjectFile)'." Importance="high">
+    </Message>
+  </Target>
+  <Target Name="CreateManifestResourceNames" Condition="'@(ResxWithNoCulture)@(ResxWithCulture)@(NonResxWithNoCulture)@(NonResxWithCulture)'!=''" />
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build">
+  </Target>
+  <Target Name="Clean">
+    <!--
+    <Message Text="Cleaning Output files..." Importance="high" />
+    <Delete Files="@([System.IO.Path]::GetFullPath('$(OutputPath)'))" />
+    -->
+    <Message Text="Cleaning Output dir ($([System.IO.Path]::GetFullPath('$(OutputPath)')))..." Importance="high" />
+    <RemoveDir Directories="$([System.IO.Path]::GetFullPath('$(OutputPath)'))" />
+  </Target>
+</Project>
