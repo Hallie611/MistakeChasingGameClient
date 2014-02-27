@@ -3,24 +3,35 @@
     height: 100%;
     position: relative;
 }
+#clockView
+{
+    background-color: White;
+    height:10%;
+    width:100%;
+    text-align:center;
+}
+
+#contentView
+{
+    background-color:White;
+    width:100%;
+    height:90%;
+    text-align:center;
+}
 .dx-theme-ios.dx-version-major-7 .empty-layout .layout-content{
     background-color: #fff;
 }
 
-    .empty-layout > div.content,
-    .empty-layout > div.content > div {
-        width: 100%;
-        height: 100%;
-    }
-
-.empty-layout .load-panel.dx-loadpanel-content {
-    background: transparent;
-    border: none;
-}
 /* Prevent margin collapse */
 .empty-layout::before {
     content: "\00a0";
     display: block;
     overflow: hidden;
     height: 0;
+}
+
+.empty-layout > div.content,
+.empty-layout > div.content > div {
+    width: 100%;
+    height: 100%;
 }

@@ -24,10 +24,15 @@
         { id: 1, src: "images/roadmap.jpg", dif: 1, a: "asd", b: "lkjhg" }
     ]
 
+    // Data for mistake types
+    var mistakeTypes = [
+        { id: 1, code: "1_NullPointer", des: "Null pointers" }
+    ];
+
     // Data for multiple choices questions
     var multiplechoice = [
-        { id: 1, src: "images/lvBtn.png", dif: 1, ans: "qwertyui" }
-    ]
+        { id: 1, src: "abcde", dif: 1, ans: mistakeTypes[0] }
+    ];
 
     MistakeChasingGameClient.db = {
 

@@ -6,6 +6,20 @@
 {
   height: 9%;
 }
+#scrollViewContainer 
+{
+    height: 70%;
+}
+
+#redXBox
+{
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    z-index: +1;
+    bottom: 5%;
+    visibility:hidden;
+}
 #header
 {
     position:absolute;

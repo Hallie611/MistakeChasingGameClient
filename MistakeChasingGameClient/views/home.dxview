@@ -43,8 +43,8 @@
     </div>
     <div data-options="dxView : { name: 'fillinBlanks', title: 'Fill in Blanks', layout: 'empty' } ">
         <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-            <div id="Div1" data-bind="dxScrollView: { }">
-                <img id="Img1" data-bind="attr: { src: curQuestion.question.src }" />
+            <div id="scrollViewContainer" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: curQuestion.question.src }" />
             </div>
         </div>
     </div>

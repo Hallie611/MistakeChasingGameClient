@@ -29,7 +29,6 @@
     </div>
     <div data-options="dxView : { name: 'findBugs', title: 'Find Bugs', layout: 'empty' } ">
         <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-            
             <div id="scrollViewContainer" data-bind="dxScrollView: { }">
                 <img id="question" data-bind="attr: { src: curQuestion.question.src }, event: { dxclick: myEventHandler }" />
                 <div id="bug" data-bind="style: {width: bwidth, height: bheight, left: bleft, top: btop}, event: { dxclick: showBug }">
@@ -39,6 +38,13 @@
                 <img id="miss1" data-bind="attr: { src: 'images/redX.png' }" style="width: 10%; height: 10%" />
                 <img id="miss2" data-bind="attr: { src: 'images/redX.png' }" style="width: 10%; height: 10%" />
                 <img id="miss3" data-bind="attr: { src: 'images/redX.png' }" style="width: 10%; height: 10%" />
+            </div>
+        </div>
+    </div>
+    <div data-options="dxView : { name: 'fillinBlanks', title: 'Fill in Blanks', layout: 'empty' } ">
+        <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+            <div id="Div1" data-bind="dxScrollView: { }">
+                <img id="Img1" data-bind="attr: { src: curQuestion.question.src }" />
             </div>
         </div>
     </div>

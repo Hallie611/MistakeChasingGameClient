@@ -68,7 +68,7 @@
 
         if (curQuestion.type == "findBugs") {
             curIndex(curIndex() + 1);
-            MCG_Prototype1.app.navigate({ view: "findBugs" });
+            MistakeChasingGameClient.app.navigate({ view: "findBugs" });
 
             bwidth = ko.observable(curQuestion.question.width),
             bheight = ko.observable(curQuestion.question.height),
@@ -79,7 +79,7 @@
         } else if (curQuestion.type == "fillinBlanks") {
             curIndex(curIndex() + 1);
             //MCG_Prototype1.app.navigate({ view: "findBugs" });
-            MCG_Prototype1.app.navigate({ view: "fillinBlanks" });
+            MistakeChasingGameClient.app.navigate({ view: "fillinBlanks" });
         };
     };
 
@@ -96,7 +96,7 @@
         //items[Math.floor(Math.random() * items.length)];
 
         // Create list of beginner find bug questions
-        filteredFillin = DevExpress.data.query(MCG_Prototype1.db.fillingblank)
+        filteredFillin = DevExpress.data.query(MistakeChasingGameClient.db.fillingblank)
                     .filter(["dif", ">=", minDif()], "and", ["dif", "<=", maxDif()])
                     .sortBy("id").toArray();
         // Random a question from the filtered list
@@ -161,6 +161,57 @@
                 MistakeChasingGameClient.app.navigate({ view: "home" });
             });
         }
+    };
+
+    return viewModel;
+};
+
+MistakeChasingGameClient.findBugs = function (params) {
+    function viewShown() {
+        startClock();
+    };
+
+    function startClock() {
+        // variables for time units
+        var minutes, seconds;
+        minutes = 0;
+        seconds = 30;
+
+        // get tag element
+        var clock = document.getElementById("clock");
+
+        // update the tag with id "countdown" every 1 second
+        var interval = setInterval(function () {
+            if (seconds == 0) {
+                seconds = 60;
+            }
+            seconds = seconds - 1;
+            if (seconds == 0) {
+                minutes = minutes - 1;
+            }
+            if (minutes < 0) {
+                DevExpress.ui.dialog.alert("Time's up!", "Game Over");
+                clearInterval(interval);
+                minutes = 0;
+                seconds = 60;
+                return;
+            }
+            seconds = checkTime(seconds);
+            // format countdown string + set tag value
+            if (minutes != null && seconds != null) {
+                document.getElementById('clock').innerHTML = minutes + ": " + seconds;
+            }
+        }, 1000);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+    var viewModel = {
+        viewShown: viewShown
     };
 
     return viewModel;

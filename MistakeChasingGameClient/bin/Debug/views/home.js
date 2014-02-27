@@ -67,14 +67,20 @@
         });
 
         if (curQuestion.type == "findBugs") {
+            curIndex(curIndex() + 1);
             MistakeChasingGameClient.app.navigate({ view: "findBugs" });
 
-            // Data for bug's positions
             bwidth = ko.observable(curQuestion.question.width),
             bheight = ko.observable(curQuestion.question.height),
             btop = ko.observable(curQuestion.question.top),
             bleft = ko.observable(curQuestion.question.left);
-        }
+
+            //MCG_Prototype1.app.navigate({ view: "menu" });
+        } else if (curQuestion.type == "fillinBlanks") {
+            curIndex(curIndex() + 1);
+            //MCG_Prototype1.app.navigate({ view: "findBugs" });
+            MistakeChasingGameClient.app.navigate({ view: "fillinBlanks" });
+        };
     };
 
     // Random questions
@@ -89,11 +95,31 @@
         randomFindBugs = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
         //items[Math.floor(Math.random() * items.length)];
 
+        // Create list of beginner find bug questions
+        filteredFillin = DevExpress.data.query(MistakeChasingGameClient.db.fillingblank)
+                    .filter(["dif", ">=", minDif()], "and", ["dif", "<=", maxDif()])
+                    .sortBy("id").toArray();
+        // Random a question from the filtered list
+        randomFillinBlanks = filteredFillin[Math.floor(Math.random() * filteredFillin.length)];
+        //items[Math.floor(Math.random() * items.length)];
+
+        // Reset index
+        curIndex(1);
         // Add random question item into playing question list
         playingQuestions.insert({
             index: curIndex(),
+
             type: "findBugs",
             question: randomFindBugs
+        }).done(function (dataItem) {
+            // process 'dataItem'
+            test = dataItem;
+        });
+        // Add random question item into playing question list
+        playingQuestions.insert({
+            index: curIndex() + 1,
+            type: "fillinBlanks",
+            question: randomFillinBlanks
         });
 
         changeView();
@@ -117,7 +143,7 @@
         points = curQuestion.question.dif * 50;
         resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " star points!", "Result");
         resultDialog.done(function () {
-            MCG_Prototype1.app.navigate({ view: "home" });
+            MistakeChasingGameClient.app.navigate({ view: "home" });
         });
     };
     
@@ -132,7 +158,7 @@
         if (countX() >= 3) {
             resultDialog = DevExpress.ui.dialog.alert("You have earn " + 0 + " star points!", "Result");
             resultDialog.done(function () {
-                MCG_Prototype1.app.navigate({ view: "home" });
+                MistakeChasingGameClient.app.navigate({ view: "home" });
             });
         }
     };

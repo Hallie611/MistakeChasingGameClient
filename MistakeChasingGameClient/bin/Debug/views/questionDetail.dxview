@@ -2,7 +2,7 @@
     <div  data-options="dxContent : { targetPlaceholder: 'content' } " >
     </div>
 
-    <div data-options="dxView : { name: 'findBugs', title: 'Find Bugs', layout: 'empty' } ">
+   <!-- <div data-options="dxView : { name: 'findBugs', title: 'Find Bugs', layout: 'empty' } ">
         <div data-options="dxContent : { targetPlaceholder: 'content' } ">
             
             <div id="scrollViewContainer" data-bind="dxScrollView: { }">
@@ -16,6 +16,6 @@
                 <img id="miss3" data-bind="attr: { src: 'images/redX.png' }" style="width: 10%; height: 10%" />
             </div>
         </div>
-    </div>
+    </div>-->
 
 </div>
