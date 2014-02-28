@@ -31,6 +31,9 @@
     <Content Include="data\db.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\clearicon.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\fillinBlankQ\F1.jpg">
       <SubType>Content</SubType>
     </Content>
@@ -209,6 +212,15 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\findbugQ\P9.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\iconA.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\iconB.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\iconC.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\level\chick.png">
