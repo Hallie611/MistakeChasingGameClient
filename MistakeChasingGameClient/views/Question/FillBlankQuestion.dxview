@@ -1,52 +1,53 @@
 <div data-options="dxView : { name: 'FillBlankQuestion', title: 'FillBlankQuestion' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-        <img data-bind="attr: { src: src }" style="width: 100%; height: auto" />
-        <table>
-            <tr>
-                <td>
-                    <table>
-                        <tr>
-                            <td style="width: 30px; text-align: center">
-                                <img data-bind="attr: { src: 'images/iconA.png' }" />
-                            </td>
-                            <td>
-                                <div data-bind="dxDropDownMenu: { buttonText: choice1, dataSource: answwer1source, itemClickAction: Answer1Click }">
-                                </div>
-                            </td>
-                            <td>
-                                <img data-bind="attr: { src: 'images/clearicon.png' }" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30px; text-align: center">
-                                <img data-bind="attr: { src: 'images/iconB.png' }" />
-                            </td>
-                            <td>
-                                <div data-bind="dxDropDownMenu: { buttonText: choice2, dataSource: answwer2source, itemClickAction: Answer2Click }">
-                                </div>
-                            </td>
-                            <td>
-                                <img data-bind="attr: { src: 'images/clearicon.png' }" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30px; text-align: center">
-                                <img data-bind="attr: { src: 'images/iconC.png' }" />
-                            </td>
-                            <td>
-                                <div data-bind="dxDropDownMenu: { buttonText: choice3, dataSource: answwer3source, itemClickAction: Answer3Click }">
-                                </div>
+        <div id="scrollViewContainer" data-bind="dxScrollView: { }">
+            <img id="question" data-bind="attr: { src: src }" />
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td style="width: 30px; text-align: center">
+                                    <img data-bind="attr: { src: 'images/iconA.png' }" />
+                                </td>
+                                <td>
+                                    <div data-bind="dxDropDownMenu: { buttonText: choice1, dataSource: answwer1source, itemClickAction: Answer1Click }">
+                                    </div>
+                                </td>
                                 <td>
                                     <img data-bind="attr: { src: 'images/clearicon.png' }" />
                                 </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="text-align: center; width: 120px">
-                    <div data-bind="dxButton: { text: 'Button1', clickAction: summit}">
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+                            </tr>
+                            <tr>
+                                <td style="width: 30px; text-align: center">
+                                    <img data-bind="attr: { src: 'images/iconB.png' }" />
+                                </td>
+                                <td>
+                                    <div data-bind="dxDropDownMenu: { buttonText: choice2, dataSource: answwer2source, itemClickAction: Answer2Click }">
+                                    </div>
+                                </td>
+                                <td>
+                                    <img data-bind="attr: { src: 'images/clearicon.png' }" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30px; text-align: center">
+                                    <img data-bind="attr: { src: 'images/iconC.png' }" />
+                                </td>
+                                <td>
+                                    <div data-bind="dxDropDownMenu: { buttonText: choice3, dataSource: answwer3source, itemClickAction: Answer3Click }">
+                                    </div>
+                                    <td>
+                                        <img data-bind="attr: { src: 'images/clearicon.png' }" />
+                                    </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="text-align: center; width: 120px">
+                        <div data-bind="dxButton: { text: 'Button1', clickAction: summit}">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
 </div>
