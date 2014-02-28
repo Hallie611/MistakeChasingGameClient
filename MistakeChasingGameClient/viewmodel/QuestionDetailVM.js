@@ -18,6 +18,10 @@
         if (Number(level) % 1 == 0)
             localStorage.curentlevel = level;
 
+        // giu diem
+        if (!localStorage.curentPoint)
+            localStorage.curentPoint = 0;
+
         var playingQuest = new DevExpress.data.ArrayStore({
             //name: "playingQ",
             key: "index"
@@ -40,8 +44,6 @@
                 var filteredFillBlank = MistakeChasingGameClient.db.fillingblankdb.createQuery().filter(["dif", "=", Number(localStorage.curentlevel)]).sortBy("id").select("id").toArray();
 
                 randomFillBlank = filteredFillBlank[Math.floor(Math.random() * filteredFillBlank.length)];
-
-
                 MistakeChasingGameClient.app.navigate({
                     view: 'FillBlankQuestion',
                     id: randomFillBlank.id
