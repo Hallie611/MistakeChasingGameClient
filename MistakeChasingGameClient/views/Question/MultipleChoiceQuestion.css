@@ -1,3 +1,12 @@
-﻿body
+﻿#tableAns
 {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    z-index: +1;
+    bottom: 3%;
+}
+#scrollViewContainer
+{
+    height: 70%;
 }

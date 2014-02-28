@@ -3,43 +3,31 @@
     "use strict";
     MistakeChasingGameClient.MultiChoiceVM = function (id) {
 
-
-
         this.src = ko.observable();
-        this.mes = ko.observable();
         this.Multidata = ko.observable(null);
-        this.value = ko.observable();
-     
-        this.selectedValue = ko.observable(null);
         var result = "";
-        var choice = "";
-
+        this.choice = ko.observable('');
+        var difCurrentQ;
+        var points = 0;
         var data;
-        
+
         MistakeChasingGameClient.db.multiplechoicedb.byKey(id).done(function (e) { data = e });
         // ham nhan du lieu tu database vao de xu ly
         this.fromJS = function () {
             this.src(data.src);
-          this.Multidata(data.listAns);
-          result = data.ans;
-
+            this.Multidata(data.listAns);
+            result = data.ans;
+            difCurrentQ = data.dif;
         };
 
-        // ham de luu choice cua user
-        this.select = function (e) {
-            choice = e.itemData;
-        };
-
-        // ham de summit cau hoi
-        this.summit = function () {
-            
-            if (result == choice)
-                result = "true";
-            else
-                result = "false";
-           
-            this.resultDialog = DevExpress.ui.dialog.alert(result);
+        // ham de submit cau hoi
+        this.submit = function () {
+            if (result == this.choice()) {
+                points += difCurrentQ * 50;
+            }
+            this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!");
             this.resultDialog.done(function () {
+                localStorage.curentPoint = Number(localStorage.curentPoint) + points;
                 localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
                 MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
             });
