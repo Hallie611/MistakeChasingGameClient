@@ -70,9 +70,11 @@
                 result += "3 correct";
             }
 
-            localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
-            MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
-            alert(result);
+            this.resultDialog = DevExpress.ui.dialog.alert(result);
+            this.resultDialog.done(function () {
+                localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+                MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+            });
         };
     };
 })();

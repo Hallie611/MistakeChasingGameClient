@@ -34,12 +34,15 @@
         this.summit = function () {
             
             if (result == choice)
-                alert("true");
+                result = "true";
             else
-                alert("false");
+                result = "false";
            
-            localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
-            MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+            this.resultDialog = DevExpress.ui.dialog.alert(result);
+            this.resultDialog.done(function () {
+                localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+                MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+            });
         };
     };
 })();
