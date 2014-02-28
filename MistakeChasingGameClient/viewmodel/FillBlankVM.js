@@ -3,75 +3,51 @@
     "use strict";
     MistakeChasingGameClient.FillBlankVM = function (id) {
 
-
-
-
-
-
         // khai bao bien
         this.src = ko.observable();
-        this.answwer1source = ko.observable();
-        this.answwer2source = ko.observable();
-        this.answwer3source = ko.observable();
+        this.answer1source = ko.observable();
+        this.answer2source = ko.observable();
+        this.answer3source = ko.observable();
 
-        this.choice1 = ko.observable('Choice');
-        this.choice2 = ko.observable('Choice');
-        this.choice3 = ko.observable('Choice');
-
+        this.choice1 = ko.observable('');
+        this.choice2 = ko.observable('');
+        this.choice3 = ko.observable('');
+        var difCurrentQ;
+        var points = 0;
         var answer1;
         var answer2;
         var answer3;
-
-        var result = "";
-
-
-        this.Multidata = ko.observable();
-        this.mes = ko.observable();
-        // ham dung de  lay dap an user chon
-        this.Answer1Click = function (clickOptions) {
-            this.choice1(clickOptions.itemData);
-        };
-        this.Answer2Click = function (clickOptions) {
-            this.choice2(clickOptions.itemData);
-        };
-        this.Answer3Click = function (clickOptions) {
-            this.choice3(clickOptions.itemData);
-        };
-
-
 
         // ham dung de load du lieu len questiondetail view by data
         this.fromJS = function (data) {
             //lay cau hoi dua theo id truyn vao data tam
             var data;
             MistakeChasingGameClient.db.fillingblankdb.byKey(id).done(function (e) { data = e });
-            
+
             this.src(data.src);
-            this.answwer1source(data.listA);
-            this.answwer2source(data.listB);
-            this.answwer3source(data.listC);
+            this.answer1source(data.listA);
+            this.answer2source(data.listB);
+            this.answer3source(data.listC);
             answer1 = data.A;
             answer2 = data.B;
-            answer3 = data.c;
-
-
+            answer3 = data.C;
+            difCurrentQ = data.dif;
         };
 
-        //summit method
-        this.summit = function () {
-            result = "";
+        //submit method
+        this.submit = function () {
             if (this.choice1() == answer1) {
-                result += "1 correct";
+                points += difCurrentQ * 25;
             }
             if (this.choice2() == answer2) {
-                result += "2 correct";
+                points += difCurrentQ * 25;
             }
             if (this.choice3() == answer3) {
-                result += "3 correct";
+                points += difCurrentQ * 25;
             }
-
-            this.resultDialog = DevExpress.ui.dialog.alert(result);
+            this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!");
             this.resultDialog.done(function () {
+                localStorage.curentPoint = Number(localStorage.curentPoint) + points;
                 localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
                 MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
             });

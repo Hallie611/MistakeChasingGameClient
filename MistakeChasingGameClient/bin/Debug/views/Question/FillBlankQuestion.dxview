@@ -1,52 +1,39 @@
 <div data-options="dxView : { name: 'FillBlankQuestion', title: 'FillBlankQuestion' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-        <img data-bind="attr: { src: src }" style="width: 100%; height: auto" />
-        <table>
+        <div id="scrollViewContainer" data-bind="dxScrollView: { }">
+            <img id="question" data-bind="attr: { src: src }" />
+        </div>
+        <table id="tableAns">
             <tr>
-                <td>
-                    <table>
-                        <tr>
-                            <td style="width: 30px; text-align: center">
-                                <img data-bind="attr: { src: 'images/iconA.png' }" />
-                            </td>
-                            <td>
-                                <div data-bind="dxDropDownMenu: { buttonText: choice1, dataSource: answwer1source, itemClickAction: Answer1Click }">
-                                </div>
-                            </td>
-                            <td>
-                                <img data-bind="attr: { src: 'images/clearicon.png' }" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30px; text-align: center">
-                                <img data-bind="attr: { src: 'images/iconB.png' }" />
-                            </td>
-                            <td>
-                                <div data-bind="dxDropDownMenu: { buttonText: choice2, dataSource: answwer2source, itemClickAction: Answer2Click }">
-                                </div>
-                            </td>
-                            <td>
-                                <img data-bind="attr: { src: 'images/clearicon.png' }" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30px; text-align: center">
-                                <img data-bind="attr: { src: 'images/iconC.png' }" />
-                            </td>
-                            <td>
-                                <div data-bind="dxDropDownMenu: { buttonText: choice3, dataSource: answwer3source, itemClickAction: Answer3Click }">
-                                </div>
-                                <td>
-                                    <img data-bind="attr: { src: 'images/clearicon.png' }" />
-                                </td>
-                        </tr>
-                    </table>
+                <td style="width: 30px; text-align: center">
+                    <img data-bind="attr: { src: 'images/iconA.png' }" />
                 </td>
-                <td style="text-align: center; width: 120px">
-                    <div data-bind="dxButton: { text: 'Button1', clickAction: summit}">
+                <td>
+                    <div data-bind="dxSelectBox:{dataSource: answer1source, value: choice1}">
+                    </div>
+                </td>
+                <td rowspan="3" style="text-align: center; width: 120px">
+                    <div id="submitBtn" data-bind="dxButton: { iconSrc: 'images/submitButton.png', clickAction: submit, height: '100%', width: '100%' }">
+                    </div>                    
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 30px; text-align: center">
+                    <img data-bind="attr: { src: 'images/iconB.png' }" />
+                </td>
+                <td>
+                    <div data-bind="dxSelectBox:{dataSource: answer2source, value: choice2}">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 30px; text-align: center">
+                    <img data-bind="attr: { src: 'images/iconC.png' }" />
+                </td>
+                <td>
+                    <div data-bind="dxSelectBox:{dataSource: answer3source, value: choice3}">
                     </div>
                 </td>
             </tr>
         </table>
     </div>
-</div>
