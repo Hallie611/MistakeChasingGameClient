@@ -9,17 +9,13 @@
         var data;
 
         MistakeChasingGameClient.db.findbugsdb.byKey(id).done(function (e) { data = e });
-
-        var countX = 0;
-
-        
+        var countX = 0;        
         this.fromJS = function () {
             this.src(data.src);
             this.bwidth(data.width);
             this.bheight(data.height);
             this.bleft(data.left);
             this.btop(data.top);
-
         };
 
         this.myEventHandler = function () {
@@ -37,9 +33,13 @@
         };
 
         this.showBug = function () {
-            
-           
+            var showMe = document.getElementById("bug");
+            showMe.style.borderStyle = "solid";
+            points = curQuestion.question.dif * 50;
+            resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " star points!", "Result");
+            resultDialog.done(function () {
+                MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+            });           
         };
-
     }
 })();
