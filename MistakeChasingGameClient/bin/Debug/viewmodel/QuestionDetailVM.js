@@ -11,12 +11,12 @@
 
         //giu index random array question
         if (!localStorage.curentIndex)
-        localStorage.curentIndex=0;
-        
+            localStorage.curentIndex = 0;
+
 
         //giu level khi chuyen view
-        if(Number(level)%1==0)
-        localStorage.curentlevel = level;
+        if (Number(level) % 1 == 0)
+            localStorage.curentlevel = level;
 
         var playingQuest = new DevExpress.data.ArrayStore({
             //name: "playingQ",
@@ -26,7 +26,7 @@
 
         this.changeView = function () {
 
-            
+
             if (Number(localStorage.curentIndex) == 0) {
                 var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.curentlevel)]).sortBy("id").select("id").toArray();
                 randomFindBugs = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
@@ -41,7 +41,7 @@
 
                 randomFillBlank = filteredFillBlank[Math.floor(Math.random() * filteredFillBlank.length)];
 
-             
+
                 MistakeChasingGameClient.app.navigate({
                     view: 'FillBlankQuestion',
                     id: randomFillBlank.id
@@ -58,23 +58,15 @@
             }
             else
                 localStorage.curentIndex = 0;
-                
-            
         };
-
-
-
         this.PlayAgain = function () {
             this.changeView();
         };
 
         this.Next = function () {
-            var nextLevel= Number( localStorage.curentlevel)+1;
+            var nextLevel = Number(localStorage.curentlevel) + 1;
             MistakeChasingGameClient.app.navigate({ view: "home", level: nextLevel });
         };
-
-
-
     };
 })();
 
