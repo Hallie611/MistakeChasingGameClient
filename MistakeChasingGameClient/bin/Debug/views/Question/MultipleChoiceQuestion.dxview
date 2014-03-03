@@ -1,18 +1,29 @@
-<div data-options="dxView : { name: 'MultipleChoiceQuestion', title: 'MultipleChoiceQuestion' } ">
+<div data-options="dxView : { name: 'MultipleChoiceQuestion', title: 'MultipleChoiceQuestion', layout: 'empty' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-        <img id="Img1" data-bind="attr: { src: src }" />
-        <h1 data-bind="text: mes"></h1>
-
-        <div data-bind="dxRadioGroup:{dataSource: Multidata,itemSelectAction: select}"></div>
-        
-  <!--      
-       <div class="selectbox" data-bind="dxSelectBox: {
-            placeholder: 'Select state',
-            dataSource: Multidata,
-            itemSelectAction : summit
-        }">
-        </div>-->
-        <div data-bind="dxButton: { text: 'Button1',clickAction: summit }"></div>
-
+        <div id="scrollViewContainer" data-bind="dxScrollView: { }">
+            <img id="question" style="width: 100%; height: 100%" data-bind="attr: { src: src }" />
+        </div>
+        <table id="tableAns">
+            <tr>
+                <td colspan="2" style="padding:2%">
+                    Which type of bug is in the codes above?
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Answer:
+                </td>
+                <td>
+                    <div data-bind="dxSelectBox:{dataSource: Multidata, value: choice}">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div data-bind="dxButton: { iconSrc: 'images/submit-button.jpg', clickAction: submit }">
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>

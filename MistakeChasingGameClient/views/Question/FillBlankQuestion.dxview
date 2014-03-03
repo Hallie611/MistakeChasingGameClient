@@ -1,7 +1,7 @@
-<div data-options="dxView : { name: 'FillBlankQuestion', title: 'FillBlankQuestion' } ">
+<div data-options="dxView : { name: 'FillBlankQuestion', title: 'FillBlankQuestion', layout: 'empty' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div id="scrollViewContainer" data-bind="dxScrollView: { }">
-            <img id="question" style="width: 100%; height: 100%" data-bind="attr: { src: src }" />
+            <img id="question" data-bind="attr: { src: src }" />
         </div>
         <table id="tableAns">
             <tr>

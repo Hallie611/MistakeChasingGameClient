@@ -1,4 +1,4 @@
-<div data-options="dxView : { name: 'MultipleChoiceQuestion', title: 'MultipleChoiceQuestion' } ">
+<div data-options="dxView : { name: 'MultipleChoiceQuestion', title: 'MultipleChoiceQuestion', layout: 'empty' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div id="scrollViewContainer" data-bind="dxScrollView: { }">
             <img id="question" style="width: 100%; height: 100%" data-bind="attr: { src: src }" />

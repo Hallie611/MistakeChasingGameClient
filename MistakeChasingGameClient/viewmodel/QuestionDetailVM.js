@@ -3,7 +3,6 @@
     "use strict";
     MistakeChasingGameClient.QuestionVM = function (level) {
 
-
         this.mes = ko.observable();
         var randomFindBugs;
         var randomFillBlank;
@@ -12,7 +11,6 @@
         //giu index random array question
         if (!localStorage.curentIndex)
             localStorage.curentIndex = 0;
-
 
         //giu level khi chuyen view
         if (Number(level) % 1 == 0)
@@ -29,7 +27,6 @@
 
 
         this.changeView = function () {
-
 
             if (Number(localStorage.curentIndex) == 0) {
                 var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.curentlevel)]).sortBy("id").select("id").toArray();

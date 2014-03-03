@@ -1,9 +1,4 @@
-﻿#submitBtn
-{
-    width: 10%;
-    height: 10%;
-}
-#tableAns
+﻿#tableAns
 {
     position: fixed;
     width: 100%;
@@ -13,10 +8,10 @@
 }
 #scrollViewContainer
 {
-    height: 70%;
+    height: 90%;
 }
-.dx-icon
+#question
 {
-    width: 100%;
-    height: 100%;
+    width:100%;
+    height:100%;    
 }

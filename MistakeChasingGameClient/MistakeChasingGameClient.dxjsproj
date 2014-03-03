@@ -214,15 +214,6 @@
     <Content Include="images\findbugQ\P9.jpg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\iconA.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\iconB.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\iconC.png">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="images\level\chick.png">
       <SubType>Content</SubType>
     </Content>
@@ -376,6 +367,15 @@
     <Content Include="images\MultipleChoice\M9.jpg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\num1.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\num2.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\num3.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\redX.png">
       <SubType>Content</SubType>
     </Content>
@@ -389,12 +389,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\submit-button.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\submitButton.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\submitonclick.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="index.js" />

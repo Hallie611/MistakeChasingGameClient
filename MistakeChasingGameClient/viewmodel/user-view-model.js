@@ -8,9 +8,7 @@
         localStorage.point = "100";
     };
 
-    MistakeChasingGameClient.UserViewModel = function (data) {
-
-        
+    MistakeChasingGameClient.UserViewModel = function (data) {        
         this.username = ko.observable();
         this.level = ko.observable();
         this.point = ko.observable();
@@ -41,10 +39,5 @@
         };
 
         //  this.fromJS(data);
-
-
-
-
-
     };
 })();
