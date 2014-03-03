@@ -2495,6 +2495,8 @@
 }
 .dx-theme-ios.dx-version-major-7 .dx-button .dx-button-content .dx-icon
 {
+  height: 28px;
+  width: 28px;
   margin: 4px;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;

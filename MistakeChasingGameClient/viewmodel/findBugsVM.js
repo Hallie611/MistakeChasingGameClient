@@ -28,7 +28,7 @@
             if (countX >= 3) {
                 this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + 0 + " star points!", "Result");
                 this.resultDialog.done(function () {
-                    localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+                    localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
                     MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
                 });
             }
@@ -40,8 +40,8 @@
             points = difCurrentQ * 50;
             this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " star points!", "Result");
             this.resultDialog.done(function () {
-                localStorage.curentPoint = Number(localStorage.curentPoint) + points;
-                localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+                localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+                localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
                 MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
             });
         };

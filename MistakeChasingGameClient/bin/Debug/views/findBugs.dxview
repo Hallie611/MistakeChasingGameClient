@@ -1,4 +1,0 @@
-<div data-options="dxView : { name: 'findBugs', title: 'findBugs' } " >
-    <div  data-options="dxContent : { targetPlaceholder: 'content' } " >
-         </div>
-</div>

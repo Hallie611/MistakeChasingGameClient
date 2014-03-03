@@ -492,7 +492,7 @@
 }
 .dx-theme-win8 .dx-button
 {
-  
+  border: 2px solid #fff;
   padding: 4px 8px;
   font-size: 11pt;
 }
@@ -562,8 +562,8 @@
 }
 .dx-theme-win8.dx-device-phone .dx-button .dx-icon
 {
-  width: 30px;
-  height: 9%;
+  width: 20px;
+  height: 20px;
 }
 .dx-theme-win8.dx-device-phone .dx-button.dx-button-back .dx-button-back-arrow
 {

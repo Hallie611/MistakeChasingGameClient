@@ -1,8 +1,9 @@
 ﻿MistakeChasingGameClient.home = function (params) {
 
-    localStorage.curentPoint = 0;
-    localStorage.curentlevel = 0;
-    localStorage.curentIndex = 0;
+    localStorage.currentIndex = 0;
+    localStorage.currentPoint = 0;
+    //localStorage.curentlevel = 0;
+    
     var viewModel = {
 
 

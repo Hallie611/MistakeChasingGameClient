@@ -27,8 +27,8 @@
             }
             this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!");
             this.resultDialog.done(function () {
-                localStorage.curentPoint = Number(localStorage.curentPoint) + points;
-                localStorage.curentIndex = Number(localStorage.curentIndex) + 1;
+                localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+                localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
                 MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
             });
         };
