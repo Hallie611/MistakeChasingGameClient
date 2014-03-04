@@ -1,4 +1,4 @@
-<div data-options="dxView : { name: 'findBugs', title: 'Find Bugs', layout: 'empty' } ">
+<div data-options="dxView : { name: 'findBugs', title: 'Find Bugs' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <h3>
             Touch the screen to select the bug in the codes below:</h3>

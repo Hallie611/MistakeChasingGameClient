@@ -17,21 +17,32 @@
         var answer1;
         var answer2;
         var answer3;
+        var randomFillBlank = ko.observable("");
+        //        function findLayout(name) {
+        //            var currentPlatform = DevExpress.devices.current().platform;
+        //            var result = $.grep(DevExpress.framework.html.layoutControllers, function (item, index) {
+        //                return (item.navigationType == name && item.platform == currentPlatform);
+        //            });
+        //            return result.length ? result[0].controller : null;
+        //        };
+        //            var controller = findLayout('slideout');
+        //            if (controller)
+        //                controller.navButtonItem.hide();
 
         // ham dung de load du lieu len questiondetail view by data
-        this.fromJS = function (data) {
-            //lay cau hoi dua theo id truyn vao data tam
-            var data;
-            MistakeChasingGameClient.db.fillingblankdb.byKey(id).done(function (e) { data = e });
-
-            this.src(data.src);
-            this.answer1source(data.listA);
-            this.answer2source(data.listB);
-            this.answer3source(data.listC);
-            answer1 = data.A;
-            answer2 = data.B;
-            answer3 = data.C;
-            difCurrentQ = data.dif;
+        this.fromJS = function () {
+            if (Number(localStorage.currentIndex) == 2) {
+                var filteredFillBlank = MistakeChasingGameClient.db.fillingblankdb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
+                randomFillBlank = filteredFillBlank[Math.floor(Math.random() * filteredFillBlank.length)];              
+            } 
+            this.src(randomFillBlank.src);
+            this.answer1source(randomFillBlank.listA);
+            this.answer2source(randomFillBlank.listB);
+            this.answer3source(randomFillBlank.listC);
+            answer1 = randomFillBlank.A;
+            answer2 = randomFillBlank.B;
+            answer3 = randomFillBlank.C;
+            difCurrentQ = randomFillBlank.dif;
         };
 
         //submit method
@@ -49,7 +60,7 @@
             this.resultDialog.done(function () {
                 localStorage.currentPoint = Number(localStorage.currentPoint) + points;
                 localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-                MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+                MistakeChasingGameClient.app.navigate('MultipleChoiceQuestion', { target: 'current' });
             });
         };
     };

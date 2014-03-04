@@ -415,6 +415,15 @@
     <Content Include="layouts\Navbar\NavbarLayout.css" />
     <Content Include="layouts\Navbar\NavbarLayout.html" />
     <Content Include="layouts\Navbar\NavbarLayout.js" />
+    <Content Include="layouts\Simple\SimpleLayout.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="layouts\Simple\SimpleLayout.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="layouts\Simple\SimpleLayout.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="layouts\SlideOut\SlideOutLayout.js" />
     <Content Include="layouts\SlideOut\SlideOutLayout.css" />
     <Content Include="layouts\SlideOut\SlideOutLayout.html" />
@@ -442,9 +451,6 @@
     <Content Include="viewmodel\MultiChoiceVM.js">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="viewmodel\QuestionDetailVM.js">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="viewmodel\user-view-model.js">
       <SubType>Content</SubType>
     </Content>
@@ -453,12 +459,6 @@
     <Content Include="views\home.js" />
     <Content Include="views\about.html" />
     <Content Include="app.config.js" />
-    <Content Include="views\questionDetail.dxview">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\questionDetail.js">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="views\Question\FillBlankQuestion.css">
       <SubType>Content</SubType>
     </Content>
@@ -506,6 +506,7 @@
     <Folder Include="layouts\Desktop\" />
     <Folder Include="layouts\Empty\" />
     <Folder Include="layouts\Navbar\" />
+    <Folder Include="layouts\Simple" />
     <Folder Include="layouts\SlideOut\" />
     <Folder Include="images" />
     <Folder Include="viewmodel" />

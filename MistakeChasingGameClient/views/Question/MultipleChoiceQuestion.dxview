@@ -1,11 +1,11 @@
-<div data-options="dxView : { name: 'MultipleChoiceQuestion', title: 'MultipleChoiceQuestion', layout: 'empty' } ">
+<div data-options="dxView : { name: 'MultipleChoiceQuestion', title: 'MultipleChoiceQuestion' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div id="scrollViewContainer" data-bind="dxScrollView: { }">
             <img id="question" style="width: 100%; height: 100%" data-bind="attr: { src: src }" />
         </div>
         <table id="tableAns">
             <tr>
-                <td colspan="2" style="padding:2%">
+                <td colspan="2" style="padding: 2%">
                     Which type of bug is in the codes above?
                 </td>
             </tr>
@@ -14,7 +14,7 @@
                     Answer:
                 </td>
                 <td>
-                    <div data-bind="dxSelectBox:{dataSource: Multidata, value: choice}">
+                    <div data-bind="dxSelectBox:{dataSource: listAns, value: choice}">
                     </div>
                 </td>
             </tr>
@@ -25,5 +25,15 @@
                 </td>
             </tr>
         </table>
+        <div data-bind="dxPopup:{visible: showMe, title: 'Result', showTitle: true, fullScreen:true}">
+            <p>
+                The text that should be shown in the popup window.</p>
+            <div data-bind="dxButton: { text: 'Play Again', clickAction: PlayAgain }">
+            </div>
+            <div data-bind="dxButton: { text: 'Next', clickAction: Next}">
+            </div>
+            <div data-bind="dxButton: { text: 'Back to Home', clickAction: backToMenu }">
+            </div>
+        </div>
     </div>
 </div>

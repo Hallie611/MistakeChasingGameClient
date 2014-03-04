@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    MistakeChasingGameClient.findBugsVM = function (id) {
+    MistakeChasingGameClient.findBugsVM = function (level) {
         this.src = ko.observable();
         this.bwidth = ko.observable();
         this.bheight = ko.observable();
@@ -8,17 +8,38 @@
         this.btop = ko.observable();
         var points;
         var difCurrentQ;
-        var data;
-
-        MistakeChasingGameClient.db.findbugsdb.byKey(id).done(function (e) { data = e });
+        var randomFindBugs = ko.observable();
         var countX = 0;
+        
+        //giu index random array question
+        if (!localStorage.currentIndex)
+            localStorage.currentIndex = 0;
+
+        //giu level khi chuyen view
+        if (Number(level) % 1 == 0)
+            localStorage.currentlevel = level;
+
+        // giu diem
+        if (!localStorage.currentPoint)
+            localStorage.currentPoint = 0;
+
+        if (Number(localStorage.currentlevel) < 8) {
+            localStorage.maxIndex = 3;
+        }
+
         this.fromJS = function () {
-            this.src(data.src);
-            this.bwidth(data.width);
-            this.bheight(data.height);
-            this.bleft(data.left);
-            this.btop(data.top);
-            difCurrentQ = data.dif;
+            alert(randomFindBugs.src);
+            if (Number(localStorage.currentIndex) == 1) {
+                var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
+                randomFindBugs = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
+                alert(randomFindBugs.src);
+            }
+            this.src(randomFindBugs.src);
+            this.bwidth(randomFindBugs.width);
+            this.bheight(randomFindBugs.height);
+            this.bleft(randomFindBugs.left);
+            this.btop(randomFindBugs.top);
+            difCurrentQ = randomFindBugs.dif;
         };
 
         this.myEventHandler = function () {
@@ -29,7 +50,7 @@
                 this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + 0 + " star points!", "Result");
                 this.resultDialog.done(function () {
                     localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-                    MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+                    MistakeChasingGameClient.app.navigate({ view: "FillBlankQuestion" });
                 });
             }
         };
@@ -42,7 +63,7 @@
             this.resultDialog.done(function () {
                 localStorage.currentPoint = Number(localStorage.currentPoint) + points;
                 localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-                MistakeChasingGameClient.app.navigate({ view: "questionDetail" });
+                MistakeChasingGameClient.app.navigate('FillBlankQuestion', { target: 'current' });
             });
         };
     }

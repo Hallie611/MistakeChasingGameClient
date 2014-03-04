@@ -109,9 +109,9 @@
     MistakeChasingGameClient.db = {
         findbugsdb:
             new DevExpress.data.ArrayStore({
-            data: findbugs,
-            key: 'id'
-        }),
+                data: findbugs,
+                key: 'id'
+            }),
         fillingblankdb: new DevExpress.data.ArrayStore({
             data: fillingblank,
             key: 'id'

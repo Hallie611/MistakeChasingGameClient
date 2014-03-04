@@ -1,7 +1,0 @@
-<div data-options="dxView : { name: 'questionDetail', title: 'questionDetail', layout: 'empty' } " >
-    <div  data-options="dxContent : { targetPlaceholder: 'content' } " >
-      <div class="dx-field-value" data-bind="dxTextBox: { value: mes }"></div>
-        <div data-bind="dxButton: { text: 'Play Again',clickAction: PlayAgain }"></div>
-        <div data-bind="dxButton: { text: 'Next' ,clickAction: Next}"></div>
-    </div>
-</div>
