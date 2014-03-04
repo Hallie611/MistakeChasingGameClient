@@ -28,11 +28,11 @@
         }
 
         this.fromJS = function () {
-            alert(randomFindBugs.src);
+            
             if (Number(localStorage.currentIndex) == 1) {
                 var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
                 randomFindBugs = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
-                alert(randomFindBugs.src);
+                
             }
             this.src(randomFindBugs.src);
             this.bwidth(randomFindBugs.width);

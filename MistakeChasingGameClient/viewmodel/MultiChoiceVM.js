@@ -34,10 +34,11 @@
             }
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-            this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!");
-            this.resultDialog.done(function () {
-                this.showMe(true);
-            });
+            this.showMe(true);
+            //            this.resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!", "Result");
+            //            this.resultDialog.done(function () {
+            //                
+            //            });
         };
 
         this.PlayAgain = function () {
