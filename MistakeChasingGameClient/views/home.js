@@ -2,7 +2,7 @@
 
     localStorage.currentIndex = 1;
     localStorage.currentPoint = 0;
-
+    //localStorage.currentlevel = 0 ;
     var viewModel = {
         tabs: [
            { text: "Beginner" },
@@ -43,11 +43,12 @@
     });
 
     clickLevel = function (level) {
-        MistakeChasingGameClient.app.navigate('findBugs/' + level, { root: true });
+        //alert(level);
+        MistakeChasingGameClient.app.navigate('training/' + level, { root: true });
     };
 
     viewModel.selectedTab(0);
     ///////////////////////////////////////////////////
-    
+
     return viewModel;
 };

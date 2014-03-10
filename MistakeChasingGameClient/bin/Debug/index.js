@@ -16,11 +16,7 @@ $(function () {
     MistakeChasingGameClient.app.router.register(":view/:id", { view: "home", id: undefined });
 
     MistakeChasingGameClient.app.resolveLayoutController.add(function (args) {
-        if (args.viewInfo.viewName == 'findBugs') {
-            args.layoutController = findController('simple', args.availableLayoutControllers);
-        } else if (args.viewInfo.viewName == 'FillBlankQuestion') {
-            args.layoutController = findController('simple', args.availableLayoutControllers);
-        } else if (args.viewInfo.viewName == 'MultipleChoiceQuestion') {
+        if (args.viewInfo.viewName == 'training') {
             args.layoutController = findController('simple', args.availableLayoutControllers);
         }
     });

@@ -2509,7 +2509,7 @@
 {
   font-size: 100%;
   line-height: 28px;
-  color: #017aff;
+  color: inherit;/*#017aff;*/
   padding: 0 2px;
   display: inline;
   vertical-align: middle;

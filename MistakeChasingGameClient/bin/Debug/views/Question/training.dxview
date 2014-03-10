@@ -1,0 +1,88 @@
+<div data-options="dxView : { name: 'training', title: 'Mistake Chasing' } ">
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
+        </div>-->
+        <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
+            <div style="height: 10%; text-align: center;">
+                <h3>
+                    Touch the screen to select the bug in the codes below:</h3>
+            </div>
+            <div id="scrollViewFB" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
+                <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
+                </div>
+            </div>
+            <div id="redXBox">
+                <img id="miss1" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
+                <img id="miss2" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
+                <img id="miss3" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
+            </div>
+        </div>
+        <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
+            <div id="scrollViewFBK" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
+            </div>
+            <div style="bottom: 2%; position: fixed; width: 100%;">
+                <div style="text-align: center;">
+                    <h3>
+                        Fill in the blanks in the codes above:</h3>
+                </div>
+                <div class="dx-fieldset" style="margin: 0px 0px 20px 0px;">
+                    <div class="dx-field">
+                        <div class="dx-field-label">
+                            1.</div>
+                        <div class="dx-field-value">
+                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer1source, value: fillingBlanksTab.choice1}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">
+                            2.</div>
+                        <div class="dx-field-value">
+                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer2source, value: fillingBlanksTab.choice2}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">
+                            3.</div>
+                        <div class="dx-field-value">
+                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer3source, value: fillingBlanksTab.choice3}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="submitBtn" style="font-size: 20px;padding: 5px 32px 5px 32px;font-weight: bold;color: #ffffff;font-family: arial;display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitFBK }"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content" id="levelmap" data-bind="if: singleChoiceTab.rendered, visible: singleChoiceTab.tabVisible">
+            <div id="scrollViewSC" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
+            </div>
+            <div style="bottom: 2%; position: fixed; width: 100%;">
+                <div style="text-align: center;">
+                    <h3>
+                        Which type of bug is in the codes above?</h3>
+                </div>
+                <div class="dx-fieldset" style="margin: 0px 0px 20px 0px;padding: 5px;">
+                    <div class="dx-field">
+                        
+                        <div class="dx-field-value">
+                            <div style="width: 100%;left: 2%;" data-bind="dxSelectBox:{dataSource: singleChoiceTab.listAns, value: singleChoiceTab.choiceSC}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                
+                    <div class="submitBtn" style="font-size: 20px;padding: 5px 32px 5px 32px;font-weight: bold;color: #ffffff;font-family: arial;display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitSC }">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

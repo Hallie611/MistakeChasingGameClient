@@ -442,13 +442,7 @@
     <Content Include="js\globalize.min.js" />
     <Content Include="js\jquery-1.9.1.min.js" />
     <Content Include="js\knockout-2.2.1.js" />
-    <Content Include="viewmodel\FillBlankVM.js">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="viewmodel\findBugsVM.js">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="viewmodel\MultiChoiceVM.js">
+    <Content Include="viewmodel\trainingVM.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="viewmodel\user-view-model.js">
@@ -459,31 +453,13 @@
     <Content Include="views\home.js" />
     <Content Include="views\about.html" />
     <Content Include="app.config.js" />
-    <Content Include="views\Question\FillBlankQuestion.css">
+    <Content Include="views\Question\training.css">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="views\Question\FillBlankQuestion.dxview">
+    <Content Include="views\Question\training.dxview">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="views\Question\FillBlankQuestion.js">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\Question\findBugs.css">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\Question\findBugs.dxview">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\Question\findBugs.js">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\Question\MultipleChoiceQuestion.css">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\Question\MultipleChoiceQuestion.dxview">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\Question\MultipleChoiceQuestion.js">
+    <Content Include="views\Question\training.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="views\User.dxview">
