@@ -10,13 +10,13 @@
             </div>
             <div id="lv3" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(3) } }">
             </div>
-            <div id="lv4" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#findBugs/4' }">
+            <div id="lv4" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(4) } }">
             </div>
-            <div id="lv5" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#findBugs/5' }">
+            <div id="lv5" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(5) } }">
             </div>
-            <div id="lv6" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#findBugs/6' }">
+            <div id="lv6" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(6) } }">
             </div>
-            <div id="lv7" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: '#findBugs/7' }">
+            <div id="lv7" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(7) } }">
             </div>
             <!-- <input id="lv1" type="image" src="images/lvBtn.png" alt="Submit" width="9%" height="9%"> -->
         </div>

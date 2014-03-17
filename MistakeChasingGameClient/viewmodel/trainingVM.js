@@ -78,6 +78,8 @@
             if (this.fillingBlanksTab.choice3() == answer3) {
                 points += difCurrentQ * 25;
             }
+            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
         };
         ////////////////////////////////////////
@@ -86,6 +88,8 @@
             if (answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 50;
             }
+            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
         };
 
@@ -98,7 +102,18 @@
             else return false;
         };
         /////////////////////////////////////////
-        this.randomFindBugs = function () {
+        this.timeUp = function () {
+            var tabIndex = selectedTab();
+            if (tabIndex == 0) {
+                return 0;
+            } else if (tabIndex == 1) {
+                return this.submitBlanks();
+            } else if (tabIndex == 2) {
+                return this.submitChoice();
+            }
+        };
+        /////////////////////////////////////////
+        this.randomFindBugs = function () {            
             var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
             randomQuestion = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
         };
@@ -135,7 +150,9 @@
             difCurrentQ = randomQuestion.dif;
         };
         this.loadQuestion = function () {
-
+            //giu level khi chuyen view    
+            if (Number(params) % 1 == 0)
+                localStorage.currentlevel = params;
             if (Number(localStorage.currentlevel) < 8) {
                 localStorage.maxIndex = 3;
             }

@@ -1,10 +1,7 @@
 ﻿MistakeChasingGameClient.training = function (params) {
 
-    //giu level khi chuyen view
-    if (Number(params.id) % 1 == 0)
-        localStorage.currentlevel = params.id;
     var viewModel = new MistakeChasingGameClient.trainingVM(params.id);
-    var countX = 0;    
+    var countX = 0;
 
     myEventHandler = function () {
         countX += 1;
@@ -12,73 +9,81 @@
         showX.style.visibility = "visible";
         if (countX >= 3) {
             countX = 0;
-            resultDialog = DevExpress.ui.dialog.alert("You have earn " + 0 + " star points!", "Result");
-            resultDialog.done(function () {
-                localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-                viewModel.loadQuestion();
-            });
+            //resultDialog = DevExpress.ui.dialog.alert("You have earn " + 0 + " star points!", "Result");
+            //resultDialog.done(function () {
+            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            viewModel.loadQuestion();
+            //});
         }
     };
 
     showBug = function () {
         var points = viewModel.bugFound();
-        resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " star points!", "Result");
+        //setTimeout(viewModel.loadQuestion(), 3000);
+        resultDialog = DevExpress.ui.dialog.alert("Bug found!", "Result");
         resultDialog.done(function () {
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             viewModel.loadQuestion();
         });
+
     };
 
     submitFBK = function () {
         var points = viewModel.submitBlanks();
-        resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!", "Result");
-        resultDialog.done(function () {
-            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-            viewModel.loadQuestion();
+        //resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!", "Result");
+        //resultDialog.done(function () {
+        //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+        //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+        viewModel.loadQuestion();
 
-        });
+        //});
     };
 
     submitSC = function () {
         var points = viewModel.submitChoice();
-        resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!", "Result");
-        resultDialog.done(function () {
-            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-            var curPoints = ko.observable(Number(localStorage.currentPoint));
-            var isPassed = viewModel.isPassed();
+        clearClock();
+        //resultDialog = DevExpress.ui.dialog.alert("You have earn " + points + " points!", "Result");
+        //resultDialog.done(function () {
+        //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+        //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+        showEndDialog();
+    };
 
-            var passDialog = DevExpress.ui.dialog.custom({
-                title: "Result",
-                message: "You have earn " + curPoints() + " points!",
-                buttons: [
+    function showEndDialog() {
+        var curPoints = ko.observable(Number(localStorage.currentPoint));
+        var isPassed = viewModel.isPassed();
+
+        var passDialog = DevExpress.ui.dialog.custom({
+            title: "Result",
+            message: "You have earn " + curPoints() + " points!",
+            buttons: [
             { text: "Next Level", clickAction: next },
             { text: "Back to Home", clickAction: backToMenu}]
-            });
+        });
 
-            var failDialog = DevExpress.ui.dialog.custom({
-                title: "Result",
-                message: "You have earn " + curPoints() + " points!",
-                buttons: [
+        var failDialog = DevExpress.ui.dialog.custom({
+            title: "Result",
+            message: "You have earn " + curPoints() + " points!",
+            buttons: [
             { text: "Try Again", clickAction: tryAgain },
             { text: "Back to Home", clickAction: backToMenu}]
-            });
-            if (isPassed) {
-                passDialog.show();
-            }
-            else failDialog.show();
         });
+        if (isPassed) {
+            passDialog.show();
+        }
+        else failDialog.show();
+        //});
     };
 
     function tryAgain() {
         localStorage.currentIndex = 1;
         localStorage.currentPoint = 0;
         viewModel.loadQuestion();
+        setClock();
     };
 
-    function next() {        
+    function next() {
         localStorage.currentIndex = 1;
         localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;
@@ -86,6 +91,7 @@
         localStorage.currentlevel = nextLevel;
         //alert(Number(localStorage.currentlevel));
         viewModel.loadQuestion();
+        setClock();
     };
 
     function backToMenu() {
@@ -93,13 +99,65 @@
         localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;
         localStorage.currentlevel = 0;
+        clearClock();
         MistakeChasingGameClient.app.navigate('home', { root: true });
+    };
+    ////////////////////////////////////
+    // variables for time units
+    txMinutes = ko.observable("0");
+    txSeconds = ko.observable("10");
+    restartClock = ko.observable(true);
+    time = ko.computed(function () {
+        return txMinutes() + " : " + txSeconds();
+    }, this);
+
+    //seconds, minutes;
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    };
+    function runClock() {
+        if (restartClock()) {
+            seconds = 10;
+            minutes = 0;
+            restartClock(false);
+        }
+        // restart second when reach 0
+        if (seconds == 0) {
+            seconds = 59;
+            minutes = minutes - 1;
+        }
+        seconds = seconds - 1;
+        var newSecond = checkTime(seconds);
+        txSeconds(newSecond + "");
+        //alert(minutes() + " " + seconds());
+
+        if (minutes == 0 && seconds == 0) {
+            clearClock();
+            var points = viewModel.timeUp();
+            showEndDialog();
+        }
+    };
+
+    var interval; // = setInterval(runClock, 1000);
+
+    function clearClock() {
+        clearInterval(interval);
+    };
+    function setClock() {
+        restartClock(true);
+        txMinutes("0");
+        txSeconds("10");
+        interval = setInterval(runClock, 1000);
     };
 
     return $.extend(viewModel, {
         viewShown: function () {
             //goi ham load cau hoi len dua theo id truyen qua
             viewModel.loadQuestion();
+            setClock();
         }
     });
 };

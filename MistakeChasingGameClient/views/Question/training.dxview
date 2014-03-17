@@ -2,8 +2,10 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->
+        <div id="clock" style="text-align: center;font-size: xx-large;" data-bind="text: time">hhhhhhhhhhhhhhhh
+        </div>
         <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
-            <div style="height: 10%; text-align: center;">
+            <div style="height: 10%; text-align: left;">
                 <h3>
                     Touch the screen to select the bug in the codes below:</h3>
             </div>
@@ -22,7 +24,7 @@
             <div id="scrollViewFBK" data-bind="dxScrollView: { }">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
-            <div style="bottom: 2%; position: fixed; width: 100%;">
+            <div style="bottom: 2%; width: 100%;">
                 <div style="text-align: center;">
                     <h3>
                         Fill in the blanks in the codes above:</h3>
@@ -54,7 +56,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <div class="submitBtn" style="font-size: 20px;padding: 5px 32px 5px 32px;font-weight: bold;color: #ffffff;font-family: arial;display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitFBK }"> 
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
+                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitFBK }">
                     </div>
                 </div>
             </div>
@@ -63,23 +66,22 @@
             <div id="scrollViewSC" data-bind="dxScrollView: { }">
                 <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
             </div>
-            <div style="bottom: 2%; position: fixed; width: 100%;">
+            <div style="bottom: 2%; width: 100%;">
                 <div style="text-align: center;">
                     <h3>
                         Which type of bug is in the codes above?</h3>
                 </div>
-                <div class="dx-fieldset" style="margin: 0px 0px 20px 0px;padding: 5px;">
+                <div class="dx-fieldset" style="margin: 0px 0px 20px 0px; padding: 5px;">
                     <div class="dx-field">
-                        
                         <div class="dx-field-value">
-                            <div style="width: 100%;left: 2%;" data-bind="dxSelectBox:{dataSource: singleChoiceTab.listAns, value: singleChoiceTab.choiceSC}">
+                            <div style="width: 100%; left: 2%;" data-bind="dxSelectBox:{dataSource: singleChoiceTab.listAns, value: singleChoiceTab.choiceSC}">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div style="text-align: center;">
-                
-                    <div class="submitBtn" style="font-size: 20px;padding: 5px 32px 5px 32px;font-weight: bold;color: #ffffff;font-family: arial;display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitSC }">
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
+                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitSC }">
                     </div>
                 </div>
             </div>
