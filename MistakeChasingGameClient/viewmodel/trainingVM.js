@@ -155,29 +155,26 @@
                 localStorage.currentlevel = params;
             if (Number(localStorage.currentlevel) < 8) {
                 localStorage.maxIndex = 3;
-            }
+            } 
+            this.singleChoiceTab.rendered(false);
+            this.fillingBlanksTab.rendered(false);
+            this.findBugsTab.rendered(false);
             ////////////////////////////////////////
             if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 1) {
                 this.randomFindBugs();
-                this.loadFindBugs();
-                this.singleChoiceTab.rendered(false);
-                this.fillingBlanksTab.rendered(false);
+                this.loadFindBugs();                
                 selectedTab(0);
                 this.findBugsTab.rendered(true);
             }
             else if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 2) {
                 this.randomFillingBlanks();
                 this.loadFillingBlanks();
-                this.singleChoiceTab.rendered(false);
-                this.findBugsTab.rendered(false);
                 selectedTab(1);
                 this.fillingBlanksTab.rendered(true);
             }
             else if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 3) {
                 this.randomSingleChoice();
                 this.loadSingleChoice();
-                this.findBugsTab.rendered(false);
-                this.fillingBlanksTab.rendered(false);
                 selectedTab(2);
                 this.singleChoiceTab.rendered(true);
             };

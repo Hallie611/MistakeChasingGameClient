@@ -1,0 +1,24 @@
+<div data-options="dxView : { name: 'Dictionary', title: 'Dictionary' } ">
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <div class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">Search By</div>
+                <div class="dx-field-value" data-bind="dxSelectBox: {
+                    dataSource: dictionaryType,
+                    displayExpr: 'content',
+                    valueExpr: 'table',
+                    value: selectType
+                    }">
+                </div>
+            </div>
+            <div class="dx-field" data-bind="style: { visibility: selectType() == '' ? 'hidden' : 'visible' }">
+                <div class="dx-field-value" data-bind="dxLookup:{dataSource: selectedTable, displayExpr: 'name', valueExpr: 'src', value :  imgsrc}" style="text-align: center; width:100%"></div>
+            </div>
+        </div>
+        <div id="scrollViewContainer" data-bind="dxScrollView: {  }">
+            <div id="textContainer">
+                <img data-bind="attr:{ src: imgsrc }" style="width:100%"/>
+            </div>
+        </div>
+    </div>
+</div>

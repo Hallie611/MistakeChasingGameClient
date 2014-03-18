@@ -26,7 +26,6 @@
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             viewModel.loadQuestion();
         });
-
     };
 
     submitFBK = function () {
@@ -51,6 +50,7 @@
     };
 
     function showEndDialog() {
+        countX = 0;
         var curPoints = ko.observable(Number(localStorage.currentPoint));
         var isPassed = viewModel.isPassed();
 

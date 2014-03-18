@@ -105,6 +105,13 @@
 		{ id: 30, src: "images/MultipleChoice/M30.jpg", dif: 10, listAns: ['ComparisonAssignment', 'AccessingNonStaticVariable', 'ZeroIndexed'], ans: 'ComparisonAssignment' }
     ];
 
+    var keyWords = [
+        { id: 1, name: "void", src: "images/Dictionary/Nullpointer.png" },
+        { id: 2, name: "main", src: "..."}];
+
+    var bugsType = [
+            { id: 1, name: "null pointer", src: "images/Dictionary/Nullpointer.png" },
+            { id: 2, name: "comparision 2 object", src: ".."}];
 
     MistakeChasingGameClient.db = {
         findbugsdb:
@@ -119,6 +126,16 @@
         multiplechoicedb: new DevExpress.data.ArrayStore({
             data: multiplechoice,
             key: 'id'
+        }),
+
+        keyWordsdb: new DevExpress.data.DataSource({
+            store: keyWords,
+            sort: 'id'
+        }),
+
+        bugsTypedb: new DevExpress.data.DataSource({
+            store: bugsType,
+            sort: 'id'
         })
     }
 })();
