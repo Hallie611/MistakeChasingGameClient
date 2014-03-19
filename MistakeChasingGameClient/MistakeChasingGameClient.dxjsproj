@@ -31,9 +31,6 @@
     <Content Include="data\db.js">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\clearicon.png">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="images\fillinBlankQ\F1.jpg">
       <SubType>Content</SubType>
     </Content>
@@ -367,15 +364,6 @@
     <Content Include="images\MultipleChoice\M9.jpg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\num1.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\num2.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\num3.png">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="images\redX.png">
       <SubType>Content</SubType>
     </Content>
@@ -386,9 +374,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\roadmap3.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\submit-button.jpg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="index.js" />
@@ -403,10 +388,25 @@
     <Content Include="css\dx.win8.black.small.css" />
     <Content Include="css\dx.tizen.black.css" />
     <Content Include="css\dx.tizen.white.css" />
+    <Content Include="js\cordova.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\cordova\cordova.android.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\cordova\cordova.ios.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\cordova\cordova.stub.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="js\jquery-1.10.2.min.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="js\jquery-2.0.3.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery.signalR-2.0.0.min.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="js\knockout-3.0.0.js">
@@ -442,10 +442,19 @@
     <Content Include="js\globalize.min.js" />
     <Content Include="js\jquery-1.9.1.min.js" />
     <Content Include="js\knockout-2.2.1.js" />
+    <Content Include="viewmodel\OnlineVM.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="viewmodel\trainingVM.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="viewmodel\user-view-model.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\Chasing.dxview">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\Chasing.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="views\Dictionary\Dictionary.dxview">
@@ -483,6 +492,7 @@
     <Folder Include="images\MultipleChoice" />
     <Folder Include="images\fillinBlankQ" />
     <Folder Include="js\" />
+    <Folder Include="js\cordova" />
     <Folder Include="layouts\" />
     <Folder Include="layouts\Desktop\" />
     <Folder Include="layouts\Empty\" />

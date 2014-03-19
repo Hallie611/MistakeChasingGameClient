@@ -12,6 +12,10 @@
     <script type="text/javascript" src="js/knockout-3.0.0.js"></script>
     <script type="text/javascript" src="js/globalize.js"></script>
     <script type="text/javascript" src="js/dx.all.js"></script>
+
+    <script type="text/javascript" src="js/jquery.signalR-2.0.0.min.js"></script>
+    <script type="text/javascript" src="js/cordova/cordova.android.js"></script>
+    <script src="http://localhost:8080/signalr/hubs"></script>
     <!--
     <script type="text/javascript" src="js/dx.all.debug.js"></script>
     -->
@@ -54,7 +58,11 @@
     <!--View Model-->
     <script type="text/javascript" src="viewmodel/user-view-model.js"></script>
     <script type="text/javascript" src="viewmodel/trainingVM.js"></script>
-    
+    <script type="text/javascript" src="viewmodel/OnlineVM.js"></script>
+
+
+    <script type="text/javascript" src="views/Chasing.js"></script>
+    <link rel="dx-template" type="text/html" href="views/Chasing.dxview" />
 </head>
 <body>
     <div id="viewport" class="dx-viewport">

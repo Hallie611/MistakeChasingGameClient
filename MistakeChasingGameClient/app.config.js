@@ -19,7 +19,12 @@ window.MistakeChasingGameClient = $.extend(true, window.MistakeChasingGameClient
           "title": "Dictionary",
           "action": "#Dictionary",
           "location": "navigation"
-      }
+      },
+       {
+           "title": "Online",
+           "action": "#Chasing"
+           //"icon": "questiondetail"
+       }
     ]
     }
 });

@@ -1,0 +1,63 @@
+<div data-options="dxView : { name: 'Chasing', title: 'Chasing Online Mode' } ">
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+
+
+
+        <div id="player" class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">User Name</div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: username }"></div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Point</div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: point }"></div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Level</div>
+                <img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />
+            </div>
+        </div>
+
+
+        <div style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }"></div>
+
+        <!-- <div id="opponent" class="dx-fieldset" style="visibility: hidden">
+            <div class="dx-field">
+                <div class="dx-field-label">Opponent Name : </div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: oppname }"></div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Point</div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: point }"></div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Level</div>
+                <img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />
+            </div>
+        </div>-->
+
+        <h1 data-bind="text:numberPlayer"></h1>
+        
+        <div style="display:none" id="listQuest" class="dx-fieldset">
+            <div id="question1" class="dx-field">
+                <div class="dx-field-label">Quesiton 1</div>
+                <div  class="dx-field-value" data-bind="dxTextBox: { value: question1,clickAction: '#Question/1' }"></div>
+            </div>
+            <div id="question2" class="dx-field">
+                <div class="dx-field-label">Quesiton 2</div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: question2 }"></div>
+            </div>
+            <div id="question3" class="dx-field">
+                <div class="dx-field-label">Quesiton 3</div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: question3 }"></div>
+            </div>
+
+        </div>
+
+        <!--<div id="listQuestion" style="display:none" data-bind="dxList: { dataSource: store }">
+            <div  data-bind="dxAction: '#Question/{id}'" data-options="dxTemplate : { name: 'item' } ">
+                <div id="Question.id" data-bind="text: Question.type "></div>
+            </div>
+        </div>-->
+    </div>
+</div>
