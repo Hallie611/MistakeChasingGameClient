@@ -14,6 +14,7 @@
                 <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
                 </div>
             </div>
+            <div id="toastContainer" data-bind="dxToast:{message:'Bug found!', type:'success', displayTime: 2000 }"></div>
             <div id="redXBox">
                 <img id="miss1" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
                 <img id="miss2" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />

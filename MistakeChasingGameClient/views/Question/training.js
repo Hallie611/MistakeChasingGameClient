@@ -19,13 +19,12 @@
 
     showBug = function () {
         var points = viewModel.bugFound();
-        //setTimeout(viewModel.loadQuestion(), 3000);
-        resultDialog = DevExpress.ui.dialog.alert("Bug found!", "Result");
-        resultDialog.done(function () {
-            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-            viewModel.loadQuestion();
-        });
+        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;           
+        $("#toastContainer").dxToast('instance').show();        
+    };
+    processHiding = function () {        
+        viewModel.loadQuestion();
     };
 
     submitFBK = function () {

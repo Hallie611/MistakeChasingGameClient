@@ -40,8 +40,6 @@
 
 
             self.store.clear();
-
-
             self.question1(listQ[0].id);
             self.question2(listQ[1].id);
             self.question3(listQ[2].id);
