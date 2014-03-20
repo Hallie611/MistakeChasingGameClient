@@ -14,16 +14,33 @@
             </div>
             <div class="dx-field">
                 <div class="dx-field-label">Level</div>
-                <img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />
+                <div class="dx-field-value" data-bind="dxTextBox: { value: level }"></div>
+                <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
             </div>
         </div>
 
 
-        <div style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }"></div>
+        <div id="findbtn" style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }"></div>
+        <div id="readybtn" style="margin-left: 40%;display:none" data-bind="dxButton: {clickAction: findOpponent, text: 'Ready ?' }"></div>
 
-        <h1 data-bind="text:numberPlayer"></h1>
-        
-        <div style="display:none" id="listQuest" class="dx-fieldset">
+       <h1 data-bind="text:message"></h1>
+       
+         <div id="opponent" style="display:none" class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">Opponent </div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: oname }"></div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Point</div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: opoint }"></div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Level</div>
+               <div class="dx-field-value" data-bind="dxTextBox: { value: oplevel }"></div>
+            </div>
+        </div>
+         
+    <!--    <div style="display:none" id="listQuest" class="dx-fieldset">
             <div id="question1" class="dx-field">
                 <div class="dx-field-label">Quesiton 1</div>
                 <div  class="dx-field-value" data-bind="dxTextBox: { value: question1,clickAction: '#Question/1' }"></div>
@@ -37,7 +54,7 @@
                 <div class="dx-field-value" data-bind="dxTextBox: { value: question3 }"></div>
             </div>
 
-        </div>
+        </div>-->
 
         <!--<div id="listQuestion" style="display:none" data-bind="dxList: { dataSource: store }">
             <div  data-bind="dxAction: '#Question/{id}'" data-options="dxTemplate : { name: 'item' } ">

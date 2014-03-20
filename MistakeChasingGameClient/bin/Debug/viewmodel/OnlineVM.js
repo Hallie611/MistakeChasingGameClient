@@ -11,30 +11,30 @@
         self.level = ko.observable(localStorage.level);
         self.point = ko.observable(localStorage.point);
 
-        self.oppname = ko.observable();
+        self.oname = ko.observable();
+        self.oplevel = ko.observable();
+        self.opoint = ko.observable();
+
+
 
         self.question1 = ko.observable();
         self.question2 = ko.observable();
         self.question3 = ko.observable();
 
         var idtext = 0;
-
-
         var Question = function (id, type) {
             this.id = id;
             this.type = type;
         };
-
-
 
         $.connection.hub.url = "http://localhost:8080/signalr";
        
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (listQ) {
-            self.question1(listQ[0].id + listQ[0].type);
-            self.question2(listQ[1].id + listQ[1].type);
-            self.question3(listQ[2].id + listQ[2].type);
+            //self.question1(listQ[0].id);
+            //self.question2(listQ[1].id);
+            //self.question3(listQ[2].id);
         }
         //
 
@@ -56,19 +56,26 @@
         //no opponent
         $.connection.gamesHub.client.noOpponents = function (message) {
 
-
+            self.message("There is no opponent");
             //    alert("Looking for an opponent!");
         };
 
         $.connection.gamesHub.client.foundOpponent = function (message) {
-            alert("Let's play");
-            document.getElementById("player").style.display = "none";
-            document.getElementById("listQuest").style.display = "initial";
+
+
+            self.oname(message.oName);
+            self.oplevel(message.oLevel);
+            self.opoint(message.oPoint);
+            document.getElementById("opponent").style.display = "initial";
+            document.getElementById("readybtn").style.display = "inline-block";
+            document.getElementById("findbtn").style.display = "none";
+            
+           
 
         };
 
         //add done question
-        $.connection.gamesHub.client.addMarkerPlacement = function (message) {
+        $.connection.gamesHub.client.addMarkerPlacement = function (message) {.4
             document.getElementById("question" + message.MarkerPosition).style.backgroundColor = "red";
             self.question1(message.OpponentName + "has checked")
             //alert(message.OpponentName + " has checked question " + message.MarkerPosition);
@@ -79,7 +86,7 @@
         $.connection.hub.start().done(function () {
             //alert("connected");
 
-            $.connection.gamesHub.server.register(localStorage.username).done(function () {
+            $.connection.gamesHub.server.register(localStorage.username, localStorage.level, localStorage.point).done(function () {
                 //  alert('added');
             });
 
@@ -90,7 +97,7 @@
 
 
         this.findOpponent = function () {
-            $.connection.gamesHub.server.findOpponent(localStorage.point);
+            $.connection.gamesHub.server.findOpponent(localStorage.level);
         };
 
         this.play = function () {

@@ -4,7 +4,7 @@
     
     if (!localStorage.username) {
         localStorage.username = "newbine";
-        localStorage.level = "./images/level/level1.jpg";
+        localStorage.level = "1";
         localStorage.point = "100";
     };
 
