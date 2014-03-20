@@ -31,6 +31,9 @@
     <Content Include="data\db.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\chasing.jpg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\fillinBlankQ\F1.jpg">
       <SubType>Content</SubType>
     </Content>

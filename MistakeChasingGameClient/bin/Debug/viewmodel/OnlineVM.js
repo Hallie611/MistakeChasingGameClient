@@ -36,17 +36,18 @@
         $.connection.hub.url = "http://localhost:8080/signalr";
 
 
-        $.connection.gamesHub.client.sentQuestionList = function (listQ) {
-
-
+        $.connection.gamesHub.client.getQuestionList = function (listQ) {
             self.store.clear();
             self.question1(listQ[0].id);
             self.question2(listQ[1].id);
             self.question3(listQ[2].id);
-
-
         }
         //
+
+        //create listQ and sent to sever
+        $.connection.gamesHub.client.createQuestionList = function () {
+            $.connection.gamesHub.server.getValue(localStorage.point);
+        }
 
         $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
             //self.text(self.text() + name + " : " + message);
@@ -94,7 +95,7 @@
 
 
         this.findOpponent = function () {
-            $.connection.gamesHub.server.findOpponent();
+            $.connection.gamesHub.server.findOpponent(localStorage.point);
         };
 
         this.play = function () {

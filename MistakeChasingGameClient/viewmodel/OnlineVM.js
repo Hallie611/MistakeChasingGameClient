@@ -25,28 +25,24 @@
             this.type = type;
         };
 
-
-
-        this.store = new DevExpress.data.LocalStore({
-            name: 'mydata',
-            key: 'id'
-
-        });
-
         $.connection.hub.url = "http://localhost:8080/signalr";
 
 
-        $.connection.gamesHub.client.sentQuestionList = function (listQ) {
-
-
+        // nhan listQ tu sever cho ca 2 client
+        $.connection.gamesHub.client.getQuestionList = function (listQ) {
             self.store.clear();
-            self.question1(listQ[0].id);
+            self.question1(listQ[0].id + listQ[0].type);
             self.question2(listQ[1].id);
             self.question3(listQ[2].id);
-
-
         }
         //
+
+        //client thap nhat tao listQ roi chuyen len sever
+        $.connection.gamesHub.client.createQuestionList = function () {
+
+            // ham tao listQ
+            $.connection.gamesHub.server.getValue(localStorage.point);
+        }
 
         $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
             //self.text(self.text() + name + " : " + message);
@@ -94,7 +90,7 @@
 
 
         this.findOpponent = function () {
-            $.connection.gamesHub.server.findOpponent();
+            $.connection.gamesHub.server.findOpponent(localStorage.point);
         };
 
         this.play = function () {

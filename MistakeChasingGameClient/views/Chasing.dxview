@@ -21,21 +21,6 @@
 
         <div style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }"></div>
 
-        <!-- <div id="opponent" class="dx-fieldset" style="visibility: hidden">
-            <div class="dx-field">
-                <div class="dx-field-label">Opponent Name : </div>
-                <div class="dx-field-value" data-bind="dxTextBox: { value: oppname }"></div>
-            </div>
-            <div class="dx-field">
-                <div class="dx-field-label">Point</div>
-                <div class="dx-field-value" data-bind="dxTextBox: { value: point }"></div>
-            </div>
-            <div class="dx-field">
-                <div class="dx-field-label">Level</div>
-                <img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />
-            </div>
-        </div>-->
-
         <h1 data-bind="text:numberPlayer"></h1>
         
         <div style="display:none" id="listQuest" class="dx-fieldset">
