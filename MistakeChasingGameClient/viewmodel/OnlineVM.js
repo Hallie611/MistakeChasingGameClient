@@ -18,20 +18,19 @@
         self.question3 = ko.observable();
 
         var idtext = 0;
-
-
         var Question = function (id, type) {
             this.id = id;
             this.type = type;
         };
 
-        $.connection.hub.url = "http://localhost:8080/signalr";
 
+
+        $.connection.hub.url = "http://localhost:8080/signalr";
+       
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (listQ) {
-            self.store.clear();
-            self.question1(listQ[0].id + listQ[0].type);
+            self.question1(listQ[0].id);
             self.question2(listQ[1].id);
             self.question3(listQ[2].id);
         }
@@ -85,7 +84,6 @@
             // hub is now ready
         }).fail(function () {
             alert("can not connect to sever");
-
         });
 
 

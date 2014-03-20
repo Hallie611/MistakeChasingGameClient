@@ -2,7 +2,8 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->
-        <div id="clock" style="text-align: center;font-size: xx-large;" data-bind="text: time">hhhhhhhhhhhhhhhh
+        <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: time">
+            hhhhhhhhhhhhhhhh
         </div>
         <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
             <div style="height: 10%; text-align: left;">
@@ -14,7 +15,9 @@
                 <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
                 </div>
             </div>
-            <div id="toastContainer" data-bind="dxToast:{message:'Bug found!', type:'success', displayTime: 2000 }"></div>
+            <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'Bug found!', type: 'success', displayTime: 300, hiddenAction: processHiding}">
+            </div>
+            
             <div id="redXBox">
                 <img id="miss1" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
                 <img id="miss2" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />

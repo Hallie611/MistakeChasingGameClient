@@ -27,25 +27,21 @@
 
 
 
-        this.store = new DevExpress.data.LocalStore({
-            name: 'mydata',
-            key: 'id'
-
-        });
-
         $.connection.hub.url = "http://localhost:8080/signalr";
+       
 
-
+        // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (listQ) {
-            self.store.clear();
-            self.question1(listQ[0].id);
-            self.question2(listQ[1].id);
-            self.question3(listQ[2].id);
+            self.question1(listQ[0].id + listQ[0].type);
+            self.question2(listQ[1].id + listQ[1].type);
+            self.question3(listQ[2].id + listQ[2].type);
         }
         //
 
-        //create listQ and sent to sever
+        //client thap nhat tao listQ roi chuyen len sever
         $.connection.gamesHub.client.createQuestionList = function () {
+
+            // ham tao listQ
             $.connection.gamesHub.server.getValue(localStorage.point);
         }
 
@@ -90,7 +86,6 @@
             // hub is now ready
         }).fail(function () {
             alert("can not connect to sever");
-
         });
 
 
