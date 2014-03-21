@@ -40,5 +40,26 @@
                 </div>
             </div>
         </div>
+
+        <div class="content" id="Div1" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
+            <h1 data-bind="text:ListTab.test"></h1>
+            <div style="display: none" id="listQuest" class="dx-fieldset">
+                <div id="question1" class="dx-field">
+                    <div class="dx-field-label">Quesiton 1</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question1"></div>
+                </div>
+                <div id="question2" class="dx-field">
+                    <div class="dx-field-label">Quesiton 2</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question2 }"></div>
+                </div>
+                <div id="question3" class="dx-field">
+                    <div class="dx-field-label">Quesiton 3</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question3 }"></div>
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
 </div>

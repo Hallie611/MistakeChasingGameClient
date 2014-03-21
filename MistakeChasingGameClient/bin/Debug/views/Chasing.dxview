@@ -6,15 +6,15 @@
             <div id="player" class="dx-fieldset">
                 <div class="dx-field">
                     <div class="dx-field-label">User Name</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: username }"></div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username }"></div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">Point</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: point }"></div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point }"></div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">Level</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: level }"></div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level }"></div>
                     <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
                 </div>
             </div>
@@ -23,22 +23,43 @@
             <div id="findbtn" style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }"></div>
             <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready, text: 'Ready ?' }"></div>
 
-            <h1 data-bind="text:message"></h1>
+            <h1 data-bind="text: RoomTab.message"></h1>
 
             <div id="opponent" style="display: none" class="dx-fieldset">
                 <div class="dx-field">
                     <div class="dx-field-label">Opponent </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: oname }"></div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oname }"></div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">Point</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: opoint }"></div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.opoint }"></div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">Level</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: oplevel }"></div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oplevel }"></div>
                 </div>
             </div>
         </div>
+
+        <div class="content" id="Div1" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
+            <h1 data-bind="text:ListTab.test"></h1>
+            <div style="display: none" id="listQuest" class="dx-fieldset">
+                <div id="question1" class="dx-field">
+                    <div class="dx-field-label">Quesiton 1</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question1"></div>
+                </div>
+                <div id="question2" class="dx-field">
+                    <div class="dx-field-label">Quesiton 2</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question2 }"></div>
+                </div>
+                <div id="question3" class="dx-field">
+                    <div class="dx-field-label">Quesiton 3</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question3 }"></div>
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
 </div>

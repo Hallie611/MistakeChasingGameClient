@@ -26,7 +26,7 @@
             src: ko.observable(),
             rendered: ko.observable(false),
             tabVisible: ko.computed(function () {
-                return selectedTab() === 0;
+                return selectedTab() === 2;
             }),
             bwidth: ko.observable(),
             bheight: ko.observable(),
@@ -39,7 +39,7 @@
             src: ko.observable(),
             rendered: ko.observable(false),
             tabVisible: ko.computed(function () {
-                return selectedTab() === 1;
+                return selectedTab() === 3;
             }),
             answer1source: ko.observable(),
             answer2source: ko.observable(),
@@ -54,7 +54,7 @@
             src: ko.observable(),
             rendered: ko.observable(false),
             tabVisible: ko.computed(function () {
-                return selectedTab() === 2;
+                return selectedTab() === 4;
             }),
             listAns: ko.observable(),
             choiceSC: ko.observable('')
@@ -93,26 +93,50 @@
         };
 
 
+        ///List Tab
+        this.ListTab = {
+            rendered: ko.observable(false),
+            tabVisible: ko.computed(function () {
+                return selectedTab() === 1;
+            }),
+            test: ko.observable(localStorage.username),
+            question1: ko.observable(),
+            question2 :ko.observable(),
+            question3 :ko.observable()
+
+        };
+
+
+        this.loadRoomTab = function () {
+            selectedTab(0);
+            this.RoomTab.rendered(true);
+        };
+
+        this.loadListTab = function () {
+            selectedTab(1);
+            this.RoomTab.rendered(false);
+            this.ListTab.rendered(true);
+        };
+
+
+
+
         $.connection.hub.url = "http://localhost:8080/signalr";
 
 
         // nhan listQ tu sever cho ca 2 client
-        $.connection.gamesHub.client.getQuestionList = function (listQ) {
-            // alert("getted question list")
-            //self.question1(listQ[0].id);
-            //self.question2(listQ[1].id);
-            //self.question3(listQ[2].id);
+        $.connection.gamesHub.client.getQuestionList = function (temp) {
+            //// temp la listQ tra ve cho ca 2 client
         }
         //
-
-
-        $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
-            //self.text(self.text() + name + " : " + message);
-            //alert(self.store.length)
-            // alert(message);
-            self.RoomTab.username("Welcome : " + localStorage.username);
-            self.RoomTab.numberPlayer('Number of player: ' + message.totalClient);
-        };
+        ///ham sver yeu cau tao list Q
+        var list;
+        $.connection.gamesHub.client.createQuestionList = function () {
+            listQ.load().done(function (theArray) {
+                $.connection.gamesHub.server.getValue(theArray);
+            });
+           
+        }
 
         //no opponent
         $.connection.gamesHub.client.noOpponents = function (message) {
@@ -131,14 +155,6 @@
             document.getElementById("findbtn").style.display = "none";
         };
 
-        //add done question
-        $.connection.gamesHub.client.addMarkerPlacement = function (message) {
-            .4
-            document.getElementById("question" + message.MarkerPosition).style.backgroundColor = "red";
-            self.question1(message.OpponentName + "has checked")
-            //alert(message.OpponentName + " has checked question " + message.MarkerPosition);
-        };
-
 
 
         $.connection.hub.start().done(function () {
@@ -155,6 +171,8 @@
 
 
         this.findOpponent = function () {
+
+            this.randomQuestion();
             $.connection.gamesHub.server.findOpponent(localStorage.level);
         };
 
@@ -162,20 +180,8 @@
             $.connection.gamesHub.server.play(1);
         };
 
-        this.Ready = function () {
-            //client thap nhat tao listQ roi chuyen len sever
-            //$.connection.gamesHub.client.createQuestionList = function () {
 
-            //    alert("aaa");
-            //    $.connection.gamesHub.server.getValue(localStorage.point);
-            //}
-            MistakeChasingGameClient.app.navigate('User');
-
-        }
-
-
-
-
+        
 
 
 
@@ -242,15 +248,15 @@
         };
         /////////////////////////////////////////
         this.randomFindBugs = function () {            
-            var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
+            var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.level)]).select("id").sortBy("id").toArray();
             randomQuestion = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
         };
         this.randomFillingBlanks = function () {
-            var filteredFillBlank = MistakeChasingGameClient.db.fillingblankdb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
+            var filteredFillBlank = MistakeChasingGameClient.db.fillingblankdb.createQuery().filter(["dif", "=", Number(localStorage.level)]).select("id").sortBy("id").toArray();
             randomQuestion = filteredFillBlank[Math.floor(Math.random() * filteredFillBlank.length)];
         };
         this.randomSingleChoice = function () {
-            var filteredSingle = MistakeChasingGameClient.db.multiplechoicedb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
+            var filteredSingle = MistakeChasingGameClient.db.multiplechoicedb.createQuery().filter(["dif", "=", Number(localStorage.level)]).select("id").sortBy("id").toArray();
             randomQuestion = filteredSingle[Math.floor(Math.random() * filteredSingle.length)];
         };
         this.loadFindBugs = function () {
@@ -277,42 +283,174 @@
             answerSC = randomQuestion.ans;
             difCurrentQ = randomQuestion.dif;
         };
-        this.loadQuestion = function () {
-            ////giu level khi chuyen view    
-            //if (Number(params) % 1 == 0)
-            //    localStorage.currentlevel = params;
-            //if (Number(localStorage.currentlevel) < 8) {
-            //    localStorage.maxIndex = 3;
-            //} 
-            //this.singleChoiceTab.rendered(false);
-            //this.fillingBlanksTab.rendered(false);
-            //this.findBugsTab.rendered(false);
-            //////////////////////////////////////////
-            //if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 1) {
-            //    this.randomFindBugs();
-            //    this.loadFindBugs();                
-            //    selectedTab(0);
-            //    this.findBugsTab.rendered(true);
-            //}
-            //else if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 2) {
-            //    this.randomFillingBlanks();
-            //    this.loadFillingBlanks();
-            //    selectedTab(1);
-            //    this.fillingBlanksTab.rendered(true);
-            //}
-            //else if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 3) {
-            //    this.randomSingleChoice();
-            //    this.loadSingleChoice();
-            //    selectedTab(2);
-            //    this.singleChoiceTab.rendered(true);
-            //};
 
-                selectedTab(0);
-                this.RoomTab.rendered(true);
+
+
+        
+
+
+
+        var listQ = new DevExpress.data.ArrayStore({
+            key: "index"
+        });
+        //////////////////////////
+        this.randomQuestion = function () {
+            //giu level khi chuyen view    
+            //            if (Number(params) % 1 == 0)
+            //                localStorage.currentlevel = params;
+
+            if (Number(localStorage.level) <= 21 && Number(localStorage.level) > 14) {
+                localStorage.maxIndex = 5;
+            }
+            else if (Number(localStorage.level) < 15 && Number(localStorage.level) > 7) {
+                localStorage.maxIndex = 4;
+            }
+            else if (Number(localStorage.level) < 8) {
+                localStorage.maxIndex = 3;
+            }
+            ////////////////////////////////////////
+            if (Number(localStorage.maxIndex) == 3) {
+                this.randomFindBugs();
+                listQ.insert({
+                    index: 1,
+                    questionId: randomQuestion.id,
+                    type: "FindBugs"
+                });
+                this.randomFillingBlanks();
+                listQ.insert({
+                    index: 2,
+                    questionId: randomQuestion.id,
+                    type: "FillingBlanks"
+                });
+                this.randomSingleChoice();
+                listQ.insert({
+                    index: 3,
+                    questionId: randomQuestion.id,
+                    type: "SingleChoice"
+                });
+            }
+            else if (Number(localStorage.maxIndex) == 4) {
+                var isRepeat = true;
+                var random1;
+                this.randomFindBugs();
+                listQ.insert({
+                    index: 1,
+                    questionId: randomQuestion.id,
+                    type: "FindBugs"
+                });
+                random1 = randomQuestion;
+                while (isRepeat) {
+                    this.randomFindBugs();
+                    if (random1 != randomQuestion) {
+                        isRepeat = false;
+                        listQ.insert({
+                            index: 2,
+                            questionId: randomQuestion.id,
+                            type: "FindBugs"
+                        });
+                    };
+                }
+                this.randomFillingBlanks();
+                listQ.insert({
+                    index: 3,
+                    questionId: randomQuestion.id,
+                    type: "FillingBlanks"
+                });
+                this.randomSingleChoice();
+                listQ.insert({
+                    index: 4,
+                    questionId: randomQuestion.id,
+                    type: "SingleChoice"
+                });
+            }
+            else if (Number(localStorage.maxIndex) == 5) {
+                var isRepeat = true;
+                var random1;
+                this.randomFindBugs();
+                listQ.insert({
+                    index: 1,
+                    questionId: randomQuestion.id,
+                    type: "FindBugs"
+                });
+                random1 = randomQuestion;
+                while (isRepeat) {
+                    this.randomFindBugs();
+                    if (random1 != randomQuestion) {
+                        isRepeat = false;
+                        listQ.insert({
+                            index: 2,
+                            questionId: randomQuestion.id,
+                            type: "FindBugs"
+                        });
+                    };
+                }
+                this.randomFillingBlanks();
+                listQ.insert({
+                    index: 3,
+                    questionId: randomQuestion.id,
+                    type: "FillingBlanks"
+                });
+                isRepeat = true;
+                random1 = randomQuestion;
+                while (isRepeat) {
+                    this.randomFillingBlanks();
+                    if (random1 != randomQuestion) {
+                        isRepeat = false;
+                        listQ.insert({
+                            index: 4,
+                            questionId: randomQuestion.id,
+                            type: "FillingBlanks"
+                        });
+                    };
+                }
+                this.randomSingleChoice();
+                listQ.insert({
+                    index: 5,
+                    questionId: randomQuestion.id,
+                    type: "SingleChoice"
+                });
+            }
         };
 
-
-
+        /////////////////////////////
+        this.loadQuestion = function () {
+            this.singleChoiceTab.rendered(false);
+            this.fillingBlanksTab.rendered(false);
+            this.findBugsTab.rendered(false);
+            ///////////////////////////////////////////////
+            var maxIndex, question, index;
+            listQ.totalCount().done(function (result) {
+                maxIndex = result;
+                //alert(maxIndex);
+            });
+            index = Number(localStorage.currentIndex);
+            listQ.byKey(index).done(function (dataItem) {
+                question = dataItem;
+                //alert(question.question.dif);
+            });
+            if (question.type == "FindBugs") {
+                randomQuestion = question.question;
+                this.loadFindBugs();
+                selectedTab(2);
+                this.findBugsTab.rendered(true);
+            }
+            else if (question.type == "FillingBlanks") {
+                randomQuestion = question.question;
+                this.loadFillingBlanks();
+                selectedTab(3);
+                this.fillingBlanksTab.rendered(true);
+            }
+            else if (question.type == "SingleChoice") {
+                randomQuestion = question.question;
+                this.loadSingleChoice();
+                selectedTab(4);
+                this.singleChoiceTab.rendered(true);
+                for (var i = 1; i <= maxIndex; i++) {
+                    listQ.remove(i);
+                }
+            }
+        };
+        ////////////////////////////
     
     };
 })();
