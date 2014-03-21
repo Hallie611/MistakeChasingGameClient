@@ -1,6 +1,12 @@
 ﻿MistakeChasingGameClient.Chasing = function (params) {
 
     var viewModel = new MistakeChasingGameClient.OnlineVM();
-
-    return viewModel;
+    
+    return $.extend(viewModel, {
+        viewShown: function () {
+            //goi ham load cau hoi len dua theo id truyen qua
+            viewModel.loadQuestion();
+            //setClock();
+        }
+    });
 };

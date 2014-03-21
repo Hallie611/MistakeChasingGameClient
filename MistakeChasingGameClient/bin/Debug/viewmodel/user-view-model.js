@@ -34,10 +34,7 @@
         //  //  MistakeChasingGameClient.app.navigate('home', { root: true });
         //};
 
-        this.clear = function () {
-            localStorage.clear();
-        };
-
+    
         //  this.fromJS(data);
     };
 })();

@@ -18,20 +18,20 @@
             localStorage.currentPoint = 0;
         ///////////////////////////////        
 
-        var selectedTab = ko.observable();
+        var selectedTab = ko.observable(0);
 
-        this.findBugsTab = {
-            src: ko.observable(),
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 0;
-            }),
-            bwidth: ko.observable(),
-            bheight: ko.observable(),
-            bleft: ko.observable(),
-            btop: ko.observable(),
-            srcX: "images/redX.png"
-        };
+        //this.findBugsTab = {
+        //    src: ko.observable(),
+        //    rendered: ko.observable(false),
+        //    tabVisible: ko.computed(function () {
+        //        return selectedTab() === 0;
+        //    }),
+        //    bwidth: ko.observable(),
+        //    bheight: ko.observable(),
+        //    bleft: ko.observable(),
+        //    btop: ko.observable(),
+        //    srcX: "images/redX.png"
+        //};
 
         this.fillingBlanksTab = {
             src: ko.observable(),
@@ -180,5 +180,8 @@
             };
 
         };
+
+
+
     }
 })();
