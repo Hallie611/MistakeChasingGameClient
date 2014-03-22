@@ -145,7 +145,8 @@
             this.ListTab.rendered(true);
         };
 
-        $.connection.hub.url = "http://localhost:8080/signalr";
+        //$.connection.hub.url = "http://localhost:8080/signalr";
+        $.connection.hub.url = "http://signalr-13.apphb.com"; 
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -159,6 +160,7 @@
         //
         ///ham sver yeu cau tao list Q
         $.connection.gamesHub.client.createQuestionList = function () {
+            self.randomQuestion();
             listQ.load().done(function (theArray) {
                 $.connection.gamesHub.server.getValue(theArray);
             });
@@ -180,6 +182,11 @@
             document.getElementById("findbtn").style.display = "none";
         };
 
+        //sever tra ve ca 2 client deu ready vao game
+        $.connection.gamesHub.client.gameReady = function () {
+            self.loadListTab();
+        };
+
         $.connection.hub.start().done(function () {
             //alert("connected");
             $.connection.gamesHub.server.register(localStorage.username, localStorage.level, localStorage.point).done(function () {
@@ -191,7 +198,7 @@
         });
 
         this.findOpponent = function () {
-            this.randomQuestion();
+            
             $.connection.gamesHub.server.findOpponent(localStorage.level);
         };
 
@@ -199,6 +206,11 @@
             $.connection.gamesHub.server.play(1);
         };
 
+        //bao la ben nay da ready
+        this.Ready = function () {
+            self.RoomTab.message("Watting opponent ready...");
+            $.connection.gamesHub.server.playerReady();
+        }
         ////////////////////////////////////////////////////
         /////////////////////////////////////////
         this.bugFound = function () {

@@ -18,12 +18,12 @@
         },
 
         intermediate: {
-            src: "images/roadmap2.png",
+            src: "images/roadmap4.jpg",
             rendered: ko.observable(false)
         },
 
         advanced: {
-            src: "images/roadmap3.jpg",
+            src: "images/roadmap2.jpg",
             rendered: ko.observable(false)
         }
 
@@ -44,7 +44,8 @@
 
     clickLevel = function (level) {
         //alert(level);
-        MistakeChasingGameClient.app.navigate('training/' + level, { root: true });
+        localStorage.currentlevel = level;
+        MistakeChasingGameClient.app.navigate('training', { root: true });
     };
 
     viewModel.selectedTab(0);

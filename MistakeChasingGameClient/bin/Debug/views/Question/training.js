@@ -139,6 +139,7 @@
         seconds = seconds - 1;
         var newSecond = checkTime(seconds);
         txSeconds(newSecond + "");
+        txMinutes(minutes + "");
         //alert(minutes() + " " + seconds());
 
         if (minutes == 0 && seconds == 0) {

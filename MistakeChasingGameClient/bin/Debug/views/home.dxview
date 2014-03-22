@@ -22,8 +22,36 @@
         </div>
         <div class="content" id="levelmap" data-bind="if: intermediate.rendered, visible: intermediate.mapVisible">
             <img data-bind="attr: { src: intermediate.src }" style="width: 100%; height: 100%" />
+            <div id="lv1" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(8) } }">
+            </div>
+            <div id="lv2" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(9) } }">
+            </div>
+            <div id="lv3" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(10) } }">
+            </div>
+            <div id="lv4" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(11) } }">
+            </div>
+            <div id="lv5" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(12) } }">
+            </div>
+            <div id="lv6" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(13) } }">
+            </div>
+            <div id="lv7" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(14) } }">
+            </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: advanced.rendered, visible: advanced.mapVisible">
             <img data-bind="attr: { src: advanced.src }" style="width: 100%; height: 100%" />
+            <div id="lv1" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(15) } }">
+            </div>
+            <div id="lv2" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(16) } }">
+            </div>
+            <div id="lv3" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(17) } }">
+            </div>
+            <div id="lv4" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(18) } }">
+            </div>
+            <div id="lv5" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(19) } }">
+            </div>
+            <div id="lv6" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(20) } }">
+            </div>
+            <div id="lv7" style="background: transparent;padding: 0px;text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(21) } }">
+            </div>
         </div>
     </div>

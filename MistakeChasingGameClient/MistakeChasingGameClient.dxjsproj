@@ -793,10 +793,13 @@
     <Content Include="images\roadmap.jpg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\roadmap2.png">
+    <Content Include="images\roadmap3.jpg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\roadmap3.jpg">
+    <Content Include="images\roadmap2.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\roadmap4.jpg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="index.js" />

@@ -174,6 +174,7 @@
             this.randomFindBugs();
             this.addQuestion(1, "FindBugs");
 
+            var isRepeat = true;
             var count = 0;
             var random1 = randomQuestion;
             while (isRepeat && count < 10) {
@@ -219,6 +220,7 @@
                 };
             }
             this.randomSingleChoice();
+            //alert(randomQuestion.id);
             this.addQuestion(5, "SingleChoice");
         };
         this.randomQuestion = function () {
@@ -258,7 +260,7 @@
             this.findBugsTab.rendered(false);
             ///////////////////////////////////////////////
             var question, index;
-            
+
             index = Number(localStorage.currentIndex);
             listQ.byKey(index).done(function (dataItem) {
                 question = dataItem;
