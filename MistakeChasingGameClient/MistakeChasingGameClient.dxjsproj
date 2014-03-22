@@ -367,6 +367,9 @@
     <Content Include="images\MultipleChoice\M9.jpg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\ready.jpg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\redX.png">
       <SubType>Content</SubType>
     </Content>

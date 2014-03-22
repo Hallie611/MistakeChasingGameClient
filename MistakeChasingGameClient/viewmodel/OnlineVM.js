@@ -3,6 +3,8 @@
 
 
     MistakeChasingGameClient.OnlineVM = function (data) {
+
+
         ///////////////////////////////////////HA
         var answerSC;
         var answer1;
@@ -73,6 +75,8 @@
 
 
         /////////////////////////////////////////////////Du
+
+        $.connection.hub.url = "http://localhost:8080/signalr";
         var self = this;
 
         this.RoomTab = {
@@ -101,9 +105,9 @@
             }),
             test: ko.observable(localStorage.username),
             question1: ko.observable(),
-            question2 :ko.observable(),
-            question3 :ko.observable()
-
+            question2: ko.observable(),
+            question3: ko.observable()
+            
         };
 
 
@@ -116,17 +120,17 @@
             selectedTab(1);
             this.RoomTab.rendered(false);
             this.ListTab.rendered(true);
+            
+
         };
-
-
-
-
-        $.connection.hub.url = "http://localhost:8080/signalr";
+        
+        
 
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
-            //// temp la listQ tra ve cho ca 2 client
+            //alert(temp[0].type);
+            //// temp la listQ tra ve cho ca 2 client gio lay cai nay load wa listTAB
         }
         //
         ///ham sver yeu cau tao list Q
@@ -141,7 +145,7 @@
         //no opponent
         $.connection.gamesHub.client.noOpponents = function (message) {
 
-            self.RoomTab.message("There is no opponent Try Again later");
+            self.RoomTab.message("Watting to find opponent...");
             //    alert("Looking for an opponent!");
         };
 
@@ -150,11 +154,14 @@
             self.RoomTab.oname(message.oName);
             self.RoomTab.oplevel(message.oLevel);
             self.RoomTab.opoint(message.oPoint);
-            document.getElementById("opponent").style.display = "initial";
+            document.getElementById("opponent").style.display = "block";
             document.getElementById("readybtn").style.display = "inline-block";
             document.getElementById("findbtn").style.display = "none";
         };
 
+        $.connection.gamesHub.client.gameReady = function () {
+            self.loadListTab();
+        };
 
 
         $.connection.hub.start().done(function () {
@@ -171,7 +178,6 @@
 
 
         this.findOpponent = function () {
-
             this.randomQuestion();
             $.connection.gamesHub.server.findOpponent(localStorage.level);
         };
@@ -181,14 +187,12 @@
         };
 
 
-        
+        this.Ready = function () {
+            self.RoomTab.message("Watting opponent ready...");
+            $.connection.gamesHub.server.playerReady();
+        }
 
 
-
-
-
-
-        ////////////////////////////////////////////////////
         
         
 

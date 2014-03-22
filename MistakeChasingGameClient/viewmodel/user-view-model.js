@@ -25,6 +25,9 @@
             localStorage.point = this.point;
         };
 
+        this.changeName = function () {
+            localStorage.username = this.username();
+        }
 
         //this.LevelUp = function (data) {
         //    localStorage.point = Number(localStorage.point) + Number(data);

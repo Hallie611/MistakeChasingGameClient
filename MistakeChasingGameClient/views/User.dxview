@@ -1,28 +1,30 @@
 <div data-options="dxView : { name: 'User', title: 'User' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
 
-         <div class="dx-fieldset">
+        <div class="dx-fieldset">
             <div class="dx-field">
-                <div class="dx-field-label" >User Name</div>
-                <div class="dx-field-value" data-bind="dxTextBox: { value: username }"></div>
+                <div class="dx-field-label">User Name</div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: username}">
+                </div>
+
             </div>
             <div class="dx-field">
                 <div class="dx-field-label">Point</div>
-                <div class="dx-field-value" data-bind="dxTextBox: { value: point }"></div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: point,readOnly: true }"></div>
             </div>
             <div class="dx-field">
                 <div class="dx-field-label">Level</div>
-                 <div class="dx-field-value" data-bind="dxTextBox: { value: level }"></div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: level ,readOnly: true}"></div>
                 <!--<img data-bind="attr: { src: level } " ,style="width:10%;height:10%"/>-->
             </div>
-            
+
         </div>
 
-
+         <div class="dx-field-value" data-bind="dxButton: { text: 'Save',clickAction: changeName }"></div>
         <div data-bind="dxButton: { text: 'Button1',clickAction: function(e){LevelUp('200');} }"></div>
-        <div data-bind="dxButton: { text: 'clear',clickAction: clear  }"></div>
+
         <div data-bind="dxButton: { text: 'history',clickAction: '#History'  }"></div>
-        
+
 
     </div>
 </div>

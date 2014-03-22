@@ -2,9 +2,7 @@
 
     var viewModel = new MistakeChasingGameClient.OnlineVM();
     
-    Ready = function () {
-        viewModel.loadListTab();
-    }
+
 
     return $.extend(viewModel, {
         viewShown: function () {
