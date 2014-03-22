@@ -129,7 +129,7 @@
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
-            alert(temp[0].type);
+            alert(temp[0].id);
             //// temp la listQ tra ve cho ca 2 client gio lay cai nay load wa listTAB
         }
         //
@@ -137,6 +137,7 @@
         var list;
         $.connection.gamesHub.client.createQuestionList = function () {
             listQ.load().done(function (theArray) {
+                alert(theArray[0].questionId);
                 $.connection.gamesHub.server.getValue(theArray);
             });
            
@@ -193,11 +194,6 @@
         }
 
 
-
-
-
-
-        ////////////////////////////////////////////////////
         
         
 

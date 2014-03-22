@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{1B19158F-E398-40A6-8E3B-350508E125F1}") = "MistakeChasingGameClient", "MistakeChasingGameClient\MistakeChasingGameClient.dxjsproj", "{79AB79EE-C8D6-4853-BD74-7A9712A816EC}"
 EndProject
 Global
