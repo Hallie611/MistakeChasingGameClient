@@ -17,21 +17,25 @@
         if (!localStorage.currentPoint)
             localStorage.currentPoint = 0;
         ///////////////////////////////        
+        var listQ = new DevExpress.data.ArrayStore({
+            key: "index"
+        });
+        //var listQ = ko.observable();
 
         var selectedTab = ko.observable(0);
 
-        //this.findBugsTab = {
-        //    src: ko.observable(),
-        //    rendered: ko.observable(false),
-        //    tabVisible: ko.computed(function () {
-        //        return selectedTab() === 0;
-        //    }),
-        //    bwidth: ko.observable(),
-        //    bheight: ko.observable(),
-        //    bleft: ko.observable(),
-        //    btop: ko.observable(),
-        //    srcX: "images/redX.png"
-        //};
+        this.findBugsTab = {
+            src: ko.observable(),
+            rendered: ko.observable(false),
+            tabVisible: ko.computed(function () {
+                return selectedTab() === 0;
+            }),
+            bwidth: ko.observable(),
+            bheight: ko.observable(),
+            bleft: ko.observable(),
+            btop: ko.observable(),
+            srcX: "images/redX.png"
+        };
 
         this.fillingBlanksTab = {
             src: ko.observable(),
@@ -97,6 +101,8 @@
             var crit = Number(localStorage.currentlevel) * 50 * 2;
             //alert(crit);
             if (Number(localStorage.currentPoint) >= crit) {
+                if (Number(localStorage.level) > Number(localStorage.currentlevel))
+                    localStorage.level = localStorage.currentlevel;
                 return true;
             }
             else return false;
@@ -113,7 +119,7 @@
             }
         };
         /////////////////////////////////////////
-        this.randomFindBugs = function () {            
+        this.randomFindBugs = function () {
             var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.currentlevel)]).sortBy("id").toArray();
             randomQuestion = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
         };
@@ -149,39 +155,133 @@
             answerSC = randomQuestion.ans;
             difCurrentQ = randomQuestion.dif;
         };
-        this.loadQuestion = function () {
-            //giu level khi chuyen view    
-            if (Number(params) % 1 == 0)
-                localStorage.currentlevel = params;
-            if (Number(localStorage.currentlevel) < 8) {
+        this.addQuestion = function (index, type) {
+            listQ.insert({
+                index: index,
+                question: randomQuestion,
+                type: type
+            });
+        };
+        this.randomThree = function () {
+            this.randomFindBugs();
+            this.addQuestion(1, "FindBugs");
+            this.randomFillingBlanks();
+            this.addQuestion(2, "FillingBlanks");
+            this.randomSingleChoice();
+            this.addQuestion(3, "SingleChoice");
+        };
+        this.randomFour = function () {
+            this.randomFindBugs();
+            this.addQuestion(1, "FindBugs");
+
+            var count = 0;
+            var random1 = randomQuestion;
+            while (isRepeat && count < 10) {
+                this.randomFindBugs();
+                count++;
+                if (random1 != randomQuestion) {
+                    isRepeat = false;
+                    this.addQuestion(2, "FindBugs");
+                };
+            }
+            this.randomFillingBlanks();
+            this.addQuestion(3, "FillingBlanks");
+            this.randomSingleChoice();
+            this.addQuestion(4, "SingleChoice");
+        };
+        this.randomFive = function () {
+            var isRepeat = true;
+            var count = 0;
+            this.randomFindBugs();
+            this.addQuestion(1, "FindBugs");
+
+            var random1 = randomQuestion;
+            while (isRepeat && count < 10) {
+                this.randomFindBugs();
+                count++;
+                if (random1 != randomQuestion) {
+                    isRepeat = false;
+                    this.addQuestion(2, "FindBugs");
+                };
+            }
+            this.randomFillingBlanks();
+            this.addQuestion(3, "FillingBlanks");
+
+            isRepeat = true;
+            count = 0;
+            random1 = randomQuestion;
+            while (isRepeat && count < 10) {
+                this.randomFillingBlanks();
+                count++;
+                if (random1 != randomQuestion) {
+                    isRepeat = false;
+                    this.addQuestion(4, "FillingBlanks");
+                };
+            }
+            this.randomSingleChoice();
+            this.addQuestion(5, "SingleChoice");
+        };
+        this.randomQuestion = function () {
+            if (Number(localStorage.currentlevel) <= 21 && Number(localStorage.currentlevel) > 14) {
+                localStorage.maxIndex = 5;
+            }
+            else if (Number(localStorage.currentlevel) < 15 && Number(localStorage.currentlevel) > 7) {
+                localStorage.maxIndex = 4;
+            }
+            else if (Number(localStorage.currentlevel) < 8) {
                 localStorage.maxIndex = 3;
-            } 
+            }
+            ////////////////////////////////////////
+            var maxIndex = 0;
+            listQ.totalCount().done(function (result) {
+                maxIndex = result;
+            });
+            if (maxIndex != 0) {
+                for (var i = 1; i <= maxIndex; i++) {
+                    listQ.remove(i);
+                }
+            };
+
+            if (Number(localStorage.maxIndex) == 3) {
+                this.randomThree();
+            }
+            else if (Number(localStorage.maxIndex) == 4) {
+                this.randomFour();
+            }
+            else if (Number(localStorage.maxIndex) == 5) {
+                this.randomFive();
+            }
+        };
+        this.loadQuestion = function (obj) {
             this.singleChoiceTab.rendered(false);
             this.fillingBlanksTab.rendered(false);
             this.findBugsTab.rendered(false);
-            ////////////////////////////////////////
-            if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 1) {
-                this.randomFindBugs();
-                this.loadFindBugs();                
+            ///////////////////////////////////////////////
+            var question, index;
+            
+            index = Number(localStorage.currentIndex);
+            listQ.byKey(index).done(function (dataItem) {
+                question = dataItem;
+                //alert(question.question.dif);
+            });
+            if (question.type == "FindBugs") {
+                randomQuestion = question.question;
+                this.loadFindBugs();
                 selectedTab(0);
                 this.findBugsTab.rendered(true);
             }
-            else if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 2) {
-                this.randomFillingBlanks();
+            else if (question.type == "FillingBlanks") {
+                randomQuestion = question.question;
                 this.loadFillingBlanks();
                 selectedTab(1);
                 this.fillingBlanksTab.rendered(true);
             }
-            else if (Number(localStorage.maxIndex) < 4 && Number(localStorage.currentIndex) == 3) {
-                this.randomSingleChoice();
+            else if (question.type == "SingleChoice") {
+                randomQuestion = question.question;
                 this.loadSingleChoice();
                 selectedTab(2);
                 this.singleChoiceTab.rendered(true);
-            };
-
+            }
         };
-
-
-
     }
 })();

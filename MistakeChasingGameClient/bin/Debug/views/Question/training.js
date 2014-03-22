@@ -20,10 +20,10 @@
     showBug = function () {
         var points = viewModel.bugFound();
         localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;           
-        $("#toastContainer").dxToast('instance').show();        
+        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+        $("#toastContainer").dxToast('instance').show();
     };
-    processHiding = function () {        
+    processHiding = function () {
         viewModel.loadQuestion();
     };
 
@@ -34,8 +34,6 @@
         //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
         //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         viewModel.loadQuestion();
-
-        //});
     };
 
     submitSC = function () {
@@ -72,12 +70,12 @@
             passDialog.show();
         }
         else failDialog.show();
-        //});
     };
 
     function tryAgain() {
         localStorage.currentIndex = 1;
         localStorage.currentPoint = 0;
+        viewModel.randomQuestion();
         viewModel.loadQuestion();
         setClock();
     };
@@ -88,7 +86,7 @@
         localStorage.currentPoint = 0;
         var nextLevel = Number(localStorage.currentlevel) + 1;
         localStorage.currentlevel = nextLevel;
-        //alert(Number(localStorage.currentlevel));
+        viewModel.randomQuestion();
         viewModel.loadQuestion();
         setClock();
     };
@@ -103,8 +101,8 @@
     };
     ////////////////////////////////////
     // variables for time units
-    txMinutes = ko.observable("0");
-    txSeconds = ko.observable("10");
+    txMinutes = ko.observable("");
+    txSeconds = ko.observable("");
     restartClock = ko.observable(true);
     time = ko.computed(function () {
         return txMinutes() + " : " + txSeconds();
@@ -119,10 +117,20 @@
     };
     function runClock() {
         if (restartClock()) {
-            seconds = 10;
-            minutes = 0;
+            if (Number(localStorage.maxIndex) == 3) {
+                seconds = 0;
+                minutes = 3;
+            }
+            else if (Number(localStorage.maxIndex) == 4) {
+                seconds = 0;
+                minutes = 4;
+            }
+            else if (Number(localStorage.maxIndex) == 5) {
+                seconds = 0;
+                minutes = 5;
+            }
             restartClock(false);
-        }
+        };
         // restart second when reach 0
         if (seconds == 0) {
             seconds = 59;
@@ -147,14 +155,25 @@
     };
     function setClock() {
         restartClock(true);
-        txMinutes("0");
-        txSeconds("10");
+        if (Number(localStorage.maxIndex) == 3) {
+            txMinutes("3");
+            txSeconds("00");
+        }
+        else if (Number(localStorage.maxIndex) == 4) {
+            txMinutes("4");
+            txSeconds("00");
+        }
+        else if (Number(localStorage.maxIndex) == 5) {
+            txMinutes("5");
+            txSeconds("00");
+        }
         interval = setInterval(runClock, 1000);
     };
 
     return $.extend(viewModel, {
         viewShown: function () {
             //goi ham load cau hoi len dua theo id truyen qua
+            viewModel.randomQuestion();
             viewModel.loadQuestion();
             setClock();
         }

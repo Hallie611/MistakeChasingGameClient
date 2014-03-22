@@ -1,65 +1,145 @@
 <div data-options="dxView : { name: 'Chasing', title: 'Chasing Online Mode' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
-
             <div id="player" class="dx-fieldset">
                 <div class="dx-field">
-                    <div class="dx-field-label">User Name</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username }"></div>
+                    <div class="dx-field-label">
+                        User Name</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username }">
+                    </div>
                 </div>
                 <div class="dx-field">
-                    <div class="dx-field-label">Point</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point }"></div>
+                    <div class="dx-field-label">
+                        Point</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point }">
+                    </div>
                 </div>
                 <div class="dx-field">
-                    <div class="dx-field-label">Level</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level }"></div>
+                    <div class="dx-field-label">
+                        Level</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level }">
+                    </div>
                     <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
                 </div>
             </div>
-
-
-            <div id="findbtn" style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }"></div>
-            <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready,  iconSrc: 'images/ready.jpg' }"></div>
-
-            <h1 data-bind="text: RoomTab.message"></h1>
-
+            <div id="findbtn" style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }">
+            </div>
+            <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready, text: 'Ready ?' }">
+            </div>
+            <h1 data-bind="text: RoomTab.message">
+            </h1>
             <div id="opponent" style="display: none" class="dx-fieldset">
                 <div class="dx-field">
-                    <div class="dx-field-label">Opponent </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oname }"></div>
+                    <div class="dx-field-label">
+                        Opponent
+                    </div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oname }">
+                    </div>
                 </div>
                 <div class="dx-field">
-                    <div class="dx-field-label">Point</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.opoint }"></div>
+                    <div class="dx-field-label">
+                        Point</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.opoint }">
+                    </div>
                 </div>
                 <div class="dx-field">
-                    <div class="dx-field-label">Level</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oplevel }"></div>
+                    <div class="dx-field-label">
+                        Level</div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oplevel }">
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="content" id="Div1" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
-            <h1 data-bind="text:ListTab.test"></h1>
-            <div id="listQuest" class="dx-fieldset">
-                <div id="question1" class="dx-field">
-                    <div class="dx-field-label">Quesiton 1</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question1"></div>
+        <div class="content" id="levelmap" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
+            <div id="myList" style="margin: 10px;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick }">
+                <div style="text-align: left;padding: 5px;" data-options="dxTemplate:{ name:'item' }">
+                    <p style="font-size: larger;">
+                        <b data-bind="text: index + '. ' + type"></b>
+                    </p>
                 </div>
-                <div id="question2" class="dx-field">
-                    <div class="dx-field-label">Quesiton 2</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question2 }"></div>
-                </div>
-                <div id="question3" class="dx-field">
-                    <div class="dx-field-label">Quesiton 3</div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: ListTab.question3 }"></div>
-                </div>
-
-            </div>
+            </div>            
         </div>
 
-
+        <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
+            <div style="height: 10%; text-align: left;">
+                <h3>
+                    Touch the screen to select the bug in the codes below:</h3>
+            </div>
+            <div id="scrollViewFB" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: findBugsTab.src }" />
+                <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
+                </div>
+            </div>
+            <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'Bug found!', type: 'success', displayTime: 300, hiddenAction: processHiding}">
+            </div>
+            
+            
+        </div>
+        <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
+            <div id="scrollViewFBK" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
+            </div>
+            <div style="bottom: 2%; width: 100%;">
+                <div style="text-align: center;">
+                    <h3>
+                        Fill in the blanks in the codes above:</h3>
+                </div>
+                <div class="dx-fieldset" style="margin: 0px 0px 20px 0px;">
+                    <div class="dx-field">
+                        <div class="dx-field-label">
+                            1.</div>
+                        <div class="dx-field-value">
+                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer1source, value: fillingBlanksTab.choice1}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">
+                            2.</div>
+                        <div class="dx-field-value">
+                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer2source, value: fillingBlanksTab.choice2}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dx-field">
+                        <div class="dx-field-label">
+                            3.</div>
+                        <div class="dx-field-value">
+                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer3source, value: fillingBlanksTab.choice3}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
+                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitFBK }">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content" id="levelmap" data-bind="if: singleChoiceTab.rendered, visible: singleChoiceTab.tabVisible">
+            <div id="scrollViewSC" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
+            </div>
+            <div style="bottom: 2%; width: 100%;">
+                <div style="text-align: center;">
+                    <h3>
+                        Which type of bug is in the codes above?</h3>
+                </div>
+                <div class="dx-fieldset" style="margin: 0px 0px 20px 0px; padding: 5px;">
+                    <div class="dx-field">
+                        <div class="dx-field-value">
+                            <div style="width: 100%; left: 2%;" data-bind="dxSelectBox:{dataSource: singleChoiceTab.listAns, value: singleChoiceTab.choiceSC}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
+                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitSC }">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
