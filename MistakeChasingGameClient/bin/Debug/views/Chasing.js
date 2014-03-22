@@ -23,10 +23,10 @@
     };
 
 
-    Ready = function () {
-        viewModel.loadListTab();
-        //setClock();
-    }
+    //Ready = function () {
+    //    viewModel.loadListTab();
+    //    //setClock();
+    //}
     ////////////////////////////////////
     // variables for time units
     txMinutes = ko.observable("");
