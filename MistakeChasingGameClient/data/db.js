@@ -237,11 +237,11 @@
 		{ id: 41, src: "images/MultipleChoice/M41.jpg", dif: 17, listAns: ['AccessingNonStaticVariable', 'CapitalizatonError', 'PassingValuePassingReference'], ans: 'CapitalizatonError' },
 		{ id: 42, src: "images/MultipleChoice/M42.jpg", dif: 18, listAns: ['CapitalizatonError', 'MistypingMethodNameOverriding', 'ComparisonAssignment'], ans: 'CapitalizatonError' },
 		{ id: 43, src: "images/MultipleChoice/M43.jpg", dif: 18, listAns: ['ComparingTwoObjects', 'ConcurrentAccessToShareVariables', 'CapitalizatonError'], ans: 'CapitalizatonError' },
-		{ id: 44, src: "images/MultipleChoice/M44.jpg", dif: 18, listAns: ['ComparingTwoObjects', 'ConcurrentAccessToShareVariables', 'ComparisonAssignment'], ans: 'ConcurrentAccessToShareVariables' },
-		{ id: 45, src: "images/MultipleChoice/M45.jpg", dif: 20, listAns: ['PassingValuePassingReference', 'MistypingMethodNameOverriding', 'ConcurrentAccessToShareVariables'], ans: 'ConcurrentAccessToShareVariables' },
+		{ id: 44, src: "images/MultipleChoice/M44.jpg", dif: 19, listAns: ['ComparingTwoObjects', 'ConcurrentAccessToShareVariables', 'ComparisonAssignment'], ans: 'ConcurrentAccessToShareVariables' },
+		{ id: 45, src: "images/MultipleChoice/M45.jpg", dif: 19, listAns: ['PassingValuePassingReference', 'MistypingMethodNameOverriding', 'ConcurrentAccessToShareVariables'], ans: 'ConcurrentAccessToShareVariables' },
 		{ id: 46, src: "images/MultipleChoice/M46.jpg", dif: 20, listAns: ['ZeroIndexed', 'ComparingTwoObjects', 'PassingValuePassingReference'], ans: 'ZeroIndexed' },
 		{ id: 47, src: "images/MultipleChoice/M47.jpg", dif: 20, listAns: ['AccessingNonStaticVariable', 'ZeroIndexed', 'MistypingMethodNameOverriding'], ans: 'ZeroIndexed' },
-		{ id: 48, src: "images/MultipleChoice/M48.jpg", dif: 21, listAns: ['ZeroIndexed', 'PassingValuePassingReference', 'ComparingTwoObjects'], ans: 'ZeroIndexed' },
+		{ id: 48, src: "images/MultipleChoice/M48.jpg", dif: 20, listAns: ['ZeroIndexed', 'PassingValuePassingReference', 'ComparingTwoObjects'], ans: 'ZeroIndexed' },
 		{ id: 49, src: "images/MultipleChoice/M49.jpg", dif: 21, listAns: ['MistypeingMethodNameOverriding', 'ConcurrentAccessToShareVariables', 'ComparingTwoObjects'], ans: 'MistypeingMethodNameOverriding' },
 		{ id: 50, src: "images/MultipleChoice/M50.jpg", dif: 21, listAns: ['MistypingMethodNameOverriding', 'ZeroIndexed', 'ComparingTwoObjects'], ans: 'ZeroIndexed' }
     ];
