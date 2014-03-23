@@ -15,6 +15,22 @@
     <KeyApkPath>certificates\android_certificate.p12</KeyApkPath>
     <KeyApkAlias>tmpl</KeyApkAlias>
     <ApkDexFilePackageName>app.id_6ac32cd3ed374bf8beeca8d8c86e5c3b</ApkDexFilePackageName>
+    <Accelerometer>False</Accelerometer>
+    <Camera>False</Camera>
+    <Capture>False</Capture>
+    <Compass>False</Compass>
+    <Connection>True</Connection>
+    <Contacts>False</Contacts>
+    <Device>False</Device>
+    <Events>False</Events>
+    <File>False</File>
+    <Geolocation>False</Geolocation>
+    <Media>False</Media>
+    <Notification>False</Notification>
+    <Storage>True</Storage>
+    <WhiteList>*</WhiteList>
+    <XapPackagePublisherID>{114885c3-809c-47c3-9b73-6ccfd4c5156d}</XapPackagePublisherID>
+    <XapPackageProductID>{1f6be1a4-d725-40b3-b1ad-eb266f800abc}</XapPackageProductID>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

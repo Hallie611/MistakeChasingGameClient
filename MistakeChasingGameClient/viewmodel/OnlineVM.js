@@ -168,7 +168,7 @@
 
         //no opponent
         $.connection.gamesHub.client.noOpponents = function (message) {
-            self.RoomTab.message("There is no opponent Try Again later");
+            self.RoomTab.message("Finding Opponent...");
             //    alert("Looking for an opponent!");
         };
 
@@ -224,6 +224,8 @@
         //////////////////////////////////////////
         //submit method
         this.submitBlanks = function () {
+            
+           
             var points = 0;
             if (this.fillingBlanksTab.choice1() == answer1) {
                 points += difCurrentQ * 25;
@@ -234,6 +236,8 @@
             if (this.fillingBlanksTab.choice3() == answer3) {
                 points += difCurrentQ * 25;
             }
+            // ham bao cho sever bik da lam cau nay roi
+            
 //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
 //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
@@ -242,6 +246,7 @@
         this.submitChoice = function () {
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
+                $.connection.gamesHub.server.play(3);
                 points += difCurrentQ * 50;
             }
 //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
@@ -300,7 +305,8 @@
             listQ.insert({
                 index: index,
                 questionId: randomQuestion.id,
-                type: type
+                type: type,
+                status: "available"
             });
         };
         this.randomThree = function () {
@@ -399,7 +405,7 @@
             this.findBugsTab.rendered(false);
             ///////////////////////////////////////////////
             var itemData = item.itemData;
-            if (itemData.type == "FindBugs") {
+            if (itemData.type == "FindBugs" && itemData.status == "available") {
                 MistakeChasingGameClient.db.findbugsdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
                     //alert(question.question.dif);
@@ -408,7 +414,7 @@
                 selectedTab(2);
                 this.findBugsTab.rendered(true);
             }
-            else if (itemData.type == "FillingBlanks") {
+            else if (itemData.type == "FillingBlanks" && item.status == "available") {
                 MistakeChasingGameClient.db.fillingblankdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
                     //alert(question.question.dif);
@@ -417,7 +423,7 @@
                 selectedTab(3);
                 this.fillingBlanksTab.rendered(true);
             }
-            else if (itemData.type == "SingleChoice") {
+            else if (itemData.type == "SingleChoice" && item.status == "available") {
                 MistakeChasingGameClient.db.multiplechoicedb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
                     //alert(question.question.dif);
@@ -426,6 +432,7 @@
                 selectedTab(4);
                 this.singleChoiceTab.rendered(true);
             }
+
         }
     };
 })();

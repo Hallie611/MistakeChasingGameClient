@@ -54,7 +54,7 @@
             <div id="myList" style="margin: 10px;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick }">
                 <div style="text-align: left;padding: 5px;" data-options="dxTemplate:{ name:'item' }">
                     <p style="font-size: larger;">
-                        <b data-bind="text: index + '. ' + type"></b>
+                        <b data-bind="text: index + '. ' + type+ ' ' + status"></b>
                     </p>
                 </div>
             </div>            
