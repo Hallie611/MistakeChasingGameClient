@@ -99,10 +99,13 @@
 
         this.isPassed = function () {
             var crit = Number(localStorage.currentlevel) * 50 * 2;
+            //alert(Number(localStorage.currentlevel) + "   " + Number(localStorage.level));
             //alert(crit);
             if (Number(localStorage.currentPoint) >= crit) {
-                if (Number(localStorage.level) > Number(localStorage.currentlevel))
-                    localStorage.level = localStorage.currentlevel;
+                if (Number(localStorage.currentlevel) == Number(localStorage.level)) {
+                    localStorage.level = Number(localStorage.currentlevel) + 1;
+                    //alert("change");
+                }
                 return true;
             }
             else return false;
