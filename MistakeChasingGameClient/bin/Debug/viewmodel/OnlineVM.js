@@ -14,6 +14,9 @@
         var listQ = new DevExpress.data.ArrayStore({
             key: "index"
         });
+        var listDataSourceTemp = new DevExpress.data.ArrayStore({
+            key: 'index'
+        });
         //var listQ = ko.observable();
 
         //giu index random array question
@@ -73,7 +76,7 @@
                 return selectedTab() === 0;
             }),
             numberPlayer: ko.observable(),
-            message: ko.observable(),
+            message: ko.observable("Connecting..."),
             username: ko.observable(localStorage.username),
             level: ko.observable(localStorage.level),
             point: ko.observable(localStorage.point),
@@ -146,17 +149,24 @@
         };
 
         //$.connection.hub.url = "http://localhost:8080/signalr";
-        $.connection.hub.url = "http://signalr-13.apphb.com"; 
+        $.connection.hub.url = "http://localhost:8080/signalr";
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
 
             //// temp la listQ tra ve cho ca 2 client
-            var listDataSource = new DevExpress.data.DataSource({
-                store: temp
-            });
-            self.ListTab.listDataSource(listDataSource);
+            listDataSourceTemp.insert({
+                id :temp [2].id,
+                index: temp[2].index,
+                questionId: temp[2].questionId,
+                type: temp[2].type,
+                status: temp[2].status
+            })
+            self.ListTab.listDataSource(listDataSourceTemp);
+            //alert(temp[0].type);
         }
+
+
         //
         ///ham sver yeu cau tao list Q
         $.connection.gamesHub.client.createQuestionList = function () {
@@ -168,7 +178,7 @@
 
         //no opponent
         $.connection.gamesHub.client.noOpponents = function (message) {
-            self.RoomTab.message("There is no opponent Try Again later");
+            self.RoomTab.message("Finding Opponent...");
             //    alert("Looking for an opponent!");
         };
 
@@ -177,7 +187,7 @@
             self.RoomTab.oname(message.oName);
             self.RoomTab.oplevel(message.oLevel);
             self.RoomTab.opoint(message.oPoint);
-            document.getElementById("opponent").style.display = "initial";
+            document.getElementById("opponent").style.display = "block";
             document.getElementById("readybtn").style.display = "inline-block";
             document.getElementById("findbtn").style.display = "none";
         };
@@ -187,8 +197,29 @@
             self.loadListTab();
         };
 
+        //update 2 client cau nao lam roi
+        $.connection.gamesHub.client.CorrectedQuestion = function (name, id) {
+            // alert("question " + id + "has done by " + name);
+            // run lại đi// cai list no update roi no chay lai no bi loi
+            // nó chạy hàm nào muh ra lỗi đó// dau bik @@, ma /hi/nh nhu la o day// bo cai update data nay di thi chay o
+
+            listDataSourceTemp.update(3, { id: 1 }).fail(function (e) { alert(e)});
+
+        }
+
+        $.connection.gamesHub.client.gameOver = function (name) {
+            alert("game over");
+
+        }
+
+        $.connection.gamesHub.client.OpponentDisconnect = function () {
+
+            alert("Your Opponent disconnected");
+        }
         $.connection.hub.start().done(function () {
             //alert("connected");
+            self.RoomTab.message("");
+            document.getElementById("findbtn").style.display = "";
             $.connection.gamesHub.server.register(localStorage.username, localStorage.level, localStorage.point).done(function () {
                 //  alert('added');
             });
@@ -198,7 +229,7 @@
         });
 
         this.findOpponent = function () {
-            
+
             $.connection.gamesHub.server.findOpponent(localStorage.level);
         };
 
@@ -214,6 +245,7 @@
         ////////////////////////////////////////////////////
         /////////////////////////////////////////
         this.bugFound = function () {
+            $.connection.gamesHub.server.correctQuestion(1);
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 50;
@@ -222,6 +254,8 @@
         //////////////////////////////////////////
         //submit method
         this.submitBlanks = function () {
+
+
             var points = 0;
             if (this.fillingBlanksTab.choice1() == answer1) {
                 points += difCurrentQ * 25;
@@ -232,18 +266,25 @@
             if (this.fillingBlanksTab.choice3() == answer3) {
                 points += difCurrentQ * 25;
             }
-//            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-//            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            // ham bao cho sever bik da lam cau nay roi
+            if (this.fillingBlanksTab.choice1() == answer1 && this.fillingBlanksTab.choice2() == answer2 && this.fillingBlanksTab.choice3() == answer3) {
+                $.connection.gamesHub.server.correctQuestion(2);
+
+            }
+
+            //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+            //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
         };
         ////////////////////////////////////////
         this.submitChoice = function () {
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
+                $.connection.gamesHub.server.correctQuestion(3);
                 points += difCurrentQ * 50;
             }
-//            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-//            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+            //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
         };
         /////////////////////////////////////////
@@ -298,7 +339,8 @@
             listQ.insert({
                 index: index,
                 questionId: randomQuestion.id,
-                type: type
+                type: type,
+                status: "available"
             });
         };
         this.randomThree = function () {
@@ -397,7 +439,7 @@
             this.findBugsTab.rendered(false);
             ///////////////////////////////////////////////
             var itemData = item.itemData;
-            if (itemData.type == "FindBugs") {
+            if (itemData.type == "FindBugs" && itemData.status == "available") {
                 MistakeChasingGameClient.db.findbugsdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
                     //alert(question.question.dif);
@@ -406,7 +448,7 @@
                 selectedTab(2);
                 this.findBugsTab.rendered(true);
             }
-            else if (itemData.type == "FillingBlanks") {
+            else if (itemData.type == "FillingBlanks" && itemData.status == "available") {
                 MistakeChasingGameClient.db.fillingblankdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
                     //alert(question.question.dif);
@@ -415,7 +457,7 @@
                 selectedTab(3);
                 this.fillingBlanksTab.rendered(true);
             }
-            else if (itemData.type == "SingleChoice") {
+            else if (itemData.type == "SingleChoice" && itemData.status == "available") {
                 MistakeChasingGameClient.db.multiplechoicedb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
                     //alert(question.question.dif);
@@ -424,6 +466,7 @@
                 selectedTab(4);
                 this.singleChoiceTab.rendered(true);
             }
+
         }
     };
 })();

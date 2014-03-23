@@ -14,10 +14,12 @@
 
     submitFBK = function () {
         var points = viewModel.submitBlanks();
+        
         viewModel.loadListTab();
     };
 
     submitSC = function () {
+        
         var points = viewModel.submitChoice();
         viewModel.loadListTab();
     };

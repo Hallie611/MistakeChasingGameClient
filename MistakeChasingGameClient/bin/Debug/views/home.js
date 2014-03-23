@@ -44,8 +44,12 @@
 
     clickLevel = function (level) {
         //alert(level);
-        localStorage.currentlevel = level;
-        MistakeChasingGameClient.app.navigate('training', { root: true });
+        if (level > Number(localStorage.level)) {
+            $("#toastContainer").dxToast('instance').show();
+        } else {
+            localStorage.currentlevel = level;
+            MistakeChasingGameClient.app.navigate('training', { root: true });
+        }
     };
 
     viewModel.selectedTab(0);
