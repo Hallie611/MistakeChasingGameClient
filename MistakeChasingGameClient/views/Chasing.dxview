@@ -22,9 +22,9 @@
                     <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
                 </div>
             </div>
-            <div id="findbtn" style="margin-left: 40%" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }">
+            <div id="findbtn" style="margin-left: 40%; display:none" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }">
             </div>
-            <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready, text: 'Ready ?' }">
+            <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/ready.jpg' }">
             </div>
             <h1 data-bind="text: RoomTab.message">
             </h1>

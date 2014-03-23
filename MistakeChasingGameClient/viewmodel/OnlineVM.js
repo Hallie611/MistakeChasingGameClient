@@ -73,7 +73,7 @@
                 return selectedTab() === 0;
             }),
             numberPlayer: ko.observable(),
-            message: ko.observable(),
+            message: ko.observable("Connecting..."),
             username: ko.observable(localStorage.username),
             level: ko.observable(localStorage.level),
             point: ko.observable(localStorage.point),
@@ -177,7 +177,7 @@
             self.RoomTab.oname(message.oName);
             self.RoomTab.oplevel(message.oLevel);
             self.RoomTab.opoint(message.oPoint);
-            document.getElementById("opponent").style.display = "initial";
+            document.getElementById("opponent").style.display = "block";
             document.getElementById("readybtn").style.display = "inline-block";
             document.getElementById("findbtn").style.display = "none";
         };
@@ -189,6 +189,8 @@
 
         $.connection.hub.start().done(function () {
             //alert("connected");
+             self.RoomTab.message("");
+            document.getElementById("findbtn").style.display = "";
             $.connection.gamesHub.server.register(localStorage.username, localStorage.level, localStorage.point).done(function () {
                 //  alert('added');
             });
