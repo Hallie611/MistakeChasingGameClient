@@ -154,14 +154,17 @@
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
 
+            temp.forEach(function (item) {
+                listDataSourceTemp.insert({
+                    id: item.id,
+                    index: item.index,
+                    questionId: item.questionId,
+                    type: item.type,
+                    status: item.status
+                })
+            });
             //// temp la listQ tra ve cho ca 2 client
-            listDataSourceTemp.insert({
-                id :temp [2].id,
-                index: temp[2].index,
-                questionId: temp[2].questionId,
-                type: temp[2].type,
-                status: temp[2].status
-            })
+            
             self.ListTab.listDataSource(listDataSourceTemp);
             //alert(temp[0].type);
         }
@@ -172,10 +175,15 @@
         $.connection.gamesHub.client.createQuestionList = function () {
             self.randomQuestion();
             listQ.load().done(function (theArray) {
-                $.connection.gamesHub.server.getValue(theArray);
+                $.connection.gamesHub.server.postQuestion(theArray);
             });
         }
 
+
+        $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
+            self.RoomTab.message("Number of player online : " + message.totalClient);
+            //    alert("Looking for an opponent!");
+        };
         //no opponent
         $.connection.gamesHub.client.noOpponents = function (message) {
             self.RoomTab.message("Finding Opponent...");
@@ -198,13 +206,13 @@
         };
 
         //update 2 client cau nao lam roi
-        $.connection.gamesHub.client.CorrectedQuestion = function (name, id) {
+        $.connection.gamesHub.client.CorrectedQuestion = function (name, index) {
             // alert("question " + id + "has done by " + name);
             // run lại đi// cai list no update roi no chay lai no bi loi
             // nó chạy hàm nào muh ra lỗi đó// dau bik @@, ma /hi/nh nhu la o day// bo cai update data nay di thi chay o
 
-            listDataSourceTemp.update(3, { id: 1 }).fail(function (e) { alert(e)});
-
+            listDataSourceTemp.update(index, { status: "done" }).fail(function (e) { alert(e) });
+            listDataSourceTemp.byKey(index).done(function (e) { alert(e.status) });
         }
 
         $.connection.gamesHub.client.gameOver = function (name) {
@@ -230,7 +238,7 @@
 
         this.findOpponent = function () {
 
-            $.connection.gamesHub.server.findOpponent(localStorage.level);
+            $.connection.gamesHub.server.findOpponent();
         };
 
         this.play = function () {
