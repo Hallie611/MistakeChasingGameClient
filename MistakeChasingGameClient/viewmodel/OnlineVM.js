@@ -133,6 +133,7 @@
             this.findBugsTab.rendered(false);
             selectedTab(0);
             this.RoomTab.rendered(true);
+            
         };
 
         this.loadListTab = function () {
@@ -155,8 +156,8 @@
             }
         };
 
-        $.connection.hub.url = "http://localhost:8080/signalr";
-       // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        //$.connection.hub.url = "http://localhost:8080/signalr";
+       $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -224,6 +225,11 @@
         $.connection.gamesHub.client.OpponentDisconnect = function () {
 
             alert("Your Opponent disconnected");
+            self.loadRoomTab();
+            document.getElementById("opponent").style.display = "none";
+            document.getElementById("readybtn").style.display = "none";
+            document.getElementById("findbtn").style.display = "";
+          
         }
         $.connection.hub.start().done(function () {
             //alert("connected");
