@@ -218,7 +218,7 @@
         }
 
         $.connection.gamesHub.client.gameOver = function (name) {
-            alert("game over");
+            alert("winner is " + name.Name + " Your Point " + name.Point);
         }
 
         $.connection.gamesHub.client.OpponentDisconnect = function () {
