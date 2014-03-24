@@ -14,10 +14,6 @@
         var listQ = new DevExpress.data.ArrayStore({
             key: "index"
         });
-        var listDataSourceTemp = new DevExpress.data.ArrayStore({
-            key: 'index'
-        });
-        //var listQ = ko.observable();
 
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -147,15 +143,27 @@
             this.RoomTab.rendered(false);
             this.ListTab.rendered(true);
         };
+        function clearListQ() {
+            var maxIndex = 0;
+            listQ.totalCount().done(function (result) {
+                maxIndex = result;
+            });
+            if (maxIndex != 0) {
+                for (var i = 1; i <= maxIndex; i++) {
+                    listQ.remove(i);
+                }
+            }
+        };
 
         //$.connection.hub.url = "http://localhost:8080/signalr";
-        $.connection.hub.url = "http://localhost:8080/signalr";
+        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
 
+            clearListQ();
             temp.forEach(function (item) {
-                listDataSourceTemp.insert({
+                listQ.insert({
                     id: item.id,
                     index: item.index,
                     questionId: item.questionId,
@@ -164,11 +172,8 @@
                 })
             });
             //// temp la listQ tra ve cho ca 2 client
-            
-            self.ListTab.listDataSource(listDataSourceTemp);
-            //alert(temp[0].type);
+            self.ListTab.listDataSource(listQ);
         }
-
 
         //
         ///ham sver yeu cau tao list Q
@@ -178,7 +183,6 @@
                 $.connection.gamesHub.server.postQuestion(theArray);
             });
         }
-
 
         $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
             self.RoomTab.message("Number of player online : " + message.totalClient);
@@ -207,17 +211,14 @@
 
         //update 2 client cau nao lam roi
         $.connection.gamesHub.client.CorrectedQuestion = function (name, index) {
-            // alert("question " + id + "has done by " + name);
-            // run lại đi// cai list no update roi no chay lai no bi loi
-            // nó chạy hàm nào muh ra lỗi đó// dau bik @@, ma /hi/nh nhu la o day// bo cai update data nay di thi chay o
 
-            listDataSourceTemp.update(index, { status: "done" }).fail(function (e) { alert(e) });
-            listDataSourceTemp.byKey(index).done(function (e) { alert(e.status) });
+            listQ.update(index, { status: "done" }).fail(function (e) { alert(e) });
+            //listQ.byKey(index).done(function (e) { alert(e.status) });
+            self.ListTab.listDataSource(listQ);
         }
 
         $.connection.gamesHub.client.gameOver = function (name) {
             alert("game over");
-
         }
 
         $.connection.gamesHub.client.OpponentDisconnect = function () {
@@ -262,8 +263,6 @@
         //////////////////////////////////////////
         //submit method
         this.submitBlanks = function () {
-
-
             var points = 0;
             if (this.fillingBlanksTab.choice1() == answer1) {
                 points += difCurrentQ * 25;
@@ -277,7 +276,6 @@
             // ham bao cho sever bik da lam cau nay roi
             if (this.fillingBlanksTab.choice1() == answer1 && this.fillingBlanksTab.choice2() == answer2 && this.fillingBlanksTab.choice3() == answer3) {
                 $.connection.gamesHub.server.correctQuestion(2);
-
             }
 
             //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
@@ -421,15 +419,7 @@
                 localStorage.maxIndex = 3;
             }
             ////////////////////////////////////////
-            var maxIndex = 0;
-            listQ.totalCount().done(function (result) {
-                maxIndex = result;
-            });
-            if (maxIndex != 0) {
-                for (var i = 1; i <= maxIndex; i++) {
-                    listQ.remove(i);
-                }
-            };
+            clearListQ();
 
             if (Number(localStorage.maxIndex) == 3) {
                 this.randomThree();
@@ -474,7 +464,6 @@
                 selectedTab(4);
                 this.singleChoiceTab.rendered(true);
             }
-
         }
     };
 })();
