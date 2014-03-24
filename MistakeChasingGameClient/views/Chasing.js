@@ -1,12 +1,29 @@
 ﻿MistakeChasingGameClient.Chasing = function (params) {
 
     var viewModel = new MistakeChasingGameClient.OnlineVM();
+    var countX = 0;
+    var canFind = true;
 
+    myEventHandler = function () {
+        countX += 1;
+        var showX = document.getElementById("miss" + countX);
+        showX.style.visibility = "visible";
+        if (countX >= 3) {
+            countX = 0;
+            canFind = false;
+            //localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            viewModel.loadListTab();
+        }
+    };
     showBug = function () {
-        var points = viewModel.bugFound();
-        //        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-        //        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-        $("#toastContainer").dxToast('instance').show();
+        if (canFind) {
+            var points = viewModel.bugFound();
+            //        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+            //        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            $("#toastSuccess").dxToast('instance').show();
+        } else {
+            $("#toastError").dxToast('instance').show();
+        }
     };
     processHiding = function () {
         viewModel.loadListTab();
@@ -14,17 +31,23 @@
 
     submitFBK = function () {
         var points = viewModel.submitBlanks();
-        
+
         viewModel.loadListTab();
     };
 
     submitSC = function () {
-        
+
         var points = viewModel.submitChoice();
         viewModel.loadListTab();
     };
+    ///////////////
+    var myScroll;
+    function loaded() {
+        myScroll = new iScroll('wrapper', { zoom: true, zoomMax: 4 });
+    };
 
-
+    document.addEventListener('DOMContentLoaded', loaded, false);
+    loaded();
     //Ready = function () {
     //    viewModel.loadListTab();
     //    //setClock();

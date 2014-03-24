@@ -10,7 +10,7 @@
                 <h3>
                     Touch the screen to select the bug in the codes below:</h3>
             </div>
-            <div id="scrollViewFB" data-bind="dxScrollView: { }">
+            <div id="wrapper">
                 <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
                 <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
                 </div>
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
-            <div id="scrollViewFBK" data-bind="dxScrollView: { }">
+            <div id="wrapper">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
             <div style="bottom: 2%; width: 100%;">

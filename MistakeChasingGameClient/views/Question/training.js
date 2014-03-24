@@ -44,8 +44,16 @@
         //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
         //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         showEndDialog();
+    }; 
+    ///////////
+    var myScroll;
+    function loaded() {
+        myScroll = new iScroll('wrapper', { zoom: true, zoomMax: 4 });
     };
 
+    document.addEventListener('DOMContentLoaded', loaded, false);
+    //loaded();
+    //////////////////
     function showEndDialog() {
         countX = 0;
         var curPoints = ko.observable(Number(localStorage.currentPoint));
@@ -177,6 +185,7 @@
             viewModel.randomQuestion();
             viewModel.loadQuestion();
             setClock();
+            loaded();
         }
     });
 };
