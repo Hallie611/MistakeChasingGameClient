@@ -22,6 +22,12 @@
         });
         //var listQ = ko.observable();
 
+        ///////////////////////zoom
+        var myScroll;
+        function loaded() {
+            myScroll = new iScroll('wrapper', { zoom: true, zoomMax: 2 });
+        };
+        //////////////////////
         var selectedTab = ko.observable(0);
 
         this.findBugsTab = {
@@ -280,12 +286,16 @@
                 this.loadFillingBlanks();
                 selectedTab(1);
                 this.fillingBlanksTab.rendered(true);
+                document.addEventListener('DOMContentLoaded', loaded, false);
+                loaded();
             }
             else if (question.type == "SingleChoice") {
                 randomQuestion = question.question;
                 this.loadSingleChoice();
                 selectedTab(2);
                 this.singleChoiceTab.rendered(true);
+                document.addEventListener('DOMContentLoaded', loaded, false);
+                loaded();
             }
         };
     }

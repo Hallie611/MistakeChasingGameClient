@@ -5,19 +5,20 @@
         <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: time">
             hhhhhhhhhhhhhhhh
         </div>
-        <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
+        <div class="content" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
             <div style="height: 10%; text-align: left;">
                 <h3>
                     Touch the screen to select the bug in the codes below:</h3>
             </div>
-            <div id="wrapper">
-                <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
+            <div id="levelmap">
+                <div id="scrollViewFB" data-bind="dxScrollView: { }">
+                    <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
+                </div>
                 <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
                 </div>
             </div>
             <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'Bug found!', type: 'success', displayTime: 300, hiddenAction: processHiding}">
             </div>
-            
             <div id="redXBox">
                 <img id="miss1" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
                 <img id="miss2" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
@@ -25,7 +26,7 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
-            <div id="wrapper">
+            <div id="wrapper" style="height: 58%;">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
             <div style="bottom: 2%; width: 100%;">
@@ -67,7 +68,7 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: singleChoiceTab.rendered, visible: singleChoiceTab.tabVisible">
-            <div id="scrollViewSC" data-bind="dxScrollView: { }">
+            <div id="wrapper" style="height: 73%;">
                 <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
             </div>
             <div style="bottom: 2%; width: 100%;">

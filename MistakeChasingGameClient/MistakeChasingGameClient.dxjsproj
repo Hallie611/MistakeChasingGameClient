@@ -842,6 +842,9 @@
     <Content Include="js\cordova\cordova.stub.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="js\iscroll.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="js\jquery-1.10.2.min.js">
       <SubType>Content</SubType>
     </Content>

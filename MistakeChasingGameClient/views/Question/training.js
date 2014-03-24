@@ -46,12 +46,7 @@
         showEndDialog();
     }; 
     ///////////
-    var myScroll;
-    function loaded() {
-        myScroll = new iScroll('wrapper', { zoom: true, zoomMax: 4 });
-    };
-
-    document.addEventListener('DOMContentLoaded', loaded, false);
+    
     //loaded();
     //////////////////
     function showEndDialog() {
@@ -185,7 +180,6 @@
             viewModel.randomQuestion();
             viewModel.loadQuestion();
             setClock();
-            loaded();
         }
     });
 };
