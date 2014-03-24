@@ -22,7 +22,12 @@
         if (!localStorage.currentPoint)
             localStorage.currentPoint = 0;
         ///////////////////////////////        
-
+        ///////////////////////zoom
+        var myScroll;
+        function loaded() {
+            myScroll = new iScroll('wrapper', { zoom: true, zoomMax: 2 });
+        };
+        //////////////////////
         var selectedTab = ko.observable();
 
         this.findBugsTab = {
@@ -460,6 +465,8 @@
                 this.loadFillingBlanks();
                 selectedTab(3);
                 this.fillingBlanksTab.rendered(true);
+                document.addEventListener('DOMContentLoaded', loaded, false);
+                loaded();
             }
             else if (itemData.type == "SingleChoice" && itemData.status == "available") {
                 MistakeChasingGameClient.db.multiplechoicedb.byKey(itemData.questionId).done(function (dataItem) {
@@ -469,6 +476,8 @@
                 this.loadSingleChoice();
                 selectedTab(4);
                 this.singleChoiceTab.rendered(true);
+                document.addEventListener('DOMContentLoaded', loaded, false);
+                loaded();
             }
         }
     };

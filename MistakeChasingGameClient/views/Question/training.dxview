@@ -5,15 +5,13 @@
         <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: time">
             hhhhhhhhhhhhhhhh
         </div>
-        <div class="content" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
+        <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
             <div style="height: 10%; text-align: left;">
                 <h3>
                     Touch the screen to select the bug in the codes below:</h3>
             </div>
-            <div id="levelmap">
-                <div id="scrollViewFB" data-bind="dxScrollView: { }">
-                    <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
-                </div>
+            <div id="scrollViewFB" data-bind="dxScrollView: { }">
+                <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
                 <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
                 </div>
             </div>

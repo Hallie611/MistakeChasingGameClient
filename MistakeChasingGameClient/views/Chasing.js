@@ -5,14 +5,14 @@
     var canFind = true;
 
     myEventHandler = function () {
-        countX += 1;
-        var showX = document.getElementById("miss" + countX);
-        showX.style.visibility = "visible";
         if (countX >= 3) {
-            countX = 0;
             canFind = false;
+            $("#toastError").dxToast('instance').show();
             //localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-            viewModel.loadListTab();
+        } else {
+            countX += 1;
+            var showX = document.getElementById("miss" + countX);
+            showX.style.visibility = "visible";
         }
     };
     showBug = function () {
@@ -40,14 +40,7 @@
         var points = viewModel.submitChoice();
         viewModel.loadListTab();
     };
-    ///////////////
-    var myScroll;
-    function loaded() {
-        myScroll = new iScroll('wrapper', { zoom: true, zoomMax: 4 });
-    };
 
-    document.addEventListener('DOMContentLoaded', loaded, false);
-    loaded();
     //Ready = function () {
     //    viewModel.loadListTab();
     //    //setClock();

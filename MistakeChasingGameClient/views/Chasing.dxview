@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
-            <div id="scrollViewFBK" data-bind="dxScrollView: { }">
+            <div id="wrapper" style="height: 58%;">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
             <div style="bottom: 2%; width: 100%;">
@@ -124,7 +124,7 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: singleChoiceTab.rendered, visible: singleChoiceTab.tabVisible">
-            <div id="scrollViewSC" data-bind="dxScrollView: { }">
+            <div id="wrapper" style="height: 73%;">
                 <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
             </div>
             <div style="bottom: 2%; width: 100%;">
