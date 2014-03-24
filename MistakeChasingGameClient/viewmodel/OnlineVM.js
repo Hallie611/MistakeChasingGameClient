@@ -155,8 +155,8 @@
             }
         };
 
-        //$.connection.hub.url = "http://localhost:8080/signalr";
-        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        $.connection.hub.url = "http://localhost:8080/signalr";
+       // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
