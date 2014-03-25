@@ -2,7 +2,7 @@
 
     viewModel = new MistakeChasingGameClient.trainingVM(params.id);
     clock = new MistakeChasingGameClient.ClockVM("");
-    
+
     var countX = 0;
     myEventHandler = function () {
         countX += 1;
@@ -30,7 +30,6 @@
 
     submitSC = function () {
         var points = viewModel.submitChoice();
-        clock.clearClock();
         showEndDialog();
     };
     //////////////////
@@ -38,7 +37,7 @@
         countX = 0;
         var curPoints = ko.observable(Number(localStorage.currentPoint));
         var isPassed = viewModel.isPassed();
-
+        clock.clearClock();
         var passDialog = DevExpress.ui.dialog.custom({
             title: "Result",
             message: "You have earn " + curPoints() + " points!",
@@ -84,12 +83,12 @@
         localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;
         localStorage.currentlevel = 0;
-        clock.clearClock();
         MistakeChasingGameClient.app.navigate('home', { root: true });
     };
 
     var timeOut = ko.computed(function () {
         if (clock.timeOut()) {
+            clock.timeOut(false);
             var points = viewModel.timeUp();
             showEndDialog();
         }

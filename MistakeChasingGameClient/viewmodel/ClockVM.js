@@ -24,7 +24,7 @@
             if (self.restartClock()) {
                 if (Number(localStorage.maxIndex) == 3) {
                     seconds = 0;
-                    minutes = 1;
+                    minutes = 3;
                 }
                 else if (Number(localStorage.maxIndex) == 4) {
                     seconds = 0;
