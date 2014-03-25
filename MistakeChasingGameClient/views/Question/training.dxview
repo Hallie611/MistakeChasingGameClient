@@ -2,7 +2,7 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->
-        <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: time">
+        <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
             hhhhhhhhhhhhhhhh
         </div>
         <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
