@@ -1,7 +1,6 @@
 ﻿(function () {
     "use strict";
 
-
     MistakeChasingGameClient.OnlineVM = function (data) {
         ///////////////////////////////////////HA
         var answerSC;
@@ -29,6 +28,8 @@
         };
         //////////////////////
         var selectedTab = ko.observable();
+
+        this.clockOn = ko.observable(false);
 
         this.findBugsTab = {
             src: ko.observable(),
@@ -138,7 +139,7 @@
             this.findBugsTab.rendered(false);
             selectedTab(0);
             this.RoomTab.rendered(true);
-            
+
         };
 
         this.loadListTab = function () {
@@ -162,7 +163,7 @@
         };
 
         //$.connection.hub.url = "http://localhost:8080/signalr";
-       $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
         // nhan listQ tu sever cho ca 2 client
         $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -210,9 +211,11 @@
             document.getElementById("findbtn").style.display = "none";
         };
 
+        
         //sever tra ve ca 2 client deu ready vao game
         $.connection.gamesHub.client.gameReady = function () {
             self.loadListTab();
+            self.clockOn(true);
         };
 
         //update 2 client cau nao lam roi
@@ -234,7 +237,7 @@
             document.getElementById("opponent").style.display = "none";
             document.getElementById("readybtn").style.display = "none";
             document.getElementById("findbtn").style.display = "";
-          
+
         }
         $.connection.hub.start().done(function () {
             //alert("connected");
@@ -307,11 +310,11 @@
         /////////////////////////////////////////
         this.timeUp = function () {
             var tabIndex = selectedTab();
-            if (tabIndex == 0) {
+            if (tabIndex == 2) {
                 return 0;
-            } else if (tabIndex == 1) {
+            } else if (tabIndex == 3) {
                 return this.submitBlanks();
-            } else if (tabIndex == 2) {
+            } else if (tabIndex == 4) {
                 return this.submitChoice();
             }
         };
@@ -479,6 +482,10 @@
                 document.addEventListener('DOMContentLoaded', loaded, false);
                 loaded();
             }
-        }
+        };
+
+        ////////////////////////////
+        ////////////////////////////////////
+
     };
 })();
