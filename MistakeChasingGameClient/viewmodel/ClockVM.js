@@ -6,7 +6,7 @@
         this.txMinutes = ko.observable("");
         this.txSeconds = ko.observable("");
         this.restartClock = ko.observable(true);
-        this.clockStopped = ko.observable(false);
+        this.timeOut = ko.observable(false);
         this.time = ko.computed(function () {
             return this.txMinutes() + " : " + this.txSeconds();
         }, this);
@@ -24,7 +24,7 @@
             if (self.restartClock()) {
                 if (Number(localStorage.maxIndex) == 3) {
                     seconds = 0;
-                    minutes = 3;
+                    minutes = 1;
                 }
                 else if (Number(localStorage.maxIndex) == 4) {
                     seconds = 0;
@@ -44,24 +44,22 @@
             seconds = seconds - 1;
             var newSecond = checkTime(seconds);
             self.txSeconds(newSecond + "");
+            self.txMinutes(minutes + "");
             //alert(minutes() + " " + seconds());
 
             if (minutes == 0 && seconds == 0) {
                 self.clearClock();
-
-                //                var points = viewModel.timeUp();
-                //                showEndDialog();
+                self.timeOut(true);                
             }
         };
 
         this.clearClock = function () {
-            clearInterval(interval);
-            this.clockStopped(true);
+            clearInterval(interval);            
         };
 
         this.setClock = function () {
             this.restartClock(true);
-            this.clockStopped(false);
+            this.timeOut(false);
             if (Number(localStorage.maxIndex) == 3) {
                 this.txMinutes("3");
                 this.txSeconds("00");

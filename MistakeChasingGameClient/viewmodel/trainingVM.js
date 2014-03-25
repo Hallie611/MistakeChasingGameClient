@@ -73,6 +73,8 @@
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 50;
+            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
         };
         //////////////////////////////////////////

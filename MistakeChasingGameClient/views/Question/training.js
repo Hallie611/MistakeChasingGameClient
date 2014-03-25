@@ -2,9 +2,8 @@
 
     viewModel = new MistakeChasingGameClient.trainingVM(params.id);
     clock = new MistakeChasingGameClient.ClockVM("");
-
+    
     var countX = 0;
-
     myEventHandler = function () {
         countX += 1;
         var showX = document.getElementById("miss" + countX);
@@ -18,8 +17,6 @@
 
     showBug = function () {
         var points = viewModel.bugFound();
-        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         $("#toastContainer").dxToast('instance').show();
     };
     processHiding = function () {
@@ -90,6 +87,13 @@
         clock.clearClock();
         MistakeChasingGameClient.app.navigate('home', { root: true });
     };
+
+    var timeOut = ko.computed(function () {
+        if (clock.timeOut()) {
+            var points = viewModel.timeUp();
+            showEndDialog();
+        }
+    });
 
     return $.extend(viewModel, {
         viewShown: function () {
