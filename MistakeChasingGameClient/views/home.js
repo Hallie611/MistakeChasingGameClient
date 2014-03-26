@@ -3,7 +3,14 @@
     localStorage.currentIndex = 1;
     localStorage.currentPoint = 0;
     //localStorage.currentlevel = 0 ;
+    popupVisible = ko.observable(false);
+    username = ko.observable('newbine');
+    message = ko.observable();
+    txtUNVisible = ko.observable(true);
+
+
     var viewModel = {
+        
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -26,6 +33,50 @@
             src: "images/roadmap2.jpg",
             rendered: ko.observable(false)
         }
+
+
+
+    };
+
+    register = function () {
+        popupVisible(true);
+         $.connection.hub.url = "http://localhost:8080/signalr";
+        if ($.connection.hub.state == null) {
+            txtUNVisible(false);
+            message("Can not connect to sever, check your connection !");
+        }
+        else {
+            $.connection.gamesHub.client.TrySave = function (result) {
+              //  alert(result);
+                if (result == true) {
+                    localStorage.username = username();
+                    localStorage.level = "1";
+                    localStorage.point = "100";
+                    popupVisible(false);
+                  //  $.connection.gamesHub.stop();
+                }
+                else {
+                    message("Username has used, Try another please");
+                }
+            }
+            $.connection.hub.start().done(function () {
+                alert('done');
+            })
+        }
+    };
+
+    if (!localStorage.username) {
+        register();
+    };
+
+  
+
+    SaveName = function () {
+        
+        $.connection.gamesHub.server.register(username());
+    };
+    loadAgain = function () {
+        connect();
 
     };
 

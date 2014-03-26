@@ -21,14 +21,9 @@
         </div>
 
          <div class="dx-field-value" data-bind="dxButton: { text: 'Save',clickAction: changeName }"></div>
-        <div data-bind="dxButton: { text: 'Button1',clickAction: function(e){LevelUp('200');} }"></div>
 
-        <div data-bind="dxButton: { text: 'history',clickAction: '#History'  }"></div>
+     
 
 
     </div>
-</div>
-
-<div data-options="dxView : { name: 'History', title: 'History' } ">
-    <div data-bind="dxGallery: { dataSource: QuestionDB }"></div>
 </div>

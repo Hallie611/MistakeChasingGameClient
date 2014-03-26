@@ -22,6 +22,8 @@
                     <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
                 </div>
             </div>
+            <div id="cntbtn" style="margin-left: 40%; " data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }">
+            </div>
             <div id="findbtn" style="margin-left: 40%; display: none" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }">
             </div>
             <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/ready.jpg' }">

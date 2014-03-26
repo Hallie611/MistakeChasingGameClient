@@ -2,11 +2,11 @@
     "use strict";
 
     
-    if (!localStorage.username) {
-        localStorage.username = "newbine";
-        localStorage.level = "1";
-        localStorage.point = "100";
-    };
+    //if (!localStorage.username) {
+    //    localStorage.username = "newbine";
+    //    localStorage.level = "1";
+    //    localStorage.point = "100";
+    //};
 
     MistakeChasingGameClient.UserViewModel = function (data) {        
         this.username = ko.observable();
@@ -19,10 +19,6 @@
             this.level(localStorage.level);
             this.point(localStorage.point);
 
-        };
-        this.toJS = function () {
-            localStorage.level = this.level;
-            localStorage.point = this.point;
         };
 
         this.changeName = function () {

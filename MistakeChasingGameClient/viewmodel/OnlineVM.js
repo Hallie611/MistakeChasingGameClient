@@ -78,7 +78,7 @@
                 return selectedTab() === 0;
             }),
             numberPlayer: ko.observable(),
-            message: ko.observable("Connecting..."),
+            message: ko.observable(""),
             username: ko.observable(localStorage.username),
             level: ko.observable(localStorage.level),
             point: ko.observable(localStorage.point),
@@ -162,94 +162,99 @@
             }
         };
 
-        //$.connection.hub.url = "http://localhost:8080/signalr";
-        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+       
+        this.ConnectToSever = function () {
 
-        // nhan listQ tu sever cho ca 2 client
-        $.connection.gamesHub.client.getQuestionList = function (temp) {
+            $.connection.hub.url = "http://localhost:8080/signalr";
 
-            clearListQ();
-            temp.forEach(function (item) {
-                listQ.insert({
-                    id: item.id,
-                    index: item.index,
-                    questionId: item.questionId,
-                    type: item.type,
-                    status: item.status
-                })
+            // nhan listQ tu sever cho ca 2 client
+            $.connection.gamesHub.client.getQuestionList = function (temp) {
+
+                clearListQ();
+                temp.forEach(function (item) {
+                    listQ.insert({
+                        id: item.id,
+                        index: item.index,
+                        questionId: item.questionId,
+                        type: item.type,
+                        status: item.status
+                    })
+                });
+                //// temp la listQ tra ve cho ca 2 client
+                self.ListTab.listDataSource(listQ);
+            }
+
+            //
+            ///ham sver yeu cau tao list Q
+            $.connection.gamesHub.client.createQuestionList = function () {
+                self.randomQuestion();
+                listQ.load().done(function (theArray) {
+                    $.connection.gamesHub.server.postQuestion(theArray);
+                });
+            }
+
+            $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
+                self.RoomTab.message("Number of player online : " + message.totalClient);
+                //    alert("Looking for an opponent!");
+            };
+            //no opponent
+            $.connection.gamesHub.client.noOpponents = function (message) {
+                self.RoomTab.message("Finding Opponent...");
+                //    alert("Looking for an opponent!");
+            };
+
+            $.connection.gamesHub.client.foundOpponent = function (message) {
+                self.RoomTab.message("");
+                self.RoomTab.oname(message.oName);
+                self.RoomTab.oplevel(message.oLevel);
+                self.RoomTab.opoint(message.oPoint);
+                document.getElementById("opponent").style.display = "block";
+                document.getElementById("readybtn").style.display = "inline-block";
+                document.getElementById("findbtn").style.display = "none";
+            };
+
+
+            //sever tra ve ca 2 client deu ready vao game
+            $.connection.gamesHub.client.gameReady = function () {
+                self.loadListTab();
+                self.clockOn(true);
+            };
+
+            //update 2 client cau nao lam roi
+            $.connection.gamesHub.client.CorrectedQuestion = function (name, index) {
+
+                listQ.update(index, { status: "done" }).fail(function (e) { alert(e) });
+                //listQ.byKey(index).done(function (e) { alert(e.status) });
+                self.ListTab.listDataSource(listQ);
+            }
+
+            $.connection.gamesHub.client.gameOver = function (name) {
+                alert("winner is " + name.Name + " Your Point " + name.Point);
+            }
+
+            $.connection.gamesHub.client.OpponentDisconnect = function () {
+
+                alert("Your Opponent disconnected");
+                self.loadRoomTab();
+                document.getElementById("opponent").style.display = "none";
+                document.getElementById("readybtn").style.display = "none";
+                document.getElementById("findbtn").style.display = "";
+
+            }
+            $.connection.hub.start().done(function () {
+                //alert("connected");
+                self.RoomTab.message("");
+                $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point).done(function () {
+                    //  alert('added');
+                    document.getElementById("findbtn").style.display = "";
+                    document.getElementById("cntbtn").style.display = "none";
+                });
+                // hub is now ready
+            }).fail(function () {
+                alert("can not connect to sever");
             });
-            //// temp la listQ tra ve cho ca 2 client
-            self.ListTab.listDataSource(listQ);
-        }
-
-        //
-        ///ham sver yeu cau tao list Q
-        $.connection.gamesHub.client.createQuestionList = function () {
-            self.randomQuestion();
-            listQ.load().done(function (theArray) {
-                $.connection.gamesHub.server.postQuestion(theArray);
-            });
-        }
-
-        $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
-            self.RoomTab.message("Number of player online : " + message.totalClient);
-            //    alert("Looking for an opponent!");
-        };
-        //no opponent
-        $.connection.gamesHub.client.noOpponents = function (message) {
-            self.RoomTab.message("Finding Opponent...");
-            //    alert("Looking for an opponent!");
-        };
-
-        $.connection.gamesHub.client.foundOpponent = function (message) {
-            self.RoomTab.message("");
-            self.RoomTab.oname(message.oName);
-            self.RoomTab.oplevel(message.oLevel);
-            self.RoomTab.opoint(message.oPoint);
-            document.getElementById("opponent").style.display = "block";
-            document.getElementById("readybtn").style.display = "inline-block";
-            document.getElementById("findbtn").style.display = "none";
-        };
-
-        
-        //sever tra ve ca 2 client deu ready vao game
-        $.connection.gamesHub.client.gameReady = function () {
-            self.loadListTab();
-            self.clockOn(true);
-        };
-
-        //update 2 client cau nao lam roi
-        $.connection.gamesHub.client.CorrectedQuestion = function (name, index) {
-
-            listQ.update(index, { status: "done" }).fail(function (e) { alert(e) });
-            //listQ.byKey(index).done(function (e) { alert(e.status) });
-            self.ListTab.listDataSource(listQ);
-        }
-
-        $.connection.gamesHub.client.gameOver = function (name) {
-            alert("winner is " + name.Name + " Your Point " + name.Point);
-        }
-
-        $.connection.gamesHub.client.OpponentDisconnect = function () {
-
-            alert("Your Opponent disconnected");
-            self.loadRoomTab();
-            document.getElementById("opponent").style.display = "none";
-            document.getElementById("readybtn").style.display = "none";
-            document.getElementById("findbtn").style.display = "";
 
         }
-        $.connection.hub.start().done(function () {
-            //alert("connected");
-            self.RoomTab.message("");
-            document.getElementById("findbtn").style.display = "";
-            $.connection.gamesHub.server.register(localStorage.username, localStorage.level, localStorage.point).done(function () {
-                //  alert('added');
-            });
-            // hub is now ready
-        }).fail(function () {
-            alert("can not connect to sever");
-        });
 
         this.findOpponent = function () {
 
