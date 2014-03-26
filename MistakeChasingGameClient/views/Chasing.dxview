@@ -4,49 +4,54 @@
             <div id="player" class="dx-fieldset">
                 <div class="dx-field">
                     <div class="dx-field-label">
-                        User Name</div>
+                        User Name
+                    </div>
                     <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username }">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
-                        Point</div>
+                        Point
+                    </div>
                     <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point }">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
-                        Level</div>
+                        Level
+                    </div>
                     <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level }">
                     </div>
                     <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
                 </div>
             </div>
-            <div id="cntbtn" style="margin-left: 40%; " data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }">
+            <div id="cntbtn" style="margin-left: 40%;" data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }">
             </div>
             <div id="findbtn" style="margin-left: 40%; display: none" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }">
             </div>
             <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/ready.jpg' }">
             </div>
-            <h1 data-bind="text: RoomTab.message">
-            </h1>
+            <h1 data-bind="text: RoomTab.message"></h1>
             <div id="opponent" style="display: none" class="dx-fieldset">
                 <div class="dx-field">
                     <div class="dx-field-label">
                         Opponent
+                   
                     </div>
                     <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oname }">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
-                        Point</div>
+                        Point
+                    </div>
                     <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.opoint }">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
-                        Level</div>
+                        Level
+                    </div>
                     <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oplevel }">
                     </div>
                 </div>
@@ -55,7 +60,12 @@
         <div class="content" id="levelmap" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
             <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
                 hhhhhhhhhhhhhhhh
+           
             </div>
+
+            <p style="width: 40%" data-bind="text : RoomTab.player1point"></p>
+            <p style="width: 40%" data-bind="text : RoomTab.oname"></p>
+
             <div id="myList" style="margin: 10px;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick }">
                 <div style="text-align: left; padding: 5px;" data-options="dxTemplate:{ name:'item' }">
                     <p style="font-size: larger;">
@@ -63,14 +73,17 @@
                     </p>
                 </div>
             </div>
+
         </div>
         <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
             <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
                 hhhhhhhhhhhhhhhh
+           
             </div>
+
+
             <div style="height: 10%; text-align: left;">
-                <h3>
-                    Touch the screen to select the bug in the codes below:</h3>
+                <h3>Touch the screen to select the bug in the codes below:</h3>
             </div>
             <div id="scrollViewFB" data-bind="dxScrollView: { }">
                 <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
@@ -90,19 +103,20 @@
         <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
             <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
                 hhhhhhhhhhhhhhhh
+           
             </div>
             <div id="wrapper" style="height: 58%;">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
             <div style="bottom: 2%; width: 100%;">
                 <div style="text-align: center;">
-                    <h3>
-                        Fill in the blanks in the codes above:</h3>
+                    <h3>Fill in the blanks in the codes above:</h3>
                 </div>
                 <div class="dx-fieldset" style="margin: 0px 0px 20px 0px;">
                     <div class="dx-field">
                         <div class="dx-field-label">
-                            1.</div>
+                            1.
+                        </div>
                         <div class="dx-field-value">
                             <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer1source, value: fillingBlanksTab.choice1}">
                             </div>
@@ -110,7 +124,8 @@
                     </div>
                     <div class="dx-field">
                         <div class="dx-field-label">
-                            2.</div>
+                            2.
+                        </div>
                         <div class="dx-field-value">
                             <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer2source, value: fillingBlanksTab.choice2}">
                             </div>
@@ -118,7 +133,8 @@
                     </div>
                     <div class="dx-field">
                         <div class="dx-field-label">
-                            3.</div>
+                            3.
+                        </div>
                         <div class="dx-field-value">
                             <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer3source, value: fillingBlanksTab.choice3}">
                             </div>
@@ -126,8 +142,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
-                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitFBK }">
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold; color: #ffffff; font-family: arial; display: inline-block;"
+                        data-bind="dxButton: { text: 'Submit', clickAction: submitFBK }">
                     </div>
                 </div>
             </div>
@@ -135,14 +151,14 @@
         <div class="content" id="levelmap" data-bind="if: singleChoiceTab.rendered, visible: singleChoiceTab.tabVisible">
             <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
                 hhhhhhhhhhhhhhhh
+           
             </div>
             <div id="wrapper" style="height: 73%;">
                 <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
             </div>
             <div style="bottom: 2%; width: 100%;">
                 <div style="text-align: center;">
-                    <h3>
-                        Which type of bug is in the codes above?</h3>
+                    <h3>Which type of bug is in the codes above?</h3>
                 </div>
                 <div class="dx-fieldset" style="margin: 0px 0px 20px 0px; padding: 5px;">
                     <div class="dx-field">
@@ -153,8 +169,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
-                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitSC }">
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold; color: #ffffff; font-family: arial; display: inline-block;"
+                        data-bind="dxButton: { text: 'Submit', clickAction: submitSC }">
                     </div>
                 </div>
             </div>
