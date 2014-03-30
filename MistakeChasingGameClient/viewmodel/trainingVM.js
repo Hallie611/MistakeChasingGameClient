@@ -72,7 +72,7 @@
         this.bugFound = function () {
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
-            var points = difCurrentQ * 50;
+            var points = difCurrentQ * 5;
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
@@ -82,13 +82,13 @@
         this.submitBlanks = function () {
             var points = 0;
             if (this.fillingBlanksTab.choice1() == answer1) {
-                points += difCurrentQ * 25;
+                points += difCurrentQ * 2;
             }
             if (this.fillingBlanksTab.choice2() == answer2) {
-                points += difCurrentQ * 25;
+                points += difCurrentQ * 2;
             }
             if (this.fillingBlanksTab.choice3() == answer3) {
-                points += difCurrentQ * 25;
+                points += difCurrentQ * 2;
             }
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
@@ -98,7 +98,7 @@
         this.submitChoice = function () {
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
-                points += difCurrentQ * 50;
+                points += difCurrentQ * 5;
             }
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
@@ -106,13 +106,11 @@
         };
 
         this.isPassed = function () {
-            var crit = Number(localStorage.currentlevel) * 50 * 2;
-            //alert(Number(localStorage.currentlevel) + "   " + Number(localStorage.level));
-            //alert(crit);
+            var crit = Number(localStorage.currentlevel) * 5 * 2;
+         
             if (Number(localStorage.currentPoint) >= crit) {
                 if (Number(localStorage.currentlevel) == Number(localStorage.level)) {
                     localStorage.level = Number(localStorage.currentlevel) + 1;
-                    //alert("change");
                 }
                 return true;
             }
@@ -231,7 +229,7 @@
                 };
             }
             this.randomSingleChoice();
-            //alert(randomQuestion.id);
+       
             this.addQuestion(5, "SingleChoice");
         };
         this.randomQuestion = function () {

@@ -4,13 +4,13 @@
         <div class="dx-fieldset">
             <div class="dx-field">
                 <div class="dx-field-label">User Name</div>
-                <div class="dx-field-value" data-bind="dxTextBox: { value: username}">
+                <div class="dx-field-value" data-bind="dxTextBox: { value: username ,readOnly: true}">
                 </div>
 
             </div>
             <div class="dx-field">
                 <div class="dx-field-label">Point</div>
-                <div class="dx-field-value" data-bind="dxTextBox: { value: point,readOnly: true }"></div>
+                <div class="dx-field-value" data-bind="dxTextBox: { value: point,readOnly: true ,readOnly: true}"></div>
             </div>
             <div class="dx-field">
                 <div class="dx-field-label">Level</div>
@@ -20,7 +20,6 @@
 
         </div>
 
-         <div class="dx-field-value" data-bind="dxButton: { text: 'Save',clickAction: changeName }"></div>
 
      
 

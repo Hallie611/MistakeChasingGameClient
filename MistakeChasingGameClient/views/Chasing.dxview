@@ -6,21 +6,21 @@
                     <div class="dx-field-label">
                         User Name
                     </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username }">
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username ,readOnly: true }">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
                         Point
                     </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point }">
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point ,readOnly: true}">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
                         Level
                     </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level }">
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level ,readOnly: true }">
                     </div>
                     <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
                 </div>
@@ -29,8 +29,21 @@
             </div>
             <div id="findbtn" style="margin-left: 40%; display: none" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }">
             </div>
-            <div id="readybtn" style="margin-left: 40%; display: none" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/ready.jpg' }">
-            </div>
+            <table id="readybtn" style="width:100%">
+                <tr>
+                    <td>
+                        <div id="" style="margin-left: 40%; " data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/ready.jpg' }"></div>
+                    </td>
+                    <td>
+                        <b data-bind="text:RoomTab.pointwin"></b> / <b data-bind="text:RoomTab.poinlose"></b>
+                    </td>
+                    <td>
+                        <div id="Cancelbtn" style="margin-left: 40%;" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/cancel.png' }"></div>
+                    </td>
+                </tr>
+            </table>
+
+
             <h1 data-bind="text: RoomTab.message"></h1>
             <div id="opponent" style="display: none" class="dx-fieldset">
                 <div class="dx-field">
@@ -38,21 +51,21 @@
                         Opponent
                    
                     </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oname }">
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oname ,readOnly: true }">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
                         Point
                     </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.opoint }">
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.opoint ,readOnly: true }">
                     </div>
                 </div>
                 <div class="dx-field">
                     <div class="dx-field-label">
                         Level
                     </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oplevel }">
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.oplevel ,readOnly: true }">
                     </div>
                 </div>
             </div>
@@ -69,14 +82,16 @@
             <div id="myList" style="margin: 10px;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick }">
                 <div style="text-align: left; padding: 5px;" data-options="dxTemplate:{ name:'item' }">
                     <p style="font-size: larger;">
-                        <b data-bind="text: index + '. ' + type+ ' ' + status"></b>
+                        <b data-bind="text: index + '. ' + type+ ' ' "></b><b data-bind="text: status"></b>
                     </p>
                 </div>
             </div>
 
         </div>
         <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">
-            <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
+            <div id="
+                "
+                style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
                 hhhhhhhhhhhhhhhh
            
             </div>

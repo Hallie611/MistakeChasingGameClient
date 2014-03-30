@@ -40,27 +40,28 @@
 
     register = function () {
         popupVisible(true);
-         $.connection.hub.url = "http://localhost:8080/signalr";
+        $.connection.hub.url = "http://localhost:8080/signalr";
+        //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
         if ($.connection.hub.state == null) {
             txtUNVisible(false);
             message("Can not connect to sever, check your connection !");
         }
         else {
             $.connection.gamesHub.client.TrySave = function (result) {
-              //  alert(result);
+                
                 if (result == true) {
                     localStorage.username = username();
                     localStorage.level = "1";
                     localStorage.point = "100";
                     popupVisible(false);
-                  //  $.connection.gamesHub.stop();
+                   $.connection.hub.stop();
                 }
                 else {
                     message("Username has used, Try another please");
                 }
             }
             $.connection.hub.start().done(function () {
-                alert('done');
+                
             })
         }
     };
@@ -94,7 +95,7 @@
     });
 
     clickLevel = function (level) {
-        //alert(level);
+      
         if (level > Number(localStorage.level)) {
             $("#toastContainer").dxToast('instance').show();
         } else {

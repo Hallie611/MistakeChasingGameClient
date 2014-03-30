@@ -10,11 +10,15 @@
         //////////////////////////
         var difCurrentQ;
         var randomQuestion = ko.observable();
+
+        var numberPlayer;
+
         var listQ = new DevExpress.data.ArrayStore({
             key: "index"
         });
 
-        
+        var connected = false;
+
 
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -88,10 +92,9 @@
             oplevel: ko.observable(),
             opoint: ko.observable(),
             player1point: ko.observable(),
-            player2point : ko.observable()
-
-            
-            
+            player2point: ko.observable(),
+            pointwin: ko.observable(),
+            poinlose: ko.observable(Number(localStorage.level) * 10)
 
         };
         ///List Tab
@@ -100,9 +103,9 @@
             tabVisible: ko.computed(function () {
                 return selectedTab() === 1;
             }),
-            
+
             listDataSource: ko.observable()
-           
+
         };
         this.findBugsTab = {
             src: ko.observable(),
@@ -148,8 +151,27 @@
             this.findBugsTab.rendered(false);
             this.ListTab.rendered(false);
             this.RoomTab.rendered(true);
+            this.RoomTab.point(localStorage.point);
+            if (connected) {
+                self.RoomTab.message('');
+                document.getElementById("opponent").style.display = "none";
+                document.getElementById("readybtn").style.display = "none";
+                document.getElementById("cntbtn").style.display = "none";
+                document.getElementById("Cancelbtn").style.display = "none";
+                document.getElementById("findbtn").style.display = "";
+                self.RoomTab.message("Click to find opponent");
+            }
+            else {
+                self.RoomTab.message('');
+                document.getElementById("opponent").style.display = "none";
+                document.getElementById("readybtn").style.display = "none";
+                document.getElementById("findbtn").style.display = "none";
+                document.getElementById("Cancelbtn").style.display = "none";
+                document.getElementById("cntbtn").style.display = "";
+            }
+
             selectedTab(0);
-           
+
 
         };
 
@@ -160,7 +182,7 @@
             this.RoomTab.rendered(false);
             this.ListTab.rendered(true);
             selectedTab(1);
-           
+
         };
         function clearListQ() {
             var maxIndex = 0;
@@ -174,11 +196,11 @@
             }
         };
 
-       
+
         this.ConnectToSever = function () {
 
             $.connection.hub.url = "http://localhost:8080/signalr";
-
+            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
 
@@ -200,20 +222,21 @@
             ///ham sver yeu cau tao list Q
             $.connection.gamesHub.client.createQuestionList = function () {
                 self.randomQuestion();
+
                 listQ.load().done(function (theArray) {
                     $.connection.gamesHub.server.postQuestion(theArray);
                 });
             }
 
             $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
-                self.RoomTab.message("Number of player online : " + message.totalClient);
-                //    alert("Looking for an opponent!");
+                self.numberPlayer = message.totalClient;
+                self.RoomTab.message("Number of player online : " + self.numberPlayer);
+
             };
             //no opponent
             $.connection.gamesHub.client.noOpponents = function (message) {
-              //  alert("No opponent");
-                self.RoomTab.message("Found no opponent, Try again later!");
-                //    alert("Looking for an opponent!");
+                //                self.loadRoomTab();
+
             };
 
             $.connection.gamesHub.client.foundOpponent = function (message) {
@@ -221,8 +244,12 @@
                 self.RoomTab.oname(message.oName);
                 self.RoomTab.oplevel(message.oLevel);
                 self.RoomTab.opoint(message.oPoint);
-                document.getElementById("opponent").style.display = "block";
-                document.getElementById("readybtn").style.display = "inline-block";
+                self.RoomTab.poinlose(Number(localStorage.level) * 10);
+                self.RoomTab.pointwin(Number(message.oLevel) * 10);
+
+                document.getElementById("opponent").style.display = "";
+                document.getElementById("readybtn").style.display = "";
+                document.getElementById("Cancelbtn").style.display = "";
                 document.getElementById("findbtn").style.display = "none";
             };
 
@@ -234,48 +261,60 @@
             };
 
             //update 2 client cau nao lam roi
-            $.connection.gamesHub.client.CorrectedQuestion = function (name, index,mark) {
+            $.connection.gamesHub.client.CorrectedQuestion = function (name, index, mark) {
                 if (self.RoomTab.username == name) {
                     self.RoomTab.player1point(10);
-                    alert(self.RoomTab.player1point());
+
                 }
                 if (self.RoomTab.oname == name) {
 
                 }
-                listQ.update(index, { status: name }).fail(function (e) { alert(e) });
-                //listQ.byKey(index).done(function (e) { alert(e.status) });
+                listQ.update(index, { status: name });
+
                 self.ListTab.listDataSource(listQ);
             }
 
             $.connection.gamesHub.client.gameOver = function (name) {
-                alert("winner is " + name.Name + " Your Point " + name.Point);
+
+                //document.getElementById("opponent").style.display = "none";
+                //document.getElementById("readybtn").style.display = "none";
+                //document.getElementById("cntbtn").style.display = "none";
+                //document.getElementById("findbtn").style.display = "";
+                DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point " + name.Point, 'Result');
+                if (localStorage.username == name.Name) {
+                    localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
+                }
+                else {
+                    localStorage.point = Number(localStorage.point) + Number(self.RoomTab.poinlose());
+                }
+                self.loadRoomTab();
+
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
+                localStorage.point = Number(localStorage.point) + 5;
+                DevExpress.ui.dialog.alert('Your Opponent has out of match your point +5', 'Notify');
 
-                //alert("Your Opponent disconnected");
                 self.loadRoomTab();
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("findbtn").style.display = "";
-
             }
+
             $.connection.hub.start().done(function () {
-                //alert("connected");
                 self.RoomTab.message("");
                 $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point).done(function () {
-                    //  alert('added');
+                    connected = true;
                     document.getElementById("findbtn").style.display = "";
                     document.getElementById("cntbtn").style.display = "none";
                 });
                 // hub is now ready
             }).fail(function () {
-                //alert("can not connect to sever");
+
             });
 
         }
 
         this.findOpponent = function () {
+          
+            
             self.RoomTab.message("Finding opponent...");
             $.connection.gamesHub.server.findOpponent();
         };
@@ -289,21 +328,31 @@
             self.RoomTab.message("Watting opponent ready...");
             $.connection.gamesHub.server.playerReady();
         }
+        this.Cancel = function () {
+            localStorage.point = Number(localStorage.point) - 5;
+            DevExpress.ui.dialog.alert('You cancel game, your point -5', 'Notify');
+            $.connection.gamesHub.server.outOfMath();
+
+            this.loadRoomTab();
+        }
         ////////////////////////////////////////////////////
         /////////////////////////////////////////
 
-        
+
         this.bugFound = function () {
-            
+
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 50;
-            this.CorrectedQuestion(1,points);
+            this.CorrectedQuestion(1, points, true);
+
             return points;
         };
         //////////////////////////////////////////
         //submit method
         this.submitBlanks = function () {
+            var maxpoint = difCurrentQ * 25 * 3;
+
             var points = 0;
             if (this.fillingBlanksTab.choice1() == answer1) {
                 points += difCurrentQ * 25;
@@ -315,24 +364,28 @@
                 points += difCurrentQ * 25;
             }
             // ham bao cho sever bik da lam cau nay roi
-            if (this.fillingBlanksTab.choice1() == answer1 && this.fillingBlanksTab.choice2() == answer2 && this.fillingBlanksTab.choice3() == answer3) {
-               
+            if (points == maxpoint) {
+                this.CorrectedQuestion(2, points, true);
+            }
+            else {
+                this.CorrectedQuestion(2, points, false);
             }
 
-            this.CorrectedQuestion(2, points);
-            //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+
+
+
             return points;
         };
         ////////////////////////////////////////
         this.submitChoice = function () {
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
-               
                 points += difCurrentQ * 50;
+                this.CorrectedQuestion(3, points, true);
             }
 
-            this.CorrectedQuestion(3, points);
+
+
             //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
@@ -341,7 +394,8 @@
         ///
         /////////////////////////////////////////
         this.timeUp = function () {
-            this.CorrectedQuestion(0,0);
+
+            this.CorrectedQuestion(0, 0);
             var tabIndex = selectedTab();
             if (tabIndex == 2) {
                 return 0;
@@ -353,9 +407,8 @@
         };
 
         ////
-        this.CorrectedQuestion = function (index,mark) {
-            $.connection.gamesHub.server.correctQuestion(index,mark);
-
+        this.CorrectedQuestion = function (index, mark, getMaxPoint) {
+            $.connection.gamesHub.server.correctQuestion(index, mark, getMaxPoint);
         };
         /////////////////////////////////////////
         this.randomFindBugs = function () {
@@ -493,7 +546,7 @@
             if (itemData.type == "FindBugs" && itemData.status == "available") {
                 MistakeChasingGameClient.db.findbugsdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
-                    //alert(question.question.dif);
+
                 });
                 this.loadFindBugs();
                 selectedTab(2);
@@ -502,7 +555,7 @@
             else if (itemData.type == "FillingBlanks" && itemData.status == "available") {
                 MistakeChasingGameClient.db.fillingblankdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
-                    //alert(question.question.dif);
+
                 });
                 this.loadFillingBlanks();
                 selectedTab(3);
@@ -513,7 +566,7 @@
             else if (itemData.type == "SingleChoice" && itemData.status == "available") {
                 MistakeChasingGameClient.db.multiplechoicedb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
-                    //alert(question.question.dif);
+
                 });
                 this.loadSingleChoice();
                 selectedTab(4);
