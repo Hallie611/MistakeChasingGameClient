@@ -9,22 +9,19 @@ window.MistakeChasingGameClient = $.extend(true, window.MistakeChasingGameClient
           "icon": "home",
           "location": "navigation"
       },
-      {
-          "title": "User",
-          "action": "#User"
-          //"icon": "questiondetail"
-      },
+       {
+           "title": "Chasing",
+           "action": "#Chasing",
+           "icon": "globe"
+           //"icon": "questiondetail"
+       },
       {
           "id": "Dictionary",
           "title": "Dictionary",
           "action": "#Dictionary",
-          "location": "navigation"
-      },
-       {
-           "title": "Online",
-           "action": "#Chasing"
-           //"icon": "questiondetail"
-       }
+          "location": "navigation",
+           "icon": "tips",
+      }
     ]
     }
 });

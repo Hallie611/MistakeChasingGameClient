@@ -47,9 +47,6 @@
     <Content Include="data\db.js">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\cancel.png">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="images\chasing.jpg">
       <SubType>Content</SubType>
     </Content>

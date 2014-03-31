@@ -73,7 +73,7 @@ height: 33px;
 /*width: 32px;
 height: 32px;*/
 }
-.dx-theme-ios.dx-version-major-7 .dx-button .dx-button-content .dx-icon {
+/* .dx-theme-ios.dx-version-major-7 .dx-button .dx-button-content .dx-icon {
 height: 9%;
 width: initial;
 margin: 0px;
@@ -83,49 +83,5 @@ background-size: 100%;
 background-position: 50% 50%;
 display: inline-block;
 vertical-align: middle;
-}
-.btnLevelBeginner {
-	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
-	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
-	background-color:#79bbff;
-	-webkit-border-top-left-radius:42px;
-	-moz-border-radius-topleft:42px;
-	border-top-left-radius:42px;
-	-webkit-border-top-right-radius:42px;
-	-moz-border-radius-topright:42px;
-	border-top-right-radius:42px;
-	-webkit-border-bottom-right-radius:42px;
-	-moz-border-radius-bottomright:42px;
-	border-bottom-right-radius:42px;
-	-webkit-border-bottom-left-radius:42px;
-	-moz-border-radius-bottomleft:42px;
-	border-bottom-left-radius:42px;
-	text-indent:0;
-	border:1px solid #84bbf3;
-	display:inline-block;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:40px;
-	font-weight:bold;
-	font-style:normal;
-	height:4%;/*80px;*/
-	line-height:80px;
-	width:4%;/*80px;*/
-	text-decoration:none;
-	text-align:center;
-	text-shadow:1px 1px 0px #528ecc;
-}
-.btnLevelBeginner:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
-	background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
-	background-color:#378de5;
-}.btnLevelBeginner:active {
-	position:relative;
-	top:1px;
-}
-/* This button was generated using CSSButtonGenerator.com */
+}*/
+

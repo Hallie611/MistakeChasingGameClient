@@ -1,4 +1,4 @@
-<div data-options="dxView : { name: 'home', title: 'Level Map' } ">
+<div data-options="dxView : { name: 'home', title: 'Home' } ">
     <div class="home-view" data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>

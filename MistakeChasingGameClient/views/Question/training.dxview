@@ -1,4 +1,4 @@
-<div data-options="dxView : { name: 'training', title: 'Mistake Chasing' } ">
+<div data-options="dxView : { name: 'training', title: 'Training' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->

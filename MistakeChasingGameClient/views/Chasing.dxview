@@ -1,4 +1,4 @@
-<div data-options="dxView : { name: 'Chasing', title: 'Chasing Online Mode' } ">
+<div data-options="dxView : { name: 'Chasing', title: 'Chasing' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
             <div id="player" class="dx-fieldset">
