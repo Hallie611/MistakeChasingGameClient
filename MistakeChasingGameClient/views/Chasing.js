@@ -9,7 +9,9 @@
     myEventHandler = function () {
         if (countX >= 3) {
             canFind = false;
+            viewModel.CorrectedQuestion(1, 0, false);
             $("#toastError").dxToast('instance').show();
+            countX = 0;
         } else {
             countX += 1;
             var showX = document.getElementById("miss" + countX);
@@ -60,6 +62,9 @@
             //goi ham load cau hoi len dua theo id truyen qua
             viewModel.loadRoomTab();
 
+        },
+        viewHidden : function(){
+            $.connection.hub.stop();
         }
     });
 };

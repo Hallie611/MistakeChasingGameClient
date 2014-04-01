@@ -924,12 +924,6 @@
     <Content Include="views\Question\training.js">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="views\User.dxview">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="views\User.js">
-      <SubType>Content</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="certificates\" />

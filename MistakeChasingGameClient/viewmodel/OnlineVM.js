@@ -89,11 +89,9 @@
             level: ko.observable(localStorage.level),
             point: ko.observable(localStorage.point),
             oname: ko.observable(),
-            oplevel: ko.observable(),
-            opoint: ko.observable(),
-            player1point: ko.observable(),
-            player2point: ko.observable(),
-            pointwin: ko.observable(),
+            oplevel: ko.observable(''),
+            opoint: ko.observable(0),
+            pointwin: ko.observable(0),
             poinlose: ko.observable(Number(localStorage.level) * 10)
 
         };
@@ -103,7 +101,10 @@
             tabVisible: ko.computed(function () {
                 return selectedTab() === 1;
             }),
-
+            username: ko.observable(localStorage.username),
+            oname: ko.observable(),
+            player1point: ko.observable(0),
+            player2point: ko.observable(0),
             listDataSource: ko.observable()
 
         };
@@ -146,23 +147,27 @@
         };
 
         this.loadRoomTab = function () {
+            self.ListTab.player1point(0);
+            self.ListTab.player2point(0);
             this.singleChoiceTab.rendered(false);
             this.fillingBlanksTab.rendered(false);
             this.findBugsTab.rendered(false);
             this.ListTab.rendered(false);
             this.RoomTab.rendered(true);
             this.RoomTab.point(localStorage.point);
-            if (connected) {
+            if ($.connection.hub.state==1) {
                 self.RoomTab.message('');
                 document.getElementById("opponent").style.display = "none";
                 document.getElementById("readybtn").style.display = "none";
                 document.getElementById("cntbtn").style.display = "none";
                 document.getElementById("Cancelbtn").style.display = "none";
                 document.getElementById("findbtn").style.display = "";
+                document.getElementById("menubtn").style.display = "";-
                 self.RoomTab.message("Click to find opponent");
             }
-            else {
+            else if ($.connection.hub.state ==4) {
                 self.RoomTab.message('');
+                document.getElementById("menubtn").style.display = "";
                 document.getElementById("opponent").style.display = "none";
                 document.getElementById("readybtn").style.display = "none";
                 document.getElementById("findbtn").style.display = "none";
@@ -176,6 +181,7 @@
         };
 
         this.loadListTab = function () {
+            document.getElementById("menubtn").style.display = "none"; 
             this.singleChoiceTab.rendered(false);
             this.fillingBlanksTab.rendered(false);
             this.findBugsTab.rendered(false);
@@ -199,8 +205,8 @@
 
         this.ConnectToSever = function () {
 
-            $.connection.hub.url = "http://localhost:8080/signalr";
-            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            //$.connection.hub.url = "http://localhost:8080/signalr";
+            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
 
@@ -242,6 +248,7 @@
             $.connection.gamesHub.client.foundOpponent = function (message) {
                 self.RoomTab.message("");
                 self.RoomTab.oname(message.oName);
+
                 self.RoomTab.oplevel(message.oLevel);
                 self.RoomTab.opoint(message.oPoint);
                 self.RoomTab.poinlose(Number(localStorage.level) * 10);
@@ -261,31 +268,38 @@
             };
 
             //update 2 client cau nao lam roi
-            $.connection.gamesHub.client.CorrectedQuestion = function (name, index, mark) {
-                if (self.RoomTab.username == name) {
-                    self.RoomTab.player1point(10);
+            $.connection.gamesHub.client.updateCorrectedQuestion = function (result) {
+
+                if (result.Name == self.RoomTab.username()) {
+
+                    self.ListTab.player1point(self.ListTab.player1point() + result.point);
+                }
+                else {
+
+                    self.ListTab.player2point(self.ListTab.player2point() + result.point);
+                }
+
+                if (result.isMax) {
+
+                    listQ.update(result.index, { status: result.Name });
+                    self.ListTab.listDataSource(listQ);
 
                 }
-                if (self.RoomTab.oname == name) {
 
-                }
-                listQ.update(index, { status: name });
-
-                self.ListTab.listDataSource(listQ);
             }
 
             $.connection.gamesHub.client.gameOver = function (name) {
 
-                //document.getElementById("opponent").style.display = "none";
-                //document.getElementById("readybtn").style.display = "none";
-                //document.getElementById("cntbtn").style.display = "none";
-                //document.getElementById("findbtn").style.display = "";
-                DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point " + name.Point, 'Result');
+
                 if (localStorage.username == name.Name) {
+
+                    DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point +" + self.RoomTab.pointwin(), 'Result');
                     localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
                 }
                 else {
-                    localStorage.point = Number(localStorage.point) + Number(self.RoomTab.poinlose());
+
+                    DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point -" + self.RoomTab.poinlose(), 'Result');
+                    localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
                 self.loadRoomTab();
 
@@ -313,8 +327,8 @@
         }
 
         this.findOpponent = function () {
-          
-            
+
+
             self.RoomTab.message("Finding opponent...");
             $.connection.gamesHub.server.findOpponent();
         };
@@ -332,7 +346,6 @@
             localStorage.point = Number(localStorage.point) - 5;
             DevExpress.ui.dialog.alert('You cancel game, your point -5', 'Notify');
             $.connection.gamesHub.server.outOfMath();
-
             this.loadRoomTab();
         }
         ////////////////////////////////////////////////////
@@ -343,7 +356,7 @@
 
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
-            var points = difCurrentQ * 50;
+            var points = difCurrentQ * 5;
             this.CorrectedQuestion(1, points, true);
 
             return points;
@@ -351,40 +364,38 @@
         //////////////////////////////////////////
         //submit method
         this.submitBlanks = function () {
-            var maxpoint = difCurrentQ * 25 * 3;
+            var maxpoint = difCurrentQ * 2 * 3;
 
             var points = 0;
             if (this.fillingBlanksTab.choice1() == answer1) {
-                points += difCurrentQ * 25;
+                points += difCurrentQ * 2;
             }
             if (this.fillingBlanksTab.choice2() == answer2) {
-                points += difCurrentQ * 25;
+                points += difCurrentQ * 2;
             }
             if (this.fillingBlanksTab.choice3() == answer3) {
-                points += difCurrentQ * 25;
+                points += difCurrentQ * 2;
             }
             // ham bao cho sever bik da lam cau nay roi
             if (points == maxpoint) {
-                this.CorrectedQuestion(2, points, true);
+                this.CorrectedQuestion(localStorage.currentIndex, points, true);
             }
             else {
-                this.CorrectedQuestion(2, points, false);
+                this.CorrectedQuestion(localStorage.currentIndex, points, false);
             }
-
-
-
-
             return points;
         };
         ////////////////////////////////////////
         this.submitChoice = function () {
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
-                points += difCurrentQ * 50;
-                this.CorrectedQuestion(3, points, true);
+                points += difCurrentQ * 5;
+                this.CorrectedQuestion(localStorage.currentIndex, points, true);
             }
+            else {
 
-
+                this.CorrectedQuestion(localStorage.currentIndex, points, false);
+            }
 
             //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
@@ -395,7 +406,7 @@
         /////////////////////////////////////////
         this.timeUp = function () {
 
-            this.CorrectedQuestion(0, 0);
+            this.CorrectedQuestion(0, 0, false);
             var tabIndex = selectedTab();
             if (tabIndex == 2) {
                 return 0;
@@ -408,6 +419,8 @@
 
         ////
         this.CorrectedQuestion = function (index, mark, getMaxPoint) {
+            listQ.update(index, { status: 'done' });
+            self.ListTab.listDataSource(listQ);
             $.connection.gamesHub.server.correctQuestion(index, mark, getMaxPoint);
         };
         /////////////////////////////////////////
@@ -467,6 +480,7 @@
             this.randomFindBugs();
             this.addQuestion(1, "FindBugs");
 
+            var isRepeat = true;
             var count = 0;
             var random1 = randomQuestion;
             while (isRepeat && count < 10) {
@@ -488,6 +502,7 @@
             this.randomFindBugs();
             this.addQuestion(1, "FindBugs");
 
+            var isRepeat = true;
             var random1 = randomQuestion;
             while (isRepeat && count < 10) {
                 this.randomFindBugs();
@@ -543,6 +558,7 @@
             this.findBugsTab.rendered(false);
             ///////////////////////////////////////////////
             var itemData = item.itemData;
+            localStorage.currentIndex = itemData.index;
             if (itemData.type == "FindBugs" && itemData.status == "available") {
                 MistakeChasingGameClient.db.findbugsdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
@@ -575,6 +591,14 @@
                 loaded();
             }
         };
+
+        this.backToHome = function () {
+            if ($.connection.hub.state == 1) {
+                $.connection.gamesHub.server.outOfMath();
+            }
+            $.connection.hub.stop();
+            MistakeChasingGameClient.app.navigate('home', { root: true });
+        }
 
         ////////////////////////////
         ////////////////////////////////////
