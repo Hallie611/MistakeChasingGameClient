@@ -1,5 +1,8 @@
 ﻿window.MistakeChasingGameClient = window.MistakeChasingGameClient || {};
 
+
+
+
 function findController(name, controllers) {
     var result = $.grep(controllers, function (item, index) {
         return item.navigationType == name;

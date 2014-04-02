@@ -40,8 +40,8 @@
 
     register = function () {
         popupVisible(true);
-        //$.connection.hub.url = "http://localhost:8080/signalr";
-        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        $.connection.hub.url = "http://localhost:8080/signalr";
+       // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
         if ($.connection.hub.state == null) {
             txtUNVisible(false);
             message("Can not connect to sever, check your connection !");

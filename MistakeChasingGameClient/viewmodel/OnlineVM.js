@@ -2,6 +2,7 @@
     "use strict";
 
     MistakeChasingGameClient.OnlineVM = function (data) {
+        
         ///////////////////////////////////////HA
         var answerSC;
         var answer1;
@@ -83,6 +84,7 @@
             tabVisible: ko.computed(function () {
                 return selectedTab() === 0;
             }),
+
             numberPlayer: ko.observable(),
             message: ko.observable(""),
             username: ko.observable(localStorage.username),
@@ -90,9 +92,16 @@
             point: ko.observable(localStorage.point),
             oname: ko.observable(),
             oplevel: ko.observable(''),
-            opoint: ko.observable(0),
-            pointwin: ko.observable(0),
-            poinlose: ko.observable(Number(localStorage.level) * 10)
+            opoint: ko.observable(),
+            pointwin: ko.observable(),
+            poinlose: ko.observable(Number(localStorage.level) * 10),
+            ResultVisible: ko.observable(),
+            resultPoint: ko.observable(),
+            ImageResult: ko.observable(),
+            result:ko.observable(),
+            okResult: function () {
+                self.RoomTab.ResultVisible(false);
+            }
 
         };
         ///List Tab
@@ -147,6 +156,7 @@
         };
 
         this.loadRoomTab = function () {
+         
             self.ListTab.player1point(0);
             self.ListTab.player2point(0);
             this.singleChoiceTab.rendered(false);
@@ -204,9 +214,8 @@
 
 
         this.ConnectToSever = function () {
-
-            //$.connection.hub.url = "http://localhost:8080/signalr";
-            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            $.connection.hub.url = "http://localhost:8080/signalr";
+           // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
 
@@ -217,7 +226,7 @@
                         index: item.index,
                         questionId: item.questionId,
                         type: item.type,
-                        status: item.status
+                        status: 'available'
                     })
                 });
                 //// temp la listQ tra ve cho ca 2 client
@@ -269,18 +278,19 @@
 
             //update 2 client cau nao lam roi
             $.connection.gamesHub.client.updateCorrectedQuestion = function (result) {
-
+                
                 if (result.Name == self.RoomTab.username()) {
 
                     self.ListTab.player1point(self.ListTab.player1point() + result.point);
                 }
                 else {
-
+                    
                     self.ListTab.player2point(self.ListTab.player2point() + result.point);
                 }
-
+                if (localStorage.currentIndex == result.index && result.isMax==true) {
+                    self.loadListTab();
+                }
                 if (result.isMax) {
-
                     listQ.update(result.index, { status: result.Name });
                     self.ListTab.listDataSource(listQ);
 
@@ -289,18 +299,39 @@
             }
 
             $.connection.gamesHub.client.gameOver = function (name) {
+                //if (localStorage.username == name.Name) {
+                //    DevExpress.ui.dialog.alert("Winner is " + name.Name + " Your Point +" + self.RoomTab.pointwin(), 'Result');
+                //    localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
+                //}
+                //else if(name.Name='none'){
+                //    DevExpress.ui.dialog.alert("DRAW", 'Result');
+                //}
+                //else{
 
+                //    DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point -" + self.RoomTab.poinlose(), 'Result');
+                //    localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
+                //}
 
+            
                 if (localStorage.username == name.Name) {
-
-                    DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point +" + self.RoomTab.pointwin(), 'Result');
+                    self.RoomTab.ImageResult('win.png');
+                    self.RoomTab.resultPoint("Your Point +"+self.RoomTab.pointwin());
                     localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
+                    self.RoomTab.result("WIN");
+                }
+                else if (name.Name == "none") {
+                    self.RoomTab.result("DRAW");
+                    self.RoomTab.ImageResult("Draw.png");
+                    self.RoomTab.resultPoint("");
                 }
                 else {
-
-                    DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point -" + self.RoomTab.poinlose(), 'Result');
+                    self.RoomTab.result("LOSE");
+                    self.RoomTab.ImageResult("lose.png");
+                    self.RoomTab.resultPoint("Your Point -"+self.RoomTab.poinlose());
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
+                self.RoomTab.ResultVisible(true);
+
                 self.loadRoomTab();
 
             }
@@ -464,8 +495,8 @@
             listQ.insert({
                 index: index,
                 questionId: randomQuestion.id,
-                type: type,
-                status: "available"
+                type: type
+               // status: "available"
             });
         };
         this.randomThree = function () {

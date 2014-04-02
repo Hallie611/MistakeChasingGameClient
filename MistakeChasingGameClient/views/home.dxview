@@ -3,7 +3,7 @@
         <div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>
 
-        <div  data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true }">
+          <div  data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
             <div  data-bind="dxTextBox: {value: username,visible: txtUNVisible}"></div>
             <p data-bind="text : message"></p>
             <div style="margin-left:30%" data-bind="dxButton: { text: 'Create',clickAction: SaveName ,visible: txtUNVisible}"></div>

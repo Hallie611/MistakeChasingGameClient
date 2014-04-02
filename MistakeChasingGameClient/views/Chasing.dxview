@@ -2,7 +2,21 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div id="menubtn" style="margin-left: 40%;" data-bind="dxButton: {clickAction: backToHome,text: 'Home' }">
         </div>
+
+
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
+
+            <div data-bind="dxPopup: {visible: RoomTab.ResultVisible ,title: 'Result Match Game', showTitle: true,height: '50%' }">
+                <div style="text-align: center" >
+                    <img data-bind="attr: { src: RoomTab.ImageResult } " />
+
+                    <h2 data-bind="text: RoomTab.resultPoint"></h2>
+                    <h1 style="font-size:300%" data-bind="text: RoomTab.result"></h1>
+
+                    <div data-bind="dxButton: { text: 'OK',clickAction: RoomTab.okResult }"></div>
+                </div>
+                
+            </div>
             <div id="player" class="dx-fieldset">
                 <div class="dx-field">
                     <div class="dx-field-label">
