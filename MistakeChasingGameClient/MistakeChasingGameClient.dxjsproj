@@ -47,256 +47,244 @@
     <Content Include="data\db.js">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Draw.png">
+    <Content Include="images\fillinBlankQ\001.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\button\chasing.jpg">
+    <Content Include="images\fillinBlankQ\002.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\button\cancel.png">
+    <Content Include="images\fillinBlankQ\003.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\button\findop.png">
+    <Content Include="images\fillinBlankQ\004.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\button\ready.png">
+    <Content Include="images\fillinBlankQ\005.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F1.jpg">
+    <Content Include="images\fillinBlankQ\006.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F10.jpg">
+    <Content Include="images\fillinBlankQ\007.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F11.jpg">
+    <Content Include="images\fillinBlankQ\008.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F12.jpg">
+    <Content Include="images\fillinBlankQ\009.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F13.jpg">
+    <Content Include="images\fillinBlankQ\010.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F14.jpg">
+    <Content Include="images\fillinBlankQ\011.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F15.jpg">
+    <Content Include="images\fillinBlankQ\012.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F16.jpg">
+    <Content Include="images\fillinBlankQ\013.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F17.jpg">
+    <Content Include="images\fillinBlankQ\014.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F18.jpg">
+    <Content Include="images\fillinBlankQ\015.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F19.jpg">
+    <Content Include="images\fillinBlankQ\016.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F2.jpg">
+    <Content Include="images\fillinBlankQ\017.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F20.jpg">
+    <Content Include="images\fillinBlankQ\018.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F21.jpg">
+    <Content Include="images\fillinBlankQ\019.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F22.jpg">
+    <Content Include="images\fillinBlankQ\020.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F23.jpg">
+    <Content Include="images\fillinBlankQ\021.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F24.jpg">
+    <Content Include="images\fillinBlankQ\022.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F25.jpg">
+    <Content Include="images\fillinBlankQ\023.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F26.jpg">
+    <Content Include="images\fillinBlankQ\024.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F27.jpg">
+    <Content Include="images\fillinBlankQ\025.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F28.jpg">
+    <Content Include="images\fillinBlankQ\026.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F29.jpg">
+    <Content Include="images\fillinBlankQ\027.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F3.jpg">
+    <Content Include="images\fillinBlankQ\028.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F30.jpg">
+    <Content Include="images\fillinBlankQ\029.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F31.jpg">
+    <Content Include="images\fillinBlankQ\030.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F32.jpg">
+    <Content Include="images\fillinBlankQ\031.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F33.jpg">
+    <Content Include="images\fillinBlankQ\032.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F34.jpg">
+    <Content Include="images\fillinBlankQ\033.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F35.jpg">
+    <Content Include="images\fillinBlankQ\034.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F36.jpg">
+    <Content Include="images\fillinBlankQ\035.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F37.jpg">
+    <Content Include="images\fillinBlankQ\036.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F38.jpg">
+    <Content Include="images\fillinBlankQ\037.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F39.jpg">
+    <Content Include="images\fillinBlankQ\038.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F4.jpg">
+    <Content Include="images\fillinBlankQ\039.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F40.jpg">
+    <Content Include="images\fillinBlankQ\040.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F41.jpg">
+    <Content Include="images\fillinBlankQ\041.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F42.jpg">
+    <Content Include="images\fillinBlankQ\042.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F43.jpg">
+    <Content Include="images\fillinBlankQ\043.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F45.jpg">
+    <Content Include="images\fillinBlankQ\044.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F46.jpg">
+    <Content Include="images\fillinBlankQ\045.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F47.jpg">
+    <Content Include="images\fillinBlankQ\046.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F48.jpg">
+    <Content Include="images\fillinBlankQ\047.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F49.jpg">
+    <Content Include="images\fillinBlankQ\048.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F5.jpg">
+    <Content Include="images\fillinBlankQ\049.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F50.jpg">
+    <Content Include="images\fillinBlankQ\050.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F51.jpg">
+    <Content Include="images\fillinBlankQ\051.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F52.jpg">
+    <Content Include="images\fillinBlankQ\052.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F53.jpg">
+    <Content Include="images\fillinBlankQ\053.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F54.jpg">
+    <Content Include="images\fillinBlankQ\054.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F55.jpg">
+    <Content Include="images\fillinBlankQ\055.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F56.jpg">
+    <Content Include="images\fillinBlankQ\056.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F57.jpg">
+    <Content Include="images\fillinBlankQ\057.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F58.jpg">
+    <Content Include="images\fillinBlankQ\058.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F59.jpg">
+    <Content Include="images\fillinBlankQ\059.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F6.jpg">
+    <Content Include="images\fillinBlankQ\060.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F60.jpg">
+    <Content Include="images\fillinBlankQ\061.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F61.jpg">
+    <Content Include="images\fillinBlankQ\062.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F62.jpg">
+    <Content Include="images\fillinBlankQ\063.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F63.jpg">
+    <Content Include="images\fillinBlankQ\064.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F64.jpg">
+    <Content Include="images\fillinBlankQ\065.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F65.jpg">
+    <Content Include="images\fillinBlankQ\066.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F66.jpg">
+    <Content Include="images\fillinBlankQ\067.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F67.jpg">
+    <Content Include="images\fillinBlankQ\068.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F68.jpg">
+    <Content Include="images\fillinBlankQ\069.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F69.jpg">
+    <Content Include="images\fillinBlankQ\070.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F7.jpg">
+    <Content Include="images\fillinBlankQ\071.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F70.jpg">
+    <Content Include="images\fillinBlankQ\072.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F71.jpg">
+    <Content Include="images\fillinBlankQ\073.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F72.jpg">
+    <Content Include="images\fillinBlankQ\074.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F73.jpg">
+    <Content Include="images\fillinBlankQ\075.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F74.jpg">
+    <Content Include="images\fillinBlankQ\076.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F75.jpg">
+    <Content Include="images\fillinBlankQ\077.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\f76.jpg">
+    <Content Include="images\fillinBlankQ\078.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F77.jpg">
+    <Content Include="images\fillinBlankQ\079.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\fillinBlankQ\F78.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\fillinBlankQ\F79.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\fillinBlankQ\F8.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\fillinBlankQ\F80.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\fillinBlankQ\F9.jpg">
+    <Content Include="images\fillinBlankQ\080.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\findbugQ\P1.jpg">
@@ -896,9 +884,6 @@
     <Content Include="js\globalize.min.js" />
     <Content Include="js\jquery-1.9.1.min.js" />
     <Content Include="js\knockout-2.2.1.js" />
-    <Content Include="lose.png">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="viewmodel\ClockVM.js">
       <SubType>Content</SubType>
     </Content>
@@ -934,9 +919,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="views\Question\training.js">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="win.png">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
