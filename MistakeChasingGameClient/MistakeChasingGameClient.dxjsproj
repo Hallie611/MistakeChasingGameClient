@@ -50,7 +50,16 @@
     <Content Include="Draw.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\chasing.jpg">
+    <Content Include="images\button\chasing.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\cancel.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\findop.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\ready.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\fillinBlankQ\F1.jpg">
@@ -803,9 +812,6 @@
     <Content Include="images\MultipleChoice\M9.jpg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\ready.jpg">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="images\redX.png">
       <SubType>Content</SubType>
     </Content>
@@ -942,6 +948,7 @@
     <Folder Include="images\level" />
     <Folder Include="images\MultipleChoice" />
     <Folder Include="images\fillinBlankQ" />
+    <Folder Include="images\button" />
     <Folder Include="js\" />
     <Folder Include="js\cordova" />
     <Folder Include="layouts\" />

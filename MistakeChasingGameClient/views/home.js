@@ -4,13 +4,13 @@
     localStorage.currentPoint = 0;
     //localStorage.currentlevel = 0 ;
     popupVisible = ko.observable(false);
-    username = ko.observable('newbine');
+    username = ko.observable('');
     message = ko.observable();
-    txtUNVisible = ko.observable(true);
-
+    txtUNVisible = ko.observable(false);
+    btnLoadAgain = ko.observable(false);
 
     var viewModel = {
-        
+
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -41,45 +41,55 @@
     register = function () {
         popupVisible(true);
         $.connection.hub.url = "http://localhost:8080/signalr";
-       // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
-        if ($.connection.hub.state == null) {
-            txtUNVisible(false);
-            message("Can not connect to sever, check your connection !");
-        }
-        else {
-            $.connection.gamesHub.client.TrySave = function (result) {
-                
-                if (result == true) {
-                    localStorage.username = username();
-                    localStorage.level = "1";
-                    localStorage.point = "100";
-                    popupVisible(false);
-                   $.connection.hub.stop();
-                }
-                else {
-                    message("Username has used, Try another please");
-                }
-            }
-            $.connection.hub.start().done(function () {
-                
+     //    $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        $.connection.hub.start()
+            .done(function () {
+                btnLoadAgain(false);
+                txtUNVisible(true);
             })
-        }
+            .fail(function () {
+                message("Check connection server  for creating user in first play");
+                btnLoadAgain(true);
+                txtUNVisible(false);
+            });
+
+       
     };
 
     if (!localStorage.username) {
         register();
     };
 
-  
+    loadAgain = function () {
+        message('...');
+        register();
+    };
+
 
     SaveName = function () {
         
-        $.connection.gamesHub.server.register(username());
-    };
-    loadAgain = function () {
-        connect();
+        if (username() == '') {
+            message("Name can not be blank");
+        }
+        else {
+            message('...');
+            $.connection.gamesHub.server.register(username()).done(function (result) {
 
+                if (result == true) {
+                            localStorage.username = username();
+                            localStorage.level = "1";
+                            localStorage.point = "100";
+                            popupVisible(false);
+                            $.connection.hub.stop();
+                        }
+                        else {
+                            message("Username has used, Try another please");
+                        }
+
+            });
+        }
     };
+
 
     $.each(["beginner", "intermediate", "advanced"], function (i, maps) {
         viewModel[maps].mapVisible = ko.computed(function () {
@@ -95,7 +105,7 @@
     });
 
     clickLevel = function (level) {
-      
+
         if (level > Number(localStorage.level)) {
             $("#toastContainer").dxToast('instance').show();
         } else {

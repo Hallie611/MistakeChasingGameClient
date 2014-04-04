@@ -173,7 +173,7 @@
                 document.getElementById("Cancelbtn").style.display = "none";
                 document.getElementById("findbtn").style.display = "";
                 document.getElementById("menubtn").style.display = "";-
-                self.RoomTab.message("Click to find opponent");
+                self.RoomTab.message("");
             }
             else if ($.connection.hub.state ==4) {
                 self.RoomTab.message('');
@@ -214,11 +214,12 @@
 
 
         this.ConnectToSever = function () {
+            self.RoomTab.message('...');
             $.connection.hub.url = "http://localhost:8080/signalr";
-           // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
-
                 clearListQ();
                 temp.forEach(function (item) {
                     listQ.insert({
@@ -589,8 +590,9 @@
             this.findBugsTab.rendered(false);
             ///////////////////////////////////////////////
             var itemData = item.itemData;
+            
             localStorage.currentIndex = itemData.index;
-            if (itemData.type == "FindBugs" && itemData.status == "available") {
+            if (itemData.type == "Find Bugs" && itemData.status == "available") {
                 MistakeChasingGameClient.db.findbugsdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
 
@@ -599,7 +601,7 @@
                 selectedTab(2);
                 this.findBugsTab.rendered(true);
             }
-            else if (itemData.type == "FillingBlanks" && itemData.status == "available") {
+            else if (itemData.type == "Fill Blanks" && itemData.status == "available") {
                 MistakeChasingGameClient.db.fillingblankdb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
 
@@ -610,7 +612,7 @@
                 document.addEventListener('DOMContentLoaded', loaded, false);
                 loaded();
             }
-            else if (itemData.type == "SingleChoice" && itemData.status == "available") {
+            else if (itemData.type == "Single Choice" && itemData.status == "available") {
                 MistakeChasingGameClient.db.multiplechoicedb.byKey(itemData.questionId).done(function (dataItem) {
                     randomQuestion = dataItem;
 
@@ -628,7 +630,7 @@
                 $.connection.gamesHub.server.outOfMath();
             }
             $.connection.hub.stop();
-            MistakeChasingGameClient.app.navigate('home', { root: true });
+            MistakeChasingGameClient.app.navigate('home', { root: false });
         }
 
         ////////////////////////////

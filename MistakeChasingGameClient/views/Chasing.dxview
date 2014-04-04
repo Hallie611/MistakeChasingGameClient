@@ -1,12 +1,12 @@
 <div data-options="dxView : { name: 'Chasing', title: 'Chasing' } ">
-    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-        <div id="menubtn" style="margin-left: 40%;" data-bind="dxButton: {clickAction: backToHome,text: 'Home' }">
+    <div style="text-align:center" data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <div id="menubtn"  data-bind="dxButton: {clickAction: backToHome,text: 'Home' }">
         </div>
 
 
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
 
-            <div data-bind="dxPopup: {visible: RoomTab.ResultVisible ,title: 'Result Match Game', showTitle: true,height: '50%' }">
+            <div data-bind="dxPopup: {visible: RoomTab.ResultVisible ,title: 'Result Match Game',clickAction: RoomTab.okResult, showTitle: true,height: '50%' }">
                 <div style="text-align: center" >
                     <img data-bind="attr: { src: RoomTab.ImageResult } " />
 
@@ -17,7 +17,7 @@
                 </div>
                 
             </div>
-            <div id="player" class="dx-fieldset">
+            <div id="player" class="dx-fieldset" style=" text-align: left;margin-left: 10%; margin-right: 10%; ">
                 <div class="dx-field">
                     <div class="dx-field-label">
                         User Name
@@ -42,29 +42,28 @@
                 </div>
             </div>
 
-            <div id="cntbtn" style="margin-left: 40%;" data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }">
-            </div>
+            <div id="cntbtn"  data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }"></div>
 
 
-            <div id="findbtn" style="margin-left: 40%; display: none" data-bind="dxButton: {clickAction: findOpponent, iconSrc: 'images/chasing.jpg' }">
+            <div id="findbtn"  style=" display: none" data-bind="dxButton: {clickAction: findOpponent,text : 'Find Opponent', iconSrc: 'images/button/findop.png' }">
             </div>
             <table id="readybtn" style="width: 100%">
                 <tr>
                     <td>
-                        <div id="" style="margin-left: 40%;" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/ready.jpg' }"></div>
+                        <div id="" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/button/ready.png' }"></div>
                     </td>
                     <td>
                         <b data-bind="text:RoomTab.pointwin"></b>/ <b data-bind="text:RoomTab.poinlose"></b>
                     </td>
                     <td>
-                        <div id="Cancelbtn" style="margin-left: 40%;" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/cancel.png' }"></div>
+                        <div id="Cancelbtn"  style=" display: none" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }"></div>
                     </td>
                 </tr>
             </table>
 
 
             <h1 data-bind="text: RoomTab.message"></h1>
-            <div id="opponent" style="display: none" class="dx-fieldset">
+            <div id="opponent" style="display: none;text-align: left;margin-left: 10%; margin-right: 10%;" class="dx-fieldset" >
                 <div class="dx-field">
                     <div class="dx-field-label">
                         Opponent
@@ -106,10 +105,8 @@
             </div>
 
 
-
-
-            <div id="myList" style="margin: 10px;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick }">
-                <div style="text-align: left; padding: 5px;" data-options="dxTemplate:{ name:'item' }">
+          <div id="myList" style="margin: 10%; " data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick }">
+                <div style="margin: 5%;text-align: left; padding: 5px;" data-options="dxTemplate:{ name:'item' }">
                     <p style="font-size: larger;">
                         <b data-bind="text: index + '. ' + type+ ' ' "></b>(<b data-bind="text: status"></b>)
                     </p>

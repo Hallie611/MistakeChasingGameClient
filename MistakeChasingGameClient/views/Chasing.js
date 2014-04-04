@@ -9,7 +9,7 @@
     myEventHandler = function () {
         if (countX >= 3) {
             canFind = false;
-            viewModel.CorrectedQuestion(1, 0, false);
+            viewModel.CorrectedQuestion(localStorage.currentIndex, 0, false);
             $("#toastError").dxToast('instance').show();
             countX = 0;
         } else {
