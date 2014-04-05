@@ -24,36 +24,36 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
-            <div id="wrapper" style="height: 58%;">
+            <div data-bind="dxScrollView: { }" style="height: 58%;">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
-            <div style="bottom: 2%; width: 100%;">
+            <div style="bottom: 0%; width: 100%;">
                 <div style="text-align: center;">
                     <h3>
                         Fill in the blanks in the codes above:</h3>
                 </div>
                 <div class="dx-fieldset" style="margin: 0px 0px 20px 0px;">
                     <div class="dx-field">
-                        <div class="dx-field-label">
+                        <div class="dx-field-label" style="width: 20%;">
                             1.</div>
-                        <div class="dx-field-value">
-                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer1source, value: fillingBlanksTab.choice1}">
+                        <div class="dx-field-value" style="width: 80%;">
+                            <div style="width: inherit;left: inherit;" data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer1source, value: fillingBlanksTab.choice1}">
                             </div>
                         </div>
                     </div>
                     <div class="dx-field">
-                        <div class="dx-field-label">
+                        <div class="dx-field-label" style="width: 20%;">
                             2.</div>
-                        <div class="dx-field-value">
-                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer2source, value: fillingBlanksTab.choice2}">
+                        <div class="dx-field-value" style="width: 80%;">
+                            <div style="width: inherit;left: inherit;" data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer2source, value: fillingBlanksTab.choice2}">
                             </div>
                         </div>
                     </div>
                     <div class="dx-field">
-                        <div class="dx-field-label">
+                        <div class="dx-field-label" style="width: 20%;">
                             3.</div>
-                        <div class="dx-field-value">
-                            <div data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer3source, value: fillingBlanksTab.choice3}">
+                        <div class="dx-field-value" style="width: 80%;">
+                            <div style="width: inherit;left: inherit;" data-bind="dxSelectBox:{dataSource: fillingBlanksTab.answer3source, value: fillingBlanksTab.choice3}">
                             </div>
                         </div>
                     </div>
@@ -66,10 +66,10 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: singleChoiceTab.rendered, visible: singleChoiceTab.tabVisible">
-            <div id="wrapper" style="height: 73%;">
+            <div data-bind="dxScrollView: { }" style="height: 73%;">
                 <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
             </div>
-            <div style="bottom: 2%; width: 100%;">
+            <div style="bottom: 0%; width: 100%;">
                 <div style="text-align: center;">
                     <h3>
                         Which type of bug is in the codes above?</h3>
