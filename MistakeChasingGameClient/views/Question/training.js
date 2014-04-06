@@ -62,12 +62,10 @@
         if (isPassed) {
             resultPopup.button.text("Next Level");
             resultPopup.button.action(next);
-            alert("pass");
         }
         else {
             resultPopup.button.text("Try Again");
             resultPopup.button.action(tryAgain);
-            alert("fail");
         }
         $('#resultPopup').dxPopup('instance').endUpdate();
         $('#resultPopup').dxPopup('instance').show();

@@ -41,7 +41,7 @@
     register = function () {
         popupVisible(true);
         $.connection.hub.url = "http://localhost:8080/signalr";
-     //    $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
         $.connection.hub.start()
             .done(function () {
                 btnLoadAgain(false);

@@ -90,7 +90,7 @@
         this.ConnectToSever = function () {
             self.RoomTab.message('...');
             $.connection.hub.url = "http://localhost:8080/signalr";
-            // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -146,7 +146,7 @@
                 }
                 if (result.isMax) {
                     self.questionVM.listQ.update(result.index, { status: result.Name }); // cái này update cái gì đây
-                    self.questionVM.ListTab.listDataSource(self.questionVM.listQ);
+                    self.ListTab.listDataSource(self.questionVM.listQ);
                 }
             }
 
@@ -224,21 +224,20 @@
             self.loadRoomTab();
         }
         //////////////////////////////////////////////////////submit method
-        /////////////////////////////////////////
         this.bugFound = function () {
             var points = self.questionVM.bugFound();
-            this.CorrectedQuestion(1, points, true);
+            self.CorrectedQuestion(1, points, true);
             return points;
-        };   
+        };
         this.submitBlanks = function () {
             var points = self.questionVM.submitBlanks();
             self.questionVM.listQ.byKey(localStorage.currentIndex).done(function (dataItem) {
                 // ham bao cho sever bik da lam cau nay roi
                 if (dataItem.status == "Correct") {
-                    this.CorrectedQuestion(localStorage.currentIndex, points, true);
+                    self.CorrectedQuestion(localStorage.currentIndex, points, true);
                 }
                 else {
-                    this.CorrectedQuestion(localStorage.currentIndex, points, false);
+                    self.CorrectedQuestion(localStorage.currentIndex, points, false);
                 }
             });
             return points;
@@ -248,27 +247,28 @@
             self.questionVM.listQ.byKey(localStorage.currentIndex).done(function (dataItem) {
                 // ham bao cho sever bik da lam cau nay roi
                 if (dataItem.status == "Correct") {
-                    this.CorrectedQuestion(localStorage.currentIndex, points, true);
+                    self.CorrectedQuestion(localStorage.currentIndex, points, true);
                 }
                 else {
-                    this.CorrectedQuestion(localStorage.currentIndex, points, false);
+                    self.CorrectedQuestion(localStorage.currentIndex, points, false);
                 }
             });
             return points;
         };
         /////////////////////////////////////////time up
         this.timeUp = function () {
-            this.CorrectedQuestion(0, 0, false); // cái gì đây? sao lại 0, 0, false
+            self.CorrectedQuestion(0, 0, false); // cái gì đây? sao lại 0, 0, false
             self.questionVM.timeUp();
         };
         ///////////////////////////////////////////////
         this.CorrectedQuestion = function (index, mark, getMaxPoint) {
-            //listQ.update(index, { status: 'done' }); // update trong các function submit
-            //self.questionVM.ListTab.listDataSource(self.questionVM.listQ);// để trong function load list tab
+            self.questionVM.listQ.update(index, { status: 'done' }); // update trong các function submit
+            self.ListTab.listDataSource(self.questionVM.listQ);// để trong function load list tab
             $.connection.gamesHub.server.correctQuestion(index, mark, getMaxPoint);
         };
         /////////////////////////////////////////load question
         this.processClick = function (item) {
+            //alert(item + "process click");
             self.questionVM.loadQuestionOnline(item);
         };
 
@@ -278,6 +278,6 @@
             }
             $.connection.hub.stop();
             MistakeChasingGameClient.app.navigate('home', { root: false });
-        }        
+        }
     };
 })();

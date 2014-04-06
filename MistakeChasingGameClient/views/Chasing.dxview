@@ -122,9 +122,12 @@
             <div id="toastError" style="text-align: center;" data-bind="dxToast: { message: 'You have used all three tries!', type:'error', displayTime: 300, hiddenAction: processHiding}">
             </div>
             <div id="redXBox">
-                <img id="miss1" data-bind="attr: { src: questionVM.findBugsTab.srcX }" style="width: 10%; height: 10%" />
-                <img id="miss2" data-bind="attr: { src: questionVM.findBugsTab.srcX }" style="width: 10%; height: 10%" />
-                <img id="miss3" data-bind="attr: { src: questionVM.findBugsTab.srcX }" style="width: 10%; height: 10%" />
+                <img id="miss1" data-bind="attr: { src: questionVM.findBugsTab.srcX }" style="width: 10%;
+                    height: 10%" />
+                <img id="miss2" data-bind="attr: { src: questionVM.findBugsTab.srcX }" style="width: 10%;
+                    height: 10%" />
+                <img id="miss3" data-bind="attr: { src: questionVM.findBugsTab.srcX }" style="width: 10%;
+                    height: 10%" />
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: questionVM.fillingBlanksTab.rendered, visible: questionVM.fillingBlanksTab.tabVisible">

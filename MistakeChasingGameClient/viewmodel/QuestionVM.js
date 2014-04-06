@@ -8,8 +8,8 @@
         var answer3;
         //////////////////////////
         var difCurrentQ;
-        var randomQuestion = ko.observable();
-        var randomAns = ko.observable();
+        var randomQuestion;// = ko.observable();
+        var randomAns;// = ko.observable();
 
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -24,7 +24,7 @@
         //////////////////////
         var selectedTab = ko.observable(0);
         var self = this;
-        
+
         this.findBugsTab = {
             src: ko.observable(),
             rendered: ko.observable(false),
@@ -92,7 +92,7 @@
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 5;
-            this.listQ.update(localStorage.currentIndex, { status: "Correct" });            
+            this.listQ.update(localStorage.currentIndex, { status: "Correct" });
             return points;
         };
         //////////////////////////////////////////
@@ -110,7 +110,7 @@
             }
             if (points == difCurrentQ * 6) {
                 this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-            }            
+            }
             return points;
         };
         ////////////////////////////////////////
@@ -119,7 +119,7 @@
             if (answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 5;
                 this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-            }            
+            }
             return points;
         };
 
@@ -158,8 +158,9 @@
         };
         /////////////////////////////////////////
         this.getQuestion = function (questionId) {
-            randomQuestion = MistakeChasingGameClient.db.questionDb.byKey(questionId).done(function (dataItem) {
+            MistakeChasingGameClient.db.questionDb.byKey(questionId).done(function (dataItem) {
                 randomQuestion = dataItem;
+                //alert(randomQuestion.id + " random Id getQuestion");
             });
         };
         this.randomFindBugs = function () {
@@ -189,7 +190,9 @@
             this.getSingleChoiceAns();
         };
         this.getSingleChoiceAns = function () {
+            //alert(randomQuestion.id + "random Id getSingleChoiceAns");
             var correctAns = MistakeChasingGameClient.db.singleChoiceDb.createQuery().filter(["questionId", "=", randomQuestion.id]).select("mistakeId").toArray()[0].mistakeId;
+            //alert(correctAns + "correctAns getSingleChoiceAns");
             var randomAns1, randomAns2;
             var isRepeat = true;
             while (isRepeat) {
@@ -201,6 +204,7 @@
                             isRepeat = false;
                             var listAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
                                                         "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
+                            //alert(listAns.length + "length list");
                             randomAns.listAns = [listAns[0].content, listAns[1].content, listAns[2].content];
                             randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
                         };
@@ -228,6 +232,7 @@
                 type: item.type,
                 status: "Available"
             });
+            //alert(randomAns + "inserted");
         };
         //////////////////////////////////////////////
         this.addQuestion = function (index, type) {
@@ -360,6 +365,7 @@
             var itemData = item.itemData;
 
             localStorage.currentIndex = itemData.index;
+            alert(itemData.index + "load online index");
             if (itemData.type == "Find Bugs" && itemData.status == "Available") {
                 randomQuestion = itemData.question;
                 randomAns = itemData.ans;
