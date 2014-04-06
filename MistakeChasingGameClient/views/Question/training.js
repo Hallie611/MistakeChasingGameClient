@@ -29,6 +29,8 @@
 
     showBug = function () {
         var points = viewModel.bugFound();
+        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         $("#toastContainer").dxToast('instance').show();
     };
     processHiding = function () {
@@ -37,11 +39,15 @@
 
     submitFBK = function () {
         var points = viewModel.submitBlanks();
+        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         viewModel.loadQuestion();
     };
 
     submitSC = function () {
         var points = viewModel.submitChoice();
+        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         showEndDialog();
     };
     //////////////////

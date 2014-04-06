@@ -134,6 +134,7 @@
             this.findBugsTab.rendered(false);
             this.RoomTab.rendered(false);
             this.ListTab.rendered(true);
+            this.ListTab.listDataSource(self.listQ);
             selectedTab(1);
         };
 
@@ -168,9 +169,7 @@
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 5;
-            this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            this.listQ.update(localStorage.currentIndex, { status: "Correct" });            
             return points;
         };
         //////////////////////////////////////////
@@ -188,9 +187,7 @@
             }
             if (points == difCurrentQ * 6) {
                 this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-            }
-            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            }            
             return points;
         };
         ////////////////////////////////////////
@@ -199,9 +196,7 @@
             if (answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 5;
                 this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-            }
-            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            }            
             return points;
         };
 
@@ -218,11 +213,11 @@
         /////////////////////////////////////////
         this.timeUp = function () {
             var tabIndex = selectedTab();
-            if (tabIndex == 0) {
+            if (tabIndex == 2) {
                 return 0;
-            } else if (tabIndex == 1) {
+            } else if (tabIndex == 3) {
                 return this.submitBlanks();
-            } else if (tabIndex == 2) {
+            } else if (tabIndex == 4) {
                 return this.submitChoice();
             }
         };

@@ -4,8 +4,26 @@
     clock = new MistakeChasingGameClient.ClockVM("");
 
     var countX = 0;
-    var canFind = true;
+    myEventHandler = function () {
+        countX += 1;
+        var showX = document.getElementById("miss" + countX);
+        showX.style.visibility = "visible";
+        if (countX >= 3) {
+            countX = 0;
+            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+            viewModel.loadQuestion();
+        }
+    };
 
+    showBug = function () {
+        var points = viewModel.bugFound();
+        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+        $("#toastContainer").dxToast('instance').show();
+    };
+
+
+    var countX = 0;
     myEventHandler = function () {
         if (countX >= 3) {
             canFind = false;
@@ -29,17 +47,17 @@
     };
 
     processHiding = function () {
-        viewModel.loadListTab();
+        viewModel.questionVM.loadListTab();
     };
 
     submitFBK = function () {
         var points = viewModel.submitBlanks();
-        viewModel.loadListTab();
+        viewModel.questionVM.loadListTab();
     };
 
     submitSC = function () {
         var points = viewModel.submitChoice();
-        viewModel.loadListTab();
+        viewModel.questionVM.loadListTab();
     };
 
     var turnClockOn = ko.computed(function () {
@@ -52,7 +70,7 @@
         if (clock.timeOut()) {
             clock.timeOut(false);
             var points = viewModel.timeUp();
-            viewModel.loadRoomTab();
+            viewModel.questionVM.loadRoomTab();
             //showEndDialog();
         }
     });
@@ -60,7 +78,7 @@
     return $.extend(viewModel, {
         viewShown: function () {
             //goi ham load cau hoi len dua theo id truyen qua
-            viewModel.loadRoomTab();
+            viewModel.questionVM.loadRoomTab();
 
         },
         viewHidden : function(){
