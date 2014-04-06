@@ -2,6 +2,18 @@
 
     viewModel = new MistakeChasingGameClient.trainingVM(params.id);
     clock = new MistakeChasingGameClient.ClockVM("");
+    resultPopup = {
+        curPoints: ko.observable(),
+        button: {
+            text: ko.observable(),
+            action: ko.observable()
+        },
+        homeButton: {
+            text: "Back to Home",
+            action: backToHome
+        },
+        resultList: ko.observable()
+    };
 
     var countX = 0;
     myEventHandler = function () {
@@ -34,32 +46,29 @@
     };
     //////////////////
     function showEndDialog() {
+        $('#resultPopup').dxPopup('instance').beginUpdate();
         countX = 0;
-        var curPoints = ko.observable(Number(localStorage.currentPoint));
+        resultPopup.curPoints(localStorage.currentPoint);
+        resultPopup.resultList(viewModel.listQ);
         var isPassed = viewModel.isPassed();
         clock.clearClock();
-        var passDialog = DevExpress.ui.dialog.custom({
-            title: "Result",
-            message: "You have earn " + curPoints() + " points!",
-            buttons: [
-            { text: "Next Level", clickAction: next },
-            { text: "Back to Home", clickAction: backToMenu}]
-        });
 
-        var failDialog = DevExpress.ui.dialog.custom({
-            title: "Result",
-            message: "You have earn " + curPoints() + " points!",
-            buttons: [
-            { text: "Try Again", clickAction: tryAgain },
-            { text: "Back to Home", clickAction: backToMenu}]
-        });
         if (isPassed) {
-            passDialog.show();
+            resultPopup.button.text("Next Level");
+            resultPopup.button.action(next);
+            alert("pass");
         }
-        else failDialog.show();
+        else {
+            resultPopup.button.text("Try Again");
+            resultPopup.button.action(tryAgain);
+            alert("fail");
+        }
+        $('#resultPopup').dxPopup('instance').endUpdate();
+        $('#resultPopup').dxPopup('instance').show();
     };
 
     function tryAgain() {
+        $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         localStorage.currentPoint = 0;
         viewModel.randomQuestion();
@@ -68,6 +77,7 @@
     };
 
     function next() {
+        $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;
@@ -78,7 +88,8 @@
         clock.setClock();
     };
 
-    function backToMenu() {
+    function backToHome() {
+        $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;

@@ -18,7 +18,7 @@
         if (!localStorage.currentPoint)
             localStorage.currentPoint = 0;
         ///////////////////////////////        
-        var listQ = new DevExpress.data.ArrayStore({
+        this.listQ = new DevExpress.data.ArrayStore({
             key: "index"
         });
         //var listQ = ko.observable();
@@ -74,6 +74,7 @@
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 5;
+            this.listQ.update(localStorage.currentIndex, { status: "Correct" });
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
@@ -91,6 +92,9 @@
             if (this.fillingBlanksTab.choice3() == answer3) {
                 points += difCurrentQ * 2;
             }
+            if (points == difCurrentQ * 6) {
+                this.listQ.update(localStorage.currentIndex, { status: "Correct" });
+            }
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
@@ -100,7 +104,8 @@
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 5;
-            }
+                this.listQ.update(localStorage.currentIndex, { status: "Correct" });
+            }                        
             localStorage.currentPoint = Number(localStorage.currentPoint) + points;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
@@ -108,7 +113,6 @@
 
         this.isPassed = function () {
             var crit = Number(localStorage.currentlevel) * 5 * 2;
-
             if (Number(localStorage.currentPoint) >= crit) {
                 if (Number(localStorage.currentlevel) == Number(localStorage.level)) {
                     localStorage.level = Number(localStorage.currentlevel) + 1;
@@ -145,24 +149,20 @@
             var filteredQuestion = MistakeChasingGameClient.db.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
                                         "and", ["type", "=", "singleChoice"]]).sortBy("id").toArray();
             randomQuestion = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
-
             var correctAns = MistakeChasingGameClient.db.singleChoiceDb.createQuery().filter(["questionId", "=", randomQuestion.id]).select("mistakeId").toArray()[0].mistakeId;
-
             var randomAns1, randomAns2;
             var isRepeat = true;
             while (isRepeat) {
-                randomAns1 = Math.floor(Math.random() * 10);
+                randomAns1 = Math.floor(Math.random() * 10) + 1;
                 if (randomAns1 != correctAns) {
                     while (isRepeat) {
-                        randomAns2 = Math.floor(Math.random() * 10);
+                        randomAns2 = Math.floor(Math.random() * 10) + 1;
                         if (randomAns2 != randomAns1 && randomAns2 != correctAns) {
                             isRepeat = false;
                             var listAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
                                                         "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
-
                             randomAns.listAns = [listAns[0].content, listAns[1].content, listAns[2].content];
                             randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
-
                         };
                     };
                 };
@@ -194,11 +194,12 @@
             difCurrentQ = randomQuestion.dif;
         };
         this.addQuestion = function (index, type) {
-            listQ.insert({
+            this.listQ.insert({
                 index: index,
                 question: randomQuestion,
                 ans: randomAns,
-                type: type
+                type: type,
+                status: "Incorrect"
             });
         };
         this.randomThree = function () {
@@ -259,27 +260,32 @@
                 };
             }
             this.randomSingleChoice();
-
             this.addQuestion(5, "SingleChoice");
         };
         this.randomQuestion = function () {
             var maxIndex = 0;
-            listQ.totalCount().done(function (result) {
+            this.listQ.totalCount().done(function (result) {
                 maxIndex = result;
             });
             if (maxIndex != 0) {
                 for (var i = 1; i <= maxIndex; i++) {
-                    listQ.remove(i);
+                    this.listQ.remove(i);
                 }
             };
+            this.listQ.totalCount().done(function (result) {
+                alert(result);
+            });
             ////////////////////////////////////////            
             if (Number(localStorage.currentlevel) <= 21 && Number(localStorage.currentlevel) > 14) {
+                localStorage.maxIndex = 5;
                 this.randomFive();
             }
             else if (Number(localStorage.currentlevel) < 15 && Number(localStorage.currentlevel) > 7) {
+                localStorage.maxIndex = 4;
                 this.randomFour();
             }
             else if (Number(localStorage.currentlevel) < 8) {
+                localStorage.maxIndex = 3;
                 this.randomThree();
             }
         };
@@ -291,7 +297,7 @@
             var question, index;
 
             index = Number(localStorage.currentIndex);
-            listQ.byKey(index).done(function (dataItem) {
+            this.listQ.byKey(index).done(function (dataItem) {
                 question = dataItem;
                 //alert(question.question.dif);
             });
