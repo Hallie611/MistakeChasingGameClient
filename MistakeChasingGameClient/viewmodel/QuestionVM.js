@@ -24,42 +24,7 @@
         //////////////////////
         var selectedTab = ko.observable(0);
         var self = this;
-
-        this.RoomTab = {
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 0;
-            }),
-            numberPlayer: ko.observable(),
-            message: ko.observable(""),
-            username: ko.observable(localStorage.username),
-            level: ko.observable(localStorage.level),
-            point: ko.observable(localStorage.point),
-            oname: ko.observable(),
-            oplevel: ko.observable(''),
-            opoint: ko.observable(),
-            pointwin: ko.observable(),
-            poinlose: ko.observable(Number(localStorage.level) * 10),
-            ResultVisible: ko.observable(),
-            resultPoint: ko.observable(),
-            ImageResult: ko.observable(),
-            result: ko.observable(),
-            okResult: function () {
-                self.RoomTab.ResultVisible(false);
-            }
-        };
-        this.ListTab = {
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 1;
-            }),
-            username: ko.observable(localStorage.username),
-            oname: ko.observable(),
-            player1point: ko.observable(0),
-            player2point: ko.observable(0),
-            listDataSource: ko.observable()
-
-        };
+        
         this.findBugsTab = {
             src: ko.observable(),
             rendered: ko.observable(false),
@@ -95,49 +60,7 @@
             listAns: ko.observable(),
             choiceSC: ko.observable('')
         };
-        ///////////////////////////////////////////////Load tab
-        this.loadRoomTab = function () {
-            self.ListTab.player1point(0);
-            self.ListTab.player2point(0);
-            this.singleChoiceTab.rendered(false);
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            this.ListTab.rendered(false);
-            this.RoomTab.rendered(true);
-            this.RoomTab.point(localStorage.point);
-            if ($.connection.hub.state == 1) {
-                self.RoomTab.message('');
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("cntbtn").style.display = "none";
-                document.getElementById("Cancelbtn").style.display = "none";
-                document.getElementById("findbtn").style.display = "";
-                document.getElementById("menubtn").style.display = ""; -
-                self.RoomTab.message("");
-            }
-            else if ($.connection.hub.state == 4) {
-                self.RoomTab.message('');
-                document.getElementById("menubtn").style.display = "";
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("findbtn").style.display = "none";
-                document.getElementById("Cancelbtn").style.display = "none";
-                document.getElementById("cntbtn").style.display = "";
-            }
-            selectedTab(0);
-        };
-
-        this.loadListTab = function () {
-            document.getElementById("menubtn").style.display = "none";
-            this.singleChoiceTab.rendered(false);
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            this.RoomTab.rendered(false);
-            this.ListTab.rendered(true);
-            this.ListTab.listDataSource(self.listQ);
-            selectedTab(1);
-        };
-
+        ///////////////////////////////////////////////Load tab        
         this.loadFindBugs = function () {
             this.findBugsTab.src(randomQuestion.src);
             this.findBugsTab.bwidth(randomAns.width);
@@ -306,7 +229,7 @@
                 status: "Available"
             });
         };
-
+        //////////////////////////////////////////////
         this.addQuestion = function (index, type) {
             this.listQ.insert({
                 index: index,

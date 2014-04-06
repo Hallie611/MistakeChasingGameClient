@@ -8,9 +8,87 @@
         this.questionVM = new MistakeChasingGameClient.QuestionVM();
         /////////////////////////////////////////////////Du
         var self = this;
+        var selectedTab = ko.observable(0);
 
+        this.RoomTab = {
+            rendered: ko.observable(false),
+            tabVisible: ko.computed(function () {
+                return selectedTab() === 0;
+            }),
+            numberPlayer: ko.observable(),
+            message: ko.observable(""),
+            username: ko.observable(localStorage.username),
+            level: ko.observable(localStorage.level),
+            point: ko.observable(localStorage.point),
+            oname: ko.observable(),
+            oplevel: ko.observable(''),
+            opoint: ko.observable(),
+            pointwin: ko.observable(),
+            poinlose: ko.observable(Number(localStorage.level) * 10),
+            ResultVisible: ko.observable(),
+            resultPoint: ko.observable(),
+            ImageResult: ko.observable(),
+            result: ko.observable(),
+            okResult: function () {
+                self.RoomTab.ResultVisible(false);
+            }
+        };
+        this.ListTab = {
+            rendered: ko.observable(false),
+            tabVisible: ko.computed(function () {
+                return selectedTab() === 1;
+            }),
+            username: ko.observable(localStorage.username),
+            oname: ko.observable(),
+            player1point: ko.observable(0),
+            player2point: ko.observable(0),
+            listDataSource: ko.observable()
+        };
+        ///////////////////////////////////////////////Load tab
+        this.loadRoomTab = function () {
+            self.ListTab.player1point(0);
+            self.ListTab.player2point(0);
+            this.questionVM.singleChoiceTab.rendered(false);
+            this.questionVM.fillingBlanksTab.rendered(false);
+            this.questionVM.findBugsTab.rendered(false);
+            this.ListTab.rendered(false);
+            this.RoomTab.rendered(true);
+            this.RoomTab.point(localStorage.point);
+            if ($.connection.hub.state == 1) {
+                self.RoomTab.message('');
+                document.getElementById("opponent").style.display = "none";
+                document.getElementById("readybtn").style.display = "none";
+                document.getElementById("cntbtn").style.display = "none";
+                document.getElementById("Cancelbtn").style.display = "none";
+                document.getElementById("findbtn").style.display = "";
+                document.getElementById("menubtn").style.display = ""; -
+                self.RoomTab.message("");
+            }
+            else if ($.connection.hub.state == 4) {
+                self.RoomTab.message('');
+                document.getElementById("menubtn").style.display = "";
+                document.getElementById("opponent").style.display = "none";
+                document.getElementById("readybtn").style.display = "none";
+                document.getElementById("findbtn").style.display = "none";
+                document.getElementById("Cancelbtn").style.display = "none";
+                document.getElementById("cntbtn").style.display = "";
+            }
+            selectedTab(0);
+        };
+
+        this.loadListTab = function () {
+            document.getElementById("menubtn").style.display = "none";
+            this.questionVM.singleChoiceTab.rendered(false);
+            this.questionVM.fillingBlanksTab.rendered(false);
+            this.questionVM.findBugsTab.rendered(false);
+            this.RoomTab.rendered(false);
+            this.ListTab.rendered(true);
+            this.ListTab.listDataSource(self.questionVM.listQ);
+            selectedTab(1);
+        };
+        ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
-            self.questionVM.RoomTab.message('...');
+            self.RoomTab.message('...');
             $.connection.hub.url = "http://localhost:8080/signalr";
             // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
@@ -21,12 +99,12 @@
                     self.questionVM.addQuestionOnline(item);
                 });
                 //// temp la listQ tra ve cho ca 2 client
-                self.questionVM.ListTab.listDataSource(listQ);
+                self.ListTab.listDataSource(self.questionVM.listQ);
             };
             //
             $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
                 self.numberPlayer = message.totalClient;
-                self.questionVM.RoomTab.message("Number of player online : " + self.numberPlayer);
+                self.RoomTab.message("Number of player online : " + self.numberPlayer);
 
             };
             //no opponent
@@ -35,13 +113,13 @@
             };
 
             $.connection.gamesHub.client.foundOpponent = function (message) {
-                self.questionVM.RoomTab.message("");
-                self.questionVM.RoomTab.oname(message.oName);
+                self.RoomTab.message("");
+                self.RoomTab.oname(message.oName);
 
-                self.questionVM.RoomTab.oplevel(message.oLevel);
-                self.questionVM.RoomTab.opoint(message.oPoint);
-                self.questionVM.RoomTab.poinlose(Number(localStorage.level) * 10);
-                self.questionVM.RoomTab.pointwin(Number(message.oLevel) * 10);
+                self.RoomTab.oplevel(message.oLevel);
+                self.RoomTab.opoint(message.oPoint);
+                self.RoomTab.poinlose(Number(localStorage.level) * 10);
+                self.RoomTab.pointwin(Number(message.oLevel) * 10);
 
                 document.getElementById("opponent").style.display = "";
                 document.getElementById("readybtn").style.display = "";
@@ -51,24 +129,24 @@
 
             //sever tra ve ca 2 client deu ready vao game
             $.connection.gamesHub.client.gameReady = function () {
-                self.questionVM.loadListTab();
+                self.loadListTab();
                 self.clockOn(true);
             };
 
             //update 2 client cau nao lam roi
             $.connection.gamesHub.client.updateCorrectedQuestion = function (result) {
-                if (result.Name == self.questionVM.RoomTab.username()) {
-                    self.questionVM.ListTab.player1point(self.questionVM.ListTab.player1point() + result.point);
+                if (result.Name == self.RoomTab.username()) {
+                    self.ListTab.player1point(self.ListTab.player1point() + result.point);
                 }
                 else {
-                    self.questionVM.ListTab.player2point(self.questionVM.ListTab.player2point() + result.point);
+                    self.ListTab.player2point(self.ListTab.player2point() + result.point);
                 }
                 if (localStorage.currentIndex == result.index && result.isMax == true) {
-                    self.questionVM.loadListTab();
+                    self.loadListTab();
                 }
                 if (result.isMax) {
-                    self.questionVM.listQ.update(result.index, { status: result.Name });
-                    self.questionVM.ListTab.listDataSource(listQ);
+                    self.questionVM.listQ.update(result.index, { status: result.Name }); // cái này update cái gì đây
+                    self.questionVM.ListTab.listDataSource(self.questionVM.listQ);
                 }
             }
 
@@ -87,34 +165,34 @@
                 //}
 
                 if (localStorage.username == name.Name) {
-                    self.questionVM.RoomTab.ImageResult('win.png');
-                    self.questionVM.RoomTab.resultPoint("Your Point +" + self.questionVM.RoomTab.pointwin());
-                    localStorage.point = Number(localStorage.point) + Number(self.questionVM.RoomTab.pointwin());
-                    self.questionVM.RoomTab.result("WIN");
+                    self.RoomTab.ImageResult('win.png');
+                    self.RoomTab.resultPoint("Your Point +" + self.RoomTab.pointwin());
+                    localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
+                    self.RoomTab.result("WIN");
                 }
                 else if (name.Name == "none") {
-                    self.questionVM.RoomTab.result("DRAW");
-                    self.questionVM.RoomTab.ImageResult("Draw.png");
-                    self.questionVM.RoomTab.resultPoint("");
+                    self.RoomTab.result("DRAW");
+                    self.RoomTab.ImageResult("Draw.png");
+                    self.RoomTab.resultPoint("");
                 }
                 else {
-                    self.questionVM.RoomTab.result("LOSE");
-                    self.questionVM.RoomTab.ImageResult("lose.png");
-                    self.questionVM.RoomTab.resultPoint("Your Point -" + self.questionVM.RoomTab.poinlose());
-                    localStorage.point = Number(localStorage.point) - Number(self.questionVM.RoomTab.poinlose());
+                    self.RoomTab.result("LOSE");
+                    self.RoomTab.ImageResult("lose.png");
+                    self.RoomTab.resultPoint("Your Point -" + self.RoomTab.poinlose());
+                    localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
-                self.questionVM.RoomTab.ResultVisible(true);
-                self.questionVM.loadRoomTab();
+                self.RoomTab.ResultVisible(true);
+                self.loadRoomTab();
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
                 localStorage.point = Number(localStorage.point) + 5;
                 DevExpress.ui.dialog.alert('Your Opponent has out of match your point +5', 'Notify');
-                self.questionVM.loadRoomTab();
+                self.loadRoomTab();
             }
 
             $.connection.hub.start().done(function () {
-                self.questionVM.RoomTab.message("");
+                self.RoomTab.message("");
                 $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point).done(function () {
                     connected = true;
                     document.getElementById("findbtn").style.display = "";
@@ -126,7 +204,7 @@
         }
 
         this.findOpponent = function () {
-            self.questionVM.RoomTab.message("Finding opponent...");
+            self.RoomTab.message("Finding opponent...");
             $.connection.gamesHub.server.findOpponent();
         };
 
@@ -136,14 +214,14 @@
 
         //bao la ben nay da ready
         this.Ready = function () {
-            self.questionVM.RoomTab.message("Watting opponent ready...");
+            self.RoomTab.message("Watting opponent ready...");
             $.connection.gamesHub.server.playerReady();
         }
         this.Cancel = function () {
             localStorage.point = Number(localStorage.point) - 5;
             DevExpress.ui.dialog.alert('You cancel game, your point -5', 'Notify');
             $.connection.gamesHub.server.outOfMath();
-            self.questionVM.loadRoomTab();
+            self.loadRoomTab();
         }
         //////////////////////////////////////////////////////submit method
         /////////////////////////////////////////
