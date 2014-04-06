@@ -902,6 +902,9 @@
     <Content Include="views\Chasing.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="views\home.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="views\Dictionary\Dictionary.dxview">
       <SubType>Content</SubType>
     </Content>
@@ -910,7 +913,6 @@
     </Content>
     <Content Include="views\home.dxview" />
     <Content Include="views\home.css" />
-    <Content Include="views\home.js" />
     <Content Include="app.config.js" />
     <Content Include="views\Question\training.css">
       <SubType>Content</SubType>
