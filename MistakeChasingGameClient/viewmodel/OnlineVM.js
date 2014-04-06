@@ -2,237 +2,30 @@
     "use strict";
 
     MistakeChasingGameClient.OnlineVM = function (data) {
-        
-        ///////////////////////////////////////HA
-        var answerSC;
-        var answer1;
-        var answer2;
-        var answer3;
-        //////////////////////////
-        var difCurrentQ;
-        var randomQuestion = ko.observable();
+
+
 
         var numberPlayer;
-
-        var listQ = new DevExpress.data.ArrayStore({
-            key: "index"
-        });
-
         var connected = false;
-
-
-        //giu index random array question
-        if (!localStorage.currentIndex)
-            localStorage.currentIndex = 0;
-        // giu diem
-        if (!localStorage.currentPoint)
-            localStorage.currentPoint = 0;
-        ///////////////////////////////        
-        ///////////////////////zoom
-        var myScroll;
-        function loaded() {
-            myScroll = new iScroll('wrapper', { zoom: true, zoomMax: 2 });
-        };
-        //////////////////////
-        var selectedTab = ko.observable();
-
         this.clockOn = ko.observable(false);
-
-        this.findBugsTab = {
-            src: ko.observable(),
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 2;
-            }),
-            bwidth: ko.observable(),
-            bheight: ko.observable(),
-            bleft: ko.observable(),
-            btop: ko.observable(),
-            srcX: "images/redX.png"
-        };
-
-        this.fillingBlanksTab = {
-            src: ko.observable(),
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 3;
-            }),
-            answer1source: ko.observable(),
-            answer2source: ko.observable(),
-            answer3source: ko.observable(),
-
-            choice1: ko.observable(''),
-            choice2: ko.observable(''),
-            choice3: ko.observable('')
-        };
-
-        this.singleChoiceTab = {
-            src: ko.observable(),
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 4;
-            }),
-            listAns: ko.observable(),
-            choiceSC: ko.observable('')
-        };
-
+        this.questionVM = new MistakeChasingGameClient.QuestionVM();
         /////////////////////////////////////////////////Du
         var self = this;
 
-        this.RoomTab = {
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 0;
-            }),
-
-            numberPlayer: ko.observable(),
-            message: ko.observable(""),
-            username: ko.observable(localStorage.username),
-            level: ko.observable(localStorage.level),
-            point: ko.observable(localStorage.point),
-            oname: ko.observable(),
-            oplevel: ko.observable(''),
-            opoint: ko.observable(),
-            pointwin: ko.observable(),
-            poinlose: ko.observable(Number(localStorage.level) * 10),
-            ResultVisible: ko.observable(),
-            resultPoint: ko.observable(),
-            ImageResult: ko.observable(),
-            result:ko.observable(),
-            okResult: function () {
-                self.RoomTab.ResultVisible(false);
-            }
-
-        };
-        ///List Tab
-        this.ListTab = {
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 1;
-            }),
-            username: ko.observable(localStorage.username),
-            oname: ko.observable(),
-            player1point: ko.observable(0),
-            player2point: ko.observable(0),
-            listDataSource: ko.observable()
-
-        };
-        this.findBugsTab = {
-            src: ko.observable(),
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 2;
-            }),
-            bwidth: ko.observable(),
-            bheight: ko.observable(),
-            bleft: ko.observable(),
-            btop: ko.observable(),
-            srcX: "images/redX.png"
-        };
-
-        this.fillingBlanksTab = {
-            src: ko.observable(),
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 3;
-            }),
-            answer1source: ko.observable(),
-            answer2source: ko.observable(),
-            answer3source: ko.observable(),
-
-            choice1: ko.observable(''),
-            choice2: ko.observable(''),
-            choice3: ko.observable('')
-        };
-
-        this.singleChoiceTab = {
-            src: ko.observable(),
-            rendered: ko.observable(false),
-            tabVisible: ko.computed(function () {
-                return selectedTab() === 4;
-            }),
-            listAns: ko.observable(),
-            choiceSC: ko.observable('')
-        };
-
-        this.loadRoomTab = function () {
-         
-            self.ListTab.player1point(0);
-            self.ListTab.player2point(0);
-            this.singleChoiceTab.rendered(false);
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            this.ListTab.rendered(false);
-            this.RoomTab.rendered(true);
-            this.RoomTab.point(localStorage.point);
-            if ($.connection.hub.state==1) {
-                self.RoomTab.message('');
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("cntbtn").style.display = "none";
-                document.getElementById("Cancelbtn").style.display = "none";
-                document.getElementById("findbtn").style.display = "";
-                document.getElementById("menubtn").style.display = "";-
-                self.RoomTab.message("");
-            }
-            else if ($.connection.hub.state ==4) {
-                self.RoomTab.message('');
-                document.getElementById("menubtn").style.display = "";
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("findbtn").style.display = "none";
-                document.getElementById("Cancelbtn").style.display = "none";
-                document.getElementById("cntbtn").style.display = "";
-            }
-
-            selectedTab(0);
-
-
-        };
-
-        this.loadListTab = function () {
-            document.getElementById("menubtn").style.display = "none"; 
-            this.singleChoiceTab.rendered(false);
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            this.RoomTab.rendered(false);
-            this.ListTab.rendered(true);
-            selectedTab(1);
-
-        };
-        function clearListQ() {
-            var maxIndex = 0;
-            listQ.totalCount().done(function (result) {
-                maxIndex = result;
-            });
-            if (maxIndex != 0) {
-                for (var i = 1; i <= maxIndex; i++) {
-                    listQ.remove(i);
-                }
-            }
-        };
-
-
         this.ConnectToSever = function () {
-            self.RoomTab.message('...');
+            self.questionVM.RoomTab.message('...');
             $.connection.hub.url = "http://localhost:8080/signalr";
             // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
-                clearListQ();
+                self.questionVM.clearListQ();
                 temp.forEach(function (item) {
-                    listQ.insert({
-                        id: item.id,
-                        index: item.index,
-                        questionId: item.questionId,
-                        type: item.type,
-                        status: 'available'
-                    })
+                    self.questionVM.addQuestionOnline(item);
                 });
                 //// temp la listQ tra ve cho ca 2 client
                 self.ListTab.listDataSource(listQ);
-            }
+            };
 
             //
             $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
@@ -243,7 +36,6 @@
             //no opponent
             $.connection.gamesHub.client.noOpponents = function (message) {
                 //                self.loadRoomTab();
-
             };
 
             $.connection.gamesHub.client.foundOpponent = function (message) {
@@ -261,7 +53,6 @@
                 document.getElementById("findbtn").style.display = "none";
             };
 
-
             //sever tra ve ca 2 client deu ready vao game
             $.connection.gamesHub.client.gameReady = function () {
                 self.loadListTab();
@@ -270,24 +61,21 @@
 
             //update 2 client cau nao lam roi
             $.connection.gamesHub.client.updateCorrectedQuestion = function (result) {
-                
+
                 if (result.Name == self.RoomTab.username()) {
 
                     self.ListTab.player1point(self.ListTab.player1point() + result.point);
                 }
                 else {
-                    
                     self.ListTab.player2point(self.ListTab.player2point() + result.point);
                 }
-                if (localStorage.currentIndex == result.index && result.isMax==true) {
+                if (localStorage.currentIndex == result.index && result.isMax == true) {
                     self.loadListTab();
                 }
                 if (result.isMax) {
                     listQ.update(result.index, { status: result.Name });
                     self.ListTab.listDataSource(listQ);
-
                 }
-
             }
 
             $.connection.gamesHub.client.gameOver = function (name) {
@@ -304,10 +92,9 @@
                 //    localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 //}
 
-            
                 if (localStorage.username == name.Name) {
                     self.RoomTab.ImageResult('win.png');
-                    self.RoomTab.resultPoint("Your Point +"+self.RoomTab.pointwin());
+                    self.RoomTab.resultPoint("Your Point +" + self.RoomTab.pointwin());
                     localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
                     self.RoomTab.result("WIN");
                 }
@@ -319,19 +106,16 @@
                 else {
                     self.RoomTab.result("LOSE");
                     self.RoomTab.ImageResult("lose.png");
-                    self.RoomTab.resultPoint("Your Point -"+self.RoomTab.poinlose());
+                    self.RoomTab.resultPoint("Your Point -" + self.RoomTab.poinlose());
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
                 self.RoomTab.ResultVisible(true);
-
                 self.loadRoomTab();
-
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
                 localStorage.point = Number(localStorage.point) + 5;
                 DevExpress.ui.dialog.alert('Your Opponent has out of match your point +5', 'Notify');
-
                 self.loadRoomTab();
             }
 
@@ -344,14 +128,10 @@
                 });
                 // hub is now ready
             }).fail(function () {
-
             });
-
         }
 
         this.findOpponent = function () {
-
-
             self.RoomTab.message("Finding opponent...");
             $.connection.gamesHub.server.findOpponent();
         };
@@ -373,10 +153,7 @@
         }
         ////////////////////////////////////////////////////
         /////////////////////////////////////////
-
-
         this.bugFound = function () {
-
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 5;
@@ -416,19 +193,14 @@
                 this.CorrectedQuestion(localStorage.currentIndex, points, true);
             }
             else {
-
                 this.CorrectedQuestion(localStorage.currentIndex, points, false);
             }
-
-            //            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-            //            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
             return points;
         };
 
         ///
         /////////////////////////////////////////
         this.timeUp = function () {
-
             this.CorrectedQuestion(0, 0, false);
             var tabIndex = selectedTab();
             if (tabIndex == 2) {
@@ -447,93 +219,7 @@
             $.connection.gamesHub.server.correctQuestion(index, mark, getMaxPoint);
         };
         /////////////////////////////////////////
-        this.randomFindBugs = function () {
-            var filteredFindbugs = MistakeChasingGameClient.db.findbugsdb.createQuery().filter(["dif", "=", Number(localStorage.level)]).select("id").sortBy("id").toArray();
-            randomQuestion = filteredFindbugs[Math.floor(Math.random() * filteredFindbugs.length)];
-        };
-        this.randomFillingBlanks = function () {
-            var filteredFillBlank = MistakeChasingGameClient.db.fillingblankdb.createQuery().filter(["dif", "=", Number(localStorage.level)]).select("id").sortBy("id").toArray();
-            randomQuestion = filteredFillBlank[Math.floor(Math.random() * filteredFillBlank.length)];
-        };
-        this.randomSingleChoice = function () {
-            var filteredSingle = MistakeChasingGameClient.db.multiplechoicedb.createQuery().filter(["dif", "=", Number(localStorage.level)]).select("id").sortBy("id").toArray();
-            randomQuestion = filteredSingle[Math.floor(Math.random() * filteredSingle.length)];
-        };
-        this.loadFindBugs = function () {
-            this.findBugsTab.src(randomQuestion.src);
-            this.findBugsTab.bwidth(randomQuestion.width);
-            this.findBugsTab.bheight(randomQuestion.height);
-            this.findBugsTab.bleft(randomQuestion.left);
-            this.findBugsTab.btop(randomQuestion.top);
-            difCurrentQ = randomQuestion.dif;
-        };
-        this.loadFillingBlanks = function () {
-            this.fillingBlanksTab.src(randomQuestion.src);
-            this.fillingBlanksTab.answer1source(randomQuestion.listA);
-            this.fillingBlanksTab.answer2source(randomQuestion.listB);
-            this.fillingBlanksTab.answer3source(randomQuestion.listC);
-            answer1 = randomQuestion.A;
-            answer2 = randomQuestion.B;
-            answer3 = randomQuestion.C;
-            difCurrentQ = randomQuestion.dif;
-        };
-        this.loadSingleChoice = function () {
-            this.singleChoiceTab.src(randomQuestion.src);
-            this.singleChoiceTab.listAns(randomQuestion.listAns);
-            answerSC = randomQuestion.ans;
-            difCurrentQ = randomQuestion.dif;
-        };
-
         this.processClick = function (item) {
-            this.singleChoiceTab.rendered(false);
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            ///////////////////////////////////////////////
-            var itemData = item.itemData;
-            
-            localStorage.currentIndex = itemData.index;
-            if (itemData.type == "Find Bugs" && itemData.status == "available") {
-
-                /// lấy question ra 
-                
-                MistakeChasingGameClient.db.findbugsdb.byKey(itemData.questionId).done(function (dataItem) {
-                    randomQuestion = dataItem;
-
-                });
-                this.loadFindBugs();
-                selectedTab(2);
-                this.findBugsTab.rendered(true);
-            }
-            else if (itemData.type == "Fill Blanks" && itemData.status == "available") {
-
-
-                /// lấy question ra 
-
-                MistakeChasingGameClient.db.fillingblankdb.byKey(itemData.questionId).done(function (dataItem) {
-                    randomQuestion = dataItem;
-
-                });
-                this.loadFillingBlanks();
-                selectedTab(3);
-                this.fillingBlanksTab.rendered(true);
-                document.addEventListener('DOMContentLoaded', loaded, false);
-                loaded();
-            }
-            else if (itemData.type == "Single Choice" && itemData.status == "available") {
-
-
-                /// lấy question ra 
-
-                MistakeChasingGameClient.db.multiplechoicedb.byKey(itemData.questionId).done(function (dataItem) {
-                    randomQuestion = dataItem;
-
-                });
-                this.loadSingleChoice();
-                selectedTab(4);
-                this.singleChoiceTab.rendered(true);
-                document.addEventListener('DOMContentLoaded', loaded, false);
-                loaded();
-            }
         };
 
         this.backToHome = function () {

@@ -1,6 +1,6 @@
 ﻿MistakeChasingGameClient.training = function (params) {
 
-    viewModel = new MistakeChasingGameClient.trainingVM(params.id);
+    viewModel = new MistakeChasingGameClient.QuestionVM(params.id);
     clock = new MistakeChasingGameClient.ClockVM("");
     resultPopup = {
         curPoints: ko.observable(),
