@@ -1,14 +1,10 @@
 ﻿(function () {
     "use strict";
     MistakeChasingGameClient.QuestionVM = function (params) {
-        var answerSC;
-        var answer1;
-        var answer2;
-        var answer3;
         //////////////////////////
         var difCurrentQ;
-        var randomQuestion;// = ko.observable();
-        var randomAns;// = ko.observable();
+        var randomQuestion; // = ko.observable();
+        var randomAns; // = ko.observable();
 
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -34,7 +30,15 @@
             bheight: ko.observable(),
             bleft: ko.observable(),
             btop: ko.observable(),
-            srcX: "images/redX.png"
+            srcX: "images/redX.png",
+            loadFindBugs: function () {
+                self.findBugsTab.src(randomQuestion.src);
+                self.findBugsTab.bwidth(randomAns.width);
+                self.findBugsTab.bheight(randomAns.height);
+                self.findBugsTab.bleft(randomAns.left);
+                self.findBugsTab.btop(randomAns.top);
+                difCurrentQ = randomQuestion.dif;
+            }
         };
         this.fillingBlanksTab = {
             src: ko.observable(),
@@ -48,7 +52,20 @@
 
             choice1: ko.observable(''),
             choice2: ko.observable(''),
-            choice3: ko.observable('')
+            choice3: ko.observable(''),
+            answer1: "",
+            answer2: "",
+            answer3: "",
+            loadFillingBlanks: function () {
+                self.fillingBlanksTab.src(randomQuestion.src);
+                self.fillingBlanksTab.answer1source(randomAns[0].list);
+                self.fillingBlanksTab.answer2source(randomAns[1].list);
+                self.fillingBlanksTab.answer3source(randomAns[2].list);
+                self.fillingBlanksTab.answer1 = randomAns[0].ans;
+                self.fillingBlanksTab.answer2 = randomAns[1].ans;
+                self.fillingBlanksTab.answer3 = randomAns[2].ans;
+                difCurrentQ = randomQuestion.dif;
+            }
         };
         this.singleChoiceTab = {
             src: ko.observable(),
@@ -57,35 +74,15 @@
                 return selectedTab() === 4;
             }),
             listAns: ko.observable(),
-            choiceSC: ko.observable('')
-        };
-        ///////////////////////////////////////////////Load tab        
-        this.loadFindBugs = function () {
-            this.findBugsTab.src(randomQuestion.src);
-            this.findBugsTab.bwidth(randomAns.width);
-            this.findBugsTab.bheight(randomAns.height);
-            this.findBugsTab.bleft(randomAns.left);
-            this.findBugsTab.btop(randomAns.top);
-            difCurrentQ = randomQuestion.dif;
-        };
-
-        this.loadFillingBlanks = function () {
-            this.fillingBlanksTab.src(randomQuestion.src);
-            this.fillingBlanksTab.answer1source(randomAns[0].list);
-            this.fillingBlanksTab.answer2source(randomAns[1].list);
-            this.fillingBlanksTab.answer3source(randomAns[2].list);
-            answer1 = randomAns[0].ans;
-            answer2 = randomAns[1].ans;
-            answer3 = randomAns[2].ans;
-            difCurrentQ = randomQuestion.dif;
-        };
-
-        this.loadSingleChoice = function () {
-            this.singleChoiceTab.src(randomQuestion.src);
-            this.singleChoiceTab.listAns(randomAns.listAns);
-            answerSC = randomAns.ans;
-            difCurrentQ = randomQuestion.dif;
-        };
+            choiceSC: ko.observable(''),
+            answerSC: "",
+            loadSingleChoice: function () {
+                self.singleChoiceTab.src(randomQuestion.src);
+                self.singleChoiceTab.listAns(randomAns.listAns);
+                self.singleChoiceTab.answerSC = randomAns.ans;
+                difCurrentQ = randomQuestion.dif;
+            }
+        };        
         /////////////////////////////////////////
         this.bugFound = function () {
             var showMe = document.getElementById("bug");
@@ -94,17 +91,16 @@
             this.listQ.update(localStorage.currentIndex, { status: "Correct" });
             return points;
         };
-        //////////////////////////////////////////
-        //submit method
+        ////////////////////////////////////////////submit method
         this.submitBlanks = function () {
             var points = 0;
-            if (this.fillingBlanksTab.choice1() == answer1) {
+            if (this.fillingBlanksTab.choice1() == this.fillingBlanksTab.answer1) {
                 points += difCurrentQ * 2;
             }
-            if (this.fillingBlanksTab.choice2() == answer2) {
+            if (this.fillingBlanksTab.choice2() == this.fillingBlanksTab.answer2) {
                 points += difCurrentQ * 2;
             }
-            if (this.fillingBlanksTab.choice3() == answer3) {
+            if (this.fillingBlanksTab.choice3() == this.fillingBlanksTab.answer3) {
                 points += difCurrentQ * 2;
             }
             if (points == difCurrentQ * 6) {
@@ -115,7 +111,7 @@
         ////////////////////////////////////////
         this.submitChoice = function () {
             var points = 0;
-            if (answerSC == this.singleChoiceTab.choiceSC()) {
+            if (this.singleChoiceTab.answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 5;
                 this.listQ.update(localStorage.currentIndex, { status: "Correct" });
             }
@@ -155,7 +151,7 @@
                 }
             };
         };
-        /////////////////////////////////////////
+        /////////////////////////////////////////get data
         this.getQuestion = function (questionId) {
             MistakeChasingGameClient.db.questionDb.byKey(questionId).done(function (dataItem) {
                 randomQuestion = dataItem;
@@ -212,28 +208,6 @@
             };
         };
         ////////////////////////////////////////////////add question
-        this.addQuestionOnline = function (item) {
-            this.getQuestion(item.questionId);
-            if (item.type == "Find Bugs") {
-                this.getFindBugsAns();
-            }
-            else if (item.type == "Fill Blanks") {
-                this.getFillingBlanksAns();
-            }
-            else if (item.type == "Single Choice") {
-                this.getSingleChoiceAns();
-            }
-
-            this.listQ.insert({
-                index: item.index,
-                question: randomQuestion,
-                ans: randomAns,
-                type: item.type,
-                status: "Available"
-            });
-            //alert(randomAns + "inserted");
-        };
-        //////////////////////////////////////////////
         this.addQuestion = function (index, type) {
             this.listQ.insert({
                 index: index,
@@ -335,54 +309,21 @@
             if (question.type == "FindBugs") {
                 randomQuestion = question.question;
                 randomAns = question.ans;
-                this.loadFindBugs();
+                this.findBugsTab.loadFindBugs();
                 selectedTab(2);
                 this.findBugsTab.rendered(true);
             }
             else if (question.type == "FillingBlanks") {
                 randomQuestion = question.question;
                 randomAns = question.ans;
-                this.loadFillingBlanks();
+                this.fillingBlanksTab.loadFillingBlanks();
                 selectedTab(3);
                 this.fillingBlanksTab.rendered(true);
             }
             else if (question.type == "SingleChoice") {
                 randomQuestion = question.question;
                 randomAns = question.ans;
-                this.loadSingleChoice();
-                selectedTab(4);
-                this.singleChoiceTab.rendered(true);
-            }
-        };
-
-        /////////////////////////////////////////
-        this.loadQuestionOnline = function (item) {
-            this.singleChoiceTab.rendered(false);
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            ///////////////////////////////////////////////
-            var itemData = item.itemData;
-
-            localStorage.currentIndex = itemData.index;
-            alert(itemData.index + "load online index");
-            if (itemData.type == "Find Bugs" && itemData.status == "Available") {
-                randomQuestion = itemData.question;
-                randomAns = itemData.ans;
-                this.loadFindBugs();
-                selectedTab(2);
-                this.findBugsTab.rendered(true);
-            }
-            else if (itemData.type == "Fill Blanks" && itemData.status == "Available") {
-                randomQuestion = itemData.question;
-                randomAns = itemData.ans;
-                this.loadFillingBlanks();
-                selectedTab(3);
-                this.fillingBlanksTab.rendered(true);
-            }
-            else if (itemData.type == "Single Choice" && itemData.status == "Available") {
-                randomQuestion = itemData.question;
-                randomAns = itemData.ans;
-                this.loadSingleChoice();
+                this.singleChoiceTab.loadSingleChoice();
                 selectedTab(4);
                 this.singleChoiceTab.rendered(true);
             }

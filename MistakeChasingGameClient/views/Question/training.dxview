@@ -2,7 +2,7 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->
-        <div id="resultPopup" data-bind="dxPopup: { showTitle: false, height: '55%'}">
+        <div id="resultPopup" data-bind="dxPopup: { showTitle: false, height: '330px'}">
             <div style="text-align: center; height: 100%;">
                 <p style="font-size: larger; font-weight: bolder;">
                     Result
@@ -52,7 +52,7 @@
             <div data-bind="dxScrollView: { }" style="height: 58%;">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
-            <div style="bottom: 0%; width: 100%;">
+            <div style="bottom: 0%; width: 100%;position: absolute;">
                 <div style="text-align: center;">
                     <h3>
                         Fill in the blanks in the codes above:</h3>
@@ -94,7 +94,7 @@
             <div data-bind="dxScrollView: { }" style="height: 73%;">
                 <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
             </div>
-            <div style="bottom: 0%; width: 100%;">
+            <div style="bottom: 0%; width: 100%;position: absolute;">
                 <div style="text-align: center;">
                     <h3>
                         Which type of bug is in the codes above?</h3>
