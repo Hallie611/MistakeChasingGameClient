@@ -1,7 +1,7 @@
 ﻿MistakeChasingGameClient.training = function (params) {
 
-    viewModel = new MistakeChasingGameClient.QuestionVM(params.id);
-    clock = new MistakeChasingGameClient.ClockVM("");
+    trainingViewModel = new MistakeChasingGameClient.QuestionVM(params.id);
+    trainingClock = new MistakeChasingGameClient.ClockVM("");
     resultPopup = {
         curPoints: ko.observable(),
         button: {
@@ -23,41 +23,41 @@
         if (countX >= 3) {
             countX = 0;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-            viewModel.loadQuestion();
+            trainingViewModel.loadQuestion();
         }
     };
 
     showBug = function () {
-        var points = viewModel.bugFound();
+        var points = trainingViewModel.bugFound();
         localStorage.currentPoint = Number(localStorage.currentPoint) + points;
         localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         $("#toastContainer").dxToast('instance').show();
     };
     processHiding = function () {
-        viewModel.loadQuestion();
+        trainingViewModel.loadQuestion();
     };
 
     submitFBK = function () {
-        var points = viewModel.submitBlanks();
+        var points = trainingViewModel.submitBlanks();
         localStorage.currentPoint = Number(localStorage.currentPoint) + points;
         localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-        viewModel.loadQuestion();
+        trainingViewModel.loadQuestion();
     };
 
     submitSC = function () {
-        var points = viewModel.submitChoice();
+        var points = trainingViewModel.submitChoice();
         localStorage.currentPoint = Number(localStorage.currentPoint) + points;
         localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         showEndDialog();
     };
     //////////////////
     function showEndDialog() {
-        $('#resultPopup').dxPopup('instance').beginUpdate();
+        //$('#resultPopup').dxPopup('instance').beginUpdate();
         countX = 0;
         resultPopup.curPoints(localStorage.currentPoint);
-        resultPopup.resultList(viewModel.listQ);
-        var isPassed = viewModel.isPassed();
-        clock.clearClock();
+        resultPopup.resultList(trainingViewModel.listQ);
+        var isPassed = trainingViewModel.isPassed();
+        trainingClock.clearClock();
 
         if (isPassed) {
             resultPopup.button.text("Next Level");
@@ -67,7 +67,7 @@
             resultPopup.button.text("Try Again");
             resultPopup.button.action(tryAgain);
         }
-        $('#resultPopup').dxPopup('instance').endUpdate();
+        //$('#resultPopup').dxPopup('instance').endUpdate();
         $('#resultPopup').dxPopup('instance').show();
     };
 
@@ -75,9 +75,9 @@
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         localStorage.currentPoint = 0;
-        viewModel.randomQuestion();
-        viewModel.loadQuestion();
-        clock.setClock();
+        trainingViewModel.randomQuestion();
+        trainingViewModel.loadQuestion();
+        trainingClock.setClock();
     };
 
     function next() {
@@ -87,9 +87,9 @@
         localStorage.currentPoint = 0;
         var nextLevel = Number(localStorage.currentlevel) + 1;
         localStorage.currentlevel = nextLevel;
-        viewModel.randomQuestion();
-        viewModel.loadQuestion();
-        clock.setClock();
+        trainingViewModel.randomQuestion();
+        trainingViewModel.loadQuestion();
+        trainingClock.setClock();
     };
 
     function backToHome() {
@@ -102,19 +102,19 @@
     };
 
     var timeOut = ko.computed(function () {
-        if (clock.timeOut()) {
-            clock.timeOut(false);
-            var points = viewModel.timeUp();
+        if (trainingClock.timeOut()) {
+            trainingClock.timeOut(false);
+            var points = trainingViewModel.timeUp();
             showEndDialog();
         }
     });
 
-    return $.extend(viewModel, {
+    return $.extend(trainingViewModel, {
         viewShown: function () {
             //goi ham load cau hoi len dua theo id truyen qua
-            viewModel.randomQuestion();
-            viewModel.loadQuestion();
-            clock.setClock();
+            trainingViewModel.randomQuestion();
+            trainingViewModel.loadQuestion();
+            trainingClock.setClock();
         }
     });
 };
@@ -134,7 +134,7 @@
 // variables for time units
 //    txMinutes = ko.observable("");
 //    txSeconds = ko.observable("");
-//    restartClock = ko.observable(true);
+//    restarttrainingClock = ko.observable(true);
 //    time = ko.computed(function () {
 //        return txMinutes() + " : " + txSeconds();
 //    }, this);
@@ -146,8 +146,8 @@
 //        }
 //        return i;
 //    };
-//    function runClock() {
-//        if (restartClock()) {
+//    function runtrainingClock() {
+//        if (restarttrainingClock()) {
 //            if (Number(localStorage.maxIndex) == 3) {
 //                seconds = 0;
 //                minutes = 3;
@@ -160,7 +160,7 @@
 //                seconds = 0;
 //                minutes = 5;
 //            }
-//            restartClock(false);
+//            restarttrainingClock(false);
 //        };
 //        // restart second when reach 0
 //        if (seconds == 0) {
@@ -174,19 +174,19 @@
 //        //alert(minutes() + " " + seconds());
 
 //        if (minutes == 0 && seconds == 0) {
-//            clearClock();
-//            var points = viewModel.timeUp();
+//            cleartrainingClock();
+//            var points = trainingViewModel.timeUp();
 //            showEndDialog();
 //        }
 //    };
 
-//    var interval; // = setInterval(runClock, 1000);
+//    var interval; // = setInterval(runtrainingClock, 1000);
 
-//    function clearClock() {
+//    function cleartrainingClock() {
 //        clearInterval(interval);
 //    };
-//    function setClock() {
-//        restartClock(true);
+//    function settrainingClock() {
+//        restarttrainingClock(true);
 //        if (Number(localStorage.maxIndex) == 3) {
 //            txMinutes("3");
 //            txSeconds("00");
@@ -199,5 +199,5 @@
 //            txMinutes("5");
 //            txSeconds("00");
 //        }
-//        interval = setInterval(runClock, 1000);
+//        interval = setInterval(runtrainingClock, 1000);
 //    };

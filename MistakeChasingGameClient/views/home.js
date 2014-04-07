@@ -33,9 +33,6 @@
             src: "images/roadmap2.jpg",
             rendered: ko.observable(false)
         }
-
-
-
     };
 
     register = function () {
@@ -51,9 +48,7 @@
                 message("Check connection server  for creating user in first play");
                 btnLoadAgain(true);
                 txtUNVisible(false);
-            });
-
-       
+            });       
     };
 
     if (!localStorage.username) {
@@ -66,15 +61,13 @@
     };
 
 
-    SaveName = function () {
-        
+    SaveName = function () {        
         if (username() == '') {
             message("Name can not be blank");
         }
         else {
             message('...');
             $.connection.gamesHub.server.register(username()).done(function (result) {
-
                 if (result == true) {
                             localStorage.username = username();
                             localStorage.level = "1";
@@ -85,7 +78,6 @@
                         else {
                             message("Username has used, Try another please");
                         }
-
             });
         }
     };
@@ -105,7 +97,6 @@
     });
 
     clickLevel = function (level) {
-
         if (level > Number(localStorage.level)) {
             $("#toastContainer").dxToast('instance').show();
         } else {

@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: clock.time">
+        <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: trainingClock.time">
             hhhhhhhhhhhhhhhh
         </div>
         <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">

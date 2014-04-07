@@ -41,10 +41,34 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="cancel.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="css\dx.generic.light.css">
       <SubType>Content</SubType>
     </Content>
     <Content Include="data\db.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Draw.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\cancel.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\chasing.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\findop.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\ready.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\button\Thumbs.db">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\cancel.jpg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\fillinBlankQ\001.png">
@@ -881,6 +905,9 @@
     <Content Include="js\globalize.min.js" />
     <Content Include="js\jquery-1.9.1.min.js" />
     <Content Include="js\knockout-2.2.1.js" />
+    <Content Include="lose.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="viewmodel\ClockVM.js">
       <SubType>Content</SubType>
     </Content>
@@ -918,6 +945,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="views\Question\training.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="win.png">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>

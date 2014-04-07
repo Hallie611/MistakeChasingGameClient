@@ -1,7 +1,6 @@
 ﻿(function () {
     "use strict";
     MistakeChasingGameClient.QuestionVM = function (params) {
-
         var answerSC;
         var answer1;
         var answer2;
