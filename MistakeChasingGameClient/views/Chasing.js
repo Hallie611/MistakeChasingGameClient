@@ -56,10 +56,13 @@
     });
 
     backHome = function () {
-        MistakeChasingGameClient.app.navigate('home', { root: 'blank' });
+        MistakeChasingGameClient.app.navigate('home', { root: 'current' });
         popupVisible(false);
     }
 
+    if (localStorage.username) {
+        onlineViewModel.isUser=true;
+    }
     register = function () {
         popupVisible(true);
         //$.connection.hub.url = "http://localhost:8080/signalr";
@@ -107,10 +110,7 @@
             });
         }
     };
-    if (!isUser) {
-        register();
-    }
-
+   
 
 
     return $.extend(onlineViewModel, {
@@ -118,8 +118,10 @@
             //goi ham load cau hoi len dua theo id truyen qua
             //onlineViewModel = new MistakeChasingGameClient.OnlineVM();
             //alert(onlineViewModel);
-            if (isUser) {
+            if (onlineViewModel.isUser) {
                 onlineViewModel.loadRoomTab();
+            } else{
+                register();
             }
 
            

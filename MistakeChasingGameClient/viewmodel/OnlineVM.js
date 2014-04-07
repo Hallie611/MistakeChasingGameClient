@@ -3,6 +3,7 @@
 
     MistakeChasingGameClient.OnlineVM = function (data) {
 
+        var isUser = ko.observable(false);
         var answerSC;
         var answer1;
         var answer2;
