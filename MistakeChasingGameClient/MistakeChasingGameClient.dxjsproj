@@ -71,6 +71,9 @@
     <Content Include="images\cancel.jpg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\Dictionary\Nullpointer.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\fillinBlankQ\001.png">
       <SubType>Content</SubType>
     </Content>
@@ -917,9 +920,6 @@
     <Content Include="viewmodel\QuestionVM.js">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="viewmodel\user-view-model.js">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="views\Chasing.dxview">
       <SubType>Content</SubType>
     </Content>
@@ -960,6 +960,7 @@
     <Folder Include="images\MultipleChoice" />
     <Folder Include="images\fillinBlankQ" />
     <Folder Include="images\button" />
+    <Folder Include="images\Dictionary" />
     <Folder Include="js\" />
     <Folder Include="js\cordova" />
     <Folder Include="layouts\" />
