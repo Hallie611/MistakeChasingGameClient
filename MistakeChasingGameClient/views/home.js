@@ -9,8 +9,16 @@
     txtUNVisible = ko.observable(false);
     btnLoadAgain = ko.observable(false);
 
-    var viewModel = {
+    if (!localStorage.level) {
+        localStorage.level = 1;
+        localStorage.point = 0;
+    }
+    level= ko.observable(localStorage.level);
+    point= ko.observable(localStorage.point);
 
+
+    var viewModel = {
+     
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -34,12 +42,8 @@
             rendered: ko.observable(false)
         }
     };
-    
-    if (!localStorage.level) {
-        localStorage.level = 1;
-        localStorage.point = 100;
-    }
- 
+
+
     $.each(["beginner", "intermediate", "advanced"], function (i, maps) {
         viewModel[maps].mapVisible = ko.computed(function () {
             return viewModel.selectedTab() === i;

@@ -611,19 +611,19 @@
     <Content Include="images\findbugQ\P99.jpg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\level\chick.png">
+    <Content Include="images\level\level1.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\level\chiken.png">
+    <Content Include="images\level\level2.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\level\level1.jpg">
+    <Content Include="images\level\level3.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\level\level2.jpg">
+    <Content Include="images\level\level4.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\level\level3.jpg">
+    <Content Include="images\level\level5.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\lvBtn.png">

@@ -60,6 +60,7 @@
         trainingClock.clearClock();
 
         if (isPassed) {
+
             resultPopup.button.text("Next Level");
             resultPopup.button.action(next);
         }
@@ -99,6 +100,9 @@
         localStorage.currentPoint = 0;
         localStorage.currentlevel = 0;
         MistakeChasingGameClient.app.navigate('home', { root: true });
+        this.level = ko.observable(localStorage.level);
+        this.point = ko.observable(localStorage.point);
+
     };
 
     var timeOut = ko.computed(function () {

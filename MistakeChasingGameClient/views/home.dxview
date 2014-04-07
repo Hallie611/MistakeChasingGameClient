@@ -1,11 +1,13 @@
 <div data-options="dxView : { name: 'home', title: 'Home' } ">
     <div class="home-view" data-options="dxContent : { targetPlaceholder: 'content' } ">
-     
+
         <div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>
-
-       <b data-bind="localStorage.level">Level : 1</b>
-        <b data-bind="localStorage.point">Point : 100</b>
+        <div style="text-align:center">
+            <b style="margin-right :5%" data-bind="text : 'Level: ' + level()"></b>
+             <img data-bind="attr: { src: 'images/level/level'+level()+'.png',height :'20px'}"/>
+            <b style="margin-left:5%" data-bind="text : 'Point: ' +point() "></b>
+        </div>
 
         <div class="content" id="levelmap" data-bind="if: beginner.rendered, visible: beginner.mapVisible">
             <img data-bind="attr: { src: beginner.src }" style="width: 100%; height: 100%" />
@@ -43,7 +45,7 @@
             </div>
             <div id="lv14" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(14) } }">
             </div>
-			<div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'You have not reach this level yet!', type:'error', displayTime: 300}">
+            <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'You have not reach this level yet!', type:'error', displayTime: 300}">
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: advanced.rendered, visible: advanced.mapVisible">
@@ -62,7 +64,7 @@
             </div>
             <div id="lv21" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(21) } }">
             </div>
-			<div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'You have not reach this level yet!', type:'error', displayTime: 300}">
+            <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'You have not reach this level yet!', type:'error', displayTime: 300}">
             </div>
         </div>
     </div>
