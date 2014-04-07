@@ -108,6 +108,7 @@
             this.findBugsTab.bleft(randomAns.left);
             this.findBugsTab.btop(randomAns.top);
             difCurrentQ = randomQuestion.dif;
+       
         };
 
         this.loadFillingBlanks = function () {
@@ -177,11 +178,13 @@
                 localStorage.maxIndex = result;
             });
         };
+        var counter;
+
         ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
             self.RoomTab.message('...');
-            $.connection.hub.url = "http://localhost:8080/signalr";
-            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            //$.connection.hub.url = "http://localhost:8080/signalr";
+            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -191,6 +194,7 @@
                 });
                 //// temp la listQ tra ve cho ca 2 client
                 self.ListTab.listDataSource(self.listQ);
+                
             };
             //
             $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
@@ -218,26 +222,52 @@
                 document.getElementById("findbtn").style.display = "none";
             };
 
-            //sever tra ve ca 2 client deu ready vao game
+
+            
+
+            $.connection.gamesHub.client.oponentReady = function (opponent) {
+
+                var count = 10;
+
+                counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+
+                function timer() {
+                    count = count - 1;
+                    if (count <= 0) {
+                        
+                        clearInterval(counter);
+                        //counter ended, do something here
+                        $.connection.gamesHub.server.playerReady();
+                        return;
+                    }
+                    self.RoomTab.message(opponent + " ready .Game start after " + count + " s");
+                    //Do code for showing the number of seconds here
+                }
+
+                
+            };            //sever tra ve ca 2 client deu ready vao game
             $.connection.gamesHub.client.gameReady = function () {
+                clearInterval(counter);
                 self.loadListTab();
                 self.clockOn(true);
             };
 
             //update 2 client cau nao lam roi
             $.connection.gamesHub.client.updateCorrectedQuestion = function (result) {
+                
                 if (result.Name == self.RoomTab.username()) {
                     self.ListTab.player1point(self.ListTab.player1point() + result.point);
                 }
                 else {
                     self.ListTab.player2point(self.ListTab.player2point() + result.point);
                 }
-                if (localStorage.currentIndex == result.index && result.isMax == true) {
-                    self.loadListTab();
-                }
+               
                 if (result.isMax) {
                     self.listQ.update(result.index, { status: result.Name }); // cái này update cái gì đây
                     self.ListTab.listDataSource(self.listQ);
+                }
+                if (localStorage.currentIndex == result.index && result.isMax == true) {
+                    self.loadListTab();
                 }
             }
 
@@ -280,6 +310,7 @@
                 localStorage.point = Number(localStorage.point) + 5;
                 DevExpress.ui.dialog.alert('Your Opponent has out of match your point +5', 'Notify');
                 self.loadRoomTab();
+                clearInterval(counter);
             }
 
             $.connection.hub.start().done(function () {
@@ -303,15 +334,20 @@
             $.connection.gamesHub.server.play(1);
         };
 
+
+
+
         //bao la ben nay da ready
         this.Ready = function () {
-            self.RoomTab.message("Watting opponent ready...");
+            self.RoomTab.message("Watting opponent ready ...");
             $.connection.gamesHub.server.playerReady();
         }
         this.Cancel = function () {
             localStorage.point = Number(localStorage.point) - 5;
             DevExpress.ui.dialog.alert('You cancel game, your point -5', 'Notify');
             $.connection.gamesHub.server.outOfMath();
+            clearInterval(counter);
+            self.RoomTab.message("Click To Opponent");
             self.loadRoomTab();
         }
         ///////////////////////////////////////////
@@ -390,8 +426,8 @@
             var showMe = document.getElementById("bug");
             showMe.style.borderStyle = "solid";
             var points = difCurrentQ * 5;
-            this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-            self.CorrectedQuestion(1, points, true);
+            //this.listQ.update(localStorage.currentIndex, { status: "Correct" });
+            self.CorrectedQuestion(localStorage.currentIndex, points, true);
             return points;
         };
         this.submitBlanks = function () {
@@ -406,7 +442,7 @@
                 points += difCurrentQ * 2;
             }
             if (points == difCurrentQ * 6) {
-                this.listQ.update(localStorage.currentIndex, { status: "Correct" });
+               // this.listQ.update(localStorage.currentIndex, { status: "Correct" });
                 //}
                 //            var points = self.questionVM.submitBlanks();
                 //            self.questionVM.listQ.byKey(localStorage.currentIndex).done(function (dataItem) {
@@ -463,12 +499,12 @@
             this.singleChoiceTab.rendered(false);
             this.fillingBlanksTab.rendered(false);
             this.findBugsTab.rendered(false);
-            this.ListTab.rendered(false);
+            
             this.RoomTab.rendered(false);
             ///////////////////////////////////////////////
             var itemData = item.itemData;
             localStorage.currentIndex = itemData.index;
-            alert(itemData.index + "load online index");
+          
 
             if (itemData.type == "Find Bugs" && itemData.status == "Available") {
                 randomQuestion = itemData.question;
@@ -476,6 +512,7 @@
                 this.loadFindBugs();
                 selectedTab(2);
                 this.findBugsTab.rendered(true);
+                this.ListTab.rendered(false);
             }
             else if (itemData.type == "Fill Blanks" && itemData.status == "Available") {
                 randomQuestion = itemData.question;
@@ -483,6 +520,7 @@
                 this.loadFillingBlanks();
                 selectedTab(3);
                 this.fillingBlanksTab.rendered(true);
+                this.ListTab.rendered(false);
             }
             else if (itemData.type == "Single Choice" && itemData.status == "Available") {
                 randomQuestion = itemData.question;
@@ -490,6 +528,7 @@
                 this.loadSingleChoice();
                 selectedTab(4);
                 this.singleChoiceTab.rendered(true);
+                this.ListTab.rendered(false);
             }
         };
         this.backToHome = function () {
@@ -499,5 +538,9 @@
             $.connection.hub.stop();
             MistakeChasingGameClient.app.navigate('home', { root: true });
         }
+
+
+
+
     };
 })();

@@ -50,12 +50,71 @@
         }
     });
 
+
+
+    register = function () {
+        popupVisible(true);
+        //$.connection.hub.url = "http://localhost:8080/signalr";
+        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        $.connection.hub.start()
+            .done(function () {
+                btnLoadAgain(false);
+                txtUNVisible(true);
+            })
+            .fail(function () {
+                message("Check connection server  for creating user in first play");
+                btnLoadAgain(true);
+                txtUNVisible(false);
+            });
+    };
+
+    
+    loadAgain = function () {
+        message('...');
+        register();
+    };
+
+
+    SaveName = function () {
+        if (username() == '') {
+            message("Name can not be blank");
+        }
+        else {
+            message('...');
+            $.connection.gamesHub.server.register(username()).done(function (result) {
+                if (result == true) {
+                    localStorage.username = username();
+                    onlineViewModel.RoomTab.username(localStorage.username),
+                     onlineViewModel.RoomTab.level(localStorage.level),
+                     onlineViewModel.RoomTab.point(localStorage.point),
+
+                    popupVisible(false);
+                    $.connection.hub.stop();
+
+                    onlineViewModel.loadRoomTab();
+                }
+                else {
+                    message("Username has used, Try another please");
+                }
+            });
+        }
+    };
+
+
+
+
     return $.extend(onlineViewModel, {
         viewShown: function () {
             //goi ham load cau hoi len dua theo id truyen qua
             //onlineViewModel = new MistakeChasingGameClient.OnlineVM();
             //alert(onlineViewModel);
-            onlineViewModel.loadRoomTab();
+            if (!localStorage.username) {
+                register();
+            } else {
+                onlineViewModel.loadRoomTab();
+            }
+
+           
         },
         viewDisposing: function () {
             $.connection.hub.stop();

@@ -34,55 +34,12 @@
             rendered: ko.observable(false)
         }
     };
-
-    register = function () {
-        popupVisible(true);
-        $.connection.hub.url = "http://localhost:8080/signalr";
-        //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
-        $.connection.hub.start()
-            .done(function () {
-                btnLoadAgain(false);
-                txtUNVisible(true);
-            })
-            .fail(function () {
-                message("Check connection server  for creating user in first play");
-                btnLoadAgain(true);
-                txtUNVisible(false);
-            });       
-    };
-
-    if (!localStorage.username) {
-        register();
-    };
-
-    loadAgain = function () {
-        message('...');
-        register();
-    };
-
-
-    SaveName = function () {        
-        if (username() == '') {
-            message("Name can not be blank");
-        }
-        else {
-            message('...');
-            $.connection.gamesHub.server.register(username()).done(function (result) {
-                if (result == true) {
-                            localStorage.username = username();
-                            localStorage.level = "1";
-                            localStorage.point = "100";
-                            popupVisible(false);
-                            $.connection.hub.stop();
-                        }
-                        else {
-                            message("Username has used, Try another please");
-                        }
-            });
-        }
-    };
-
-
+    
+    if (!localStorage.level) {
+        localStorage.level = 1;
+        localStorage.point = 100;
+    }
+ 
     $.each(["beginner", "intermediate", "advanced"], function (i, maps) {
         viewModel[maps].mapVisible = ko.computed(function () {
             return viewModel.selectedTab() === i;

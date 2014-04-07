@@ -1,16 +1,12 @@
 <div data-options="dxView : { name: 'home', title: 'Home' } ">
     <div class="home-view" data-options="dxContent : { targetPlaceholder: 'content' } ">
+     
         <div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>
 
-        <div data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
-            <div style="text-align: center">
-                <div data-bind="dxTextBox: {value: username,visible: txtUNVisible , visible: txtUNVisible}"></div>
-                <p data-bind="text : message"></p>
-                <div data-bind="dxButton: { text: 'Create',clickAction: SaveName ,visible: txtUNVisible}"></div>
-                <div data-bind="dxButton: { text: 'Try Again',clickAction: loadAgain ,visible: btnLoadAgain}"></div>
-            </div>
-        </div>
+       <b data-bind="localStorage.level">Level : 1</b>
+        <b data-bind="localStorage.point">Point : 100</b>
+
         <div class="content" id="levelmap" data-bind="if: beginner.rendered, visible: beginner.mapVisible">
             <img data-bind="attr: { src: beginner.src }" style="width: 100%; height: 100%" />
             <div id="lv1" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(1) } }">

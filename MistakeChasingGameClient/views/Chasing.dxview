@@ -1,7 +1,17 @@
 <div data-options="dxView : { name: 'Chasing', title: 'Chasing' } ">
     <div style="text-align: center" data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div id="menubtn" data-bind="dxButton: {clickAction: backToHome,text: 'Home' }">
+        
         </div>
+            <div data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
+            <div style="text-align: center">
+                <div data-bind="dxTextBox: {value: username,visible: txtUNVisible , visible: txtUNVisible}"></div>
+                <p data-bind="text : message"></p>
+                <div data-bind="dxButton: { text: 'Create',clickAction: SaveName ,visible: txtUNVisible}"></div>
+                <div data-bind="dxButton: { text: 'Try Again',clickAction: loadAgain ,visible: btnLoadAgain}"></div>
+            </div>
+        </div>
+
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
             <div data-bind="dxPopup: {visible: RoomTab.ResultVisible ,title: 'Result Match Game',clickAction: RoomTab.okResult, showTitle: true,height: '50%' }">
                 <div style="text-align: center">
@@ -58,11 +68,10 @@
                     </td>
                 </tr>
             </table>
-            <h1 data-bind="text: RoomTab.message">
+ <h1 data-bind="text: RoomTab.message">
             </h1>
             <div id="opponent" style="display: none; text-align: left; margin-left: 10%; margin-right: 10%;"
-                class="dx-fieldset">
-                <div class="dx-field">
+                class="dx-fieldset">                <div class="dx-field">
                     <div class="dx-field-label">
                         Opponent
                     </div>
@@ -95,13 +104,15 @@
                     style="float: right; margin-right: 10%;"><b style="width: 40%" data-bind="text :   RoomTab.oname">
                     </b>:<b style="width: 40%" data-bind="text :   ListTab.player2point"></b> </b>
             </div>
-            <div id="myList" style="margin: 10%;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick }">
+            <div id="myList" style="margin: 10%;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick ,height: '75%'}">
                 <div style="margin: 5%; text-align: left; padding: 5px;" data-options="dxTemplate:{ name:'item' }">
                     <p style="font-size: larger;">
                         <b data-bind="text: index + '. ' + type+ ' ' "></b>(<b data-bind="text: status"></b>)
                     </p>
                 </div>
             </div>
+
+             <div id="Div1"  data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }"></div>
         </div>
         <div class="content" id="levelmap" data-bind="if:  findBugsTab.rendered, visible:  findBugsTab.tabVisible">
             <div id="
