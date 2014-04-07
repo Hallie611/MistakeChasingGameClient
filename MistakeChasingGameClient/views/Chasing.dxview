@@ -9,6 +9,8 @@
                 <p data-bind="text : message"></p>
                 <div data-bind="dxButton: { text: 'Create',clickAction: SaveName ,visible: txtUNVisible}"></div>
                 <div data-bind="dxButton: { text: 'Try Again',clickAction: loadAgain ,visible: btnLoadAgain}"></div>
+                <div data-bind="dxButton: { text: 'Back to Home',clickAction: backHome ,visible: true}"></div>
+
             </div>
         </div>
 

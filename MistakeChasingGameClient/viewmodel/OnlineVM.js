@@ -535,7 +535,9 @@
             if ($.connection.hub.state == 1) {
                 $.connection.gamesHub.server.outOfMath();
             }
+            
             $.connection.hub.stop();
+            localStorage.currentIndex = 1;
             MistakeChasingGameClient.app.navigate('home', { root: true });
         }
 

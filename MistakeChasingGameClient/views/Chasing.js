@@ -4,6 +4,11 @@
     //alert("create");
     onlineClock = new MistakeChasingGameClient.ClockVM("");
 
+    var isUser = false;
+    if (localStorage.username) {
+        isUser = true;
+    }
+
     var countX = 0;
     myEventHandlerOnline = function () {
         countX += 1;
@@ -50,7 +55,10 @@
         }
     });
 
-
+    backHome = function () {
+        MistakeChasingGameClient.app.navigate('home', { root: 'blank' });
+        popupVisible(false);
+    }
 
     register = function () {
         popupVisible(true);
@@ -99,7 +107,9 @@
             });
         }
     };
-
+    if (!isUser) {
+        register();
+    }
 
 
 
@@ -108,9 +118,7 @@
             //goi ham load cau hoi len dua theo id truyen qua
             //onlineViewModel = new MistakeChasingGameClient.OnlineVM();
             //alert(onlineViewModel);
-            if (!localStorage.username) {
-                register();
-            } else {
+            if (isUser) {
                 onlineViewModel.loadRoomTab();
             }
 
