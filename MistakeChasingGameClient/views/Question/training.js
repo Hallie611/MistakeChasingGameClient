@@ -8,10 +8,6 @@
             text: ko.observable(),
             action: ko.observable()
         },
-        homeButton: {
-            text: "Back to Home",
-            action: backToHome
-        },
         resultList: ko.observable()
     };
 
@@ -93,16 +89,13 @@
         trainingClock.setClock();
     };
 
-    function backToHome() {
+    backToHome = function() {
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;
         localStorage.currentlevel = 0;
         MistakeChasingGameClient.app.navigate('home', { root: true });
-        this.level = ko.observable(localStorage.level);
-        this.point = ko.observable(localStorage.point);
-
     };
 
     var timeOut = ko.computed(function () {

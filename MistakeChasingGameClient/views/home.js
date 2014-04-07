@@ -11,14 +11,11 @@
 
     if (!localStorage.level) {
         localStorage.level = 1;
-        localStorage.point = 0;
+        localStorage.point = 50;
     }
-    level= ko.observable(localStorage.level);
-    point= ko.observable(localStorage.point);
 
 
     var viewModel = {
-     
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -40,9 +37,14 @@
         advanced: {
             src: "images/roadmap2.jpg",
             rendered: ko.observable(false)
+        },
+        level: ko.observable(""),
+        point: ko.observable(""),
+        viewShown: function () {
+            viewModel.point(localStorage.point);
+            viewModel.level(localStorage.level);
         }
     };
-
 
     $.each(["beginner", "intermediate", "advanced"], function (i, maps) {
         viewModel[maps].mapVisible = ko.computed(function () {

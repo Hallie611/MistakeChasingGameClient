@@ -15,7 +15,7 @@
         ///////////////////////////////
         //giu index random array question
         if (!localStorage.currentIndex)
-            localStorage.currentIndex = 0;
+            localStorage.currentIndex = 1;
         // giu diem
         if (!localStorage.currentPoint)
             localStorage.currentPoint = 0;
@@ -109,7 +109,7 @@
             this.findBugsTab.bleft(randomAns.left);
             this.findBugsTab.btop(randomAns.top);
             difCurrentQ = randomQuestion.dif;
-       
+
         };
 
         this.loadFillingBlanks = function () {
@@ -145,13 +145,13 @@
                 document.getElementById("readybtn").style.display = "none";
                 document.getElementById("cntbtn").style.display = "none";
                 document.getElementById("Cancelbtn").style.display = "none";
-              
+
                 document.getElementById("findbtn").style.display = "";
-                
+
                 self.RoomTab.message("");
                 document.getElementById("menubtn").style.display = "";
                 if (localStorage.point < localStorage.level * 10) {
-                    DevExpress.ui.dialog.alert('Your point at least '+localStorage.level*10+'for chasing', 'Not Enough Point').done(
+                    DevExpress.ui.dialog.alert('Your point at least ' + localStorage.level * 10 + 'for chasing', 'Not Enough Point').done(
                         function () {
                             MistakeChasingGameClient.app.navigate('home', { root: true });
                         });
@@ -203,7 +203,7 @@
                 });
                 //// temp la listQ tra ve cho ca 2 client
                 self.ListTab.listDataSource(self.listQ);
-                
+
             };
             //
             $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
@@ -231,9 +231,6 @@
                 document.getElementById("findbtn").style.display = "none";
             };
 
-
-            
-
             $.connection.gamesHub.client.oponentReady = function (opponent) {
 
                 var count = 10;
@@ -243,7 +240,7 @@
                 function timer() {
                     count = count - 1;
                     if (count <= 0) {
-                        
+
                         clearInterval(counter);
                         //counter ended, do something here
                         $.connection.gamesHub.server.playerReady();
@@ -253,7 +250,7 @@
                     //Do code for showing the number of seconds here
                 }
 
-                
+
             };            //sever tra ve ca 2 client deu ready vao game
             $.connection.gamesHub.client.gameReady = function () {
                 clearInterval(counter);
@@ -263,14 +260,14 @@
 
             //update 2 client cau nao lam roi
             $.connection.gamesHub.client.updateCorrectedQuestion = function (result) {
-                
+
                 if (result.Name == self.RoomTab.username()) {
                     self.ListTab.player1point(self.ListTab.player1point() + result.point);
                 }
                 else {
                     self.ListTab.player2point(self.ListTab.player2point() + result.point);
                 }
-               
+
                 if (result.isMax) {
                     self.listQ.update(result.index, { status: result.Name }); // cái này update cái gì đây
                     self.ListTab.listDataSource(self.listQ);
@@ -342,9 +339,6 @@
         this.play = function () {
             $.connection.gamesHub.server.play(1);
         };
-
-
-
 
         //bao la ben nay da ready
         this.Ready = function () {
@@ -451,7 +445,7 @@
                 points += difCurrentQ * 2;
             }
             if (points == difCurrentQ * 6) {
-               // this.listQ.update(localStorage.currentIndex, { status: "Correct" });
+                // this.listQ.update(localStorage.currentIndex, { status: "Correct" });
                 //}
                 //            var points = self.questionVM.submitBlanks();
                 //            self.questionVM.listQ.byKey(localStorage.currentIndex).done(function (dataItem) {
@@ -484,7 +478,7 @@
         };
         /////////////////////////////////////////time up
         this.timeUp = function () {
-            self.CorrectedQuestion(0, 0, false); // cái gì đây? sao lại 0, 0, false
+            self.CorrectedQuestion(0, 0, false);
             //self.questionVM.timeUp();
             var tabIndex = selectedTab();
             if (tabIndex == 2) {
@@ -508,12 +502,11 @@
             this.singleChoiceTab.rendered(false);
             this.fillingBlanksTab.rendered(false);
             this.findBugsTab.rendered(false);
-            
+
             this.RoomTab.rendered(false);
             ///////////////////////////////////////////////
             var itemData = item.itemData;
             localStorage.currentIndex = itemData.index;
-          
 
             if (itemData.type == "Find Bugs" && itemData.status == "Available") {
                 randomQuestion = itemData.question;
@@ -544,13 +537,13 @@
             if ($.connection.hub.state == 1) {
                 $.connection.gamesHub.server.outOfMath();
             }
-            
+
             $.connection.hub.stop();
             localStorage.currentIndex = 1;
+            localStorage.currentPoint = 0;
+            localStorage.currentlevel = 0;
             MistakeChasingGameClient.app.navigate('home', { root: true });
         }
-
-
 
 
     };

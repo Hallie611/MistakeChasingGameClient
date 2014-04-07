@@ -8,7 +8,7 @@
 
         //giu index random array question
         if (!localStorage.currentIndex)
-            localStorage.currentIndex = 0;
+            localStorage.currentIndex = 1;
         // giu diem
         if (!localStorage.currentPoint)
             localStorage.currentPoint = 0;

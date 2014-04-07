@@ -1,19 +1,21 @@
 <div data-options="dxView : { name: 'Chasing', title: 'Chasing' } ">
     <div style="text-align: center" data-options="dxContent : { targetPlaceholder: 'content' } ">
         <div id="menubtn" data-bind="dxButton: {clickAction: backToHome,text: 'Home' }">
-        
         </div>
-            <div data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
+        <div data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
             <div style="text-align: center">
-                <div data-bind="dxTextBox: {value: username,visible: txtUNVisible , visible: txtUNVisible}"></div>
-                <p data-bind="text : message"></p>
-                <div data-bind="dxButton: { text: 'Create',clickAction: SaveName ,visible: txtUNVisible}"></div>
-                <div data-bind="dxButton: { text: 'Try Again',clickAction: loadAgain ,visible: btnLoadAgain}"></div>
-                <div data-bind="dxButton: { text: 'Back to Home',clickAction: backHome ,visible: true}"></div>
-
+                <div data-bind="dxTextBox: {value: username,visible: txtUNVisible , visible: txtUNVisible}">
+                </div>
+                <p data-bind="text : message">
+                </p>
+                <div data-bind="dxButton: { text: 'Create',clickAction: SaveName ,visible: txtUNVisible}">
+                </div>
+                <div data-bind="dxButton: { text: 'Try Again',clickAction: loadAgain ,visible: btnLoadAgain}">
+                </div>
+                <div data-bind="dxButton: { text: 'Back to Home',clickAction: backHome ,visible: true}">
+                </div>
             </div>
         </div>
-
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
             <div data-bind="dxPopup: {visible: RoomTab.ResultVisible ,title: 'Result Match Game',clickAction: RoomTab.okResult, showTitle: true,height: '50%' }">
                 <div style="text-align: center">
@@ -70,10 +72,11 @@
                     </td>
                 </tr>
             </table>
- <h1 data-bind="text: RoomTab.message">
+            <h1 data-bind="text: RoomTab.message">
             </h1>
             <div id="opponent" style="display: none; text-align: left; margin-left: 10%; margin-right: 10%;"
-                class="dx-fieldset">                <div class="dx-field">
+                class="dx-fieldset">
+                <div class="dx-field">
                     <div class="dx-field-label">
                         Opponent
                     </div>
@@ -113,8 +116,8 @@
                     </p>
                 </div>
             </div>
-
-             <div id="Div1"  data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }"></div>
+            <div id="Div1" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }">
+            </div>
         </div>
         <div class="content" id="levelmap" data-bind="if:  findBugsTab.rendered, visible:  findBugsTab.tabVisible">
             <div id="
@@ -135,12 +138,9 @@
             <div id="toastError" style="text-align: center;" data-bind="dxToast: { message: 'You have used all three tries!', type:'error', displayTime: 300, hiddenAction: processHidingOnline}">
             </div>
             <div id="redXBox">
-                <img id="miss1" data-bind="attr: { src:  findBugsTab.srcX }" style="width: 10%;
-                    height: 10%" />
-                <img id="miss2" data-bind="attr: { src:  findBugsTab.srcX }" style="width: 10%;
-                    height: 10%" />
-                <img id="miss3" data-bind="attr: { src:  findBugsTab.srcX }" style="width: 10%;
-                    height: 10%" />
+                <img id="miss1" data-bind="attr: { src:  findBugsTab.srcX }" style="width: 10%; height: 10%" />
+                <img id="miss2" data-bind="attr: { src:  findBugsTab.srcX }" style="width: 10%; height: 10%" />
+                <img id="miss3" data-bind="attr: { src:  findBugsTab.srcX }" style="width: 10%; height: 10%" />
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if:  fillingBlanksTab.rendered, visible:  fillingBlanksTab.tabVisible">
@@ -150,7 +150,7 @@
             <div data-bind="dxScrollView: { }" style="height: 58%;">
                 <img id="question" data-bind="attr: { src:  fillingBlanksTab.src }" />
             </div>
-            <div style="bottom: 2%; width: 100%;">
+            <div style="bottom: 2%; width: 100%;position: absolute;">
                 <div style="text-align: center;">
                     <h3>
                         Fill in the blanks in the codes above:</h3>
@@ -198,7 +198,7 @@
             <div data-bind="dxScrollView: { }" style="height: 73%;">
                 <img id="question" data-bind="attr: { src:  singleChoiceTab.src }" />
             </div>
-            <div style="bottom: 2%; width: 100%;">
+            <div style="bottom: 2%; width: 100%;position: absolute;">
                 <div style="text-align: center;">
                     <h3>
                         Which type of bug is in the codes above?</h3>
