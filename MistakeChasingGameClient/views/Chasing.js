@@ -124,6 +124,12 @@
                 register();
             }
 
+            if (onlineViewModel.isUser && localStorage.point < localStorage.level * 10) {
+                DevExpress.ui.dialog.alert('Your point at least ' + localStorage.level * 10 + ' for chasing', 'Not Enough Point').done(
+                    function () {
+                        MistakeChasingGameClient.app.navigate('home', { root: true });
+                    });
+            }
            
         },
         viewDisposing: function () {

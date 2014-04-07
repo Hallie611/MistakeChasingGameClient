@@ -145,9 +145,17 @@
                 document.getElementById("readybtn").style.display = "none";
                 document.getElementById("cntbtn").style.display = "none";
                 document.getElementById("Cancelbtn").style.display = "none";
+              
                 document.getElementById("findbtn").style.display = "";
-                document.getElementById("menubtn").style.display = ""; -
+                
                 self.RoomTab.message("");
+                document.getElementById("menubtn").style.display = "";
+                if (localStorage.point < localStorage.level * 10) {
+                    DevExpress.ui.dialog.alert('Your point at least '+localStorage.level*10+'for chasing', 'Not Enough Point').done(
+                        function () {
+                            MistakeChasingGameClient.app.navigate('home', { root: true });
+                        });
+                }
             }
             else if ($.connection.hub.state == 4) {
                 self.RoomTab.message('');
