@@ -1,5 +1,8 @@
 ﻿MistakeChasingGameClient.home = function (params) {
 
+
+   
+
     localStorage.currentIndex = 1;
     localStorage.currentPoint = 0;
     //localStorage.currentlevel = 0 ;
@@ -11,7 +14,7 @@
 
     if (!localStorage.level) {
         localStorage.level = 1;
-        localStorage.point = 50;
+        localStorage.point = 0;
     }
 
 
@@ -71,5 +74,23 @@
     viewModel.selectedTab(0);
     ///////////////////////////////////////////////////
 
-    return viewModel;
+    return $.extend(viewModel, {
+        viewshow: function () {
+            // This is your app's init method. Here's an example of how to use it
+        
+            
+            document.addEventListener("deviceready", onDR, false);
+            function onDR() {
+                BackButton.override();
+                document.addEventListener("backKeyDown", backKeyDown, true);
+                //boot your app...
+            }
+            function backKeyDown() {
+                DevExpress.ui.dialog.alert('back pust', 'Notify');
+                // do something here if you wish
+                // alert('go back!');
+            }
+        }
+
+    });
 };

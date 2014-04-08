@@ -3,7 +3,6 @@
 
     MistakeChasingGameClient.OnlineVM = function (data) {
 
-        var isUser = ko.observable(false);
         var answerSC;
         var answer1;
         var answer2;
@@ -150,12 +149,7 @@
 
                 self.RoomTab.message("");
                 document.getElementById("menubtn").style.display = "";
-                if (localStorage.point < localStorage.level * 10) {
-                    DevExpress.ui.dialog.alert('Your point at least ' + localStorage.level * 10 + 'for chasing', 'Not Enough Point').done(
-                        function () {
-                            MistakeChasingGameClient.app.navigate('home', { root: true });
-                        });
-                }
+
             }
             else if ($.connection.hub.state == 4) {
                 self.RoomTab.message('');
@@ -165,6 +159,12 @@
                 document.getElementById("findbtn").style.display = "none";
                 document.getElementById("Cancelbtn").style.display = "none";
                 document.getElementById("cntbtn").style.display = "";
+            }
+            if (localStorage.point < localStorage.level * 10) {
+                DevExpress.ui.dialog.alert('Go back trainning get at least ' + localStorage.level * 10 + ' point for Chasing', 'Not Enough Point').done(
+                    function () {
+                        MistakeChasingGameClient.app.navigate('home', { root: true });
+                    });
             }
             selectedTab(0);
         };
@@ -192,8 +192,8 @@
         ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
             self.RoomTab.message('...');
-            //$.connection.hub.url = "http://localhost:8080/signalr";
-            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            $.connection.hub.url = "http://localhost:8080/signalr";
+            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -394,6 +394,7 @@
                             var listAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
                                                         "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
                             //alert(listAns.length + "length list");
+                           // alert([listAns[0].content, listAns[1].content, listAns[2].content]);
                             randomAns.listAns = [listAns[0].content, listAns[1].content, listAns[2].content];
                             randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
                         };
@@ -445,12 +446,6 @@
                 points += difCurrentQ * 2;
             }
             if (points == difCurrentQ * 6) {
-                // this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-                //}
-                //            var points = self.questionVM.submitBlanks();
-                //            self.questionVM.listQ.byKey(localStorage.currentIndex).done(function (dataItem) {
-                //                // ham bao cho sever bik da lam cau nay roi
-                //                if (dataItem.status == "Correct") {
                 self.CorrectedQuestion(localStorage.currentIndex, points, true);
             }
             else {
@@ -463,11 +458,7 @@
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 5;
-                //this.listQ.update(localStorage.currentIndex, { status: "Correct" });
-                //}
-                //self.questionVM.listQ.byKey(localStorage.currentIndex).done(function (dataItem) {
-                // ham bao cho sever bik da lam cau nay roi
-                //if (dataItem.status == "Correct") {
+                
                 self.CorrectedQuestion(localStorage.currentIndex, points, true);
             }
             else {
@@ -491,7 +482,9 @@
         };
         ///////////////////////////////////////////////
         this.CorrectedQuestion = function (index, mark, getMaxPoint) {
-            self.listQ.update(index, { status: 'done' }); // update trong các function submit
+            if (getMaxPoint == false) {
+                self.listQ.update(index, { status: 'Done' }); // update trong các function submit
+            }
             self.ListTab.listDataSource(self.listQ); // để trong function load list tab
             $.connection.gamesHub.server.correctQuestion(index, mark, getMaxPoint);
         };

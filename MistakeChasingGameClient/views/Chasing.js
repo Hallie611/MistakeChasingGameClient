@@ -4,11 +4,6 @@
     //alert("create");
     onlineClock = new MistakeChasingGameClient.ClockVM("");
 
-    var isUser = false;
-    if (localStorage.username) {
-        isUser = true;
-    }
-
     var countX = 0;
     myEventHandlerOnline = function () {
         countX += 1;
@@ -60,13 +55,10 @@
         popupVisible(false);
     }
 
-    if (localStorage.username) {
-        onlineViewModel.isUser=true;
-    }
     register = function () {
         popupVisible(true);
-        //$.connection.hub.url = "http://localhost:8080/signalr";
-        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        $.connection.hub.url = "http://localhost:8080/signalr";
+        //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
         $.connection.hub.start()
             .done(function () {
                 btnLoadAgain(false);
@@ -87,13 +79,17 @@
 
 
     SaveName = function () {
+        message("...");
         if (username() == '') {
             message("Name can not be blank");
         }
+        else if (username().length > 10) {
+            message("Name muss less than 10 char");
+        }
         else {
             message('...');
-            $.connection.gamesHub.server.register(username()).done(function (result) {
-                if (result == true) {
+            //$.connection.gamesHub.server.register(username()).done(function (result) {
+            //    if (result == true) {
                     localStorage.username = username();
                     onlineViewModel.RoomTab.username(localStorage.username),
                      onlineViewModel.RoomTab.level(localStorage.level),
@@ -101,13 +97,13 @@
 
                     popupVisible(false);
                     $.connection.hub.stop();
-
                     onlineViewModel.loadRoomTab();
-                }
-                else {
-                    message("Username has used, Try another please");
-                }
-            });
+                    
+            //    }
+            //    else {
+            //        message("Username has used, Try another please");
+            //    }
+            //});
         }
     };
    
@@ -118,19 +114,11 @@
             //goi ham load cau hoi len dua theo id truyen qua
             //onlineViewModel = new MistakeChasingGameClient.OnlineVM();
             //alert(onlineViewModel);
-            if (onlineViewModel.isUser) {
+            if (localStorage.username) {
                 onlineViewModel.loadRoomTab();
             } else{
                 register();
             }
-
-            if (onlineViewModel.isUser && localStorage.point < localStorage.level * 10) {
-                DevExpress.ui.dialog.alert('Your point at least ' + localStorage.level * 10 + ' for chasing', 'Not Enough Point').done(
-                    function () {
-                        MistakeChasingGameClient.app.navigate('home', { root: true });
-                    });
-            }
-           
         },
         viewDisposing: function () {
             $.connection.hub.stop();

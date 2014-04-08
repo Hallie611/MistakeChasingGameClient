@@ -64,6 +64,10 @@
                 self.fillingBlanksTab.answer1 = randomAns[0].ans;
                 self.fillingBlanksTab.answer2 = randomAns[1].ans;
                 self.fillingBlanksTab.answer3 = randomAns[2].ans;
+
+                self.fillingBlanksTab.choice1('');
+                self.fillingBlanksTab.choice2('');
+                self.fillingBlanksTab.choice3('');
                 difCurrentQ = randomQuestion.dif;
             }
         };
@@ -79,6 +83,7 @@
             loadSingleChoice: function () {
                 self.singleChoiceTab.src(randomQuestion.src);
                 self.singleChoiceTab.listAns(randomAns.listAns);
+                self.singleChoiceTab.choiceSC('');
                 self.singleChoiceTab.answerSC = randomAns.ans;
                 difCurrentQ = randomQuestion.dif;
             }
