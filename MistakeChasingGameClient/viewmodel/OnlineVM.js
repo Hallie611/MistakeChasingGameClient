@@ -46,13 +46,8 @@
             opoint: ko.observable(),
             pointwin: ko.observable(),
             poinlose: ko.observable(Number(localStorage.level) * 10),
-            ResultVisible: ko.observable(),
-            resultPoint: ko.observable(),
-            ImageResult: ko.observable(),
-            result: ko.observable(),
-            okResult: function () {
-                self.RoomTab.ResultVisible(false);
-            }
+            fbtndisable: ko.observable(false)
+            
         };
         this.ListTab = {
             rendered: ko.observable(false),
@@ -63,7 +58,17 @@
             oname: ko.observable(),
             player1point: ko.observable(0),
             player2point: ko.observable(0),
-            listDataSource: ko.observable()
+            listDataSource: ko.observable(),
+
+            ResultVisible: ko.observable(),
+            resultPoint: ko.observable(),
+            ImageResult: ko.observable(),
+            result: ko.observable(),
+           
+            okResult: function () {
+                self.ListTab.ResultVisible(false);
+                self.loadRoomTab();
+            }
         };
         this.findBugsTab = {
             src: ko.observable(),
@@ -137,7 +142,9 @@
             this.findBugsTab.rendered(false);
             this.ListTab.rendered(false);
             this.RoomTab.rendered(true);
+            self.RoomTab.fbtndisable(false);
             this.RoomTab.point(localStorage.point);
+
             if ($.connection.hub.state == 1) {
                 self.RoomTab.message('');
                 document.getElementById("opponent").style.display = "none";
@@ -191,9 +198,10 @@
 
         ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
+
             self.RoomTab.message('...');
             $.connection.hub.url = "http://localhost:8080/signalr";
-            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -217,6 +225,7 @@
             };
 
             $.connection.gamesHub.client.foundOpponent = function (message) {
+                clearInterval(counter);
                 self.RoomTab.message("");
                 self.RoomTab.oname(message.oName);
 
@@ -278,38 +287,25 @@
             }
 
             $.connection.gamesHub.client.gameOver = function (name) {
-                //if (localStorage.username == name.Name) {
-                //    DevExpress.ui.dialog.alert("Winner is " + name.Name + " Your Point +" + self.RoomTab.pointwin(), 'Result');
-                //    localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
-                //}
-                //else if(name.Name='none'){
-                //    DevExpress.ui.dialog.alert("DRAW", 'Result');
-                //}
-                //else{
-
-                //    DevExpress.ui.dialog.alert("winner is " + name.Name + " Your Point -" + self.RoomTab.poinlose(), 'Result');
-                //    localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
-                //}
-
                 if (localStorage.username == name.Name) {
-                    self.RoomTab.ImageResult('win.png');
-                    self.RoomTab.resultPoint("Your Point +" + self.RoomTab.pointwin());
+                    self.ListTab.ImageResult('win.png');
+                    self.ListTab.resultPoint("Your Point +" + self.RoomTab.pointwin());
                     localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
-                    self.RoomTab.result("WIN");
+                    self.ListTab.result("WIN");
                 }
                 else if (name.Name == "none") {
-                    self.RoomTab.result("DRAW");
-                    self.RoomTab.ImageResult("Draw.png");
-                    self.RoomTab.resultPoint("");
+                    self.ListTab.result("DRAW");
+                    self.ListTab.ImageResult("Draw.png");
+                    self.ListTab.resultPoint("");
                 }
                 else {
-                    self.RoomTab.result("LOSE");
-                    self.RoomTab.ImageResult("lose.png");
-                    self.RoomTab.resultPoint("Your Point -" + self.RoomTab.poinlose());
+                    self.ListTab.result("LOSE");
+                    self.ListTab.ImageResult("lose.png");
+                    self.ListTab.resultPoint("Your Point -" + self.RoomTab.poinlose());
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
-                self.RoomTab.ResultVisible(true);
-                self.loadRoomTab();
+                self.ListTab.ResultVisible(true);
+               // self.loadRoomTab();
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
@@ -325,6 +321,7 @@
                     connected = true;
                     document.getElementById("findbtn").style.display = "";
                     document.getElementById("cntbtn").style.display = "none";
+                    self.RoomTab.fbtndisable(false);
                 });
                 // hub is now ready
             }).fail(function () {
@@ -332,8 +329,23 @@
         }
 
         this.findOpponent = function () {
-            self.RoomTab.message("Finding opponent...");
+            self.RoomTab.fbtndisable(true);
             $.connection.gamesHub.server.findOpponent();
+            var count = 10;
+            counter = setInterval(timer, 1000); //1000 will  run it every 1 second
+            function timer() {
+                count = count - 1;
+                if (count <= 0) {
+                    clearInterval(counter);
+                    self.RoomTab.message("Found no opponent ! Try Again later");
+                    $.connection.gamesHub.server.foundNoOpponents();
+                    self.RoomTab.fbtndisable(false);
+                }
+                else {
+                    self.RoomTab.message("Finding opponent..." + count + " s");
+                }
+            }
+           
         };
 
         this.play = function () {
@@ -394,7 +406,7 @@
                             var listAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
                                                         "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
                             //alert(listAns.length + "length list");
-                           // alert([listAns[0].content, listAns[1].content, listAns[2].content]);
+                            // alert([listAns[0].content, listAns[1].content, listAns[2].content]);
                             randomAns.listAns = [listAns[0].content, listAns[1].content, listAns[2].content];
                             randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
                         };
@@ -458,7 +470,7 @@
             var points = 0;
             if (answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 5;
-                
+
                 self.CorrectedQuestion(localStorage.currentIndex, points, true);
             }
             else {
