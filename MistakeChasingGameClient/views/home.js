@@ -44,8 +44,14 @@
         level: ko.observable(""),
         point: ko.observable(""),
         viewShown: function () {
+
             viewModel.point(localStorage.point);
             viewModel.level(localStorage.level);
+            if ($.connection.hub.state==1)
+            {
+                $.connection.hub.stop();
+            }
+            
         }
     };
 
@@ -74,23 +80,7 @@
     viewModel.selectedTab(0);
     ///////////////////////////////////////////////////
 
-    return $.extend(viewModel, {
-        viewshow: function () {
-            // This is your app's init method. Here's an example of how to use it
-        
-            
-            document.addEventListener("deviceready", onDR, false);
-            function onDR() {
-                BackButton.override();
-                document.addEventListener("backKeyDown", backKeyDown, true);
-                //boot your app...
-            }
-            function backKeyDown() {
-                DevExpress.ui.dialog.alert('back pust', 'Notify');
-                // do something here if you wish
-                // alert('go back!');
-            }
-        }
+    return viewModel;
 
-    });
+
 };

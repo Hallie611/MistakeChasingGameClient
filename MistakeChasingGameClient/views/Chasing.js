@@ -5,6 +5,9 @@
     onlineClock = new MistakeChasingGameClient.ClockVM("");
 
     var countX = 0;
+
+    var connection;
+
     myEventHandlerOnline = function () {
         countX += 1;
         var showX = document.getElementById("miss" + countX);
@@ -57,8 +60,9 @@
 
     register = function () {
         popupVisible(true);
-        $.connection.hub.url = "http://localhost:8080/signalr";
-        //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+        //$.connection.hub.url = "http://localhost:8080/signalr";
+        $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+
         $.connection.hub.start()
             .done(function () {
                 btnLoadAgain(false);
@@ -71,7 +75,7 @@
             });
     };
 
-    
+
     loadAgain = function () {
         message('...');
         register();
@@ -88,8 +92,8 @@
         }
         else {
             message('...');
-            //$.connection.gamesHub.server.register(username()).done(function (result) {
-            //    if (result == true) {
+            $.connection.gamesHub.server.register(username()).done(function (result) {
+                if (result == true) {
                     localStorage.username = username();
                     onlineViewModel.RoomTab.username(localStorage.username),
                      onlineViewModel.RoomTab.level(localStorage.level),
@@ -98,27 +102,55 @@
                     popupVisible(false);
                     $.connection.hub.stop();
                     onlineViewModel.loadRoomTab();
-                    
-            //    }
-            //    else {
-            //        message("Username has used, Try another please");
-            //    }
-            //});
+
+                }
+                else {
+                    message("Username has used, Try another please");
+                }
+            });
         }
     };
-   
 
+    ///////////////////////////////////
 
+    ///////////////////////////////////
     return $.extend(onlineViewModel, {
         viewShown: function () {
-            //goi ham load cau hoi len dua theo id truyen qua
-            //onlineViewModel = new MistakeChasingGameClient.OnlineVM();
-            //alert(onlineViewModel);
-            if (localStorage.username) {
-                onlineViewModel.loadRoomTab();
-            } else{
-                register();
-            }
+
+
+
+            //$.ajax({
+            //    url: "http://signalr-13.apphb.com/signalR/hubs",
+            //    type: 'GET',
+            //    headers: { 'Access-Control-Allow-Origin': '*' },
+            //    crossDomain: true,
+            //    contentType: "application/json;charset=utf-8",
+            //    success: function (data) {
+                    if (localStorage.username) {
+                        $.connection.hub.stop();
+                        onlineViewModel.loadRoomTab();
+                    } else {
+                        register();
+                    }
+
+
+            //    },
+            //    error: function (request) {
+            //        if (request.status == 0 || request.status == 404) {
+
+            //            DevExpress.ui.dialog.alert("Please connect to the internet").done(function () {
+            //                MistakeChasingGameClient.app.navigate('home', { root: true });
+            //            });
+            //        }
+            //        else {
+            //            DevExpress.ui.dialog.alert("Server Maintenance! Come back later").done(function () {
+            //                MistakeChasingGameClient.app.navigate('home', { root: true });
+            //            });
+            //        }
+
+            //    }
+            //});
+
         },
         viewDisposing: function () {
             $.connection.hub.stop();
@@ -126,6 +158,7 @@
         },
         viewHidden: function () {
             $.connection.hub.stop();
+
             //onlineViewModel.clearListQ();
         },
         viewDisposed: function () {

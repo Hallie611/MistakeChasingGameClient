@@ -1,7 +1,6 @@
 <div data-options="dxView : { name: 'Chasing', title: 'Chasing' } ">
     <div style="text-align: center" data-options="dxContent : { targetPlaceholder: 'content' } ">
-        <div id="menubtn" data-bind="dxButton: {clickAction: backToHome,text: 'Home' }">
-        </div>
+        
 
         <div data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
             <div style="text-align: center">
@@ -18,8 +17,7 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
-
-
+            
             <div id="player" class="dx-fieldset" style="text-align: left; margin-left: 10%; margin-right: 10%;">
                 <div class="dx-field">
                     <div class="dx-field-label">
@@ -44,14 +42,13 @@
                     <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
                 </div>
             </div>
-            <div id="cntbtn" data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }">
+            <!--<div id="cntbtn" data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }"></div>-->
+            <div id="findbtn" data-bind="dxButton: {clickAction: findOpponent,text : 'Find Opponent', iconSrc: 'images/button/findop.png' ,disabled: RoomTab.fbtndisable}">
             </div>
-            <div id="findbtn" style="display: none" data-bind="dxButton: {clickAction: findOpponent,text : 'Find Opponent', iconSrc: 'images/button/findop.png' ,disabled: RoomTab.fbtndisable}">
-            </div>
-            <table id="readybtn" style="width: 100%">
+            <table id="readybtn" style="width: 100% ;display:none">
                 <tr>
                     <td>
-                        <div id="" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/button/ready.png' }">
+                        <div id="" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/button/ready.png' ,disabled: RoomTab.readyDisable}">
                         </div>
                     </td>
                     <td>
@@ -88,6 +85,9 @@
                     </div>
                 </div>
             </div>
+
+             
+
         </div>
         <div class="content" id="levelmap" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
 
@@ -218,5 +218,8 @@
                 </div>
             </div>
         </div>
+
+        <div id="menubtn" style="display:none; margin-top:120%" data-bind="dxButton: {clickAction: backToHome,text: 'Home',icon: 'home' }"></div>
+
     </div>
 </div>

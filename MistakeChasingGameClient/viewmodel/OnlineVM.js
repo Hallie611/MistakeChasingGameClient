@@ -24,7 +24,6 @@
         });
         /////////////////////////
         var numberPlayer;
-        var connected = false;
         this.clockOn = ko.observable(false);
         //this.questionVM = new MistakeChasingGameClient.QuestionVM();
         /////////////////////////////////////////////////Du
@@ -46,8 +45,9 @@
             opoint: ko.observable(),
             pointwin: ko.observable(),
             poinlose: ko.observable(Number(localStorage.level) * 10),
-            fbtndisable: ko.observable(false)
-            
+            fbtndisable: ko.observable(true),
+            readyDisable: ko.observable(false)
+
         };
         this.ListTab = {
             rendered: ko.observable(false),
@@ -64,7 +64,7 @@
             resultPoint: ko.observable(),
             ImageResult: ko.observable(),
             result: ko.observable(),
-           
+
             okResult: function () {
                 self.ListTab.ResultVisible(false);
                 self.loadRoomTab();
@@ -138,34 +138,35 @@
             self.ListTab.player1point(0);
             self.ListTab.player2point(0);
             this.singleChoiceTab.rendered(false);
+
+
             this.fillingBlanksTab.rendered(false);
             this.findBugsTab.rendered(false);
             this.ListTab.rendered(false);
             this.RoomTab.rendered(true);
-            self.RoomTab.fbtndisable(false);
-            this.RoomTab.point(localStorage.point);
 
-            if ($.connection.hub.state == 1) {
-                self.RoomTab.message('');
+            this.RoomTab.point(localStorage.point);
+            self.RoomTab.fbtndisable(true);
+            if ($.connection.hub.state != 1) {
+                this.ConnectToSever();
+                self.RoomTab.message('Connecting...');
+                //document.getElementById("findbtn").style.display = "none";
+                document.getElementById("menubtn").style.display = "none";
                 document.getElementById("opponent").style.display = "none";
                 document.getElementById("readybtn").style.display = "none";
-                document.getElementById("cntbtn").style.display = "none";
                 document.getElementById("Cancelbtn").style.display = "none";
-
+                this.ConnectToSever();
+            }
+            else {
+                self.RoomTab.message('');
+                self.RoomTab.fbtndisable(false);
+                self.RoomTab.readyDisable(false);
+                document.getElementById("opponent").style.display = "none";
+                document.getElementById("readybtn").style.display = "none";
+                document.getElementById("Cancelbtn").style.display = "none";
                 document.getElementById("findbtn").style.display = "";
-
                 self.RoomTab.message("");
                 document.getElementById("menubtn").style.display = "";
-
-            }
-            else if ($.connection.hub.state == 4) {
-                self.RoomTab.message('');
-                document.getElementById("menubtn").style.display = "";
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("findbtn").style.display = "none";
-                document.getElementById("Cancelbtn").style.display = "none";
-                document.getElementById("cntbtn").style.display = "";
             }
             if (localStorage.point < localStorage.level * 10) {
                 DevExpress.ui.dialog.alert('Go back trainning get at least ' + localStorage.level * 10 + ' point for Chasing', 'Not Enough Point').done(
@@ -199,9 +200,9 @@
         ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
 
-            self.RoomTab.message('...');
-            $.connection.hub.url = "http://localhost:8080/signalr";
-            // $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+
+            // $.connection.hub.url = "http://localhost:8080/signalr";
+            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -225,7 +226,9 @@
             };
 
             $.connection.gamesHub.client.foundOpponent = function (message) {
+
                 clearInterval(counter);
+
                 self.RoomTab.message("");
                 self.RoomTab.oname(message.oName);
 
@@ -238,6 +241,7 @@
                 document.getElementById("readybtn").style.display = "";
                 document.getElementById("Cancelbtn").style.display = "";
                 document.getElementById("findbtn").style.display = "none";
+                document.getElementById("menubtn").style.display = "none";
             };
 
             $.connection.gamesHub.client.oponentReady = function (opponent) {
@@ -262,6 +266,7 @@
 
             };            //sever tra ve ca 2 client deu ready vao game
             $.connection.gamesHub.client.gameReady = function () {
+                document.getElementById("menubtn").style.display = "none";
                 clearInterval(counter);
                 self.loadListTab();
                 self.clockOn(true);
@@ -305,7 +310,7 @@
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
                 self.ListTab.ResultVisible(true);
-               // self.loadRoomTab();
+                // self.loadRoomTab();
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
@@ -316,15 +321,16 @@
             }
 
             $.connection.hub.start().done(function () {
+                document.getElementById("menubtn").style.display = "";
+                self.RoomTab.fbtndisable(false);
                 self.RoomTab.message("");
-                $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point).done(function () {
-                    connected = true;
-                    document.getElementById("findbtn").style.display = "";
-                    document.getElementById("cntbtn").style.display = "none";
-                    self.RoomTab.fbtndisable(false);
-                });
+                $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point);
                 // hub is now ready
             }).fail(function () {
+                DevExpress.ui.dialog.alert("Can not connect to server right now!Try Again later").done(function () {
+                    MistakeChasingGameClient.app.navigate('home', { root: true });
+                });
+
             });
         }
 
@@ -332,11 +338,12 @@
             self.RoomTab.fbtndisable(true);
             $.connection.gamesHub.server.findOpponent();
             var count = 10;
+
             counter = setInterval(timer, 1000); //1000 will  run it every 1 second
             function timer() {
                 count = count - 1;
                 if (count <= 0) {
-                    clearInterval(counter);
+                    window.clearInterval(counter);
                     self.RoomTab.message("Found no opponent ! Try Again later");
                     $.connection.gamesHub.server.foundNoOpponents();
                     self.RoomTab.fbtndisable(false);
@@ -345,7 +352,7 @@
                     self.RoomTab.message("Finding opponent..." + count + " s");
                 }
             }
-           
+
         };
 
         this.play = function () {
@@ -354,16 +361,25 @@
 
         //bao la ben nay da ready
         this.Ready = function () {
+            self.RoomTab.readyDisable(true);
             self.RoomTab.message("Watting opponent ready ...");
             $.connection.gamesHub.server.playerReady();
         }
         this.Cancel = function () {
-            localStorage.point = Number(localStorage.point) - 5;
-            DevExpress.ui.dialog.alert('You cancel game, your point -5', 'Notify');
-            $.connection.gamesHub.server.outOfMath();
-            clearInterval(counter);
-            self.RoomTab.message("Click To Opponent");
-            self.loadRoomTab();
+            DevExpress.ui.dialog.confirm("Are you sure?", "Confirm changes")
+                .done(function (dialogResult) {
+                    if (dialogResult) {
+                        localStorage.point = Number(localStorage.point) - 5;
+                        DevExpress.ui.dialog.alert('You cancel game, your point -5', 'Notify');
+                        $.connection.gamesHub.server.outOfMath();
+                        clearInterval(counter);
+                        self.RoomTab.message("Click To Opponent");
+                        self.loadRoomTab();
+                    }
+                });
+
+
+
         }
         ///////////////////////////////////////////
         this.clearListQ = function () {
@@ -498,7 +514,7 @@
                 self.listQ.update(index, { status: 'Done' }); // update trong các function submit
             }
             self.ListTab.listDataSource(self.listQ); // để trong function load list tab
-            $.connection.gamesHub.server.correctQuestion(index, mark, getMaxPoint);
+            $.connection.gamesHub.server.postAnswer(index, mark, getMaxPoint);
         };
         /////////////////////////////////////////load question
         this.processClick = function (item) {
@@ -542,7 +558,7 @@
             if ($.connection.hub.state == 1) {
                 $.connection.gamesHub.server.outOfMath();
             }
-
+            clearInterval(counter);
             $.connection.hub.stop();
             localStorage.currentIndex = 1;
             localStorage.currentPoint = 0;

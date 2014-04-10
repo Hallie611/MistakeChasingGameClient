@@ -663,7 +663,12 @@
             { id: 1, name: "null pointer", src: "images/Dictionary/Nullpointer.png" },
             { id: 2, name: "comparision 2 object", src: ".."}];
 
+    function getQuestionID(id) {
+        findBugs.bykey
+    }
+
     MistakeChasingGameClient.db = {
+        
         findBugsDb: new DevExpress.data.ArrayStore({
             data: findBugs,
             key: 'id'
