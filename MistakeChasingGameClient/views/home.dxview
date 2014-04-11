@@ -4,7 +4,7 @@
         </div>
         <div style="text-align: center">
             <b style="margin-right: 5%" data-bind="text : 'Level: ' + level()"></b>
-            <img data-bind="attr: { src: 'images/level/level'+level()+'.png',height :'20px'}" />
+            <img data-bind="attr: { src: 'images/level/'+rank()+'.png',height :'20px'}" />
             <b style="margin-left: 5%" data-bind="text : 'Point: ' + point() "></b>
         </div>
         <div class="content" id="levelmap" data-bind="if: beginner.rendered, visible: beginner.mapVisible">

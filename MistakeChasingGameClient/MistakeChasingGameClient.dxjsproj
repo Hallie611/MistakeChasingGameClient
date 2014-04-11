@@ -614,6 +614,15 @@
     <Content Include="images\findbugQ\P99.jpg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\level\Advanced.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\level\Beginner.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\level\Intermediate.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\level\level1.png">
       <SubType>Content</SubType>
     </Content>

@@ -19,7 +19,7 @@
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
 
             <div id="levelImage" style="display: normal;height:30%">
-                <img style="margin-top:15%" data-bind="attr: { src: 'images/level/level'+RoomTab.level()+'.png',height :'50px'}" />
+                <img style="margin-top:15%" data-bind="attr: { src: 'images/level/'+RoomTab.rank()+'.png',height :'50px'}" />
             </div>
 
             <div id="opponent" style="display: none; text-align: left; margin-left: 10%; margin-right: 10%;"
@@ -61,7 +61,7 @@
                     </td>
                     <td style="font-size: xx-large;">
 
-                        <sup style="color:lightsalmon"><b data-bind="text:RoomTab.pointwin"></b></sup> &frasl; <sub style="color:darkgray"><b data-bind="text:RoomTab.poinlose"></b></sub>
+                        <sup style="color:lightsalmon">+<b data-bind="text:RoomTab.pointwin"></b></sup> &frasl; <sub style="color:darkgray">-<b data-bind="text:RoomTab.poinlose"></b></sub>
                     </td>
                     <td>
                         <div id="Cancelbtn" style="display: none" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }">

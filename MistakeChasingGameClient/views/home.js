@@ -17,6 +17,15 @@
         localStorage.point = 0;
     }
 
+    if (localStorage.level < 8)
+    {
+        localStorage.rank = "Beginner";
+    }
+    else if (localStorage.level > 7 && localStorage.level < 15) {
+        localStorage.rank = "Intermediate";
+    } else {
+        localStorage.rank = "Advanced"
+    }
 
     var viewModel = {
         tabs: [
@@ -43,10 +52,15 @@
         },
         level: ko.observable(""),
         point: ko.observable(""),
+        rank : ko.observable(""),
+
+
+
         viewShown: function () {
 
             viewModel.point(localStorage.point);
             viewModel.level(localStorage.level);
+            viewModel.rank(localStorage.rank);
             if ($.connection.hub.state==1)
             {
                 $.connection.hub.stop();
