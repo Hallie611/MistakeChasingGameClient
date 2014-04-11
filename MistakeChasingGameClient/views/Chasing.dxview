@@ -1,6 +1,6 @@
 <div data-options="dxView : { name: 'Chasing', title: 'Chasing' } ">
     <div style="text-align: center" data-options="dxContent : { targetPlaceholder: 'content' } ">
-        
+
 
         <div data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
             <div style="text-align: center">
@@ -17,50 +17,11 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
-            
-            <div id="player" class="dx-fieldset" style="text-align: left; margin-left: 10%; margin-right: 10%;">
-                <div class="dx-field">
-                    <div class="dx-field-label">
-                        User Name
-                    </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username ,readOnly: true }">
-                    </div>
-                </div>
-                <div class="dx-field">
-                    <div class="dx-field-label">
-                        Point
-                    </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point ,readOnly: true}">
-                    </div>
-                </div>
-                <div class="dx-field">
-                    <div class="dx-field-label">
-                        Level
-                    </div>
-                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level ,readOnly: true }">
-                    </div>
-                    <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
-                </div>
+
+            <div id="levelImage" style="display: normal;height:30%">
+                <img style="margin-top:15%" data-bind="attr: { src: 'images/level/level'+RoomTab.level()+'.png',height :'50px'}" />
             </div>
-            <!--<div id="cntbtn" data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }"></div>-->
-            <div id="findbtn" data-bind="dxButton: {clickAction: findOpponent,text : 'Find Opponent', iconSrc: 'images/button/findop.png' ,disabled: RoomTab.fbtndisable}">
-            </div>
-            <table id="readybtn" style="width: 100% ;display:none">
-                <tr>
-                    <td>
-                        <div id="" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/button/ready.png' ,disabled: RoomTab.readyDisable}">
-                        </div>
-                    </td>
-                    <td>
-                        <b data-bind="text:RoomTab.pointwin"></b>/ <b data-bind="text:RoomTab.poinlose"></b>
-                    </td>
-                    <td>
-                        <div id="Cancelbtn" style="display: none" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }">
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <h1 data-bind="text: RoomTab.message"></h1>
+
             <div id="opponent" style="display: none; text-align: left; margin-left: 10%; margin-right: 10%;"
                 class="dx-fieldset">
                 <div class="dx-field">
@@ -86,20 +47,66 @@
                 </div>
             </div>
 
-             
+            <h1 data-bind="text: RoomTab.message"></h1>
+            <!--<div id="cntbtn" data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }"></div>-->
+            <div id="findbtn" data-bind="dxButton: {clickAction: findOpponent,text : 'Find Opponent', iconSrc: 'images/button/findop.png' ,disabled: RoomTab.fbtndisable}">
+            </div>
+
+
+            <table id="readybtn" style="width: 100%; display: none">
+                <tr>
+                    <td>
+                        <div id="" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/button/ready.png' ,disabled: RoomTab.readyDisable}">
+                        </div>
+                    </td>
+                    <td style="font-size: xx-large;">
+
+                        <sup style="color:lightsalmon"><b data-bind="text:RoomTab.pointwin"></b></sup> &frasl; <sub style="color:darkgray"><b data-bind="text:RoomTab.poinlose"></b></sub>
+                    </td>
+                    <td>
+                        <div id="Cancelbtn" style="display: none" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+
+
+            <div id="player" class="dx-fieldset" style="text-align: left; margin-left: 10%; margin-right: 10%;">
+                <div class="dx-field">
+                    <div class="dx-field-label">
+                        User Name
+                    </div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.username ,readOnly: true }">
+                    </div>
+                </div>
+                <div class="dx-field">
+                    <div class="dx-field-label">
+                        Point
+                    </div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.point ,readOnly: true}">
+                    </div>
+                </div>
+                <div class="dx-field">
+                    <div class="dx-field-label">
+                        Level
+                    </div>
+                    <div class="dx-field-value" data-bind="dxTextBox: { value: RoomTab.level ,readOnly: true }">
+                    </div>
+                    <!--<img style="height: 100%; position: absolute" data-bind="attr: { src: level } " />-->
+                </div>
+            </div>
 
         </div>
         <div class="content" id="levelmap" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
 
-            <div data-bind="dxPopup: {visible: ListTab.ResultVisible ,title: 'Result Match Game',clickAction: ListTab.okResult, showTitle: true,height: '50%' }">
+            <div data-bind="dxPopup: {visible: ListTab.ResultVisible ,title: 'Result Match Game',clickAction: ListTab.okResult, showTitle: false,height: '300px' }">
                 <div style="text-align: center">
+                    <h1 style="font-size: 300%" data-bind="text: ListTab.result"></h1>
                     <img data-bind="attr: { src: ListTab.ImageResult } " />
-                    <h2 data-bind="text: ListTab.resultPoint">
-                    </h2>
-                    <h1 style="font-size: 300%" data-bind="text: ListTab.result">
-                    </h1>
-                    <div data-bind="dxButton: { text: 'OK',clickAction: ListTab.okResult }">
-                    </div>
+                    <h2 data-bind="text: ListTab.resultPoint"></h2>
+                   <!-- <div data-bind="dxButton: { text: 'OK',clickAction: ListTab.okResult }"></div>-->
                 </div>
             </div>
 
@@ -219,7 +226,7 @@
             </div>
         </div>
 
-        <div id="menubtn" style="display:none; margin-top:120%" data-bind="dxButton: {clickAction: backToHome,text: 'Home',icon: 'home' }"></div>
+        <div id="menubtn" style="display: none; margin-top: 120%" data-bind="dxButton: {clickAction: backToHome,text: 'Home',icon: 'home' }"></div>
 
     </div>
 </div>

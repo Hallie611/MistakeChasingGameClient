@@ -40,30 +40,39 @@
 
     var turnClockOn = ko.computed(function () {
         if (onlineViewModel.clockOn()) {
-            onlineViewModel.clockOn(false);
+          //  alert(onlineViewModel.clockOn());
+            //onlineViewModel.clockOn(false);
             onlineClock.setClock();
+        }
+    });
+
+    var turnClockOff = ko.computed(function () {
+        if (!onlineViewModel.clockOn()) {
+           // alert(onlineViewModel.clockOn());
+            onlineClock.clearClock();
         }
     });
     var timeOutOnline = ko.computed(function () {
         if (onlineClock.timeOut()) {
             onlineClock.timeOut(false);
             var points = onlineViewModel.timeUp();
-            onlineViewModel.loadRoomTab();
-            //showEndDialog();
+            onlineViewModel.ListTab.ResultVisible(true);
+           // onlineViewModel.loadRoomTab();
+          //  showEndDialog();
         }
     });
 
     backHome = function () {
-        MistakeChasingGameClient.app.navigate('home', { root: 'current' });
+        MistakeChasingGameClient.app.navigate('home', { root: 'true' });
         popupVisible(false);
     }
 
     register = function () {
         popupVisible(true);
-        //$.connection.hub.url = "http://localhost:8080/signalr";
+       // $.connection.hub.url = "http://localhost:8080/signalr";
         $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
-        $.connection.hub.start()
+        $.connection.hub.start({ transport: 'longPolling' })
             .done(function () {
                 btnLoadAgain(false);
                 txtUNVisible(true);
@@ -118,7 +127,6 @@
         viewShown: function () {
 
 
-
             //$.ajax({
             //    url: "http://signalr-13.apphb.com/signalR/hubs",
             //    type: 'GET',
@@ -127,7 +135,7 @@
             //    contentType: "application/json;charset=utf-8",
             //    success: function (data) {
                     if (localStorage.username) {
-                        $.connection.hub.stop();
+                     //   $.connection.hub.stop();
                         onlineViewModel.loadRoomTab();
                     } else {
                         register();

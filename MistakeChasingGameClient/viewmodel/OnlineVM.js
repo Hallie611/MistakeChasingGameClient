@@ -11,6 +11,7 @@
         var difCurrentQ;
         var randomQuestion; // = ko.observable();
         var randomAns; // = ko.observable();
+        
         ///////////////////////////////
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -147,32 +148,34 @@
 
             this.RoomTab.point(localStorage.point);
             self.RoomTab.fbtndisable(true);
-            if ($.connection.hub.state != 1) {
-                this.ConnectToSever();
-                self.RoomTab.message('Connecting...');
-                //document.getElementById("findbtn").style.display = "none";
-                document.getElementById("menubtn").style.display = "none";
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("Cancelbtn").style.display = "none";
-                this.ConnectToSever();
-            }
-            else {
-                self.RoomTab.message('');
-                self.RoomTab.fbtndisable(false);
-                self.RoomTab.readyDisable(false);
-                document.getElementById("opponent").style.display = "none";
-                document.getElementById("readybtn").style.display = "none";
-                document.getElementById("Cancelbtn").style.display = "none";
-                document.getElementById("findbtn").style.display = "";
-                self.RoomTab.message("");
-                document.getElementById("menubtn").style.display = "";
-            }
             if (localStorage.point < localStorage.level * 10) {
                 DevExpress.ui.dialog.alert('Go back trainning get at least ' + localStorage.level * 10 + ' point for Chasing', 'Not Enough Point').done(
                     function () {
                         MistakeChasingGameClient.app.navigate('home', { root: true });
                     });
+            }
+            else {
+                if ($.connection.hub.state != 1) {
+                    self.RoomTab.message('Connecting...');
+                    this.ConnectToSever();
+                    //document.getElementById("findbtn").style.display = "none";
+                    document.getElementById("menubtn").style.display = "none";
+                    document.getElementById("opponent").style.display = "none";
+                    document.getElementById("readybtn").style.display = "none";
+                    document.getElementById("Cancelbtn").style.display = "none";
+                }
+                else {
+                    self.RoomTab.message('');
+                    self.RoomTab.fbtndisable(false);
+                    self.RoomTab.readyDisable(false);
+                    document.getElementById("levelImage").style.display = "";
+                    document.getElementById("opponent").style.display = "none";
+                    document.getElementById("readybtn").style.display = "none";
+                    document.getElementById("Cancelbtn").style.display = "none";
+                    document.getElementById("findbtn").style.display = "";
+                    self.RoomTab.message("");
+                    document.getElementById("menubtn").style.display = "";
+                }
             }
             selectedTab(0);
         };
@@ -201,8 +204,8 @@
         this.ConnectToSever = function () {
 
 
-            // $.connection.hub.url = "http://localhost:8080/signalr";
-            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            $.connection.hub.url = "http://localhost:8080/signalr";
+           //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -237,6 +240,7 @@
                 self.RoomTab.poinlose(Number(localStorage.level) * 10);
                 self.RoomTab.pointwin(Number(message.oLevel) * 10);
 
+                document.getElementById("levelImage").style.display = "none";
                 document.getElementById("opponent").style.display = "";
                 document.getElementById("readybtn").style.display = "";
                 document.getElementById("Cancelbtn").style.display = "";
@@ -292,25 +296,35 @@
             }
 
             $.connection.gamesHub.client.gameOver = function (name) {
+
                 if (localStorage.username == name.Name) {
+
+                    self.clockOn(false);
+
                     self.ListTab.ImageResult('win.png');
                     self.ListTab.resultPoint("Your Point +" + self.RoomTab.pointwin());
                     localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
                     self.ListTab.result("WIN");
                 }
                 else if (name.Name == "none") {
+
+                    self.clockOn(false);
+
                     self.ListTab.result("DRAW");
                     self.ListTab.ImageResult("Draw.png");
                     self.ListTab.resultPoint("");
                 }
                 else {
+
+                    self.clockOn(false);
+
                     self.ListTab.result("LOSE");
                     self.ListTab.ImageResult("lose.png");
                     self.ListTab.resultPoint("Your Point -" + self.RoomTab.poinlose());
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
                 self.ListTab.ResultVisible(true);
-                // self.loadRoomTab();
+                
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
@@ -320,7 +334,7 @@
                 clearInterval(counter);
             }
 
-            $.connection.hub.start().done(function () {
+            $.connection.hub.start({ transport: 'longPolling' }).done(function () {
                 document.getElementById("menubtn").style.display = "";
                 self.RoomTab.fbtndisable(false);
                 self.RoomTab.message("");
@@ -344,7 +358,7 @@
                 count = count - 1;
                 if (count <= 0) {
                     window.clearInterval(counter);
-                    self.RoomTab.message("Found no opponent ! Try Again later");
+                    self.RoomTab.message("No opponent found");
                     $.connection.gamesHub.server.foundNoOpponents();
                     self.RoomTab.fbtndisable(false);
                 }
@@ -412,6 +426,7 @@
             //alert(correctAns + "correctAns getSingleChoiceAns");
             var randomAns1, randomAns2;
             var isRepeat = true;
+            
             while (isRepeat) {
                 randomAns1 = Math.floor(Math.random() * 10) + 1;
                 if (randomAns1 != correctAns) {
@@ -419,11 +434,20 @@
                         randomAns2 = Math.floor(Math.random() * 10) + 1;
                         if (randomAns2 != randomAns1 && randomAns2 != correctAns) {
                             isRepeat = false;
-                            var listAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
+                            var ranListAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
                                                         "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
-                            //alert(listAns.length + "length list");
-                            // alert([listAns[0].content, listAns[1].content, listAns[2].content]);
-                            randomAns.listAns = [listAns[0].content, listAns[1].content, listAns[2].content];
+                            //for (var i = 0; i < 3; i++) {
+                            //    if (ranListAns[i].content == null);
+                            //    alert(ranListAns[i].content);
+                            //}
+
+
+                            //alert(ranListAns[0].content + "  " + ranListAns[1].content + "  " + ranListAns[2].content);
+
+                       
+
+                            randomAns.listAns = ko.observableArray([ranListAns[0].content, ranListAns[1].content, ranListAns[2].content]);
+                            
                             randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
                         };
                     };
