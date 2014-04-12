@@ -6,8 +6,8 @@
         this.txMinutes = ko.observable("");
         this.txSeconds = ko.observable("");
         this.restartClock = ko.observable(true);
-        this.timeOut = ko.observable(false);
-        this.time = ko.computed(function () {
+        this.timeUp = ko.observable(false);
+        this.getTime = ko.computed(function () {
             return this.txMinutes() + " : " + this.txSeconds();
         }, this);
 
@@ -49,7 +49,7 @@
 
             if (minutes == 0 && seconds == 0) {
                 self.clearClock();
-                self.timeOut(true);                
+                self.timeUp(true);                
             }
         };
 
@@ -59,7 +59,7 @@
 
         this.setClock = function () {
             this.restartClock(true);
-            this.timeOut(false);
+            this.timeUp(false);
             if (Number(localStorage.maxIndex) == 3) {
                 this.txMinutes("3");
                 this.txSeconds("00");

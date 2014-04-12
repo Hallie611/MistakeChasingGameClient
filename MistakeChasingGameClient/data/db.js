@@ -411,7 +411,7 @@
         { id: 63, questionId: 1021, answerIndex: 3, list: ["a", "b", "y"], ans: "y" },
         { id: 64, questionId: 1022, answerIndex: 1, list: ["extends", "void", "class"], ans: "class" },
         { id: 65, questionId: 1022, answerIndex: 2, list: ["protected", "static", "null"], ans: "static" },
-        { id: 66, questionId: 1022, answerIndex: 3, list: ["writeln", "println", "write"], ans: "println" },   
+        { id: 66, questionId: 1022, answerIndex: 3, list: ["writeln", "println", "write"], ans: "println" },
         { id: 67, questionId: 1023, answerIndex: 1, list: ["static", "void", "class"], ans: "class" },
         { id: 68, questionId: 1023, answerIndex: 2, list: ["static", "void", "class"], ans: "static" },
         { id: 69, questionId: 1023, answerIndex: 3, list: ["static", "void", "class"], ans: "static" },
@@ -667,8 +667,8 @@
         findBugs.bykey
     }
 
-    MistakeChasingGameClient.db = {
-        
+    MistakeChasingGameClient.LocalDB = {
+
         findBugsDb: new DevExpress.data.ArrayStore({
             data: findBugs,
             key: 'id'
@@ -696,6 +696,131 @@
         bugsTypedb: new DevExpress.data.DataSource({
             store: bugsType,
             sort: 'id'
-        })
+        }),
+        /////////////////////////////////////////get data
+        getQuestion: function (questionId) {
+            var question;
+            MistakeChasingGameClient.LocalDB.questionDb.byKey(questionId).done(function (dataItem) {
+                //alert(dataItem.id + " random Id getQuestion");
+                question = dataItem;
+                //randomQuestion = dataItem;
+            });
+            return question;
+        },
+        randomFindBugs: function () {
+            var filteredQuestion = MistakeChasingGameClient.LocalDB.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
+                                        "and", ["type", "=", "findbugs"]]).sortBy("id").toArray();
+            var question = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
+            return question;
+            //this.getFindBugsAns();
+        },
+        getFindBugsAns: function (questionId) {
+            var ans = MistakeChasingGameClient.LocalDB.findBugsDb.createQuery().filter(["questionId", "=", questionId]).toArray()[0];
+            return ans;
+        },
+
+        randomFillingBlanks: function () {
+            var filteredQuestion = MistakeChasingGameClient.LocalDB.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
+                                        "and", ["type", "=", "fillingBlanks"]]).sortBy("id").toArray();
+            var question = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
+            return question;
+            //this.getFillingBlanksAns();
+        },
+        getFillingBlanksAns: function (questionId) {
+            var ans = MistakeChasingGameClient.LocalDB.fillingBlanksDb.createQuery().filter(["questionId", "=", questionId]).sortBy("answerIndex").toArray();
+            return ans;
+        },
+
+        randomSingleChoice: function () {
+            var filteredQuestion = MistakeChasingGameClient.LocalDB.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
+                                        "and", ["type", "=", "singleChoice"]]).sortBy("id").toArray();
+            var question = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
+            return question;
+            //this.getSingleChoiceAns();
+        },
+        getSingleChoiceAns: function (questionId) {
+            var answer = {
+                listAns: "",
+                ans: ""
+            };
+            //alert(randomQuestion.id + "random Id getSingleChoiceAns");
+            var correctAns = MistakeChasingGameClient.LocalDB.singleChoiceDb.createQuery().filter(["questionId", "=", questionId]).select("mistakeId").toArray()[0].mistakeId;
+            //alert(correctAns + "correctAns getSingleChoiceAns");
+            var randomAns1, randomAns2;
+            var isRepeat = true;
+            while (isRepeat) {
+                randomAns1 = Math.floor(Math.random() * 10) + 1;
+                if (randomAns1 != correctAns) {
+                    while (isRepeat) {
+                        randomAns2 = Math.floor(Math.random() * 10) + 1;
+                        if (randomAns2 != randomAns1 && randomAns2 != correctAns) {
+                            isRepeat = false;
+                            var listAns = MistakeChasingGameClient.LocalDB.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
+                                                        "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
+                            //alert(listAns.length + "length list");
+                            answer.listAns = [listAns[0].content, listAns[1].content, listAns[2].content];
+                            answer.ans = MistakeChasingGameClient.LocalDB.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
+                            return answer;
+                        };
+                    };
+                };
+            };
+        }
     }
 })();
+//        /////////////////////////////////////////get data
+//        this.getQuestion = function (questionId) {
+//            MistakeChasingGameClient.db.questionDb.byKey(questionId).done(function (dataItem) {
+//                randomQuestion = dataItem;
+//                //alert(randomQuestion.id + " random Id getQuestion");
+//            });
+//        };
+//        this.randomFindBugs = function () {
+//            var filteredQuestion = MistakeChasingGameClient.db.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
+//                                        "and", ["type", "=", "findbugs"]]).sortBy("id").toArray();
+//            randomQuestion = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
+//            this.getFindBugsAns();
+//        };
+//        this.getFindBugsAns = function () {
+//            randomAns = MistakeChasingGameClient.db.findBugsDb.createQuery().filter(["questionId", "=", randomQuestion.id]).toArray()[0];
+//        };
+
+//        this.randomFillingBlanks = function () {
+//            var filteredQuestion = MistakeChasingGameClient.db.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
+//                                        "and", ["type", "=", "fillingBlanks"]]).sortBy("id").toArray();
+//            randomQuestion = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
+//            this.getFillingBlanksAns();
+//        };
+//        this.getFillingBlanksAns = function () {
+//            randomAns = MistakeChasingGameClient.db.fillingBlanksDb.createQuery().filter(["questionId", "=", randomQuestion.id]).sortBy("answerIndex").toArray();
+//        };
+
+//        this.randomSingleChoice = function () {
+//            var filteredQuestion = MistakeChasingGameClient.db.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
+//                                        "and", ["type", "=", "singleChoice"]]).sortBy("id").toArray();
+//            randomQuestion = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
+//            this.getSingleChoiceAns();
+//        };
+//        this.getSingleChoiceAns = function () {
+//            //alert(randomQuestion.id + "random Id getSingleChoiceAns");
+//            var correctAns = MistakeChasingGameClient.db.singleChoiceDb.createQuery().filter(["questionId", "=", randomQuestion.id]).select("mistakeId").toArray()[0].mistakeId;
+//            //alert(correctAns + "correctAns getSingleChoiceAns");
+//            var randomAns1, randomAns2;
+//            var isRepeat = true;
+//            while (isRepeat) {
+//                randomAns1 = Math.floor(Math.random() * 10) + 1;
+//                if (randomAns1 != correctAns) {
+//                    while (isRepeat) {
+//                        randomAns2 = Math.floor(Math.random() * 10) + 1;
+//                        if (randomAns2 != randomAns1 && randomAns2 != correctAns) {
+//                            isRepeat = false;
+//                            var listAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
+//                                                        "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
+//                            //alert(listAns.length + "length list");
+//                            randomAns.listAns = [listAns[0].content, listAns[1].content, listAns[2].content];
+//                            randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
+//                        };
+//                    };
+//                };
+//            };
+//        };

@@ -2,14 +2,14 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->
-        <div id="resultPopup" data-bind="dxPopup: { showTitle: false, height: '330px'}">
+        <div id="resultPopup" data-bind="dxPopup: { showTitle: false, height: '330px', hidingAction: backToHome }">
             <div style="text-align: center; height: 100%;">
                 <p style="font-size: larger; font-weight: bolder;">
                     Result
                 </p>
-                <p data-bind="text: 'You have earn ' + resultPopup.curPoints() + ' points!' ">
+                <p data-bind="text: 'You have earn ' + curPoints() + ' points!' ">
                 </p>
-                <div style="height: initial;" data-bind="dxList: { dataSource: resultPopup.resultList, showScrollbar: true, activeStateEnabled: false, height: '230px' }">
+                <div style="height: initial;" data-bind="dxList: { dataSource: resultList, showScrollbar: true, activeStateEnabled: false, height: '230px' }">
                     <div data-options="dxTemplate:{ name:'item' }">
                         <div style="display: inline-block; margin: 5px;">
                             <p style="font-size: larger;">
@@ -21,13 +21,13 @@
                         </div>
                     </div>
                 </div>
-                <div data-bind="dxButton: { text: resultPopup.button.text, clickAction: resultPopup.button.action }">
+                <div data-bind="dxButton: { text: button.text, clickAction: button.action }">
                 </div>
                 <div data-bind="dxButton: { text: 'Back to Home', clickAction: backToHome }">
                 </div>
             </div>
         </div>
-        <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: trainingClock.time">
+        <div id="clock" style="text-align: center; font-size: xx-large;" data-bind="text: trainingClock.getTime">
             hhhhhhhhhhhhhhhh
         </div>
         <div class="content" id="levelmap" data-bind="if: findBugsTab.rendered, visible: findBugsTab.tabVisible">

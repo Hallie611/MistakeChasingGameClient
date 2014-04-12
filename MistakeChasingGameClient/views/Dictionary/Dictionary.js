@@ -8,9 +8,9 @@
 
         selectedTable: ko.observable(),
 
-        keyWords: MistakeChasingGameClient.db.keyWordsdb,
+        keyWords: MistakeChasingGameClient.LocalDB.keyWordsdb,
 
-        bugsType: MistakeChasingGameClient.db.bugsTypedb,
+        bugsType: MistakeChasingGameClient.LocalDB.bugsTypedb,
 
         dictionaryType : [
             { id: 1, content: "Key Words", table: "keyWords"},

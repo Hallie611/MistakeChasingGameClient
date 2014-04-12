@@ -5,7 +5,6 @@
     onlineClock = new MistakeChasingGameClient.ClockVM("");
 
     var countX = 0;
-
     var connection;
 
     myEventHandlerOnline = function () {
@@ -26,40 +25,42 @@
     };
 
     processHidingOnline = function () {
-        onlineViewModel.loadListTab();
+        onlineViewModel.ListTab.loadListTab();
     };
 
     submitOnlineFBK = function () {
         var points = onlineViewModel.submitBlanks();
-        onlineViewModel.loadListTab();
+        onlineViewModel.ListTab.loadListTab();
     };
 
     submitOnlineSC = function () {
         var points = onlineViewModel.submitChoice();
-        onlineViewModel.loadListTab();
+        onlineViewModel.ListTab.loadListTab();
     };
 
     var turnClockOn = ko.computed(function () {
         if (onlineViewModel.clockOn()) {
-          //  alert(onlineViewModel.clockOn());
+            //  alert(onlineViewModel.clockOn());
             //onlineViewModel.clockOn(false);
+            //alert("set clock");
             onlineClock.setClock();
         }
     });
 
     var turnClockOff = ko.computed(function () {
         if (!onlineViewModel.clockOn()) {
-           // alert(onlineViewModel.clockOn());
+            // alert(onlineViewModel.clockOn());
+            //alert("clear clock");
             onlineClock.clearClock();
         }
     });
-    var timeOutOnline = ko.computed(function () {
-        if (onlineClock.timeOut()) {
-            onlineClock.timeOut(false);
+    var timeUpOnline = ko.computed(function () {
+        if (onlineClock.timeUp()) {
+            onlineClock.timeUp(false);
             var points = onlineViewModel.timeUp();
             onlineViewModel.ListTab.ResultVisible(true);
-           // onlineViewModel.loadRoomTab();
-          //  showEndDialog();
+            // onlineViewModel.RoomTab.loadRoomTab();
+            //  showEndDialog();
         }
     });
 
@@ -70,7 +71,7 @@
 
     register = function () {
         popupVisible(true);
-       // $.connection.hub.url = "http://localhost:8080/signalr";
+        // $.connection.hub.url = "http://localhost:8080/signalr";
         $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
         $.connection.hub.start({ transport: 'longPolling' })
@@ -108,11 +109,9 @@
                     onlineViewModel.RoomTab.username(localStorage.username),
                      onlineViewModel.RoomTab.level(localStorage.level),
                      onlineViewModel.RoomTab.point(localStorage.point),
-
                     popupVisible(false);
                     $.connection.hub.stop();
-                    onlineViewModel.loadRoomTab();
-
+                    onlineViewModel.RoomTab.loadRoomTab();
                 }
                 else {
                     message("Username has used, Try another please");
@@ -122,12 +121,8 @@
     };
 
     ///////////////////////////////////
-
-    ///////////////////////////////////
     return $.extend(onlineViewModel, {
         viewShown: function () {
-
-
             //$.ajax({
             //    url: "http://signalr-13.apphb.com/signalR/hubs",
             //    type: 'GET',
@@ -135,12 +130,12 @@
             //    crossDomain: true,
             //    contentType: "application/json;charset=utf-8",
             //    success: function (data) {
-                    if (localStorage.username) {
-                     //   $.connection.hub.stop();
-                        onlineViewModel.loadRoomTab();
-                    } else {
-                        register();
-                    }
+            if (localStorage.username) {
+                //   $.connection.hub.stop();
+                onlineViewModel.RoomTab.loadRoomTab();
+            } else {
+                register();
+            }
 
 
             //    },

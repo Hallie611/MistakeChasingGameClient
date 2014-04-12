@@ -2,14 +2,13 @@
 
     trainingViewModel = new MistakeChasingGameClient.QuestionVM(params.id);
     trainingClock = new MistakeChasingGameClient.ClockVM("");
-    resultPopup = {
-        curPoints: ko.observable(),
-        button: {
-            text: ko.observable(),
-            action: ko.observable()
-        },
-        resultList: ko.observable()
+    curPoints = ko.observable();
+    button = {
+        text: ko.observable(),
+        action: ko.observable()
     };
+    resultList = ko.observable();
+
 
     var countX = 0;
     myEventHandler = function () {
@@ -51,20 +50,19 @@
     function showEndDialog() {
         //$('#resultPopup').dxPopup('instance').beginUpdate();
         countX = 0;
-        resultPopup.curPoints(localStorage.currentPoint);
-        resultPopup.resultList(trainingViewModel.listQ);
+        curPoints(localStorage.currentPoint);
+        resultList(trainingViewModel.listQ);
         localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
-        var isPassed = trainingViewModel.isPassed();
+        var isPassed = trainingViewModel.checkPassed();
         trainingClock.clearClock();
 
         if (isPassed) {
-
-            resultPopup.button.text("Next Level");
-            resultPopup.button.action(next);
+            button.text("Next Level");
+            button.action(next);
         }
         else {
-            resultPopup.button.text("Try Again");
-            resultPopup.button.action(tryAgain);
+            button.text("Try Again");
+            button.action(tryAgain);
         }
         //$('#resultPopup').dxPopup('instance').endUpdate();
         $('#resultPopup').dxPopup('instance').show();
@@ -91,7 +89,7 @@
         trainingClock.setClock();
     };
 
-    backToHome = function() {
+    backToHome = function () {
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         //localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
@@ -100,9 +98,9 @@
         MistakeChasingGameClient.app.navigate('home', { root: true });
     };
 
-    var timeOut = ko.computed(function () {
-        if (trainingClock.timeOut()) {
-            trainingClock.timeOut(false);
+    var timeUp = ko.computed(function () {
+        if (trainingClock.timeUp()) {
+            trainingClock.timeUp(false);
             var points = trainingViewModel.timeUp();
             showEndDialog();
         }
