@@ -20,6 +20,7 @@
     };
 
     showBugOnline = function () {
+        countX = 0;
         var points = onlineViewModel.bugFound();
         $("#toastSuccess").dxToast('instance').show();
     };

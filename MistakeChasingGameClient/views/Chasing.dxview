@@ -19,7 +19,7 @@
         <div class="content" id="levelmap" data-bind="if: RoomTab.rendered, visible: RoomTab.tabVisible">
 
             <div id="levelImage" style="display: normal;height:30%">
-                <img style="margin-top:15%" data-bind="attr: { src: 'images/level/'+RoomTab.rank()+'.png',height :'50px'}" />
+                <img style="margin-top:15%" data-bind="attr: { src: 'images/level/'+RoomTab.rank()+'.png',height :'40%'}" />
             </div>
 
             <div id="opponent" style="display: none; text-align: left; margin-left: 10%; margin-right: 10%;"
@@ -159,7 +159,7 @@
             <div data-bind="dxScrollView: { }" style="height: 58%;">
                 <img id="question" data-bind="attr: { src:  fillingBlanksTab.src }" />
             </div>
-            <div style="bottom: 2%; width: 100%; position: absolute;">
+            <div style="bottom: 1%; width: 100%; position: absolute;">
                 <div style="text-align: center;">
                     <h3>Fill in the blanks in the codes above:</h3>
                 </div>
@@ -206,7 +206,7 @@
             <div data-bind="dxScrollView: { }" style="height: 73%;">
                 <img id="question" data-bind="attr: { src:  singleChoiceTab.src }" />
             </div>
-            <div style="bottom: 2%; width: 100%; position: absolute;">
+            <div style="bottom: 1%; width: 100%; position: absolute;">
                 <div style="text-align: center;">
                     <h3>Which type of bug is in the codes above?</h3>
                 </div>

@@ -124,7 +124,16 @@
         };
 
         this.isPassed = function () {
-            var crit = Number(localStorage.currentlevel) * 5 * 2;
+            var crit;
+            if (Number(localStorage.currentlevel) <= 21 && Number(localStorage.currentlevel) > 14) {
+                crit = Number(localStorage.currentlevel) * 5 * 4;
+            }
+            else if (Number(localStorage.currentlevel) < 15 && Number(localStorage.currentlevel) > 7) {
+                crit = Number(localStorage.currentlevel) * 5 * 3;
+            }
+            else if (Number(localStorage.currentlevel) < 8) {
+                crit = Number(localStorage.currentlevel) * 5 * 2;
+            }
             if (Number(localStorage.currentPoint) >= crit) {
                 if (Number(localStorage.currentlevel) == Number(localStorage.level)) {
                     localStorage.level = Number(localStorage.currentlevel) + 1;

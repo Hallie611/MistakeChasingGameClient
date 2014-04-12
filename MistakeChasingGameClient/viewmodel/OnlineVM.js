@@ -11,7 +11,7 @@
         var difCurrentQ;
         var randomQuestion; // = ko.observable();
         var randomAns; // = ko.observable();
-        
+
         ///////////////////////////////
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -40,7 +40,7 @@
             message: ko.observable(""),
             username: ko.observable(localStorage.username),
             level: ko.observable(localStorage.level),
-            rank :ko.observable(localStorage.rank),
+            rank: ko.observable(localStorage.rank),
             point: ko.observable(localStorage.point),
             oname: ko.observable(),
             oplevel: ko.observable(''),
@@ -206,7 +206,7 @@
 
 
             //$.connection.hub.url = "http://localhost:8080/signalr";
-           $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -264,7 +264,7 @@
                         $.connection.gamesHub.server.playerReady();
                         return;
                     }
-                    self.RoomTab.message(opponent + " ready .Game start after " + count + " s");
+                    self.RoomTab.message(opponent + " ready. Start after " + count + " s");
                     //Do code for showing the number of seconds here
                 }
 
@@ -325,7 +325,7 @@
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
                 self.ListTab.ResultVisible(true);
-                
+
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
@@ -335,7 +335,7 @@
                 clearInterval(counter);
             }
 
-            $.connection.hub.start({ transport: 'longPolling' }).done(function () {
+            $.connection.hub.start().done(function () {
                 document.getElementById("menubtn").style.display = "";
                 self.RoomTab.fbtndisable(false);
                 self.RoomTab.message("");
@@ -352,8 +352,7 @@
         this.findOpponent = function () {
             self.RoomTab.fbtndisable(true);
             $.connection.gamesHub.server.findOpponent();
-            var count = 10;
-
+            var count = 30;
             counter = setInterval(timer, 1000); //1000 will  run it every 1 second
             function timer() {
                 count = count - 1;
@@ -368,6 +367,7 @@
                 }
             }
 
+
         };
 
         this.play = function () {
@@ -377,11 +377,11 @@
         //bao la ben nay da ready
         this.Ready = function () {
             self.RoomTab.readyDisable(true);
-            self.RoomTab.message("Watting opponent ready ...");
+            self.RoomTab.message("Watting " + self.RoomTab.oname() + " ready ...");
             $.connection.gamesHub.server.playerReady();
         }
         this.Cancel = function () {
-            DevExpress.ui.dialog.confirm("Are you sure?", "Confirm changes")
+            DevExpress.ui.dialog.confirm("Are you sure?", "Confirm ")
                 .done(function (dialogResult) {
                     if (dialogResult) {
                         localStorage.point = Number(localStorage.point) - 5;
@@ -427,7 +427,7 @@
             //alert(correctAns + "correctAns getSingleChoiceAns");
             var randomAns1, randomAns2;
             var isRepeat = true;
-            
+
             while (isRepeat) {
                 randomAns1 = Math.floor(Math.random() * 10) + 1;
                 if (randomAns1 != correctAns) {
@@ -445,10 +445,10 @@
 
                             //alert(ranListAns[0].content + "  " + ranListAns[1].content + "  " + ranListAns[2].content);
 
-                       
+
 
                             randomAns.listAns = ko.observableArray([ranListAns[0].content, ranListAns[1].content, ranListAns[2].content]);
-                            
+
                             randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
                         };
                     };

@@ -24,6 +24,7 @@
     };
 
     showBug = function () {
+        countX = 0;
         var points = trainingViewModel.bugFound();
         localStorage.currentPoint = Number(localStorage.currentPoint) + points;
         localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
@@ -52,6 +53,7 @@
         countX = 0;
         resultPopup.curPoints(localStorage.currentPoint);
         resultPopup.resultList(trainingViewModel.listQ);
+        localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         var isPassed = trainingViewModel.isPassed();
         trainingClock.clearClock();
 
@@ -80,7 +82,7 @@
     function next() {
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
-        localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
+        //localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;
         var nextLevel = Number(localStorage.currentlevel) + 1;
         localStorage.currentlevel = nextLevel;
@@ -92,7 +94,7 @@
     backToHome = function() {
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
-        localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
+        //localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
         localStorage.currentPoint = 0;
         localStorage.currentlevel = 0;
         MistakeChasingGameClient.app.navigate('home', { root: true });

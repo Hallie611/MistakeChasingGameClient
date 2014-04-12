@@ -9,7 +9,7 @@
                 </p>
                 <p data-bind="text: 'You have earn ' + resultPopup.curPoints() + ' points!' ">
                 </p>
-                <div style="height: initial;" data-bind="dxList: { dataSource: resultPopup.resultList }">
+                <div style="height: initial;" data-bind="dxList: { dataSource: resultPopup.resultList, showScrollbar: true, activeStateEnabled: false, height: '230px' }">
                     <div data-options="dxTemplate:{ name:'item' }">
                         <div style="display: inline-block; margin: 5px;">
                             <p style="font-size: larger;">
