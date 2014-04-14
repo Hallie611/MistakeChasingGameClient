@@ -1,5 +1,6 @@
 <div data-options="dxView : { name: 'Dictionary', title: 'Dictionary' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <div data-bind="dxTextBox: {value: username}"></div>
         <div class="dx-fieldset">
             <div class="dx-field">
                 <div class="dx-field-label">Search By</div>

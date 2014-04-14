@@ -1,6 +1,12 @@
 ﻿MistakeChasingGameClient.Dictionary = function (params) {
 
+    
+
+    
+
     var viewModel = {
+        
+        
 
         id: ko.observable('0'),
         

@@ -1,7 +1,7 @@
 ﻿MistakeChasingGameClient.home = function (params) {
 
+    
 
-   
 
     localStorage.currentIndex = 1;
     localStorage.currentPoint = 0;

@@ -920,10 +920,16 @@
     <Content Include="lose.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Model\PlayerModel.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="viewmodel\ClockVM.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="viewmodel\OnlineVM.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="viewmodel\PlayerVM.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="viewmodel\QuestionVM.js">
@@ -979,6 +985,7 @@
     <Folder Include="layouts\Simple" />
     <Folder Include="layouts\SlideOut\" />
     <Folder Include="images" />
+    <Folder Include="Model" />
     <Folder Include="viewmodel" />
     <Folder Include="views\" />
     <Folder Include="views\Dictionary" />
