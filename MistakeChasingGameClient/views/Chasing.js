@@ -71,9 +71,7 @@
 
     register = function () {
         popupVisible(true);
-        // $.connection.hub.url = "http://localhost:8080/signalr";
         $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
-
         $.connection.hub.start({ transport: 'longPolling' })
             .done(function () {
                 btnLoadAgain(false);
@@ -137,7 +135,6 @@
                 register();
             }
 
-
             //    },
             //    error: function (request) {
             //        if (request.status == 0 || request.status == 404) {
@@ -155,17 +152,25 @@
             //    }
             //});
 
+
         },
         viewDisposing: function () {
             $.connection.hub.stop();
             //onlineViewModel.clearListQ();
         },
         viewHidden: function () {
+    
+            
+            if (counter) {
+                clearInterval(couter);
+                alert(counter);
+            }
             $.connection.hub.stop();
 
             //onlineViewModel.clearListQ();
         },
         viewDisposed: function () {
+
             $.connection.hub.stop();
             //onlineViewModel.clearListQ();
         }
