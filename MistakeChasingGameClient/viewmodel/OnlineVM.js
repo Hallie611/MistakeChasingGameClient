@@ -2,16 +2,10 @@
     "use strict";
 
     MistakeChasingGameClient.OnlineVM = function (data) {
-
-        var answerSC;
-        var answer1;
-        var answer2;
-        var answer3;
         //////////////////////////
         var difCurrentQ;
         var randomQuestion; // = ko.observable();
         var randomAns; // = ko.observable();
-
         ///////////////////////////////
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -48,8 +42,49 @@
             pointwin: ko.observable(),
             poinlose: ko.observable(Number(localStorage.level) * 10),
             fbtndisable: ko.observable(true),
-            readyDisable: ko.observable(false)
+            readyDisable: ko.observable(false),
+            loadRoomTab: function () {
+                self.ListTab.player1point(0);
+                self.ListTab.player2point(0);
+                self.singleChoiceTab.rendered(false);
+                self.fillingBlanksTab.rendered(false);
+                self.findBugsTab.rendered(false);
+                self.ListTab.rendered(false);
+                self.RoomTab.rendered(true);
 
+                self.RoomTab.point(localStorage.point);
+                self.RoomTab.fbtndisable(true);
+                if (localStorage.point < localStorage.level * 10) {
+                    DevExpress.ui.dialog.alert('Required point for level ' + localStorage.level + ' is ' + localStorage.level * 10 + '. You can earn more points in Training.', 'Not enough points').done(
+                    function () {
+                        MistakeChasingGameClient.app.navigate('home', { root: true });
+                    });
+                }
+                else {
+                    if ($.connection.hub.state != 1) {
+                        self.RoomTab.message('Connecting...');
+                        self.ConnectToSever();
+                        //document.getElementById("findbtn").style.display = "none";
+                        document.getElementById("menubtn").style.display = "none";
+                        document.getElementById("opponent").style.display = "none";
+                        document.getElementById("readybtn").style.display = "none";
+                        document.getElementById("Cancelbtn").style.display = "none";
+                    }
+                    else {
+                        self.RoomTab.message('');
+                        self.RoomTab.fbtndisable(false);
+                        self.RoomTab.readyDisable(false);
+                        document.getElementById("levelImage").style.display = "";
+                        document.getElementById("opponent").style.display = "none";
+                        document.getElementById("readybtn").style.display = "none";
+                        document.getElementById("Cancelbtn").style.display = "none";
+                        document.getElementById("findbtn").style.display = "";
+                        self.RoomTab.message("");
+                        document.getElementById("menubtn").style.display = "";
+                    }
+                }
+                selectedTab(0);
+            }
         };
         this.ListTab = {
             rendered: ko.observable(false),
@@ -69,7 +104,19 @@
 
             okResult: function () {
                 self.ListTab.ResultVisible(false);
-                self.loadRoomTab();
+                self.RoomTab.loadRoomTab();
+            },
+            loadListTab: function () {
+                // set maxIndex for clock
+                self.setMaxIndex();
+                document.getElementById("menubtn").style.display = "none";
+                self.singleChoiceTab.rendered(false);
+                self.fillingBlanksTab.rendered(false);
+                self.findBugsTab.rendered(false);
+                self.RoomTab.rendered(false);
+                self.ListTab.rendered(true);
+                self.ListTab.listDataSource(self.listQ);
+                selectedTab(1);
             }
         };
         this.findBugsTab = {
@@ -82,7 +129,15 @@
             bheight: ko.observable(),
             bleft: ko.observable(),
             btop: ko.observable(),
-            srcX: "images/redX.png"
+            srcX: "images/redX.png",
+            loadFindBugs: function () {
+                self.findBugsTab.src(randomQuestion.src);
+                self.findBugsTab.bwidth(randomAns.width);
+                self.findBugsTab.bheight(randomAns.height);
+                self.findBugsTab.bleft(randomAns.left);
+                self.findBugsTab.btop(randomAns.top);
+                difCurrentQ = randomQuestion.dif;
+            }
         };
         this.fillingBlanksTab = {
             src: ko.observable(),
@@ -96,7 +151,23 @@
 
             choice1: ko.observable(''),
             choice2: ko.observable(''),
-            choice3: ko.observable('')
+            choice3: ko.observable(''),
+            answer1: "",
+            answer2: "",
+            answer3: "",
+            loadFillingBlanks: function () {
+                self.fillingBlanksTab.src(randomQuestion.src);
+                self.fillingBlanksTab.answer1source(randomAns[0].list);
+                self.fillingBlanksTab.answer2source(randomAns[1].list);
+                self.fillingBlanksTab.answer3source(randomAns[2].list);
+                self.fillingBlanksTab.answer1 = randomAns[0].ans;
+                self.fillingBlanksTab.answer2 = randomAns[1].ans;
+                self.fillingBlanksTab.answer3 = randomAns[2].ans;
+                self.fillingBlanksTab.choice1('');
+                self.fillingBlanksTab.choice2('');
+                self.fillingBlanksTab.choice3('');
+                difCurrentQ = randomQuestion.dif;
+            }
         };
         this.singleChoiceTab = {
             src: ko.observable(),
@@ -105,108 +176,28 @@
                 return selectedTab() === 4;
             }),
             listAns: ko.observable(),
-            choiceSC: ko.observable('')
-        };
-        ///////////////////////////////////////////////Load tab        
-        this.loadFindBugs = function () {
-            this.findBugsTab.src(randomQuestion.src);
-            this.findBugsTab.bwidth(randomAns.width);
-            this.findBugsTab.bheight(randomAns.height);
-            this.findBugsTab.bleft(randomAns.left);
-            this.findBugsTab.btop(randomAns.top);
-            difCurrentQ = randomQuestion.dif;
-
-        };
-
-        this.loadFillingBlanks = function () {
-            this.fillingBlanksTab.src(randomQuestion.src);
-            this.fillingBlanksTab.answer1source(randomAns[0].list);
-            this.fillingBlanksTab.answer2source(randomAns[1].list);
-            this.fillingBlanksTab.answer3source(randomAns[2].list);
-            answer1 = randomAns[0].ans;
-            answer2 = randomAns[1].ans;
-            answer3 = randomAns[2].ans;
-            difCurrentQ = randomQuestion.dif;
-        };
-
-        this.loadSingleChoice = function () {
-            this.singleChoiceTab.src(randomQuestion.src);
-            this.singleChoiceTab.listAns(randomAns.listAns);
-            answerSC = randomAns.ans;
-            difCurrentQ = randomQuestion.dif;
-        };
-        /////////////////////////////////////////////////
-        this.loadRoomTab = function () {
-            self.ListTab.player1point(0);
-            self.ListTab.player2point(0);
-            this.singleChoiceTab.rendered(false);
-
-
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            this.ListTab.rendered(false);
-            this.RoomTab.rendered(true);
-
-            this.RoomTab.point(localStorage.point);
-            self.RoomTab.fbtndisable(true);
-            if (localStorage.point < localStorage.level * 10) {
-                DevExpress.ui.dialog.alert('Go back trainning get at least ' + localStorage.level * 10 + ' point for Chasing', 'Not Enough Point').done(
-                    function () {
-                        MistakeChasingGameClient.app.navigate('home', { root: true });
-                    });
+            choiceSC: ko.observable(''),
+            answerSC: "",
+            loadSingleChoice: function () {
+                self.singleChoiceTab.src(randomQuestion.src);
+                self.singleChoiceTab.listAns(randomAns.listAns);
+                self.singleChoiceTab.choiceSC('');
+                self.singleChoiceTab.answerSC = randomAns.ans;
+                difCurrentQ = randomQuestion.dif;
             }
-            else {
-                if ($.connection.hub.state != 1) {
-                    self.RoomTab.message('Connecting...');
-                    this.ConnectToSever();
-                    //document.getElementById("findbtn").style.display = "none";
-                    document.getElementById("menubtn").style.display = "none";
-                    document.getElementById("opponent").style.display = "none";
-                    document.getElementById("readybtn").style.display = "none";
-                    document.getElementById("Cancelbtn").style.display = "none";
-                }
-                else {
-                    self.RoomTab.message('');
-                    self.RoomTab.fbtndisable(false);
-                    self.RoomTab.readyDisable(false);
-                    document.getElementById("levelImage").style.display = "";
-                    document.getElementById("opponent").style.display = "none";
-                    document.getElementById("readybtn").style.display = "none";
-                    document.getElementById("Cancelbtn").style.display = "none";
-                    document.getElementById("findbtn").style.display = "";
-                    self.RoomTab.message("");
-                    document.getElementById("menubtn").style.display = "";
-                }
-            }
-            selectedTab(0);
         };
-
-        this.loadListTab = function () {
-            // set maxIndex for clock
-            self.setMaxIndex();
-            document.getElementById("menubtn").style.display = "none";
-            this.singleChoiceTab.rendered(false);
-            this.fillingBlanksTab.rendered(false);
-            this.findBugsTab.rendered(false);
-            this.RoomTab.rendered(false);
-            this.ListTab.rendered(true);
-            this.ListTab.listDataSource(self.listQ);
-            selectedTab(1);
-        };
-
+        ////////////////////////////////////////////////////////
         this.setMaxIndex = function () {
             this.listQ.totalCount().done(function (result) {
                 localStorage.maxIndex = result;
             });
         };
         var counter;
-
         ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
 
-
-            $.connection.hub.url = "http://localhost:8080/signalr";
-            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            //$.connection.hub.url = "http://localhost:8080/signalr";
+            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
@@ -216,13 +207,11 @@
                 });
                 //// temp la listQ tra ve cho ca 2 client
                 self.ListTab.listDataSource(self.listQ);
-
             };
             //
             $.connection.gamesHub.client.refeshAmountOfPlayer = function (message) {
                 self.numberPlayer = message.totalClient;
-                self.RoomTab.message("Number of player online : " + self.numberPlayer);
-
+                self.RoomTab.message("Number of players online : " + self.numberPlayer);
             };
             //no opponent
             $.connection.gamesHub.client.noOpponents = function (message) {
@@ -230,7 +219,6 @@
             };
 
             $.connection.gamesHub.client.foundOpponent = function (message) {
-
                 clearInterval(counter);
 
                 self.RoomTab.message("");
@@ -250,30 +238,27 @@
             };
 
             $.connection.gamesHub.client.oponentReady = function (opponent) {
-
                 var count = 10;
-
                 counter = setInterval(timer, 1000); //1000 will  run it every 1 second
 
                 function timer() {
                     count = count - 1;
                     if (count <= 0) {
-
                         clearInterval(counter);
                         //counter ended, do something here
                         $.connection.gamesHub.server.playerReady();
                         return;
                     }
-                    self.RoomTab.message(opponent + " ready. Start after " + count + " s");
+                    self.RoomTab.message(opponent + " is ready. Start after " + count + " s");
                     //Do code for showing the number of seconds here
                 }
+            };
 
-
-            };            //sever tra ve ca 2 client deu ready vao game
+            //sever tra ve ca 2 client deu ready vao game
             $.connection.gamesHub.client.gameReady = function () {
                 document.getElementById("menubtn").style.display = "none";
                 clearInterval(counter);
-                self.loadListTab();
+                self.ListTab.loadListTab();
                 self.clockOn(true);
             };
 
@@ -292,36 +277,30 @@
                     self.ListTab.listDataSource(self.listQ);
                 }
                 if (localStorage.currentIndex == result.index && result.isMax == true) {
-                    self.loadListTab();
+                    self.ListTab.loadListTab();
                 }
             }
 
             $.connection.gamesHub.client.gameOver = function (name) {
 
                 if (localStorage.username == name.Name) {
-
                     self.clockOn(false);
-
                     self.ListTab.ImageResult('win.png');
-                    self.ListTab.resultPoint("Your Point +" + self.RoomTab.pointwin());
+                    self.ListTab.resultPoint("Your point +" + self.RoomTab.pointwin());
                     localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
                     self.ListTab.result("WIN");
                 }
                 else if (name.Name == "none") {
-
                     self.clockOn(false);
-
                     self.ListTab.result("DRAW");
                     self.ListTab.ImageResult("Draw.png");
                     self.ListTab.resultPoint("");
                 }
                 else {
-
                     self.clockOn(false);
-
                     self.ListTab.result("LOSE");
                     self.ListTab.ImageResult("lose.png");
-                    self.ListTab.resultPoint("Your Point -" + self.RoomTab.poinlose());
+                    self.ListTab.resultPoint("Your point -" + self.RoomTab.poinlose());
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
                 }
                 self.ListTab.ResultVisible(true);
@@ -330,8 +309,8 @@
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
                 localStorage.point = Number(localStorage.point) + 5;
-                DevExpress.ui.dialog.alert('Your Opponent has out of match your point +5', 'Notify');
-                self.loadRoomTab();
+                DevExpress.ui.dialog.alert('Your opponent has canceled the match. You earn 5 points.', 'Notify');
+                self.RoomTab.loadRoomTab();
                 clearInterval(counter);
             }
 
@@ -342,7 +321,7 @@
                 $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point);
                 // hub is now ready
             }).fail(function () {
-                DevExpress.ui.dialog.alert("Can not connect to server right now!Try Again later").done(function () {
+                DevExpress.ui.dialog.alert("Cannot connect to server right now! Please try again later.").done(function () {
                     MistakeChasingGameClient.app.navigate('home', { root: true });
                 });
 
@@ -351,16 +330,14 @@
 
         this.findOpponent = function () {
             self.RoomTab.fbtndisable(true);
-            $.connection.gamesHub.server.findOpponent().done(function (r) {
-                
-            });
-            var count = 15;
+            $.connection.gamesHub.server.findOpponent();
+            var count = 30;
             counter = setInterval(timer, 1000); //1000 will  run it every 1 second
             function timer() {
                 count = count - 1;
                 if (count <= 0) {
                     window.clearInterval(counter);
-                    self.RoomTab.message("No opponent found");
+                    self.RoomTab.message("No opponent found. Please try again.");
                     $.connection.gamesHub.server.foundNoOpponents();
                     self.RoomTab.fbtndisable(false);
                 }
@@ -379,24 +356,21 @@
         //bao la ben nay da ready
         this.Ready = function () {
             self.RoomTab.readyDisable(true);
-            self.RoomTab.message("Watting " + self.RoomTab.oname() + " ready ...");
+            self.RoomTab.message("Waitting for " + self.RoomTab.oname() + "to be ready ...");
             $.connection.gamesHub.server.playerReady();
         }
         this.Cancel = function () {
-            DevExpress.ui.dialog.confirm("Are you sure?", "Confirm ")
+            DevExpress.ui.dialog.confirm("Cancel the match? You will lose points.", "Confirm ")
                 .done(function (dialogResult) {
                     if (dialogResult) {
                         localStorage.point = Number(localStorage.point) - 5;
-                        DevExpress.ui.dialog.alert('You cancel game, your point -5', 'Notify');
+                        DevExpress.ui.dialog.alert('You canceled the match, you lost 5 points.', 'Notify');
                         $.connection.gamesHub.server.outOfMath();
                         clearInterval(counter);
-                       // self.RoomTab.message("Click To Opponent");
-                        self.loadRoomTab();
+                        self.RoomTab.message("Click to find opponent");
+                        self.RoomTab.loadRoomTab();
                     }
                 });
-
-
-
         }
         ///////////////////////////////////////////
         this.clearListQ = function () {
@@ -410,70 +384,27 @@
                 }
             };
         };
-        /////////////////////////////////////////
-        this.getQuestion = function (questionId) {
-            MistakeChasingGameClient.db.questionDb.byKey(questionId).done(function (dataItem) {
-                randomQuestion = dataItem;
-                //alert(randomQuestion.id + " random Id getQuestion");
-            });
-        };
-        this.getFindBugsAns = function () {
-            randomAns = MistakeChasingGameClient.db.findBugsDb.createQuery().filter(["questionId", "=", randomQuestion.id]).toArray()[0];
-        };
-        this.getFillingBlanksAns = function () {
-            randomAns = MistakeChasingGameClient.db.fillingBlanksDb.createQuery().filter(["questionId", "=", randomQuestion.id]).sortBy("answerIndex").toArray();
-        };
-        this.getSingleChoiceAns = function () {
-            //alert(randomQuestion.id + "random Id getSingleChoiceAns");
-            var correctAns = MistakeChasingGameClient.db.singleChoiceDb.createQuery().filter(["questionId", "=", randomQuestion.id]).select("mistakeId").toArray()[0].mistakeId;
-            //alert(correctAns + "correctAns getSingleChoiceAns");
-            var randomAns1, randomAns2;
-            var isRepeat = true;
-
-            while (isRepeat) {
-                randomAns1 = Math.floor(Math.random() * 10) + 1;
-                if (randomAns1 != correctAns) {
-                    while (isRepeat) {
-                        randomAns2 = Math.floor(Math.random() * 10) + 1;
-                        if (randomAns2 != randomAns1 && randomAns2 != correctAns) {
-                            isRepeat = false;
-                            var ranListAns = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter([["id", "=", randomAns1],
-                                                        "or", ["id", "=", randomAns2], "or", ["id", "=", correctAns]]).sortBy("id").select("content").toArray();
-                            //for (var i = 0; i < 3; i++) {
-                            //    if (ranListAns[i].content == null);
-                            //    alert(ranListAns[i].content);
-                            //}
-
-
-                            //alert(ranListAns[0].content + "  " + ranListAns[1].content + "  " + ranListAns[2].content);
-
-
-
-                            randomAns.listAns = ko.observableArray([ranListAns[0].content, ranListAns[1].content, ranListAns[2].content]);
-
-                            randomAns.ans = MistakeChasingGameClient.db.mistakeTypesDb.createQuery().filter(["id", "=", correctAns]).select("content").toArray()[0].content;
-                        };
-                    };
-                };
-            };
-        };
         ////////////////////////////////////////////////add question
         this.addQuestionOnline = function (item) {
-            this.getQuestion(item.questionId);
+            var question = MistakeChasingGameClient.LocalDB.getQuestion(item.questionId);
+            //alert("go here " + item.questionId + " " + question);
             if (item.type == "Find Bugs") {
-                this.getFindBugsAns();
+                var answer = MistakeChasingGameClient.LocalDB.getFindBugsAns(item.questionId);
+                //alert("answer " + item.questionId + " " + answer);
             }
             else if (item.type == "Fill Blanks") {
-                this.getFillingBlanksAns();
+                var answer = MistakeChasingGameClient.LocalDB.getFillingBlanksAns(item.questionId);
+                //alert("answer " + item.questionId + " " + answer);
             }
             else if (item.type == "Single Choice") {
-                this.getSingleChoiceAns();
+                var answer = MistakeChasingGameClient.LocalDB.getSingleChoiceAns(item.questionId);
+                //alert("answer " + item.questionId + " " + answer);
             }
 
             this.listQ.insert({
                 index: item.index,
-                question: randomQuestion,
-                ans: randomAns,
+                question: question,
+                ans: answer,
                 type: item.type,
                 status: "Available"
             });
@@ -491,13 +422,13 @@
         };
         this.submitBlanks = function () {
             var points = 0;
-            if (this.fillingBlanksTab.choice1() == answer1) {
+            if (this.fillingBlanksTab.choice1() == self.fillingBlanksTab.answer1) {
                 points += difCurrentQ * 2;
             }
-            if (this.fillingBlanksTab.choice2() == answer2) {
+            if (this.fillingBlanksTab.choice2() == self.fillingBlanksTab.answer2) {
                 points += difCurrentQ * 2;
             }
-            if (this.fillingBlanksTab.choice3() == answer3) {
+            if (this.fillingBlanksTab.choice3() == self.fillingBlanksTab.answer3) {
                 points += difCurrentQ * 2;
             }
             if (points == difCurrentQ * 6) {
@@ -511,9 +442,8 @@
         };
         this.submitChoice = function () {
             var points = 0;
-            if (answerSC == this.singleChoiceTab.choiceSC()) {
+            if (self.singleChoiceTab.answerSC == this.singleChoiceTab.choiceSC()) {
                 points += difCurrentQ * 5;
-
                 self.CorrectedQuestion(localStorage.currentIndex, points, true);
             }
             else {
@@ -555,27 +485,27 @@
             ///////////////////////////////////////////////
             var itemData = item.itemData;
             localStorage.currentIndex = itemData.index;
+            randomQuestion = itemData.question;
+            randomAns = itemData.ans;
+            //alert(randomQuestion.id + " process click");
 
             if (itemData.type == "Find Bugs" && itemData.status == "Available") {
-                randomQuestion = itemData.question;
-                randomAns = itemData.ans;
-                this.loadFindBugs();
+
+                this.findBugsTab.loadFindBugs();
                 selectedTab(2);
                 this.findBugsTab.rendered(true);
                 this.ListTab.rendered(false);
             }
             else if (itemData.type == "Fill Blanks" && itemData.status == "Available") {
-                randomQuestion = itemData.question;
-                randomAns = itemData.ans;
-                this.loadFillingBlanks();
+
+                this.fillingBlanksTab.loadFillingBlanks();
                 selectedTab(3);
                 this.fillingBlanksTab.rendered(true);
                 this.ListTab.rendered(false);
             }
             else if (itemData.type == "Single Choice" && itemData.status == "Available") {
-                randomQuestion = itemData.question;
-                randomAns = itemData.ans;
-                this.loadSingleChoice();
+
+                this.singleChoiceTab.loadSingleChoice();
                 selectedTab(4);
                 this.singleChoiceTab.rendered(true);
                 this.ListTab.rendered(false);
@@ -592,7 +522,5 @@
             localStorage.currentlevel = 0;
             MistakeChasingGameClient.app.navigate('home', { root: true });
         }
-
-
     };
 })();
