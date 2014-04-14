@@ -309,7 +309,7 @@
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
                 localStorage.point = Number(localStorage.point) + 5;
-                DevExpress.ui.dialog.alert('Your opponent has canceled the match. You earn 5 points.', 'Notify');
+                DevExpress.ui.dialog.alert('Your opponent has canceled the match. You earn 5 points.', 'Canceled');
                 self.RoomTab.loadRoomTab();
                 clearInterval(counter);
             }
@@ -356,7 +356,7 @@
         //bao la ben nay da ready
         this.Ready = function () {
             self.RoomTab.readyDisable(true);
-            self.RoomTab.message("Waitting for " + self.RoomTab.oname() + "to be ready ...");
+            self.RoomTab.message("Waiting for " + self.RoomTab.oname() + "to be ready ...");
             $.connection.gamesHub.server.playerReady();
         }
         this.Cancel = function () {

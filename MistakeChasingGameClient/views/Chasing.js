@@ -78,7 +78,7 @@
                 txtUNVisible(true);
             })
             .fail(function () {
-                message("Check connection server  for creating user in first play");
+                message("Check connection server for creating user in first play");
                 btnLoadAgain(true);
                 txtUNVisible(false);
             });
@@ -97,7 +97,7 @@
             message("Name can not be blank");
         }
         else if (username().length > 10) {
-            message("Name muss less than 10 char");
+            message("Name must be less than 10 characters");
         }
         else {
             message('...');
@@ -112,7 +112,7 @@
                     onlineViewModel.RoomTab.loadRoomTab();
                 }
                 else {
-                    message("Username has used, Try another please");
+                    message("Username was used. Try again please");
                 }
             });
         }

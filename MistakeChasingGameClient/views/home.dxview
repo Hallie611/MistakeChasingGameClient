@@ -9,19 +9,19 @@
         </div>
         <div class="content" id="levelmap" data-bind="if: beginner.rendered, visible: beginner.mapVisible">
             <img data-bind="attr: { src: beginner.src }" style="width: 100%; height: 100%" />
-            <div id="lv1" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(1) } }">
+            <div id="lv1" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 1 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(1) } }">
             </div>
-            <div id="lv2" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(2) } }">
+            <div id="lv2" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 2 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(2) } }">
             </div>
-            <div id="lv3" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(3) } }">
+            <div id="lv3" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 3 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(3) } }">
             </div>
-            <div id="lv4" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(4) } }">
+            <div id="lv4" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 4 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(4) } }">
             </div>
-            <div id="lv5" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(5) } }">
+            <div id="lv5" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 5 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(5) } }">
             </div>
-            <div id="lv6" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(6) } }">
+            <div id="lv6" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 6 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(6) } }">
             </div>
-            <div id="lv7" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(7) } }">
+            <div id="lv7" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 7 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(7) } }">
             </div>
             <!-- <input id="lv1" type="image" src="images/lvBtn.png" alt="Submit" width="9%" height="9%"> -->
             <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'You have not reach this level yet!', type:'error', displayTime: 300}">
@@ -29,38 +29,38 @@
         </div>
         <div class="content" id="levelmap" data-bind="if: intermediate.rendered, visible: intermediate.mapVisible">
             <img data-bind="attr: { src: intermediate.src }" style="width: 100%; height: 100%" />
-            <div id="lv8" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(8) } }">
+            <div id="lv8" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 8 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(8) } }">
             </div>
-            <div id="lv9" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(9) } }">
+            <div id="lv9" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 9 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(9) } }">
             </div>
-            <div id="lv10" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(10) } }">
+            <div id="lv10" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 10 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(10) } }">
             </div>
-            <div id="lv11" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(11) } }">
+            <div id="lv11" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 11 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(11) } }">
             </div>
-            <div id="lv12" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(12) } }">
+            <div id="lv12" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 12 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(12) } }">
             </div>
-            <div id="lv13" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(13) } }">
+            <div id="lv13" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 13 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(13) } }">
             </div>
-            <div id="lv14" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(14) } }">
+            <div id="lv14" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 14 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(14) } }">
             </div>
             <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'You have not reach this level yet!', type:'error', displayTime: 300}">
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: advanced.rendered, visible: advanced.mapVisible">
             <img data-bind="attr: { src: advanced.src }" style="width: 100%; height: 100%" />
-            <div id="lv15" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(15) } }">
+            <div id="lv15" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 15 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(15) } }">
             </div>
-            <div id="lv16" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(16) } }">
+            <div id="lv16" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 16 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(16) } }">
             </div>
-            <div id="lv17" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(17) } }">
+            <div id="lv17" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 17 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(17) } }">
             </div>
-            <div id="lv18" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(18) } }">
+            <div id="lv18" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 18 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(18) } }">
             </div>
-            <div id="lv19" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(19) } }">
+            <div id="lv19" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 19 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(19) } }">
             </div>
-            <div id="lv20" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(20) } }">
+            <div id="lv20" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 20 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(20) } }">
             </div>
-            <div id="lv21" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: 'images/lvBtn.png', clickAction: function(e) { clickLevel(21) } }">
+            <div id="lv21" style="background: transparent; padding: 0px; text-align: left;" data-bind="dxButton: { iconSrc: level() >= 21 ? 'images/lvBtn.png' : 'images/blueOrbLock.png', clickAction: function(e) { clickLevel(21) } }">
             </div>
             <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'You have not reach this level yet!', type:'error', displayTime: 300}">
             </div>

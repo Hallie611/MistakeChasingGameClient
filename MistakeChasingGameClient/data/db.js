@@ -708,9 +708,11 @@
             return question;
         },
         randomFindBugs: function () {
+            //alert(localStorage.currentlevel);
             var filteredQuestion = MistakeChasingGameClient.LocalDB.questionDb.createQuery().filter([["dif", "=", Number(localStorage.currentlevel)],
                                         "and", ["type", "=", "findbugs"]]).sortBy("id").toArray();
             var question = filteredQuestion[Math.floor(Math.random() * filteredQuestion.length)];
+            //alert(question);
             return question;
             //this.getFindBugsAns();
         },

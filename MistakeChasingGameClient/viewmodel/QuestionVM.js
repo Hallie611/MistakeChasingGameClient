@@ -3,8 +3,8 @@
     MistakeChasingGameClient.QuestionVM = function (params) {
         //////////////////////////
         var difCurrentQ;
-        var randomQuestion; // = ko.observable();
-        var randomAns; // = ko.observable();
+        var randomQuestion//= ko.observable();
+        var randomAns//= ko.observable();
 
         //giu index random array question
         if (!localStorage.currentIndex)
@@ -87,7 +87,7 @@
                 self.singleChoiceTab.answerSC = randomAns.ans;
                 difCurrentQ = randomQuestion.dif;
             }
-        };        
+        };
         /////////////////////////////////////////
         this.bugFound = function () {
             var showMe = document.getElementById("bug");
@@ -177,7 +177,9 @@
         };
         ///////////////////////////////////////////////random list questions
         this.randomThree = function () {
+            //alert(randomQuestion);
             randomQuestion = MistakeChasingGameClient.LocalDB.randomFindBugs();
+            //alert(randomQuestion);
             randomAns = MistakeChasingGameClient.LocalDB.getFindBugsAns(randomQuestion.id);
             this.addQuestion(1, "FindBugs");
             randomQuestion = MistakeChasingGameClient.LocalDB.randomFillingBlanks();

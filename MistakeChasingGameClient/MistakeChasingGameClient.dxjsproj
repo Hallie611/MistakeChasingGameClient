@@ -53,6 +53,12 @@
     <Content Include="Draw.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\BlueLockBtn.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\blueOrbLock.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\button\cancel.png">
       <SubType>Content</SubType>
     </Content>
@@ -840,9 +846,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\roadmap.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\roadmap3.jpg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\roadmap2.jpg">

@@ -8,7 +8,7 @@
         action: ko.observable()
     };
     resultList = ko.observable();
-
+    isClick = ko.observable(false);
 
     var countX = 0;
     myEventHandler = function () {
@@ -32,6 +32,13 @@
     processHiding = function () {
         trainingViewModel.loadQuestion();
     };
+    processHidingPopup = function () {
+        if (!isClick()) {
+            localStorage.currentIndex = 1;
+            localStorage.currentPoint = 0;
+            MistakeChasingGameClient.app.navigate('home', { root: true });
+        }        
+    };
 
     submitFBK = function () {
         var points = trainingViewModel.submitBlanks();
@@ -48,6 +55,7 @@
     };
     //////////////////
     function showEndDialog() {
+        isClick(false);
         //$('#resultPopup').dxPopup('instance').beginUpdate();
         countX = 0;
         curPoints(localStorage.currentPoint);
@@ -69,15 +77,18 @@
     };
 
     function tryAgain() {
+        isClick(true);
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         localStorage.currentPoint = 0;
+        localStorage.currentlevel = localStorage.currentlevel;
         trainingViewModel.randomQuestion();
         trainingViewModel.loadQuestion();
         trainingClock.setClock();
     };
 
     function next() {
+        isClick(true);
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         //localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);
@@ -90,6 +101,7 @@
     };
 
     backToHome = function () {
+        isClick(true);
         $('#resultPopup').dxPopup('instance').hide();
         localStorage.currentIndex = 1;
         //localStorage.point = Number(localStorage.point) + Number(localStorage.currentPoint);

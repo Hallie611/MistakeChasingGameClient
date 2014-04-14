@@ -10,7 +10,7 @@
                 </div>
                 <div data-bind="dxButton: { text: 'Try Again',clickAction: loadAgain ,visible: btnLoadAgain}">
                 </div>
-                <div data-bind="dxButton: { text: 'Back to Home',clickAction: backHome ,visible: true}">
+                <div data-bind="dxButton: { text: 'Cancel',clickAction: backHome ,visible: true}">
                 </div>
             </div>
         </div>
