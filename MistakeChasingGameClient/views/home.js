@@ -3,15 +3,11 @@
     localStorage.currentIndex = 1;
     localStorage.currentPoint = 0;
     //localStorage.currentlevel = 0 ;
-    popupVisible = ko.observable(false);
-    username = ko.observable('');
-    message = ko.observable();
-    txtUNVisible = ko.observable(false);
-    btnLoadAgain = ko.observable(false);
+    
 
     if (!localStorage.level) {
         localStorage.level = 1;
-        localStorage.point = 0;
+        localStorage.point = 10;
     }
 
     if (localStorage.level < 8) {
@@ -54,9 +50,9 @@
             viewModel.point(localStorage.point);
             viewModel.level(localStorage.level);
             viewModel.rank(localStorage.rank);
-            if ($.connection.hub.state == 1) {
-                $.connection.hub.stop();
-            }
+            //if ($.connection.hub.state == 1) {
+            //    $.connection.hub.stop();
+            //}
             //alert(viewModel.level());
         }
     };

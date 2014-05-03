@@ -10,7 +10,7 @@
                 </div>
                 <div data-bind="dxButton: { text: 'Try Again',clickAction: loadAgain ,visible: btnLoadAgain}">
                 </div>
-                <div data-bind="dxButton: { text: 'Cancel',clickAction: backHome ,visible: true}">
+                <div data-bind="dxButton: { text: 'Cancel',clickAction: backHome ,visible: txtUNVisible}">
                 </div>
             </div>
         </div>
@@ -42,8 +42,7 @@
                     </div>
                 </div>
             </div>
-            <h2 data-bind="text: RoomTab.message">
-            </h2>
+            <h2 data-bind="text: RoomTab.message"></h2>
             <!--<div id="cntbtn" data-bind="dxButton: {clickAction: ConnectToSever,text: 'Connect' }"></div>-->
             <div id="findbtn" data-bind="dxButton: {clickAction: findOpponent,text : 'Find Opponent', iconSrc: 'images/button/findop.png' ,disabled: RoomTab.fbtndisable}">
             </div>
@@ -53,7 +52,7 @@
                         <div id="" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/button/ready.png' ,disabled: RoomTab.readyDisable}">
                         </div>
                     </td>
-                    <td style="font-size: xx-large;">
+                    <td style="font-size: x-large;">
                         <sup style="color: lightsalmon">+<b data-bind="text:RoomTab.pointwin"></b></sup>
                         &frasl; <sub style="color: darkgray">-<b data-bind="text:RoomTab.poinlose"></b></sub>
                     </td>
@@ -91,11 +90,9 @@
         <div class="content" id="levelmap" data-bind="if: ListTab.rendered, visible: ListTab.tabVisible">
             <div data-bind="dxPopup: {visible: ListTab.ResultVisible ,title: 'Result Match Game',clickAction: ListTab.okResult, showTitle: false,height: '300px' }">
                 <div style="text-align: center">
-                    <h1 style="font-size: 300%" data-bind="text: ListTab.result">
-                    </h1>
+                    <h1 style="font-size: 300%" data-bind="text: ListTab.result"></h1>
                     <img data-bind="attr: { src: ListTab.ImageResult } " />
-                    <h2 data-bind="text: ListTab.resultPoint">
-                    </h2>
+                    <h2 data-bind="text: ListTab.resultPoint"></h2>
                     <!-- <div data-bind="dxButton: { text: 'OK',clickAction: ListTab.okResult }"></div>-->
                 </div>
             </div>
@@ -103,16 +100,23 @@
                 hhhhhhhhhhhhhhhh
             </div>
             <div id="playerPoint">
-                <b style="float: left; margin-left: 10%;"><b style="width: 40%" data-bind="text :   RoomTab.username">
-                </b>: <b style="width: 40%" data-bind="text :   ListTab.player1point"></b></b><b
-                    style="float: right; margin-right: 10%;"><b style="width: 40%" data-bind="text :   RoomTab.oname">
-                    </b>:<b style="width: 40%" data-bind="text :   ListTab.player2point"></b> </b>
+                <b style="float: left; margin-left: 10%;"><b style="width: 40%; color: blue" data-bind="text :   RoomTab.username"></b>: <b style="width: 40%" data-bind="text :   ListTab.player1point"></b></b><b
+                    style="float: right; margin-right: 10%;"><b style="width: 40%; color: red" data-bind="text :   RoomTab.oname"></b>:<b style="width: 40%" data-bind="text :   ListTab.player2point"></b> </b>
             </div>
-            <div id="myList" style="margin: 10%;" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick ,height: '75%'}">
+            <div id="myList" style="margin: 10%; height:60%" data-bind="dxList: { dataSource: ListTab.listDataSource, itemClickAction: processClick ,height: '75%'}">
                 <div style="margin: 5%; text-align: left; padding: 5px;" data-options="dxTemplate:{ name:'item' }">
-                    <p style="font-size: larger;">
-                        <b data-bind="text: index + '. ' + type+ ' ' "></b>(<b data-bind="text: status"></b>)
-                    </p>
+                    <div style="display: inline-block; text-align: left; width: 30%">
+                        <img data-bind="attr:{ src: index == '1' ? 'images/ListTabNumberIcon/Number-1-icon.png' : 
+                        index == '2' ? 'images/ListTabNumberIcon/Number-2-icon.png' :
+                        index == '3' ? 'images/ListTabNumberIcon/Number-3-icon.png' : 
+                        index == '4' ? 'images/ListTabNumberIcon/Number-4-icon.png' :
+                        'images/ListTabNumberIcon/Number-5-icon.png'}"
+                            style="width: 30px; height: 30px" />
+                    </div>
+                    <div style="display: inline-block; text-align: left;">
+                        <div><b data-bind="text: type+ ' ' "></b></div>
+                        <div><b data-bind="text: status == 'Available' ? 'Status: ' : status == 'Done' ? 'Status: ' : 'Corrected by: '"></b><b data-bind="text: status"></b></div>
+                    </div>
                 </div>
             </div>
             <div id="Div1" data-bind="dxButton: { clickAction: Cancel, text: 'Cancel', iconSrc: 'images/button/cancel.png' }">
@@ -120,12 +124,12 @@
         </div>
         <div class="content" id="levelmap" data-bind="if:  findBugsTab.rendered, visible:  findBugsTab.tabVisible">
             <div id="
-                " style="text-align: center; font-size: xx-large;" data-bind="text: onlineClock.getTime">
+                "
+                style="text-align: center; font-size: xx-large;" data-bind="text: onlineClock.getTime">
                 hhhhhhhhhhhhhhhh
             </div>
             <div style="height: 10%; text-align: left;">
-                <h3>
-                    Touch the screen to select the bug in the codes below:</h3>
+                <h3>Touch the screen to select the bug in the codes below:</h3>
             </div>
             <div id="scrollViewFB" data-bind="dxScrollView: { }">
                 <img id="question" data-bind="attr: { src:  findBugsTab.src }, event: { dxclick: myEventHandlerOnline }" />
@@ -151,8 +155,7 @@
             </div>
             <div style="bottom: 1%; width: 100%; position: absolute;">
                 <div style="text-align: center;">
-                    <h3>
-                        Fill in the blanks in the codes above:</h3>
+                    <h3>Fill in the blanks in the codes above:</h3>
                 </div>
                 <div class="dx-fieldset" style="margin: 0px 0px 20px 0px;">
                     <div class="dx-field">
@@ -184,8 +187,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
-                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitOnlineFBK }">
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold; color: #ffffff; font-family: arial; display: inline-block;"
+                        data-bind="dxButton: { text: 'Submit', clickAction: submitOnlineFBK }">
                     </div>
                 </div>
             </div>
@@ -199,8 +202,7 @@
             </div>
             <div style="bottom: 1%; width: 100%; position: absolute;">
                 <div style="text-align: center;">
-                    <h3>
-                        Which type of bug is in the codes above?</h3>
+                    <h3>Which type of bug is in the codes above?</h3>
                 </div>
                 <div class="dx-fieldset" style="margin: 0px 0px 20px 0px; padding: 5px;">
                     <div class="dx-field">
@@ -211,8 +213,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold;
-                        color: #ffffff; font-family: arial; display: inline-block;" data-bind="dxButton: { text: 'Submit', clickAction: submitOnlineSC }">
+                    <div class="submitBtn" style="font-size: 20px; padding: 5px 32px 5px 32px; font-weight: bold; color: #ffffff; font-family: arial; display: inline-block;"
+                        data-bind="dxButton: { text: 'Submit', clickAction: submitOnlineSC }">
                     </div>
                 </div>
             </div>

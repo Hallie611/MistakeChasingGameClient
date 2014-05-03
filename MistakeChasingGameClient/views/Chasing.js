@@ -4,6 +4,13 @@
     //alert("create");
     onlineClock = new MistakeChasingGameClient.ClockVM("");
 
+    username = ko.observable();
+    popupVisible = ko.observable(false);
+
+    message = ko.observable();
+    txtUNVisible = ko.observable(false);
+    btnLoadAgain = ko.observable(false);
+
     var countX = 0;
     var connection;
 
@@ -70,10 +77,14 @@
     }
 
     register = function () {
+        message('connecting');
+        txtUNVisible(false);
+        username('');
         popupVisible(true);
         $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
-        $.connection.hub.start({ transport: 'longPolling' })
+        $.connection.hub.start()
             .done(function () {
+                message('');
                 btnLoadAgain(false);
                 txtUNVisible(true);
             })
@@ -100,7 +111,7 @@
             message("Name must be less than 10 characters");
         }
         else {
-            message('...');
+
             $.connection.gamesHub.server.register(username()).done(function (result) {
                 if (result == true) {
                     localStorage.username = username();
@@ -108,7 +119,7 @@
                      onlineViewModel.RoomTab.level(localStorage.level),
                      onlineViewModel.RoomTab.point(localStorage.point),
                     popupVisible(false);
-                    $.connection.hub.stop();
+                    //$.connection.hub.stop();
                     onlineViewModel.RoomTab.loadRoomTab();
                 }
                 else {
@@ -121,6 +132,8 @@
     ///////////////////////////////////
     return $.extend(onlineViewModel, {
         viewShown: function () {
+            
+
             //$.ajax({
             //    url: "http://signalr-13.apphb.com/signalR/hubs",
             //    type: 'GET',
@@ -139,7 +152,7 @@
             //    error: function (request) {
             //        if (request.status == 0 || request.status == 404) {
 
-            //            DevExpress.ui.dialog.alert("Please connect to the internet").done(function () {
+            //            DevExpress.ui.dialog.alert("Check your connection !").done(function () {
             //                MistakeChasingGameClient.app.navigate('home', { root: true });
             //            });
             //        }
@@ -155,23 +168,23 @@
 
         },
         viewDisposing: function () {
-            $.connection.hub.stop();
+            //$.connection.hub.stop();
+            message('');
+            clearInterval(couter);
             //onlineViewModel.clearListQ();
         },
         viewHidden: function () {
-    
-            
             if (counter) {
                 clearInterval(couter);
                 alert(counter);
             }
-            $.connection.hub.stop();
-
+            //$.connection.hub.stop();
+            message('');
             //onlineViewModel.clearListQ();
         },
         viewDisposed: function () {
-
-            $.connection.hub.stop();
+            message('');
+            //$.connection.hub.stop();
             //onlineViewModel.clearListQ();
         }
     });

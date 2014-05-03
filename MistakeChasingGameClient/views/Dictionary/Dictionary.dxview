@@ -16,7 +16,7 @@
                 <div class="dx-field-value" data-bind="dxLookup:{dataSource: selectedTable, displayExpr: 'name', valueExpr: 'src', value :  imgsrc}" style="text-align: center; width:100%"></div>
             </div>
         </div>
-        <div id="scrollViewContainer" data-bind="dxScrollView: {  }">
+        <div id="scrollViewContainer" data-bind="dxScrollView: {  }" style="height:74%">
             <div id="textContainer">
                 <img data-bind="attr:{ src: imgsrc }" style="width:100%"/>
             </div>

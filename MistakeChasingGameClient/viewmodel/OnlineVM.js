@@ -1,7 +1,10 @@
 ﻿(function () {
     "use strict";
-
+    
     MistakeChasingGameClient.OnlineVM = function (data) {
+
+        
+        
         //////////////////////////
         var difCurrentQ;
         var randomQuestion; // = ko.observable();
@@ -283,18 +286,22 @@
 
             $.connection.gamesHub.client.gameOver = function (name) {
 
+                
+
                 if (localStorage.username == name.Name) {
                     self.clockOn(false);
                     self.ListTab.ImageResult('win.png');
                     self.ListTab.resultPoint("Your point +" + self.RoomTab.pointwin());
                     localStorage.point = Number(localStorage.point) + Number(self.RoomTab.pointwin());
                     self.ListTab.result("WIN");
+                    MistakeChasingGameClient.LocalDB.insertHistory(self.RoomTab.oname(), "W", self.RoomTab.pointwin());
                 }
                 else if (name.Name == "none") {
                     self.clockOn(false);
                     self.ListTab.result("DRAW");
                     self.ListTab.ImageResult("Draw.png");
                     self.ListTab.resultPoint("");
+                    MistakeChasingGameClient.LocalDB.insertHistory(self.RoomTab.oname(), "D", 0);
                 }
                 else {
                     self.clockOn(false);
@@ -302,6 +309,7 @@
                     self.ListTab.ImageResult("lose.png");
                     self.ListTab.resultPoint("Your point -" + self.RoomTab.poinlose());
                     localStorage.point = Number(localStorage.point) - Number(self.RoomTab.poinlose());
+                    MistakeChasingGameClient.LocalDB.insertHistory(self.RoomTab.oname(), "L", self.RoomTab.poinlose());
                 }
                 self.ListTab.ResultVisible(true);
 
@@ -314,6 +322,13 @@
                 clearInterval(counter);
             }
 
+            $.connection.hub.disconnected(function () {
+                if (selectedTab() == 0 || selectedTab() == 1 || selectedTab() == 2 || selectedTab() == 3 || selectedTab()==4)
+                    DevExpress.ui.dialog.alert("You were disconnect from server").done(function () {
+                        MistakeChasingGameClient.app.navigate('home', { root: true });
+                    });
+            });
+
             $.connection.hub.start().done(function () {
                 document.getElementById("menubtn").style.display = "";
                 self.RoomTab.fbtndisable(false);
@@ -321,7 +336,7 @@
                 $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point);
                 // hub is now ready
             }).fail(function () {
-                DevExpress.ui.dialog.alert("Cannot connect to server right now! Please try again later.").done(function () {
+                DevExpress.ui.dialog.alert("Check Your Connection!").done(function () {
                     MistakeChasingGameClient.app.navigate('home', { root: true });
                 });
 
@@ -516,7 +531,7 @@
                 $.connection.gamesHub.server.outOfMath();
             }
             clearInterval(counter);
-            $.connection.hub.stop();
+            //$.connection.hub.stop();
             localStorage.currentIndex = 1;
             localStorage.currentPoint = 0;
             localStorage.currentlevel = 0;

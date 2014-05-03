@@ -22,6 +22,14 @@ window.MistakeChasingGameClient = $.extend(true, window.MistakeChasingGameClient
           "location": "navigation",
            "icon": "tips",
       }
+      ,
+      {
+          "id": "History",
+          "title": "History",
+          "action": "#History",
+          "location": "navigation",
+          "icon": "event",
+      }
     ]
     }
 });

@@ -644,6 +644,21 @@
     <Content Include="images\level\level5.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="images\ListTabNumberIcon\Number-1-icon.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\ListTabNumberIcon\Number-2-icon.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\ListTabNumberIcon\Number-3-icon.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\ListTabNumberIcon\Number-4-icon.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\ListTabNumberIcon\Number-5-icon.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="images\lvBtn.png">
       <SubType>Content</SubType>
     </Content>
@@ -926,6 +941,9 @@
     <Content Include="viewmodel\ClockVM.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="viewmodel\Connection.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="viewmodel\OnlineVM.js">
       <SubType>Content</SubType>
     </Content>
@@ -936,6 +954,12 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="views\Chasing.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\History.dxview">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="views\History.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="views\home.js">
@@ -973,6 +997,7 @@
     <Folder Include="images\fillinBlankQ" />
     <Folder Include="images\button" />
     <Folder Include="images\Dictionary" />
+    <Folder Include="images\ListTabNumberIcon" />
     <Folder Include="js\" />
     <Folder Include="js\cordova" />
     <Folder Include="layouts\" />

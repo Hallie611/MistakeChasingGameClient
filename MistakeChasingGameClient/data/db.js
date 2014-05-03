@@ -669,6 +669,13 @@
 
     MistakeChasingGameClient.LocalDB = {
 
+
+        historyDb: new DevExpress.data.LocalStore({
+            name: "historyData",
+            key: 'id'
+        }),
+
+
         findBugsDb: new DevExpress.data.ArrayStore({
             data: findBugs,
             key: 'id'
@@ -698,6 +705,30 @@
             sort: 'id'
         }),
         /////////////////////////////////////////get data
+        insertHistory: function (opponentName, result, score) {
+            var currentIndex;
+
+            MistakeChasingGameClient.LocalDB.historyDb.createQuery()
+                .max("index")
+                .done(function (result) {
+                    if (result == null) currentIndex = 0;
+                    else currentIndex = result;
+                });
+            if (currentIndex > 9) {
+                MistakeChasingGameClient.LocalDB.historyDb.remove(currentIndex % 10 + 1);
+            }
+
+            //alert("if");
+            MistakeChasingGameClient.LocalDB.historyDb.insert({
+                'index': currentIndex + 1,
+                'id': currentIndex % 10 + 1,
+                'oppName': opponentName,
+                'result': result,
+                'date': (new Date()).toString().split(' ').splice(1, 3).join(' ').toString(),
+                'score': score
+            });
+        },
+
         getQuestion: function (questionId) {
             var question;
             MistakeChasingGameClient.LocalDB.questionDb.byKey(questionId).done(function (dataItem) {
