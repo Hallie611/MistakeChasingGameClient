@@ -3,7 +3,7 @@
 
     MistakeChasingGameClient.OnlineVM = function (data) {
 
-        var checkConnect = true;
+        var checkConnect;
 
         //////////////////////////
         var difCurrentQ;
@@ -47,6 +47,7 @@
             fbtndisable: ko.observable(true),
             readyDisable: ko.observable(false),
             loadRoomTab: function () {
+                checkConnect = true;
                 self.ListTab.player1point(0);
                 self.ListTab.player2point(0);
                 self.singleChoiceTab.rendered(false);
@@ -66,12 +67,14 @@
                 else {
                     if ($.connection.hub.state != 1) {
                         self.RoomTab.message('Connecting...');
-                        self.ConnectToSever();
-                        //document.getElementById("findbtn").style.display = "none";
+                        document.getElementById("findbtn").style.display = "none";
                         document.getElementById("menubtn").style.display = "none";
                         document.getElementById("opponent").style.display = "none";
                         document.getElementById("readybtn").style.display = "none";
                         document.getElementById("Cancelbtn").style.display = "none";
+                        document.getElementById("levelImage").style.display = "";
+                        self.ConnectToSever();
+                        
                     }
                     else {
                         self.RoomTab.message('');
@@ -80,7 +83,7 @@
                         document.getElementById("levelImage").style.display = "";
                         document.getElementById("opponent").style.display = "none";
                         document.getElementById("readybtn").style.display = "none";
-                        document.getElementById("Cancelbtn").style.display = "none";
+                        document.getElementById("Cancelbtn").style.display = "normal";
                         document.getElementById("findbtn").style.display = "";
                         self.RoomTab.message("");
                         document.getElementById("menubtn").style.display = "";
@@ -199,10 +202,10 @@
         ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
 
-            //$.connection.hub.url = "http://localhost:8080/signalr";
-            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            $.connection.hub.url = "http://localhost:8080/signalr";
+            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
-            checkConnec(true);
+            checkConnect=true;
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
                 self.clearListQ();
@@ -324,7 +327,7 @@
             }
 
             $.connection.hub.disconnected(function () {
-                if (checkConnect) {
+                if (checkConnect==true) {
                     DevExpress.ui.dialog.alert("Can not connect to server!", 'No connection').done(function () {
                         MistakeChasingGameClient.app.navigate('home', { root: true });
                     });
@@ -332,9 +335,16 @@
             });
 
             $.connection.hub.start().done(function () {
-                document.getElementById("menubtn").style.display = "";
+                self.RoomTab.message('');
                 self.RoomTab.fbtndisable(false);
+                self.RoomTab.readyDisable(false);
+                document.getElementById("levelImage").style.display = "";
+                document.getElementById("opponent").style.display = "none";
+                document.getElementById("readybtn").style.display = "none";
+                document.getElementById("Cancelbtn").style.display = "normal";
+                document.getElementById("findbtn").style.display = "";
                 self.RoomTab.message("");
+                document.getElementById("menubtn").style.display = "";
                 $.connection.gamesHub.server.connectSever(localStorage.username, localStorage.level, localStorage.point);
                 // hub is now ready
             }).fail(function () {
@@ -372,10 +382,15 @@
 
         //bao la ben nay da ready
         this.Ready = function () {
+           
             self.RoomTab.readyDisable(true);
             self.RoomTab.message("Waiting for " + self.RoomTab.oname() + "to be ready ...");
             $.connection.gamesHub.server.playerReady();
         }
+        this.disconnect = function () {
+            $.connection.hub.stop();
+        }
+
         this.Cancel = function () {
             DevExpress.ui.dialog.confirm("Cancel the match? You will lose points.", "Confirm ")
                 .done(function (dialogResult) {
@@ -530,7 +545,7 @@
         };
         this.backToHome = function () {
 
-            checkConnect(false);
+            checkConnect = false;
             if ($.connection.hub.state == 1) {
                 $.connection.gamesHub.server.outOfMath();
             }
