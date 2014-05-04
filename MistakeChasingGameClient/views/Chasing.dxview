@@ -53,6 +53,7 @@
                     <td>
                         <div id="" data-bind="dxButton: { clickAction: Ready, text: 'Ready', iconSrc: 'images/button/ready.png' ,disabled: RoomTab.readyDisable}">
                         </div>
+                        <!--<div data-bind="dxButton: { text: 'Button1' ,clickAction: disconnect}"></div>-->
                     </td>
                     <td style="font-size: x-large;">
                         <sup style="color: lightsalmon">+<b data-bind="text:RoomTab.pointwin"></b></sup>
