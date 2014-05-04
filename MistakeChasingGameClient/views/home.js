@@ -18,8 +18,9 @@
     } else {
         localStorage.rank = "Advanced"
     }
-
+    
     var viewModel = {
+        
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -47,6 +48,9 @@
         rank: ko.observable(""),
 
         viewShown: function () {
+            if ($.connection.hub.state==1)
+            $.connection.hub.stop();
+
             viewModel.point(localStorage.point);
             viewModel.level(localStorage.level);
             viewModel.rank(localStorage.rank);
