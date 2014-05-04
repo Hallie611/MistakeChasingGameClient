@@ -1,10 +1,10 @@
 ﻿(function () {
     "use strict";
-    
+
     MistakeChasingGameClient.OnlineVM = function (data) {
 
-        
-        
+        var checkConnect = true;
+
         //////////////////////////
         var difCurrentQ;
         var randomQuestion; // = ko.observable();
@@ -202,6 +202,7 @@
             //$.connection.hub.url = "http://localhost:8080/signalr";
             $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
+            checkConnec(true);
             // nhan listQ tu sever cho ca 2 client
             $.connection.gamesHub.client.getQuestionList = function (temp) {
                 self.clearListQ();
@@ -286,7 +287,7 @@
 
             $.connection.gamesHub.client.gameOver = function (name) {
 
-                
+
 
                 if (localStorage.username == name.Name) {
                     self.clockOn(false);
@@ -323,10 +324,11 @@
             }
 
             $.connection.hub.disconnected(function () {
-                if (selectedTab() == 0 || selectedTab() == 1 || selectedTab() == 2 || selectedTab() == 3 || selectedTab()==4)
-                    DevExpress.ui.dialog.alert("You were disconnect from server", "No connection").done(function () {
+                if (checkConnect) {
+                    DevExpress.ui.dialog.alert("Can not connect to server!", 'No connection').done(function () {
                         MistakeChasingGameClient.app.navigate('home', { root: true });
                     });
+                }
             });
 
             $.connection.hub.start().done(function () {
@@ -527,6 +529,8 @@
             }
         };
         this.backToHome = function () {
+
+            checkConnect(false);
             if ($.connection.hub.state == 1) {
                 $.connection.gamesHub.server.outOfMath();
             }
