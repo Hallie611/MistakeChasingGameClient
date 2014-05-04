@@ -3,7 +3,7 @@
     localStorage.currentIndex = 1;
     localStorage.currentPoint = 0;
     //localStorage.currentlevel = 0 ;
-    
+
 
     if (!localStorage.level) {
         localStorage.level = 1;
@@ -18,9 +18,9 @@
     } else {
         localStorage.rank = "Advanced"
     }
-    
+    soundSrc = ko.observable("sound/Daily Life.mp3");
     var viewModel = {
-        
+
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -48,8 +48,8 @@
         rank: ko.observable(""),
 
         viewShown: function () {
-            if ($.connection.hub.state==1)
-            $.connection.hub.stop();
+            if ($.connection.hub.state == 1)
+                $.connection.hub.stop();
 
             viewModel.point(localStorage.point);
             viewModel.level(localStorage.level);

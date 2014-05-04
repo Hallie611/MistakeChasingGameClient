@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
-            <div data-bind="dxScrollView: { }" style="height: 58%;">
+            <div data-bind="dxScrollView: { }" style="height: 51%;">
                 <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
             <div style="bottom: 0%; width: 100%; position: absolute;">

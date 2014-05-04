@@ -77,7 +77,193 @@
     <Content Include="images\cancel.jpg">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\Dictionary\Nullpointer.png">
+    <Content Include="images\Dictionary\BugType\001.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\002.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\003.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\004.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\005.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\006.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\007.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\008.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\009.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\BugType\010.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\001.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\002.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\003.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\004.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\005.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\006.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\007.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\008.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\009.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\010.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\011.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\012.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\013.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\014.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\015.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\016.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\017.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\018.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\019.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\020.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\021.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\022.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\023.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\024.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\025.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\026.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\027.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\028.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\029.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\030.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\031.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\032.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\033.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\034.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\035.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\036.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\037.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\038.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\039.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\040.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\041.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\042.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\043.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\044.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\045.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\046.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\047.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\048.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\049.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\050.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\051.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\052.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="images\Dictionary\KeyWord\053.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\fillinBlankQ\001.png">
@@ -662,199 +848,154 @@
     <Content Include="images\lvBtn.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M1.jpg">
+    <Content Include="images\MultipleChoice\001.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M10.jpg">
+    <Content Include="images\MultipleChoice\002.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M11.jpg">
+    <Content Include="images\MultipleChoice\003.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M12.jpg">
+    <Content Include="images\MultipleChoice\004.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M13.jpg">
+    <Content Include="images\MultipleChoice\005.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M14.jpg">
+    <Content Include="images\MultipleChoice\006.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M15.jpg">
+    <Content Include="images\MultipleChoice\007.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M16.jpg">
+    <Content Include="images\MultipleChoice\008.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M17.jpg">
+    <Content Include="images\MultipleChoice\009.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M18.jpg">
+    <Content Include="images\MultipleChoice\010.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M19.jpg">
+    <Content Include="images\MultipleChoice\011.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M2.jpg">
+    <Content Include="images\MultipleChoice\012.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M20.jpg">
+    <Content Include="images\MultipleChoice\013.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M21.jpg">
+    <Content Include="images\MultipleChoice\014.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M22.jpg">
+    <Content Include="images\MultipleChoice\015.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M23.jpg">
+    <Content Include="images\MultipleChoice\016.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M24.jpg">
+    <Content Include="images\MultipleChoice\017.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M25.jpg">
+    <Content Include="images\MultipleChoice\018.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M26.jpg">
+    <Content Include="images\MultipleChoice\019.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M27.jpg">
+    <Content Include="images\MultipleChoice\020.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M28.jpg">
+    <Content Include="images\MultipleChoice\021.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M29.jpg">
+    <Content Include="images\MultipleChoice\022.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M3.jpg">
+    <Content Include="images\MultipleChoice\023.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M30.jpg">
+    <Content Include="images\MultipleChoice\024.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M31.jpg">
+    <Content Include="images\MultipleChoice\025.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M32.jpg">
+    <Content Include="images\MultipleChoice\026.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M33.jpg">
+    <Content Include="images\MultipleChoice\027.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M34.jpg">
+    <Content Include="images\MultipleChoice\028.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M35.jpg">
+    <Content Include="images\MultipleChoice\029.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M36.jpg">
+    <Content Include="images\MultipleChoice\030.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M37.jpg">
+    <Content Include="images\MultipleChoice\031.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M38.jpg">
+    <Content Include="images\MultipleChoice\032.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M39.jpg">
+    <Content Include="images\MultipleChoice\033.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M4.jpg">
+    <Content Include="images\MultipleChoice\034.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M40.jpg">
+    <Content Include="images\MultipleChoice\035.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M41.jpg">
+    <Content Include="images\MultipleChoice\036.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M42.jpg">
+    <Content Include="images\MultipleChoice\037.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M43.jpg">
+    <Content Include="images\MultipleChoice\038.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M44.jpg">
+    <Content Include="images\MultipleChoice\039.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M45.jpg">
+    <Content Include="images\MultipleChoice\040.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M46.jpg">
+    <Content Include="images\MultipleChoice\041.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M47.jpg">
+    <Content Include="images\MultipleChoice\042.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M48.jpg">
+    <Content Include="images\MultipleChoice\043.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M49.jpg">
+    <Content Include="images\MultipleChoice\044.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M5.jpg">
+    <Content Include="images\MultipleChoice\045.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M50.jpg">
+    <Content Include="images\MultipleChoice\046.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M51.jpg">
+    <Content Include="images\MultipleChoice\047.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M52.jpg">
+    <Content Include="images\MultipleChoice\048.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M53.jpg">
+    <Content Include="images\MultipleChoice\049.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\MultipleChoice\M54.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M55.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M56.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M57.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M58.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M59.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M6.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M60.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M61.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M62.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M63.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M64.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M65.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M7.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M8.jpg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="images\MultipleChoice\M9.jpg">
+    <Content Include="images\MultipleChoice\050.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\redX.png">
@@ -938,6 +1079,24 @@
     <Content Include="lose.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="sound\Daily Life.mp3">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="sound\Memories.mp3">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="sound\Hometown.mp3">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="sound\Fight!.mp3">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="sound\Gaur Plains.mp3">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="sound\Where the Ancestors Sleep.mp3">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="viewmodel\ClockVM.js">
       <SubType>Content</SubType>
     </Content>
@@ -991,6 +1150,8 @@
     <Folder Include="certificates\" />
     <Folder Include="css\" />
     <Folder Include="data\" />
+    <Folder Include="images\Dictionary\KeyWord" />
+    <Folder Include="images\Dictionary\BugType" />
     <Folder Include="images\findbugQ" />
     <Folder Include="images\level" />
     <Folder Include="images\MultipleChoice" />
@@ -1007,6 +1168,7 @@
     <Folder Include="layouts\Simple" />
     <Folder Include="layouts\SlideOut\" />
     <Folder Include="images" />
+    <Folder Include="sound" />
     <Folder Include="viewmodel" />
     <Folder Include="views\" />
     <Folder Include="views\Dictionary" />
