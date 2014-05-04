@@ -1,5 +1,6 @@
 <div data-options="dxView : { name: 'History', title: 'History' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+    <audio id="bgAudioHistory" data-bind="attr: { src: soundSrc }" loop="true" autoplay="autoplay" preload="auto" />
         <!--<div data-bind="text: array">
                 </div>-->
         <div style="height: initial; height:100%" data-bind="dxList: { dataSource: HistorySource, showScrollbar: true, activeStateEnabled: false, noDataText: 'Your have not played any matches yet' }">

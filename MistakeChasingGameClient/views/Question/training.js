@@ -1,5 +1,9 @@
 ﻿MistakeChasingGameClient.training = function (params) {
 
+    // Audio
+    var bgAudioTraining = ko.observable();
+    soundSrc = ko.observable("sound/Gaur Plains.mp3"),
+
     trainingViewModel = new MistakeChasingGameClient.QuestionVM(params.id);
     trainingClock = new MistakeChasingGameClient.ClockVM("");
     curPoints = ko.observable();
@@ -18,7 +22,7 @@
         if (countX >= 3) {
             countX = 0;
             localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-            trainingViewModel.loadQuestion();
+            $("#toastError").dxToast('instance').show();
         }
     };
 
@@ -27,7 +31,7 @@
         var points = trainingViewModel.bugFound();
         localStorage.currentPoint = Number(localStorage.currentPoint) + points;
         localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
-        $("#toastContainer").dxToast('instance').show();
+        $("#toastSuccess").dxToast('instance').show();
     };
     processHiding = function () {
         trainingViewModel.loadQuestion();
@@ -124,6 +128,15 @@
             trainingViewModel.randomQuestion();
             trainingViewModel.loadQuestion();
             trainingClock.setClock();
+
+            // Audio
+            bgAudioTraining(document.getElementById('bgAudioTraining'));
+            //alert(bgAudioTraining());
+            bgAudioTraining().play();
+        },
+        viewHidden: function () {
+            //alert(bgAudioTraining());
+            bgAudioTraining().pause();
         }
     });
 };

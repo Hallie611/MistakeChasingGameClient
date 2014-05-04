@@ -1,5 +1,8 @@
 ﻿MistakeChasingGameClient.History = function (params) {
 
+    // Audio
+    var bgAudioHistory = ko.observable();
+
     //var array = 
     //var abc = new DevExpress.data.ArrayStore({
     //    data: array,
@@ -7,18 +10,26 @@
     //});
 
     var viewModel = {
+        soundSrc: ko.observable("sound/Where the Ancestors Sleep.mp3"),
         HistorySource: ko.observable(""),
 
         viewShown: function () {
-            var temp;
+            // Audio
+            bgAudioHistory(document.getElementById('bgAudioHistory'));
+            //alert(bgAudioHistory());
+            bgAudioHistory().play();
 
-            temp = MistakeChasingGameClient.LocalDB.historyDb.createQuery()
+            var temp = MistakeChasingGameClient.LocalDB.historyDb.createQuery()
             .filter([["id", ">=", 1], "and", ["id", "<=", 10]])
             .sortBy("index",true)
             .select("id", "oppName", "result", "score", "date")
             .toArray();
 
             viewModel.HistorySource(temp);
+        },
+        viewHidden: function () {
+            //alert(bgAudioHistory());
+            bgAudioHistory().pause();
         }
     };
 

@@ -324,7 +324,7 @@
 
             $.connection.hub.disconnected(function () {
                 if (selectedTab() == 0 || selectedTab() == 1 || selectedTab() == 2 || selectedTab() == 3 || selectedTab()==4)
-                    DevExpress.ui.dialog.alert("You were disconnect from server").done(function () {
+                    DevExpress.ui.dialog.alert("You were disconnect from server", "No connection").done(function () {
                         MistakeChasingGameClient.app.navigate('home', { root: true });
                     });
             });

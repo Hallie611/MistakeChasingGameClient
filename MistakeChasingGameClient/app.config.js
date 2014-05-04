@@ -12,7 +12,8 @@ window.MistakeChasingGameClient = $.extend(true, window.MistakeChasingGameClient
        {
            "title": "Chasing",
            "action": "#Chasing",
-           "icon": "globe"
+           "icon": "globe",
+           "location": "navigation"
            //"icon": "questiondetail"
        },
       {
@@ -20,16 +21,14 @@ window.MistakeChasingGameClient = $.extend(true, window.MistakeChasingGameClient
           "title": "Dictionary",
           "action": "#Dictionary",
           "location": "navigation",
-           "icon": "tips",
-      }
-      ,
+          "icon": "tips"
+      },
       {
           "id": "History",
           "title": "History",
           "action": "#History",
           "location": "navigation",
-          "icon": "event",
-      }
-    ]
+          "icon": "event"
+      }]
     }
 });

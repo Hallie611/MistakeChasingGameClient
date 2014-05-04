@@ -1,6 +1,6 @@
 <div data-options="dxView : { name: 'Dictionary', title: 'Dictionary' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-        
+        <audio id="bgAudioDictionary" data-bind="attr: { src: soundSrc }" loop="true" autoplay="autoplay" preload="auto" />
         <div class="dx-fieldset">
             <div class="dx-field">
                 <div class="dx-field-label">Search By</div>

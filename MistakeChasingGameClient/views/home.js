@@ -4,7 +4,6 @@
     localStorage.currentPoint = 0;
     //localStorage.currentlevel = 0 ;
 
-
     if (!localStorage.level) {
         localStorage.level = 1;
         localStorage.point = 10;
@@ -18,9 +17,13 @@
     } else {
         localStorage.rank = "Advanced"
     }
-    soundSrc = ko.observable("sound/Daily Life.mp3");
-    var viewModel = {
 
+    // Audio
+    var bgAudioHome = ko.observable(); //document.getElementById('bgAudio');
+
+    var viewModel = {
+        soundSrc: ko.observable("sound/Daily Life.mp3"),
+        //bgAudio: ko.observable(),
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -58,6 +61,17 @@
             //    $.connection.hub.stop();
             //}
             //alert(viewModel.level());
+
+            // Audio
+            bgAudioHome(document.getElementById('bgAudioHome'));
+            bgAudioHome().play();
+
+            //audio.currentTime = 0;
+            //audio.seekable.start();
+        },
+        viewHidden: function () {
+            //alert(bgAudio());
+            bgAudioHome().pause();
         }
     };
 

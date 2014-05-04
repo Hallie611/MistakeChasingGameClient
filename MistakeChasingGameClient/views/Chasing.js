@@ -1,6 +1,9 @@
 ﻿MistakeChasingGameClient.Chasing = function (params) {
 
-    
+    // Audio
+    var bgAudioChasing = ko.observable();
+    soundSrc = ko.observable("sound/Fight!.mp3");
+    /////////
 
     onlineViewModel = new MistakeChasingGameClient.OnlineVM();
     //alert("create");
@@ -106,8 +109,8 @@
 
     SaveName = function () {
         message("...");
-        if (username().length==0) {
-            
+        if (username().length == 0) {
+
             message("Name can not be blank");
         }
         else if (username().length > 10) {
@@ -135,6 +138,12 @@
     ///////////////////////////////////
     return $.extend(onlineViewModel, {
         viewShown: function () {
+            // Audio
+            bgAudioChasing(document.getElementById('bgAudioChasing'));
+            //alert(bgAudioChasing());
+            bgAudioChasing().play();
+
+            ///////////////
             username('');
             message('');
             //$.ajax({
@@ -177,6 +186,10 @@
             //onlineViewModel.clearListQ();
         },
         viewHidden: function () {
+            // Audio
+            //alert(bgAudioChasing());
+            bgAudioChasing().pause();
+
             if (counter) {
                 clearInterval(couter);
                 alert(counter);

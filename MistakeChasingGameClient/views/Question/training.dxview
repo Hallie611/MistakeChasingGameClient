@@ -2,6 +2,7 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->
+        <audio id="bgAudioTraining" data-bind="attr: { src: soundSrc }" loop="true" autoplay="autoplay" preload="auto" />
         <div id="resultPopup" data-bind="dxPopup: { showTitle: false, height: '330px', hidingAction: processHidingPopup }">
             <div style="text-align: center; height: 100%;">
                 <p style="font-size: larger; font-weight: bolder;">
@@ -36,11 +37,13 @@
                     Touch the screen to select the bug in the codes below:</h3>
             </div>
             <div id="scrollViewFB" data-bind="dxScrollView: { }">
-                <img id="question" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
+                <img style="width:100%" data-bind="attr: { src: findBugsTab.src }, event: { dxclick: myEventHandler }" />
                 <div id="bug" data-bind="style: {width: findBugsTab.bwidth, height: findBugsTab.bheight, left: findBugsTab.bleft, top: findBugsTab.btop}, event: { dxclick: showBug }">
                 </div>
             </div>
-            <div id="toastContainer" style="text-align: center;" data-bind="dxToast: { message: 'Bug found!', type: 'success', displayTime: 300, hiddenAction: processHiding}">
+            <div id="toastSuccess" style="text-align: center;" data-bind="dxToast: { message: 'Bug found!', type: 'success', displayTime: 300, hiddenAction: processHiding}">
+            </div>
+            <div id="toastError" style="text-align: center;" data-bind="dxToast: { message: 'You have used all three tries!', type:'error', displayTime: 300, hiddenAction: processHiding}">
             </div>
             <div id="redXBox">
                 <img id="miss1" data-bind="attr: { src: findBugsTab.srcX }" style="width: 10%; height: 10%" />
@@ -50,7 +53,7 @@
         </div>
         <div class="content" id="levelmap" data-bind="if: fillingBlanksTab.rendered, visible: fillingBlanksTab.tabVisible">
             <div data-bind="dxScrollView: { }" style="height: 51%;">
-                <img id="question" data-bind="attr: { src: fillingBlanksTab.src }" />
+                <img style="width:100%" data-bind="attr: { src: fillingBlanksTab.src }" />
             </div>
             <div style="bottom: 0%; width: 100%; position: absolute;">
                 <div style="text-align: center;">
@@ -92,7 +95,7 @@
         </div>
         <div class="content" id="levelmap" data-bind="if: singleChoiceTab.rendered, visible: singleChoiceTab.tabVisible">
             <div data-bind="dxScrollView: { }" style="height: 73%;">
-                <img id="question" data-bind="attr: { src: singleChoiceTab.src }" />
+                <img style="width:100%" data-bind="attr: { src: singleChoiceTab.src }" />
             </div>
             <div style="bottom: 0%; width: 100%; position: absolute;">
                 <div style="text-align: center;">
