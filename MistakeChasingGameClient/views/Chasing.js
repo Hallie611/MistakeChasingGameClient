@@ -1,5 +1,7 @@
 ﻿MistakeChasingGameClient.Chasing = function (params) {
 
+    
+
     onlineViewModel = new MistakeChasingGameClient.OnlineVM();
     //alert("create");
     onlineClock = new MistakeChasingGameClient.ClockVM("");
@@ -79,7 +81,7 @@
     register = function () {
         message('connecting');
         txtUNVisible(false);
-        username('');
+        //username('');
         popupVisible(true);
         $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
         $.connection.hub.start()
@@ -104,7 +106,8 @@
 
     SaveName = function () {
         message("...");
-        if (username() == '') {
+        if (username().length==0) {
+            
             message("Name can not be blank");
         }
         else if (username().length > 10) {
@@ -132,8 +135,8 @@
     ///////////////////////////////////
     return $.extend(onlineViewModel, {
         viewShown: function () {
-            
-
+            username('');
+            message('');
             //$.ajax({
             //    url: "http://signalr-13.apphb.com/signalR/hubs",
             //    type: 'GET',

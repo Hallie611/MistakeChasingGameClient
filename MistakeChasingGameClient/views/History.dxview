@@ -1,0 +1,28 @@
+<div data-options="dxView : { name: 'History', title: 'History' } ">
+    <div data-options="dxContent : { targetPlaceholder: 'content' } ">
+        <!--<div data-bind="text: array">
+                </div>-->
+        <div style="height: initial; height:100%" data-bind="dxList: { dataSource: HistorySource, showScrollbar: true, activeStateEnabled: false, noDataText: 'Your have not played any matches yet' }">
+            <div data-options="dxTemplate:{ name:'item' }">
+                <div style="display: inline-block; text-align:left; width:30%">
+                    <img data-bind="attr:{ src: result == 'W' ? 'win.png' : 
+                        result == 'L' ? 'lose.png' : 'Draw.png'}"
+                        style="width:50px; height:50px"/>
+                </div>
+                <div style="display: inline-block; text-align:left; width:35%">
+                    <div><b data-bind="text:oppName" style="text-align: left; "></b></div>
+                    <div><i data-bind="text:result == 'W' ? 'Victory' : result == 'L' ? 'Defeat' : 'Draw',
+                        style: {color: result == 'W' ? 'blue' : result == 'L' ? 'red' : 'purple'}" 
+                        style="text-align: left;" ></i></div>
+                </div>
+                <div style="display: inline-block; text-align:right; width:35%">
+                    <div><i data-bind="text:date" style="text-align: right; color:gray"></i></div>
+                    <div data-bind="text:result == 'L' ? '-' + score : '+' + score, 
+                        style: {color : result == 'W' ? 'blue' : result == 'L' ? 'red' : 'purple'}" 
+                        style="text-align: right;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
