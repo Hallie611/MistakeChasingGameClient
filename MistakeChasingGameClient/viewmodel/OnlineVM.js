@@ -61,6 +61,7 @@
                 if (localStorage.point < localStorage.level * 10) {
                     DevExpress.ui.dialog.alert('Required point for level ' + localStorage.level + ' is ' + localStorage.level * 10 + '. You can earn more points in Training.', 'Not enough points').done(
                     function () {
+                        checkConnect = false;
                         MistakeChasingGameClient.app.navigate('home', { root: true });
                     });
                 }
@@ -202,8 +203,8 @@
         ////////////////////////////////////////////////////////
         this.ConnectToSever = function () {
 
-            $.connection.hub.url = "http://localhost:8080/signalr";
-            //$.connection.hub.url = "http://signalr-13.apphb.com/signalr";
+            //$.connection.hub.url = "http://localhost:8080/signalr";
+            $.connection.hub.url = "http://signalr-13.apphb.com/signalr";
 
             checkConnect=true;
             // nhan listQ tu sever cho ca 2 client
@@ -320,6 +321,7 @@
             }
 
             $.connection.gamesHub.client.OpponentDisconnect = function () {
+                self.clockOn(false);
                 localStorage.point = Number(localStorage.point) + 5;
                 DevExpress.ui.dialog.alert('Your opponent has canceled the match. You earn 5 points.', 'Canceled');
                 self.RoomTab.loadRoomTab();
@@ -328,7 +330,7 @@
 
             $.connection.hub.disconnected(function () {
                 if (checkConnect==true) {
-                    DevExpress.ui.dialog.alert("Can not connect to server!", 'No connection').done(function () {
+                    DevExpress.ui.dialog.alert("Can not connect to server!", 'Connection Error').done(function () {
                         MistakeChasingGameClient.app.navigate('home', { root: true });
                     });
                 }
@@ -384,7 +386,7 @@
         this.Ready = function () {
            
             self.RoomTab.readyDisable(true);
-            self.RoomTab.message("Waiting for " + self.RoomTab.oname() + "to be ready ...");
+            self.RoomTab.message("Waiting for " + self.RoomTab.oname() + " to be ready ...");
             $.connection.gamesHub.server.playerReady();
         }
         this.disconnect = function () {
@@ -395,6 +397,7 @@
             DevExpress.ui.dialog.confirm("Cancel the match? You will lose points.", "Confirm ")
                 .done(function (dialogResult) {
                     if (dialogResult) {
+                        self.clockOn(false);
                         localStorage.point = Number(localStorage.point) - 5;
                         DevExpress.ui.dialog.alert('You canceled the match, you lost 5 points.', 'Notify');
                         $.connection.gamesHub.server.outOfMath();
