@@ -2,7 +2,7 @@
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
         <!--<div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>-->
-        <audio id="bgAudioTraining" data-bind="attr: { src: soundSrc }" loop="true" autoplay="autoplay" preload="auto" />
+       
         <div id="resultPopup" data-bind="dxPopup: { showTitle: false, height: '330px', hidingAction: processHidingPopup }">
             <div style="text-align: center; height: 100%;">
                 <p style="font-size: larger; font-weight: bolder;">

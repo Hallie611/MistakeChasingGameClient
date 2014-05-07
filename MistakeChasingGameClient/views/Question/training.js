@@ -1,8 +1,5 @@
 ﻿MistakeChasingGameClient.training = function (params) {
 
-    // Audio
-    var bgAudioTraining = ko.observable();
-    soundSrc = ko.observable("sound/Gaur Plains.mp3"),
 
     trainingViewModel = new MistakeChasingGameClient.QuestionVM(params.id);
     trainingClock = new MistakeChasingGameClient.ClockVM("");
@@ -13,35 +10,39 @@
     };
     resultList = ko.observable();
     isClick = ko.observable(false);
+    
 
+    var ifShowX = true;
     var countX = 0;
     myEventHandler = function () {
-        countX += 1;
-        var showX = document.getElementById("miss" + countX);
-        showX.style.visibility = "visible";
-        if (countX >= 3) {
-            countX = 0;
-            localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
+        if (countX <= 2 && ifShowX == true) {
+            countX += 1;
+            var showX = document.getElementById("miss" + countX);
+            showX.style.visibility = "visible";
+        }
+        if (countX == 3 && ifShowX == true) {
+            ifShowX = false;
             $("#toastError").dxToast('instance').show();
         }
     };
 
     showBug = function () {
-        countX = 0;
         var points = trainingViewModel.bugFound();
         localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         $("#toastSuccess").dxToast('instance').show();
     };
     processHiding = function () {
+        countX = 0;
+        localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         trainingViewModel.loadQuestion();
+        ifShowX = true;
     };
     processHidingPopup = function () {
         if (!isClick()) {
             localStorage.currentIndex = 1;
             localStorage.currentPoint = 0;
             MistakeChasingGameClient.app.navigate('home', { root: true });
-        }        
+        }
     };
 
     submitFBK = function () {
@@ -129,15 +130,9 @@
             trainingViewModel.loadQuestion();
             trainingClock.setClock();
 
-            // Audio
-            bgAudioTraining(document.getElementById('bgAudioTraining'));
-            //alert(bgAudioTraining());
-            bgAudioTraining().play();
-        },
-        viewHidden: function () {
-            //alert(bgAudioTraining());
-            bgAudioTraining().pause();
+
         }
+
     });
 };
 

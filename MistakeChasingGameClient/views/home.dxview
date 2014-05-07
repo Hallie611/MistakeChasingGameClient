@@ -1,6 +1,6 @@
 <div data-options="dxView : { name: 'home', title: 'Home' } ">
     <div class="home-view" data-options="dxContent : { targetPlaceholder: 'content' } ">
-    <audio id="bgAudioHome" data-bind="attr: { src: soundSrc }" loop="loop" autoplay="autoplay" preload="auto" />
+    
         <div id="tabs" data-bind="dxTabs: { items: tabs, selectedIndex: selectedTab }">
         </div>
         <div style="text-align: center">

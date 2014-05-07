@@ -1,6 +1,6 @@
 <div data-options="dxView : { name: 'Chasing', title: 'Chasing' } ">
     <div style="text-align: center" data-options="dxContent : { targetPlaceholder: 'content' } ">
-    <audio id="bgAudioChasing" data-bind="attr: { src: soundSrc }" loop="true" autoplay="autoplay" preload="auto" />
+    
         <div data-bind="dxPopup: {visible: popupVisible ,title: 'Create new user', showTitle: true ,height: '50%'}">
             <div style="text-align: center">
                 <div data-bind="dxTextBox: {value: username,visible: txtUNVisible , visible: txtUNVisible}">

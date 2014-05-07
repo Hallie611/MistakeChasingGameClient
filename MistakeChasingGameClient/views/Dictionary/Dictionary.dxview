@@ -1,6 +1,6 @@
 <div data-options="dxView : { name: 'Dictionary', title: 'Dictionary' } ">
     <div data-options="dxContent : { targetPlaceholder: 'content' } ">
-        <audio id="bgAudioDictionary" data-bind="attr: { src: soundSrc }" loop="true" autoplay="autoplay" preload="auto" />
+        
         <div class="dx-fieldset">
             <div class="dx-field">
                 <div class="dx-field-label">Search By</div>
@@ -13,7 +13,10 @@
                 </div>
             </div>
             <div class="dx-field" data-bind="style: { visibility: selectType() == '' ? 'hidden' : 'visible' }">
-                <div class="dx-field-value" data-bind="dxLookup:{dataSource: selectedTable, displayExpr: 'name', valueExpr: 'src', value :  imgsrc}" style="text-align: center; width:100%"></div>
+                <div id="LookupBugtype" class="dx-field-value" data-bind="dxLookup:{dataSource: bugsType, 
+                    displayExpr: 'name', valueExpr: 'src', value :  imgsrc, visible : visibleBugType }" style="text-align: center; width:100%"></div>
+                <div id="LookupKeyWord" class="dx-field-value" data-bind="dxLookup:{dataSource: keyWords, 
+                    displayExpr: 'name', valueExpr: 'src', value :  imgsrc, visible : visibleKeyWord }" style="text-align: center; width:100%"></div>
             </div>
         </div>
         <div id="scrollViewContainer" data-bind="dxScrollView: {  }" style="height:74%">

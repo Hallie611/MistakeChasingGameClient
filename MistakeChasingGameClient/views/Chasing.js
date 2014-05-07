@@ -1,9 +1,6 @@
 ﻿MistakeChasingGameClient.Chasing = function (params) {
 
-    // Audio
-    var bgAudioChasing = ko.observable();
-    soundSrc = ko.observable("sound/Fight!.mp3");
-    /////////
+    
 
     onlineViewModel = new MistakeChasingGameClient.OnlineVM();
     //alert("create");
@@ -16,27 +13,31 @@
     txtUNVisible = ko.observable(false);
     btnLoadAgain = ko.observable(false);
 
+    var ifShowX = true;
     var countX = 0;
     var connection;
 
     myEventHandlerOnline = function () {
-        countX += 1;
-        var showX = document.getElementById("miss" + countX);
-        showX.style.visibility = "visible";
-        if (countX >= 3) {
-            countX = 0;
-            onlineViewModel.CorrectedQuestion(localStorage.currentIndex, 0, false);
+        if (countX <= 2 && ifShowX == true) {
+            countX += 1;
+            var showX = document.getElementById("miss" + countX);
+            showX.style.visibility = "visible";
+        }
+        if (countX == 3 && ifShowX == true) {
+            ifShowX = false;
             $("#toastError").dxToast('instance').show();
         }
     };
 
     showBugOnline = function () {
-        countX = 0;
         var points = onlineViewModel.bugFound();
         $("#toastSuccess").dxToast('instance').show();
     };
 
     processHidingOnline = function () {
+        countX = 0;
+        ifShowX = true;
+        onlineViewModel.CorrectedQuestion(localStorage.currentIndex, 0, false);
         onlineViewModel.ListTab.loadListTab();
     };
 
@@ -138,21 +139,18 @@
     ///////////////////////////////////
     return $.extend(onlineViewModel, {
         viewShown: function () {
-            // Audio
-            bgAudioChasing(document.getElementById('bgAudioChasing'));
-            //alert(bgAudioChasing());
-            bgAudioChasing().play();
+            
 
             ///////////////
             username('');
             message('');
-            //$.ajax({
-            //    url: "http://signalr-13.apphb.com/signalR/hubs",
-            //    type: 'GET',
-            //    headers: { 'Access-Control-Allow-Origin': '*' },
-            //    crossDomain: true,
-            //    contentType: "application/json;charset=utf-8",
-            //    success: function (data) {
+            $.ajax({
+                url: "http://signalr-13.apphb.com/signalR/hubs",
+                type: 'GET',
+                headers: { 'Access-Control-Allow-Origin': '*' },
+                crossDomain: true,
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
             if (localStorage.username) {
                 //   $.connection.hub.stop();
                 onlineViewModel.RoomTab.loadRoomTab();
@@ -160,22 +158,22 @@
                 register();
             }
 
-            //    },
-            //    error: function (request) {
-            //        if (request.status == 0 || request.status == 404) {
+                },
+                error: function (request) {
+                    if (request.status == 0 || request.status == 404) {
 
-            //            DevExpress.ui.dialog.alert("Check your connection !").done(function () {
-            //                MistakeChasingGameClient.app.navigate('home', { root: true });
-            //            });
-            //        }
-            //        else {
-            //            DevExpress.ui.dialog.alert("Server Maintenance! Come back later").done(function () {
-            //                MistakeChasingGameClient.app.navigate('home', { root: true });
-            //            });
-            //        }
+                        DevExpress.ui.dialog.alert("Can not connect to server",'Connection Error').done(function () {
+                            MistakeChasingGameClient.app.navigate('home', { root: true });
+                        });
+                    }
+                    else {
+                        DevExpress.ui.dialog.alert("Server Maintenance! Come back later").done(function () {
+                            MistakeChasingGameClient.app.navigate('home', { root: true });
+                        });
+                    }
 
-            //    }
-            //});
+                }
+            });
 
 
         },
@@ -186,10 +184,6 @@
             //onlineViewModel.clearListQ();
         },
         viewHidden: function () {
-            // Audio
-            //alert(bgAudioChasing());
-            bgAudioChasing().pause();
-
             if (counter) {
                 clearInterval(couter);
                 alert(counter);

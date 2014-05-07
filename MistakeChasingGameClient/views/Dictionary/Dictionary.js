@@ -1,10 +1,10 @@
 ﻿MistakeChasingGameClient.Dictionary = function (params) {
 
     // Audio
-    var bgAudioDictionary = ko.observable();
+    
 
     var viewModel = {
-        soundSrc: ko.observable("sound/Memories.mp3"),
+    
         id: ko.observable('0'),
         
         selectType: ko.observable(''),
@@ -20,16 +20,14 @@
             { id: 2, content: "Bug Types", table: "bugsType" }],
 
         imgsrc: ko.observable(),
-        viewShown: function () {
-            // Audio
-            bgAudioDictionary(document.getElementById('bgAudioDictionary'));
-            //alert(bgAudioDictionary());
-            bgAudioDictionary().play();
-        },
-        viewHidden: function () {
-            //alert(bgAudioDictionary());
-            bgAudioDictionary().pause();
-        }
+        visibleBugType: ko.observable(false),
+        visibleKeyWord: ko.observable(false)
+       
+        //scrollDistance: ko.observable(-100000),
+
+        //doScroll : function () {
+        //    $("#scrollViewContainer").dxScrollView("instance").scrollBy(scrollDistance());
+        //}
 
     };
 
@@ -38,9 +36,20 @@
 
         }
         if (newValue == "keyWords") {
-            viewModel.selectedTable(viewModel.keyWords);
+            //viewModel.selectedTable("");
+            //viewModel.selectedTable(MistakeChasingGameClient.LocalDB.keyWordsdb);
+            viewModel.visibleKeyWord(true);
+            viewModel.visibleBugType(false);
+            //lookup.dataSource = viewModel.keyWords;
+            //lookup.repaint();
         } else {
-            viewModel.selectedTable(viewModel.bugsType);
+            //viewModel.selectedTable("");
+            //viewModel.selectedTable(MistakeChasingGameClient.LocalDB.bugsTypedb);
+            //$("#LookupBugtype").dxLookup('instance').repaint();
+            viewModel.visibleKeyWord(false);
+            viewModel.visibleBugType(true);
+            //lookup.dataSource = viewModel.bugsType;
+            //lookup.repaint();
         }
     });
     

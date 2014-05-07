@@ -18,12 +18,11 @@
         localStorage.rank = "Advanced"
     }
 
-    // Audio
-    var bgAudioHome = ko.observable(); //document.getElementById('bgAudio');
+   
 
     var viewModel = {
-        soundSrc: ko.observable("sound/Daily Life.mp3"),
-        //bgAudio: ko.observable(),
+        
+        
         tabs: [
            { text: "Beginner" },
            { text: "Intermediate" },
@@ -61,17 +60,6 @@
             //    $.connection.hub.stop();
             //}
             //alert(viewModel.level());
-
-            // Audio
-            bgAudioHome(document.getElementById('bgAudioHome'));
-            bgAudioHome().play();
-
-            //audio.currentTime = 0;
-            //audio.seekable.start();
-        },
-        viewHidden: function () {
-            //alert(bgAudio());
-            bgAudioHome().pause();
         }
     };
 
