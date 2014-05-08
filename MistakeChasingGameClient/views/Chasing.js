@@ -1,6 +1,6 @@
 ﻿MistakeChasingGameClient.Chasing = function (params) {
 
-    
+
 
     onlineViewModel = new MistakeChasingGameClient.OnlineVM();
     //alert("create");
@@ -25,20 +25,23 @@
         }
         if (countX == 3 && ifShowX == true) {
             ifShowX = false;
+            onlineViewModel.CorrectedQuestion(localStorage.currentIndex, 0, false);
             $("#toastError").dxToast('instance').show();
         }
     };
 
     showBugOnline = function () {
-        var points = onlineViewModel.bugFound();
-        $("#toastSuccess").dxToast('instance').show();
+        if (ifShowX == true) {
+            ifShowX = false;
+            var points = onlineViewModel.bugFound();
+            $("#toastSuccess").dxToast('instance').show();
+        }
     };
 
     processHidingOnline = function () {
+        onlineViewModel.ListTab.loadListTab();
         countX = 0;
         ifShowX = true;
-        onlineViewModel.CorrectedQuestion(localStorage.currentIndex, 0, false);
-        onlineViewModel.ListTab.loadListTab();
     };
 
     submitOnlineFBK = function () {
@@ -139,7 +142,7 @@
     ///////////////////////////////////
     return $.extend(onlineViewModel, {
         viewShown: function () {
-            
+
 
             ///////////////
             username('');
@@ -151,18 +154,18 @@
                 crossDomain: true,
                 contentType: "application/json;charset=utf-8",
                 success: function (data) {
-            if (localStorage.username) {
-                //   $.connection.hub.stop();
-                onlineViewModel.RoomTab.loadRoomTab();
-            } else {
-                register();
-            }
+                    if (localStorage.username) {
+                        //   $.connection.hub.stop();
+                        onlineViewModel.RoomTab.loadRoomTab();
+                    } else {
+                        register();
+                    }
 
                 },
                 error: function (request) {
                     if (request.status == 0 || request.status == 404) {
 
-                        DevExpress.ui.dialog.alert("Can not connect to server",'Connection Error').done(function () {
+                        DevExpress.ui.dialog.alert("Can not connect to server", 'Connection Error').done(function () {
                             MistakeChasingGameClient.app.navigate('home', { root: true });
                         });
                     }

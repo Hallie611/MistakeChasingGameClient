@@ -53,9 +53,6 @@
     <Content Include="Draw.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="images\BlueLockBtn.png">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="images\blueOrbLock.png">
       <SubType>Content</SubType>
     </Content>
@@ -1079,24 +1076,6 @@
     <Content Include="lose.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="sound\Daily Life.mp3">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="sound\Memories.mp3">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="sound\Hometown.mp3">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="sound\Fight!.mp3">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="sound\Gaur Plains.mp3">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="sound\Where the Ancestors Sleep.mp3">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="viewmodel\ClockVM.js">
       <SubType>Content</SubType>
     </Content>
@@ -1168,7 +1147,6 @@
     <Folder Include="layouts\Simple" />
     <Folder Include="layouts\SlideOut\" />
     <Folder Include="images" />
-    <Folder Include="sound" />
     <Folder Include="viewmodel" />
     <Folder Include="views\" />
     <Folder Include="views\Dictionary" />

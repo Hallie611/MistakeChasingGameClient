@@ -10,31 +10,34 @@
     };
     resultList = ko.observable();
     isClick = ko.observable(false);
-    
+
 
     var ifShowX = true;
     var countX = 0;
     myEventHandler = function () {
-        if (countX <= 2 && ifShowX == true) {
+        if (countX <= 2 && ifShowX == true) {            
             countX += 1;
             var showX = document.getElementById("miss" + countX);
             showX.style.visibility = "visible";
         }
-        if (countX == 3 && ifShowX == true) {
+        if (countX == 3 && ifShowX == true) {            
             ifShowX = false;
             $("#toastError").dxToast('instance').show();
         }
     };
 
     showBug = function () {
-        var points = trainingViewModel.bugFound();
-        localStorage.currentPoint = Number(localStorage.currentPoint) + points;
-        $("#toastSuccess").dxToast('instance').show();
+        if (ifShowX == true) {
+            ifShowX = false;
+            var points = trainingViewModel.bugFound();
+            localStorage.currentPoint = Number(localStorage.currentPoint) + points;
+            $("#toastSuccess").dxToast('instance').show();
+        }
     };
     processHiding = function () {
-        countX = 0;
         localStorage.currentIndex = Number(localStorage.currentIndex) + 1;
         trainingViewModel.loadQuestion();
+        countX = 0;
         ifShowX = true;
     };
     processHidingPopup = function () {
